@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+::-webkit-scrollbar{
+    width: 10px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+    /*background: #65a3eb;*/
+    background: #3b3d41;
+    border-radius: 1em;
+} 
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    font-weight: 500;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    /*overflow-y: hidden;*/
+    /*overflow-y: scroll;*/
+}
+
+div{
+    display: block;
+    word-wrap: break-word;
+    line-height: 1.2;
+}
+ul{
+    list-style: none;
+    display: inline-block;
+}
+li{
+    word-wrap: none;
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+input{
+    border: none;
+    display: block;
+}
+input:focus{
+    outline: none;
+}
+
+input[type = 'range']{
+    appearance: none;
+    pointer-events: none;
+}
+input[type='range']::-webkit-slider-thumb{
+    appearance: none;
+    pointer-events: auto;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    cursor: pointer;
+    background-color: var(--color-text-main-hover-blue-experimental-lighter);
+}
+input[type='range']::-webkit-slider-thumb:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+textarea{
+    border: none;
+    resize: none;
+}
+textarea:focus{
+    outline: none;
+}
+
+.dark-theme{
+    --main-color-background: #17181e;
+    --secondary-color-background: #181a20;
+
+    --color-text-white: #FFFFFF;
+    --color-text-gray: #EAECEF;
+    
+    --color-text-main: #e0e0e0;
+    --color-text-secondary: #b7bec8;
+    --color-text-third: #a0a0a0;
+    --color-text-fourth: #3d3d3d;
+    --color-text-main-hover-blue: #4d94e4;
+    --color-text-main-hover-blue-experimental: #3f66da;
+    --color-text-main-hover-blue-experimental-darker: #513dbf;
+    --color-text-main-hover-blue-experimental-lighter: #7eb3ef;
+    --color-text-main-yellow: #FCD535;
+    --color-text-main-hover-yellow: #F0B90B;
+    --color-text-hover-red: #FF3C78;
+
+    --transition-0_1s: 0.1s;
+    --transition-0_2s: 0.2s;
+    --transition-0_3s: 0.3s;
+    --transition-0_4s: 0.4s;
+    --transition-0_5s: 0.5s;
+    --transition-1s: 1s;
+    --transition-1_5s: 1.5s;
+    --transition-2s: 2s;
+}
+
+.light-theme{
+    --main-color-background: #17181e;
+    --secondary-color-background: #181a20;
+
+    --color-text-gray: #EAECEF;
+    --color-text-main: #e0e0e0;
+    --color-text-secondary: #b7bec8;
+    --color-text-gray-second: rgb(211, 216, 221);
+    --color-text-third: #a0a0a0;
+    --color-text-main-hover-blue: #4d94e4;
+    --color-text-main-hover-blue-experimental: #3f66da;
+    --color-text-main-hover-blue-experimental-darker: #513dbf;
+    --color-text-main-hover-blue-experimental-lighter: #65a3eb;
+    --color-text-main-yellow: #FCD535;
+    --color-text-main-hover-yellow: #F0B90B;
+    --color-text-hover-red: #FF3C78;
+}
+
+:root{
+    --color-text-white: #FFFFFF;
+    --color-text-gray-root-light:rgb(232, 233, 235);
+    --color-text-gray-root:rgb(188, 193, 198);
+    --color-text-main-hover-blue: #4d94e4;
+    --color-text-main-hover-blue-experimental: #3f66da;
+    --color-text-main-hover-blue-experimental-mid:rgb(63, 128, 218);;
+    --color-text-main-hover-blue-experimental-darker: #513dbf;
+    --color-text-main-hover-blue-experimental-darker-evenmore: rgb(50, 44, 166);
+    --color-text-main-hover-blue-experimental-lighter: #65a3eb;
+    --color-text-main-hover-blue-experimental-lighter-evenmore: rgb(135, 184, 241);
+    --color-text-main-hover-blue-experimental-lighter-evenmore-hover: rgb(140, 190, 247);
+    --color-text-main-hover-blue-experimental-footerdark: rgb(63, 63, 218);
+    --color-blue-walmart: #004f9a;
+    --color-blue-1-amazon: #232f3e;
+    --color-blue-2-amazon: #131a22;
+
+    --color-text-strong-faded-gray: #494949;
+    --color-text-faded-gray: #6e6e73;
+
+    --color-blue-aapl: #0066cc;
+    --color-blue-aapl-stronger: #0071e3;
+    --color-blue-aapl-stronger-hover: #0b81f7;
+
+    --color-warning-red: #f6465d;
+
+    --color-alibaba-orange: #ff6600;
+    --color-amazon-red: #cc0c39;
+    --color-amazon-star-orange: #ffa41c;
+
+    --color-walmart-green: #2a8703;
+
+    --transition-0_1s: 0.1s;
+    --transition-0_2s: 0.2s;
+    --transition-0_3s: 0.3s;
+    --transition-0_4s: 0.4s;
+    --transition-0_5s: 0.5s;
+    --transition-1s: 1s;
+    --transition-1_5s: 1.5s;
+    --transition-2s: 2s;
+
+    --third-color-background: #eaecef;
+
+    --chat-color-deepseek: #f9fbff;
+    --chat-color-chatgpt: #f9f9f9;
+    --chat-color-blue: #f7f8fd;
+
+    --chat-color-gray: #c5c5c5;
+    --chat-color-gray-strong: #8f8f8f;
+    --chat-color-gray-light: #efefef;
+    --chat-color-gray-light-hover: #eaeaea;
+    --chat-color-gray-strong-more: #555555;
+    --chat-color-blue-light: #eff6ff;
+    --chat-color-blue-light-evenmore: #f9fbff;
+    --chat-color-blue-strong: #dbeafe;
+    --chat-color-blue-strong-more: #cadbf2;
+
+    --nav-height: 75px;
+
+    --nav-color-bubble: rgb(162, 202, 248);
+    /*--nav-color-bubble-lighter: rgb(221, 232, 245);*/
+    --nav-color-bubble-lighter: rgb(247, 250, 254);
+
+    --chatnav-dim-popup: 175px;
+    --chatnav-dim-main-popup-w: 500px;
+    --chatnav-dim-main-popup-h: 300px;
+
+    --chat-color-gray-light-2: #f5f5f5;
+    --chatnav-color-delete: #ef5557;
+    --chatnav-color-delete-strong: #da3737;
+    --chatnav-color-delete-light: #f75c5e;
+
+    --chatnav-width: 250px;
+
+    --chatmain-ask-minheight: 150px;
+    --chatmain-ask-maxheight: 300px;
+
+    --settings-imgheight: 200px;
+    --settings-popup-h: 300px;
+    --settings-popup-w: 500px;
+}
+
+
+.light-theme{
+    --main-color-background: #ffffff;
+    --secondary-color-background2: #fafafa;
+    --secondary-color-background: #f5f6f7;
+    --third-color-background: #eaecef;
+}
+
+.transition_add{
+    transition: 0.1s ease-out;
+}
+.color_blue_hover_evenmore{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}

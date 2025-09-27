@@ -1,0 +1,9 @@
+chris
+UbuCoff_51_
+
+Commands:
+List all files in directory:
+ls
+
+View:
+You can View the paths and files in Linux > Ubuntu

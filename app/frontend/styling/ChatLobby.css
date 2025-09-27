@@ -1,0 +1,21 @@
+.all_holder_clobby{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.clobby{
+    position: relative;
+    width: 100%;
+    height: calc(100vh - var(--nav-height));
+    overflow-y: hidden;
+}
+
+.clobby_all{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}

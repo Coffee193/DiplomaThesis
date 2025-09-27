@@ -1,0 +1,14 @@
+Run DEV:
+-> Cd to frontend and type: npm run dev
+-> Cd to backend and type: python manage.py runserver
+
+Backend Update Database Fields:
+-> Cd to backend and type: python manage.py makemigrations
+and then type: python manage.py migrate
+
+Test User:
+-> f@gamil.com
+->
+
+-> adm_@gmail.com
+-> KoKo_55_Po

@@ -1,0 +1,78 @@
+.modelselect_allholder{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.blur_element{
+    filter: blur(20px);
+    pointer-events: none;
+}
+
+.modelselect_mainholder{
+    position: relative;
+    width: 300px;
+    height: 350px;
+    background-color: #fff;
+    border: solid 1px var(--chat-color-gray);
+    border-radius: 25px;
+    box-shadow: 0px 5px 10px 0px rgba(43,50,64,0.12);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    transition: 0.1s ease-out;
+    pointer-events: none;
+}
+
+.modelselect_maintext{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    font-size: 20px;
+}
+
+.modelselect_close{
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+.modelselect_close:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+}
+
+.modelselect_lowertext{
+    text-align: center;
+    color: var(--color-text-gray-root);
+    font-weight: 200;
+}
+
+.modelselect_modelholder{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.modelselect_modelholder>li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.1s ease-out;
+}
+.modelselect_modelholder>li:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+    color: #fff;
+}

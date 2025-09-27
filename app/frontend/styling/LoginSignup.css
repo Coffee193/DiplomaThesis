@@ -1,0 +1,320 @@
+.LoginBody{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    padding: 35px 0;
+    background-color: #fff;
+}
+
+.LogoHome{
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    position: relative;
+}
+.LogoHome > img{
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.Loginmainbox{
+    min-height: 80%;
+    width: 33%;
+    background: var(--main-color-background);
+    border-radius: 25px;
+    box-shadow: 0px 8px 20px 0px rgba(43,50,64,0.12);
+    position: relative;
+    /*padding: 20px 35px;*/
+    /*overflow: hidden;*/
+    min-width: 425px;
+    padding:25px 0;
+    overflow: hidden;
+}
+
+.MainBox{
+    position: relative;
+}
+
+.FirstLoginStep{
+    left:20px;
+    right:20px;
+    top:0px;
+    bottom: 35px;
+    position: absolute;
+    transition: 0.2s;
+}
+
+.SigUpHolder{
+    position: relative;
+    display: flex;
+    gap: 5px;
+    bottom: 0;
+}
+.SignUpClick{
+    color: var(--color-blue-aapl-stronger);
+    cursor: pointer;
+}
+
+.LoginHeader{
+    font-weight: 600;
+    font-size: 28px;
+    width:100%;
+    text-align: center;
+    color: var(--color-text-strong-faded-gray);
+}
+
+.LoginForm{
+    margin: 35px 0;
+    color: var(--color-text-faded-gray);
+}
+
+.LoginUpper{
+    margin-top:7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:150px;
+}
+
+.LoginInitialField{
+    display: flex;
+}
+
+.LoginInputfield{
+    width:100%;
+    height:49px;
+    border: 2px solid;
+    border-color: var(--color-text-faded-gray);
+    border-radius:6px;
+    padding: 0 10px;
+}
+
+.LoginPhoneNumber{
+    width:135px;
+    margin-right:25px;
+    border: 2px solid;
+    border-color: var(--color-text-faded-gray);
+    border-radius:6px;
+    padding: 0 10px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+}
+.LoginPhoneNumber > div{
+    display: flex;
+    align-items: center;
+}
+
+.LoginInputfield:focus, .LoginPhoneNumber:hover{
+    outline: none;
+    border: 3px solid;
+    border-color: var(--color-blue-aapl-stronger);
+}
+.LoginPhoneNumber:hover{
+    color: var(--color-blue-aapl-stronger);
+}
+
+#blurPage{
+    filter: blur(20px);
+}
+
+.LoginExtraField{
+    display: flex;
+    justify-content: space-between;
+    gap:20px;
+}
+.LoginInitialField{
+    display: flex;
+}
+
+.LoginWarningField{
+    color: var(--color-warning-red);
+}
+
+.LoginForgotPassword_orUserName{
+    color: var(--color-blue-aapl-stronger);
+    cursor: pointer;
+    white-space:nowrap;
+}
+
+.LoginUpper_Nextbutton{
+    width: 100%;
+    height: 49px;
+    text-align: center;
+    /*background-color: var(--color-text-main-hover-blue);*/
+    background-color: var(--color-blue-aapl-stronger);
+    border-radius:6px;
+    color: var(--color-text-white);
+    line-height: 45px;
+    cursor: pointer;
+}
+.LoginUpper_Nextbutton:hover{
+    background-color: var(--color-blue-aapl-stronger-hover);
+}
+
+.LoginORField{
+    margin-top: 30px;
+}
+
+.or_LoginLine{
+    display: flex;
+    align-items: center;
+}
+.or_LoginLine_fill{
+    background-color: #b7bec8;
+    height:2px;
+    width:100%;
+}
+.or_LoginLine_orval{
+    margin:0 10px;
+}
+
+.LoginAlternative{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 5px 25px;
+    margin: 25px 0;
+    border-radius: 8px;
+    border:1px solid #b7bec8;
+    cursor: pointer;
+    width: 100%;
+}
+.LoginAlternative > span {
+    margin: 0 auto;
+}
+
+.LoginAlternative:hover{
+    border:2px solid var(--color-blue-aapl-stronger-hover);
+    color: var(--color-blue-aapl-stronger);
+}
+
+.SecondLoginStep{
+    position: absolute;
+    left: calc(100% + 20px);
+    right: calc(-100% + 20px);
+    top:35px;
+    bottom: 35px;
+    transition: 0.2s;
+}
+
+.SecondLoginStep_BackButton{
+    position: absolute;
+    bottom: 20px;
+    left:5px;
+    color: var(--color-text-faded-gray);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.SecondLoginStep_BackButton_Svg{
+    transform: rotate(90deg);
+    pointer-events: none;
+}
+.SecondLoginStep_BackButton_span{
+    font-weight: 500;
+    font-size: 25px;
+    margin-left:5px;
+    pointer-events: none;
+}
+
+.Email_Phone_Header{
+    font-weight: 500;
+    font-size: 25px;
+    background-color: var(--third-color-background);
+    border-radius: 16px;
+    color: var(--color-text-strong-faded-gray);
+    padding: 10px 25px;
+    pointer-events: none;
+}
+.Email_Phone_Header_div{
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.second_step_signup_main_fields{
+    margin-top:43px;
+}
+
+.second_step_signup_Password{
+    display:flex;
+    cursor: pointer;
+}
+.SecondLoginStep_SvgsPassword{
+    display: flex;
+    align-items: center;
+    color: var(--color-text-strong-faded-gray);
+    cursor: default;
+}
+.SecondLoginStep_SvgsPassword > svg{
+    margin-left:7px;
+    cursor: default;
+}
+.second_step_signup_Password:focus-within{
+    border: 3px solid;
+    border-color: var(--color-blue-aapl-stronger);
+}
+
+.PasswordLoginInput{
+    border: none;
+    width: 100%;
+    outline: none;
+    height:100%;
+    font-size: 20px;
+}
+
+.SecondLoginStep_SvgsPassword_EyeIcon{
+    display: flex;
+    align-items: center;
+    height:100%;
+    margin-left:7px;
+    cursor: pointer;
+}
+.SecondloginStep_SvgsPassword_EyeIcon>svg{
+    pointer-events: none;
+}
+
+.margin_top_ForgotPassword{
+    margin-top:15px;
+}
+
+.Login_keep_me_signed_in{
+    margin-top:25px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+.Login_keep_me_signed_in > input{
+    pointer-events: all;
+}
+.keep_me_signed_in_textsvg{
+    color: var(--color-text-strong-faded-gray);
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+.keep_me_signed_in_textsvg > svg{
+    margin-left: 5px;
+    margin-top:1px;
+    cursor: pointer;
+    pointer-events: all;
+}
+.keep_me_signed_in_textsvg > svg > path{
+    pointer-events: none;
+}
+
+#KeepmeSignedInDown{
+    color: var(--color-text-strong-faded-gray);
+    display: none;
+    position: relative;
+    margin-top: 25px;
+}

@@ -15,7 +15,6 @@ export function Settings(){
     const popupRef = useRef()
     const darkenRef = useRef()
     const [changeheaderstate, changeheadersetState] = useState()
-    const [changevalstate, changevalsetState] = useState()
     const changeboxRef = useRef()
     const changeinputRef = useRef()
     const changeinputsvgRef = useRef()
@@ -27,7 +26,14 @@ export function Settings(){
     const changevaltypeRef = useRef()
     const changesubmitactiveRef = useRef([false, 'Fields are empty'])
     const [newpasswordeyestate, newpasswordeyesetState] = useState([<EyeIcon/>, true, 'password'])
-    const [newpasswordsvgstate, newpasswordsvgsetState] = useState()
+    const [newpasswordclassstate, newpasswordclasssetState] = useState('settingschange_valbox_extra settingschange_valbox_extra_passwordadd')
+    const [changeinputplaceholderstate, changeinputplaceholdersetState] = useState('')
+    const changeimgholderRef = useRef()
+    const [changeimgstate, changeimgsetState] = useState()
+    const changeimgvalRef = useRef()
+    const [changeimguploadstate, changeimguploadsetState] = useState('UPLAOD IMAGE')
+    const changeimgpicRef = useRef()
+    const changeimgpressRef = useRef()
 
     const reg_contains_only_num = new RegExp('^[0-9]+$')
     const reg_contains_atleast1_num = new RegExp(['[0-9]'])
@@ -91,10 +97,15 @@ export function Settings(){
         if(response_status === 200){
 
             if(response['img_path'] === null){
-                iconsetState(<UserIconThin className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', false, 'image')}/>)
+                iconsetState(<UserIconThin className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
+                changeimguploadsetState('UPLOAD IMAGE')
+                changeimgvalRef.current.classList.add('settingschange_img_inactive')
+                changeimgpicRef.current.classList.add('settingschange_img_inactive')
             }
             else{
-
+                changeimguploadsetState('UPLAOD NEW IMAGE')
+                changeimgpicRef.current.classList.add('settingschange_img_active')
+                changeimgvalRef.current.calssList.add('settingschange_img_active')
             }
 
             if(response['name'] === null){
@@ -143,34 +154,27 @@ export function Settings(){
             changevaltypeRef.current = changetype
             
             changeheadersetState(header)
-            if(changetype !== 'image'){
-                console.log('&&&')
-                if(changetype === 'password'){
-                    newpasswordeyesetState([<EyeIcon/>, true, 'password'])
-                    newpasswordsvgsetState(<div className='settingschange_valbox_extra settingschange_valbox_extra_visible' onClick={() => NewPasswordVisibility()}>
-                        {newpasswordeyestate[0]}
-                    </div>)
-                }
-                else{
-                    newpasswordeyesetState([<EyeCloseIcon/>, false, 'text'])
-                    newpasswordsvgsetState(<></>)
-                }
-                changevalsetState(
-                    <div className='settingschange_valbox' ref={changeboxRef}>
-                        <input placeholder={text} className='settingschange_valinput' onFocus={() => changeboxRef.current.classList.add('settingschange_focus')} onBlur={() => changeboxRef.current.classList.remove('settingschange_focus')} ref={changeinputRef} type={newpasswordeyestate[2]} onChange={() => {SettingsInputChange()
-                            ChangeValuesSubmitButton()}
-                        }/>
-                        {newpasswordsvgstate}
-                        <div className='settingschange_valbox_extra' ref={changeinputsvgRef} onClick={() => {changeinputRef.current.value = ''
-                            SettingsInputChange()}
-                        }>
-                            <XCloseIcon/>
-                        </div>
-                    </div>
-                )
+            
+            if(changetype === 'password'){
+                newpasswordclasssetState('settingschange_valbox_extra settingschange_valbox_extra_passwordadd')
+                newpasswordeyesetState([<EyeIcon/>, true, 'password'])
             }
             else{
+                newpasswordclasssetState('settingschange_valbox_extra settingschange_valbox_extra_passwordremove')
+                newpasswordeyesetState([<EyeCloseIcon/>, false, 'text'])
+            }
 
+            if(changetype !== 'image'){
+                changeinputplaceholdersetState(text)
+                {/*AHA*/}
+                changeboxRef.current.classList.remove('settingschange_valbox_remove')
+                changeboxRef.current.classList.add('settingschange_valbox_add')
+                changeimgholderRef.current.classList.remove('settingschange_img_active')
+            }
+            else{
+                changeboxRef.current.classList.remove('settingschange_valbox_add')
+                changeboxRef.current.classList.add('settingschange_valbox_remove')
+                changeimgholderRef.current.classList.add('settingschange_img_active')
             }
 
         }
@@ -185,6 +189,7 @@ export function Settings(){
             changepasswordRef.current.value = ''
             SettingsInputChange()
             changesubmitactiveRef.current = [false, 'Fields are empty']
+            newpasswordeyesetState([<EyeIcon/>, true, 'password'])
         }
     }
 
@@ -208,7 +213,10 @@ export function Settings(){
         }
     }
     function NewPasswordVisibility(){
+        console.log('***')
+        console.log(newpasswordeyestate)
         if(newpasswordeyestate[1] === true){
+            console.log('&&&')
             newpasswordeyesetState([<EyeCloseIcon/>, false, 'text'])
         }
         else{
@@ -296,6 +304,10 @@ export function Settings(){
                 return
             }
         }
+        else if(changevaltypeRef.current === 'image'){
+            
+        }
+
     }
 
     function ChangeSettingsSetSubmitAcive(active = false, description = ''){
@@ -311,10 +323,23 @@ export function Settings(){
         }
     }
 
-    function SettingsChangePressSubmit(){
+    async function SettingsChangePressSubmit(){
         if(changesubmitactiveRef.current[0] === false){
             changewarningsetState(changesubmitactiveRef.current[1])
         }
+        else{
+           let response_status = null
+           
+        }
+    }
+
+    function ClickSelectImg(){
+        changeimgpressRef.current.click()
+    }
+
+    function ImgSelectChange(){
+        console.log(changeimgpressRef.current.files)
+        console.log(changeimgpressRef.current.files[0])
     }
 
     return(
@@ -326,7 +351,34 @@ export function Settings(){
                     <XCloseIcon className = 'settingschange_headerclose' onClick={() => PopUpOpenClose('close')}/>
                 </div>
                 <div className='settingschange_val'>
-                    {changevalstate}
+                    <div className='settingschange_img' ref={changeimgholderRef}>
+                        <div className='settingschange_img_imgholder' ref={changeimgpicRef}>
+                            <img src={changeimgstate} className='settingschange_img_pic'/>
+                        </div>
+                        <div className='settingschange_img_val'>
+                            <div className='settingschange_img_val_box settingschange_img_blue' onClick={() => ClickSelectImg()}>
+                                {changeimguploadstate}
+                            </div>
+                            <input type='file' className='settingschange_img_inpimg' ref={changeimgpressRef} accept='image/*' onChange={() => ImgSelectChange()}/>
+                            <div className='settingschange_img_val_box settingschange_img_red' ref={changeimgvalRef}>
+                                DLEETE IMAGE
+                            </div>
+                        </div>
+                    </div>
+                    <div className='settingschange_valbox' ref={changeboxRef}>
+                        <input placeholder={changeinputplaceholderstate} className='settingschange_valinput' onFocus={() => changeboxRef.current.classList.add('settingschange_focus')} onBlur={() => changeboxRef.current.classList.remove('settingschange_focus')} ref={changeinputRef} type={newpasswordeyestate[2]} onChange={() => {SettingsInputChange()
+                            ChangeValuesSubmitButton()
+                        }}/>
+                        <div className='settingschange_valbox_extra' ref={changeinputsvgRef} onClick={() => {changeinputRef.current.value = ''
+                            SettingsInputChange()
+                        }}>
+                            <XCloseIcon/>
+                        </div>
+                        <div className={newpasswordclassstate} onClick={() => NewPasswordVisibility()}>
+                            {newpasswordeyestate[0]}
+                        </div>
+                    {/*AHA */}
+                    </div>
                     <div className='settingschange_valbox' ref={changeboxpasswordRef}>
                         <input placeholder='Enter Password' className='settingschange_valinput' ref={changepasswordRef} type={passwordeyestate[2]} onChange={() => ChangeValuesSubmitButton()} onFocus={() => changeboxpasswordRef.current.classList.add('settingschange_focus')} onBlur={() => changeboxpasswordRef.current.classList.remove('settingschange_focus')}/>
                         <div className='settingschange_valbox_extra settingschange_valbox_extra_visible' onClick={() => PasswordVisibility()}>
@@ -348,13 +400,13 @@ export function Settings(){
                         <div className='settings_imgholder'>
                             {iconstate}
                         </div>
-                        <div className='settings_greetings' onClick={() => PopUpOpenClose('open', 'Change Name', 'Enter New Name', false, 'name')}>
+                        <div className='settings_greetings' onClick={() => PopUpOpenClose('open', 'Change Name', 'Enter New Name', 'name')}>
                             {namestate}
                         </div>
                     </div>
 
                     <div className='settingscontent'>
-                        <div className='settingscontent_info' onClick={() => PopUpOpenClose('open', 'Change Email', 'Enter New Email Address', false, 'email')}>
+                        <div className='settingscontent_info' onClick={() => PopUpOpenClose('open', 'Change Email', 'Enter New Email Address', 'email')}>
                             <span className='settingscontent_infoheader'>Email</span>
                             <div className='settingscontent_infomain'>
                                 {emailstate}
@@ -362,7 +414,7 @@ export function Settings(){
                             </div>
                         </div>
                     
-                        <div className='settingscontent_info' onClick={() => PopUpOpenClose('open', 'Change Phone', 'Enter New Phone Number', false, 'phone')}>
+                        <div className='settingscontent_info' onClick={() => PopUpOpenClose('open', 'Change Phone', 'Enter New Phone Number', 'phone')}>
                             <span className='settingscontent_infoheader'>Phone</span>
                             <div className='settingscontent_infomain'>
                                 {phonestate}
@@ -370,7 +422,7 @@ export function Settings(){
                             </div>
                         </div>
 
-                        <div className='settingscontent_info' onClick={() => PopUpOpenClose('open', 'Change Password', 'Enter New Password', false, 'password')}>
+                        <div className='settingscontent_info' onClick={() => PopUpOpenClose('open', 'Change Password', 'Enter New Password', 'password')}>
                             <span className='settingscontent_infoheader'>Password</span>
                             <div className='settingscontent_infomain'>
                                 <div className='settingscontent_infoval'>*****</div>

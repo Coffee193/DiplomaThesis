@@ -185,7 +185,7 @@
 .settingschangeval{
     position: fixed;
     width: var(--settings-popup-w);
-    height: var(--settings-popup-h);
+    min-height: var(--settings-popup-h);
     background-color: #fff;
     right: calc((100vw - var(--settings-popup-w)) /2);
     top: calc((0px + var(--nav-height) + var(--settings-popup-h)) /2);
@@ -256,6 +256,26 @@
     pointer-events: all;
 }
 
+.settingschange_valbox_extra_passwordremove{
+    display: none;
+    pointer-events: none;
+}
+.settingschange_valbox_extra_passwordadd{
+    display: flex;
+    opacity: 1;
+    pointer-events: all;
+    margin-left: 5px;
+}
+
+.settingschange_valbox_remove{
+    display: none;
+    pointer-events: none;
+}
+.settingschange_valbox_add{
+    display: flex;
+    pointer-events: all;
+}
+
 .settingschange_val{
     display: flex;
     flex-direction: column;
@@ -293,4 +313,72 @@
     display: flex;
     justify-content: center;
     color: var(--chatnav-color-delete-light);
+}
+
+.settingschange_img{
+    position: relative;
+    width: 100%;
+    display: none;
+    height: 200px;
+    pointer-events: none;
+}
+.settingschange_img_active{
+    display: flex;
+    pointer-events: all;
+}
+.settingschange_img_inactive{
+    display: none;
+    pointer-events: none;
+}
+
+.settingschange_img_imgholder{
+    position: relative;
+    height: 100%;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.settingschange_img_val{
+    position: relative;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.settingschange_img_pic{
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.settingschange_img_val_box{
+    color: #fff;
+    padding: 9px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 200;
+    text-align: center;
+}
+.settingschange_img_blue:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter);
+}
+.settingschange_img_red:hover{
+    background-color: var(--chatnav-color-delete-strong);
+}
+.settingschange_img_blue{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+.settingschange_img_red{
+    background-color: var(--chatnav-color-delete-light);
+}
+
+.settingschange_img_inpimg{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
 }

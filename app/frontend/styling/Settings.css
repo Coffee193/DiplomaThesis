@@ -354,6 +354,8 @@
     position: relative;
     border-radius: 50%;
     overflow: hidden;
+    height: 200px;
+    width: 200px;
 }
 
 .settingschange_img_val_box{
@@ -420,6 +422,16 @@
     border: 3px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore);
     right: calc(50% - var(--settings-img-circle)/2);
     top: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.settingschange_img_screenshot{
+    position:relative;
+    width: var(--settings-img-circle);
+    height: var(--settings-img-circle);
     border-radius: 50%;
     display: flex;
     align-items: center;

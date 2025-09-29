@@ -30,7 +30,7 @@ export function Settings(){
     const [newpasswordclassstate, newpasswordclasssetState] = useState('settingschange_valbox_extra settingschange_valbox_extra_passwordadd')
     const [changeinputplaceholderstate, changeinputplaceholdersetState] = useState('')
     const changeimgholderRef = useRef()
-    const [changeimgstate, changeimgsetState] = useState()
+    const [changeimgstate, changeimgsetState] = useState(null)
     const changeimgvalRef = useRef()
     const [changeimguploadstate, changeimguploadsetState] = useState('UPLAOD IMAGE')
     const changeimgpicRef = useRef()
@@ -41,6 +41,9 @@ export function Settings(){
     const imgmoveposRef = useRef()
     const imgcanmoveRef = useRef()
     const imgpreviewRef = useRef()
+    const screenshotRef = useRef()
+    const changeimgprevvalRef = useRef([null, false])
+    
 
     const reg_contains_only_num = new RegExp('^[0-9]+$')
     const reg_contains_atleast1_num = new RegExp(['[0-9]'])
@@ -199,6 +202,16 @@ export function Settings(){
             SettingsInputChange()
             changesubmitactiveRef.current = [false, 'Fields are empty']
             newpasswordeyesetState([<EyeIcon/>, true, 'password'])
+            if(changeimgprevvalRef.current[1] === true){
+                changeimgsetState(changeimgprevvalRef.current[0])
+                if(changeimgprevvalRef.current[0] === null){
+                    ChangeImgVisible(false)
+                    changeimgpressRef.current.value = ''
+                    changeimguploadsetState('UPLOAD IMAGE')
+                    changeimgprevvalRef.current[0] = null
+                }
+                changeimgprevvalRef.current[1] = false
+            }
         }
     }
 
@@ -309,9 +322,16 @@ export function Settings(){
                 ChangeSettingsSetSubmitAcive(false, 'New password must contain at least 1 uppercase')
                 return
             }
+            ChangeSettingsSetSubmitAcive(true)
+            return
         }
         else if(changevaltypeRef.current === 'image'){
-            
+            if(changeimgprevvalRef.current[1] === false){
+                ChangeSettingsSetSubmitAcive(false, 'You did not change your image')
+                return
+            }
+            ChangeSettingsSetSubmitAcive(true)
+            return
         }
 
     }
@@ -381,19 +401,44 @@ export function Settings(){
     }
     
     function SaveScreenshot(){
-        html2canvas(imgpreviewRef.current).then((canvas) => {
+        html2canvas(screenshotRef.current).then((canvas) => {
             let img = canvas.toDataURL('image/jpeg')
-            console.log('the img is: ', img)
+            if(changeimgprevvalRef.current[1] === false){
+                changeimgprevvalRef.current = [changeimgstate, true]
+            }
+            changeimgsetState(img)
             NewImgSubmit()
         })
     }
 
     function NewImgSubmit(){
-        changeimgvalRef.current.classList.remove('settingschange_img_inactive')
-        changeimgpicRef.current.classList.remove('settingschange_img_inactive')
-        changeimgvalRef.current.classList.add('settingschange_img_active')
-        changeimgpicRef.current.classList.add('settingschange_img_active')
+        ChangeImgVisible(true)
         ImgConfirmClose()
+        changeimguploadsetState('CHANGE IMAGE')
+    }
+
+    function ChangeImgVisible(visible = false){
+        if(visible === false){
+            changeimgvalRef.current.classList.remove('settingschange_img_active')
+            changeimgpicRef.current.classList.remove('settingschange_img_active')
+            changeimgvalRef.current.classList.add('settingschange_img_inactive')
+            changeimgpicRef.current.classList.add('settingschange_img_inactive')
+        }
+        else{
+            changeimgvalRef.current.classList.remove('settingschange_img_inactive')
+            changeimgpicRef.current.classList.remove('settingschange_img_inactive')
+            changeimgvalRef.current.classList.add('settingschange_img_active')
+            changeimgpicRef.current.classList.add('settingschange_img_active')
+        }
+    }
+
+    function DeleteImg(){
+        if(changeimgprevvalRef.current[1] === false){
+            changeimgprevvalRef.current = [changeimgstate, true]
+        }
+        ChangeImgVisible()
+        changeimguploadsetState('UPLOAD IMAGE')
+        changeimgpressRef.current.value = ''
     }
 
     return(
@@ -402,10 +447,12 @@ export function Settings(){
             <div className='settingschange_img_confirm' ref={changeimgpopupRef}>
                 <div className='settingschange_img_confirmbox'>
                     <div className='settingschange_img_confirmcircle'>
-                        <div className='settingschange_img_preview' onMouseDown={(e) => handleImgMouseDown(e)} onMouseUp={() => handleImgMouseUp()} onMouseMove={(e) => handleImgMouseMove(e)} ref={imgpreviewRef}>
-                            <img src={imgpreviewstate} className='pointerevents_none'/>
+                        <div className='settingschange_img_screenshot' ref={screenshotRef}>
+                            <div className='settingschange_img_preview' onMouseDown={(e) => handleImgMouseDown(e)} onMouseUp={() => handleImgMouseUp()} onMouseMove={(e) => handleImgMouseMove(e)} ref={imgpreviewRef}>
+                                <img src={imgpreviewstate} className='pointerevents_none'/>
+                                <div className='settingschange_img_blackbg'/>
+                            </div>
                         </div>
-                        <div className='settingschange_img_blackbg'/>
                     </div>
                 </div>
                 <div className='settingschange_img_confirmbuttons'>
@@ -429,7 +476,7 @@ export function Settings(){
                                 {changeimguploadstate}
                             </div>
                             <input type='file' className='settingschange_img_inpimg' ref={changeimgpressRef} accept='image/*' onChange={() => ImgSelectChange()}/>
-                            <div className='settingschange_img_val_box settingschange_img_red' ref={changeimgvalRef}>
+                            <div className='settingschange_img_val_box settingschange_img_red' ref={changeimgvalRef} onClick={() => DeleteImg()}>
                                 DLEETE IMAGE
                             </div>
                         </div>

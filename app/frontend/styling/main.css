@@ -210,6 +210,9 @@ textarea:focus{
     --settings-imgheight: 200px;
     --settings-popup-h: 300px;
     --settings-popup-w: 500px;
+
+    --settings-img-popup-w: 900px;
+    --settings-img-popup-h: 350px;
 }
 
 

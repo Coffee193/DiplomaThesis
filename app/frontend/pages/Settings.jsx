@@ -1,7 +1,7 @@
 import '../styling/Settings.css'
 import { NavBar } from './NavBar'
 import { useEffect, useState, useRef } from 'react'
-import { UserIconThin, PencilIcon, XCloseIcon, EyeIcon, EyeCloseIcon } from '../components/svgs/UtilIcons'
+import { UserIconThin, PencilIcon, XCloseIcon, EyeIcon, EyeCloseIcon, Tick } from '../components/svgs/UtilIcons'
 import { useNavigate } from 'react-router-dom'
 
 export function Settings(){
@@ -34,6 +34,9 @@ export function Settings(){
     const [changeimguploadstate, changeimguploadsetState] = useState('UPLAOD IMAGE')
     const changeimgpicRef = useRef()
     const changeimgpressRef = useRef()
+    const changeimgdarkRef = useRef()
+    const changeimgpopupRef = useRef()
+    const [imgpreviewstate, imgpreviewsetState] = useState()
 
     const reg_contains_only_num = new RegExp('^[0-9]+$')
     const reg_contains_atleast1_num = new RegExp(['[0-9]'])
@@ -340,11 +343,43 @@ export function Settings(){
     function ImgSelectChange(){
         console.log(changeimgpressRef.current.files)
         console.log(changeimgpressRef.current.files[0])
+        changeimgdarkRef.current.style.display = 'block'
+        changeimgpopupRef.current.style.display = 'block'
+        changeimgdarkRef.current.style.pointerEvents = 'all'
+        changeimgpopupRef.current.style.pointerEvents = 'all'
+        let imgreader = new FileReader();
+        imgreader.readAsDataURL(changeimgpressRef.current.files[0])
+        imgreader.onloadend = () => {
+            imgpreviewsetState(imgreader.result)
+        }
+    }
+
+    function ImgConfirmClose(remove = false){
+        changeimgdarkRef.current.style.display = 'none'
+        changeimgpopupRef.current.style.display = 'none'
+        changeimgdarkRef.current.style.pointerEvents = 'none'
+        changeimgpopupRef.current.style.pointerEvents = 'none'
+        if(remove === true){
+            changeimgpressRef.current.value = ''
+        }
     }
 
     return(
         <div className='settings_allholder'>
             <NavBar/>
+            <div className='settingschange_img_confirm' ref={changeimgpopupRef}>
+                <div className='settingschange_img_confirmbox'>
+                    <div className='settingschange_img_confirmcircle'>
+                        <img src={imgpreviewstate} className = 'settingschange_img_preview'/>
+                        <div className='settingschange_img_blackbg'/>
+                    </div>
+                </div>
+                <div className='settingschange_img_confirmbuttons'>
+                    <div className='settingschange_img_confirmbuttonval settingschange_img_confirmcancel' onClick={() => ImgConfirmClose(true)}><XCloseIcon/></div>
+                    <div className='settingschange_img_confirmbuttonval settingschange_img_confirmaccept'><Tick width={24} height={24}/></div>
+                </div>
+            </div>
+            <div className='settingschange_img_darkenall' ref={changeimgdarkRef} onClick={() => ImgConfirmClose(true)}/>
             <div className='settingschangeval' ref = {popupRef}>
                 <div className='settingschange_header'>
                     {changeheaderstate}

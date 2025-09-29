@@ -382,3 +382,77 @@
     z-index: -1;
     opacity: 0;
 }
+
+.settingschange_img_darkenall{
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.settingschange_img_confirm{
+    position: fixed;
+    width: var(--settings-img-popup-w);
+    height: var(--settings-img-popup-h);
+    background-color: #fff;
+    z-index: 7;
+    border-radius: 25px;
+    right: calc((100vw - var(--settings-img-popup-w))/2);
+    top: calc((0px + var(--nav-height) + var(--settings-img-popup-h))/2);
+    display: none;
+    padding: 25px 15px;
+}
+
+.settingschange_img_confirmbox{
+    width: 100%;
+    height: 225px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.settingschange_img_confirmcircle{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 3px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    right: calc(50% - 112px);
+    top: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.settingschange_img_confirmbuttons{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 50px;
+    color: var(--chat-color-gray-strong);
+}
+
+.settingschange_img_confirmbuttonval{
+    cursor: pointer;
+}
+.settingschange_img_confirmcancel:hover{
+    color: var(--chatnav-color-delete-light);
+}
+.settingschange_img_confirmaccept:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.settingschange_img_preview{
+    cursor: move;
+}
+.settingschange_img_blackbg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--chat-color-gray);
+    z-index: -1;
+}

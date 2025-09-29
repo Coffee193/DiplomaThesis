@@ -415,10 +415,10 @@
 
 .settingschange_img_confirmcircle{
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: var(--settings-img-circle);
+    height: var(--settings-img-circle);
     border: 3px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore);
-    right: calc(50% - 112px);
+    right: calc(50% - var(--settings-img-circle)/2);
     top: 0;
     border-radius: 50%;
     display: flex;
@@ -438,16 +438,24 @@
 
 .settingschange_img_confirmbuttonval{
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
 }
 .settingschange_img_confirmcancel:hover{
-    color: var(--chatnav-color-delete-light);
+    color: #fff;
+    background-color: var(--chatnav-color-delete-light);
 }
 .settingschange_img_confirmaccept:hover{
-    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    color: #fff;
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
 }
 
 .settingschange_img_preview{
     cursor: move;
+    position: absolute;
 }
 .settingschange_img_blackbg{
     position: absolute;

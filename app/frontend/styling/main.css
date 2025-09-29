@@ -213,6 +213,8 @@ textarea:focus{
 
     --settings-img-popup-w: 900px;
     --settings-img-popup-h: 350px;
+
+    --settings-img-circle: 200px;
 }
 
 
@@ -228,4 +230,8 @@ textarea:focus{
 }
 .color_blue_hover_evenmore{
     color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.pointerevents_none{
+    pointer-events: none;
 }

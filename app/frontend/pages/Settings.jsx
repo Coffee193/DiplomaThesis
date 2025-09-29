@@ -3,6 +3,7 @@ import { NavBar } from './NavBar'
 import { useEffect, useState, useRef } from 'react'
 import { UserIconThin, PencilIcon, XCloseIcon, EyeIcon, EyeCloseIcon, Tick } from '../components/svgs/UtilIcons'
 import { useNavigate } from 'react-router-dom'
+import html2canvas from 'html2canvas'
 
 export function Settings(){
 
@@ -37,6 +38,9 @@ export function Settings(){
     const changeimgdarkRef = useRef()
     const changeimgpopupRef = useRef()
     const [imgpreviewstate, imgpreviewsetState] = useState()
+    const imgmoveposRef = useRef()
+    const imgcanmoveRef = useRef()
+    const imgpreviewRef = useRef()
 
     const reg_contains_only_num = new RegExp('^[0-9]+$')
     const reg_contains_atleast1_num = new RegExp(['[0-9]'])
@@ -151,6 +155,7 @@ export function Settings(){
             popupRef.current.style.pointerEvents = 'all'
             popupRef.current.style.opacity = '1'
             popupRef.current.style.transform = 'scale(1)'
+            popupRef.current.style.zIndex = 3
             darkenRef.current.style.opacity = '1'
             darkenRef.current.style.pointerEvents = 'all'
 
@@ -185,6 +190,7 @@ export function Settings(){
             popupRef.current.style.pointerEvents = 'none'
             popupRef.current.style.opacity = '0'
             popupRef.current.style.transform = 'scale(0.8)'
+            popupRef.current.style.zIndex = -1
             darkenRef.current.style.opacity = '0'
             darkenRef.current.style.pointerEvents = 'none'
             changewarningsetState('')
@@ -216,10 +222,7 @@ export function Settings(){
         }
     }
     function NewPasswordVisibility(){
-        console.log('***')
-        console.log(newpasswordeyestate)
         if(newpasswordeyestate[1] === true){
-            console.log('&&&')
             newpasswordeyesetState([<EyeCloseIcon/>, false, 'text'])
         }
         else{
@@ -341,8 +344,6 @@ export function Settings(){
     }
 
     function ImgSelectChange(){
-        console.log(changeimgpressRef.current.files)
-        console.log(changeimgpressRef.current.files[0])
         changeimgdarkRef.current.style.display = 'block'
         changeimgpopupRef.current.style.display = 'block'
         changeimgdarkRef.current.style.pointerEvents = 'all'
@@ -364,19 +365,52 @@ export function Settings(){
         }
     }
 
+    function handleImgMouseDown(e){
+        imgcanmoveRef.current = true
+        imgmoveposRef.current = e.sclientX
+    }
+    function handleImgMouseUp(){
+        imgcanmoveRef.current = false
+    }
+    function handleImgMouseMove(e){
+        if(imgcanmoveRef.current === true){
+            let pos = imgmoveposRef.current - e.clientX
+            imgmoveposRef.current = e.clientX
+            imgpreviewRef.current.style.left = (imgpreviewRef.current.offsetLeft - pos) + 'px'
+        }
+    }
+    
+    function SaveScreenshot(){
+        html2canvas(imgpreviewRef.current).then((canvas) => {
+            let img = canvas.toDataURL('image/jpeg')
+            console.log('the img is: ', img)
+            NewImgSubmit()
+        })
+    }
+
+    function NewImgSubmit(){
+        changeimgvalRef.current.classList.remove('settingschange_img_inactive')
+        changeimgpicRef.current.classList.remove('settingschange_img_inactive')
+        changeimgvalRef.current.classList.add('settingschange_img_active')
+        changeimgpicRef.current.classList.add('settingschange_img_active')
+        ImgConfirmClose()
+    }
+
     return(
         <div className='settings_allholder'>
             <NavBar/>
             <div className='settingschange_img_confirm' ref={changeimgpopupRef}>
                 <div className='settingschange_img_confirmbox'>
                     <div className='settingschange_img_confirmcircle'>
-                        <img src={imgpreviewstate} className = 'settingschange_img_preview'/>
+                        <div className='settingschange_img_preview' onMouseDown={(e) => handleImgMouseDown(e)} onMouseUp={() => handleImgMouseUp()} onMouseMove={(e) => handleImgMouseMove(e)} ref={imgpreviewRef}>
+                            <img src={imgpreviewstate} className='pointerevents_none'/>
+                        </div>
                         <div className='settingschange_img_blackbg'/>
                     </div>
                 </div>
                 <div className='settingschange_img_confirmbuttons'>
                     <div className='settingschange_img_confirmbuttonval settingschange_img_confirmcancel' onClick={() => ImgConfirmClose(true)}><XCloseIcon/></div>
-                    <div className='settingschange_img_confirmbuttonval settingschange_img_confirmaccept'><Tick width={24} height={24}/></div>
+                    <div className='settingschange_img_confirmbuttonval settingschange_img_confirmaccept' onClick={() => SaveScreenshot()}><Tick width={24} height={24}/></div>
                 </div>
             </div>
             <div className='settingschange_img_darkenall' ref={changeimgdarkRef} onClick={() => ImgConfirmClose(true)}/>

@@ -82,7 +82,7 @@ export function Settings(){
                 namesetState('Welcome, Back!')
             }
             else{
-                
+                namesetState('Welcome, ' + response['name'])
             }
 
             if(response['email'] === null){
@@ -229,13 +229,13 @@ export function Settings(){
         let inp_val = changeinputRef.current.value
         if(changevaltypeRef.current === 'email'){
             if(inp_val.length === 0){
-                ChangeSettingsSetSubmitAcive(false, 'Email field is empty')
+                ChangeSettingsSetSubmitAcive(true)
                 return
             }
             else{
                 let contains_a = inp_val.indexOf('@')
                 let contains_dot = inp_val.indexOf('.')
-                if( (contains_a <= 0) || (contains_dot === -1) || (contains_a + 1 >= contains_dot) || (inp_val.length < 5) || (contains_dot = inp_val.length - 1)){
+                if( (contains_a <= 0) || (contains_dot === -1) || (contains_a + 1 >= contains_dot) || (inp_val.length < 5) || (contains_dot === inp_val.length - 1)){
                     ChangeSettingsSetSubmitAcive(false, 'Enter a valid Email Address')
                     return
                 }
@@ -245,11 +245,11 @@ export function Settings(){
         }
         else if(changevaltypeRef.current === 'phone'){
             if(inp_val.length === 0){
-                ChangeSettingsSetSubmitAcive(false, 'Phone field is empty')
+                ChangeSettingsSetSubmitAcive(true)
                 return
             }
             else{
-                if(inp_val.length <5 || inp_val.slice(1).search(reg_contains_only_num) === 0 || inp_val[0] !== '+'){
+                if(inp_val.length <5 || !reg_contains_only_num.test(inp_val.slice(1)) || inp_val[0] !== '+'){
                     ChangeSettingsSetSubmitAcive(false, 'Enter a valid phone number')
                     return
                 }
@@ -293,6 +293,14 @@ export function Settings(){
             ChangeSettingsSetSubmitAcive(true)
             return
         }
+        else if(changevaltypeRef.current === 'name'){
+            if(inp_val.length > 7){
+                ChangeSettingsSetSubmitAcive(false, 'Name is too big')
+                return
+            }
+            ChangeSettingsSetSubmitAcive(true)
+            return
+        }
 
     }
 
@@ -314,8 +322,52 @@ export function Settings(){
             changewarningsetState(changesubmitactiveRef.current[1])
         }
         else{
-           let response_status = null
-           
+            let response_status = null
+            let request = {"k": changevaltypeRef.current, "v": changeinputRef.current.value, "p": changepasswordRef.current.value}
+            let response = await fetch('http://127.0.0.1:8000/loginregister/updatevalue/', {
+                method: 'POST',
+                body: JSON.stringify(request),
+                credentials: 'include',
+            }).then(res => { response_status = res.status
+                res.json()}).then(data => data)
+            if(response_status === 403){
+                navigate('/login')
+                return
+            }
+            else if(response_status === 401){
+                changewarningsetState('Password is incorrect')
+            }
+            else if(response_status === 409){
+                changewarningsetState('Either Email or Phone Number must have a value')
+            }
+            else if(response_status === 200){
+                if(changevaltypeRef.current === 'email'){
+                    if(changeinputRef.current.value === ''){
+                        emailsetState(<div className='settingscontent_infoval vallight'>no email provided</div>)
+                    }
+                    else{
+                        emailsetState(<div className='settingscontent_infoval'>{changeinputRef.current.value}</div>)
+                    }
+                }
+                else if(changevaltypeRef.current === 'phone'){
+                    if(changeinputRef.current.value === ''){
+                        phonesetState(<div className='settingscontent_infoval vallight'>no phone number provided</div>)
+                    }
+                    else{
+                        phonesetState(<div className='settingscontent_infoval'>{changeinputRef.current.value}</div>)
+                    }
+                }
+                else if(changevaltypeRef.current === 'name'){
+                    if(changeinputRef.current.value === ''){
+                        namesetState('Welcome, Back!')
+                    }
+                    else{
+                        namesetState('Welcome, ' + changeinputRef.current.value)
+                    }
+                }
+                PopUpOpenClose('close')
+            }
+
         }
     }
 
@@ -447,6 +499,7 @@ export function Settings(){
                         }}/>
                         <div className='settingschange_valbox_extra' ref={changeinputsvgRef} onClick={() => {changeinputRef.current.value = ''
                             SettingsInputChange()
+                            ChangeValuesSubmitButton()
                         }}>
                             <XCloseIcon/>
                         </div>

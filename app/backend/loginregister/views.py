@@ -315,27 +315,45 @@ def UpdateValue(request):
             return HttpResponse(json.dumps('Bad Request'), status = 400)
         if(jwt_r[0] == False):
             return HttpResponse(json.dumps('Not authenticated'), status = 403)
-        passwuser = User.objects.filter(id = int(jwt_r[1]['iss'])).values('password')[0]
-        print('9999999')
-        print(passwuser)
-        if(PasswordCheck(data['p'], passwuser['password']) == False):
+        uservals = User.objects.filter(id = int(jwt_r[1]['iss'])).values('email', 'phone', 'name', 'password')[0]
+        if(CheckDataValue(data['p'], 'password') == False):
+            return HttpResponse(json.dumps('Bad Request Password'), status = 400)
+        if(PasswordCheck(data['p'], uservals['password']) == False):
             return HttpResponse(json.dumps('wrong password'), status = 401)
         user_info = None
+        
+        if(data['v'] == ''):
+            data['v'] = None
+        if(data['k'] == 'email'):
+            if(data['v'] == None and uservals['phone'] == None):
+                return HttpResponse(json.dumps('Either email or phone number must have a value'), status = 409)
+        elif(data['k'] == 'phone'):
+            if(data['v'] == None and uservals['email'] == None):
+                return HttpResponse(json.dumps('Either email or phone number must have a value'), status = 409)
+        
         if data['k'] == 'email':
-            user_info = User.objects.filter(int(jwt_r[1]['iss'])).update(email = data['v'])
+            if(CheckDataValue(data['v'], 'email') == False):
+                return HttpResponse(json.dumps('Bad Request Email'), status = 400)
+            user_info = User.objects.filter(id = int(jwt_r[1]['iss'])).update(email = data['v'])
         elif data['k'] == 'password':
             # pn = password new
+            if(CheckDataValue(data['v'], 'password') == False):
+                return HttpResponse(json.dumps('Bad Request New Password'), status = 400)
             fin_password = PasswordSafe(password = data['v'])
-            user_info = User.objects.filter(int(jwt_r[1]['iss'])).update(password = fin_password)
+            user_info = User.objects.filter(id = int(jwt_r[1]['iss'])).update(password = fin_password)
         elif data['k'] == 'phone':
             # ph = phone number
+            if(CheckDataValue(data['v'], 'phone') == False):
+                return HttpResponse(json.dumps('Bad Request Phone'), status = 400)
             user_info = User.objects.filter(id = int(jwt_r[1]['iss'])).update(phone = data['v'])
         elif data['k'] == 'name':
+            if(CheckDataValue(data['v'], 'name') == False):
+                return HttpResponse(json.dumps('Bad Request Name'), status = 400)
             user_info = User.objects.filter(id = int(jwt_r[1]['iss'])).update(name = data['v'])
         else:
             return HttpResponse(json.dumps('Bad Request'), status = 400)
-        print('00000000')
-        print(user_info)
+        if(user_info != 1):
+            return HttpResponse(json.dumps('Something wen wrong'), status = 500)
         return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps('value successfully updated'),
                                                                          jwt_r = jwt_r)
     else:
@@ -385,3 +403,39 @@ def GetUserInfo(request):
     else:
         return HttpResponse(json.dumps('Bad Method'), status = 405)
 # Check Above 2 funcs. Create a GetUserData func
+
+def CheckDataValue(val, valtype, allownone = True):
+    if(valtype == 'password'):
+        if(type(val) != str):
+            return False
+        if( (len(val)<7) or (len(val)>30) or (any(char.isdigit() for char in val) == False) or (any(char.islower() for char in val) == False) or (any(char.isupper() for char in val) == False)):
+            return False
+    elif(valtype == 'email'):
+        if(allownone == True):
+            if(val == None):
+                return True
+        if(type(val) != str):
+            return False
+        contains_a = val.find('@')
+        contains_dot = val.find('.')
+        if( (contains_a == -1) or (contains_dot == -1) or (contains_a + 1 >= contains_dot) or (len(val) < 5) or (contains_a == 0) or (contains_dot == (len(val) - 1)) or (len(val)>255)):
+            return False
+    elif(valtype == 'phone'):
+        if(allownone == True):
+            if(val == None):
+                return True
+        if(type(val) != str):
+            return False
+        if( (len(val)<5) or (len(val)>25)):
+            return False
+    elif(valtype == 'name'):
+        if(allownone == True):
+            if(val == None):
+                return True
+        if(type(val) != str):
+            return False
+        if( (len(val)>7) or (len(val) == 0)):
+            return False
+    else:
+        return False
+    return True

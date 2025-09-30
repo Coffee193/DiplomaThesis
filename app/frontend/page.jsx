@@ -8,6 +8,7 @@ import { HomeMain } from './pages/Home'
 import { ChatLobby } from './pages/ChatLobby'
 import { TermsPolicies } from './pages/TermsPolicies'
 import { Settings } from './pages/Settings'
+import { Referal } from './pages/Referal'
 
 export function Home() {
     return(
@@ -21,6 +22,7 @@ export function Home() {
             </Route>
             <Route path = '/termspolicies' element = {<><TermsPolicies/></>}/>
             <Route path = '/settings' element = {<><Settings/></>}/>
+            <Route path = '/referalcodes' element = {<><Referal/></>}/>
         </Routes>
     )
 }

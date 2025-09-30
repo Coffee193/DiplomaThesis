@@ -2,7 +2,7 @@ import '../styling/Settings.css'
 import { NavBar } from './NavBar'
 import { useEffect, useState, useRef } from 'react'
 import { UserIconThin, PencilIcon, XCloseIcon, EyeIcon, EyeCloseIcon, Tick } from '../components/svgs/UtilIcons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import html2canvas from 'html2canvas'
 
 export function Settings(){
@@ -52,46 +52,6 @@ export function Settings(){
     
     useEffect(() => {
         GetUserInfo()
-        {/*if(1 === ''){
-            ojh
-        }
-        else{
-            iconsetState(<UserIconThin className='settingsicon'/>)
-        }
-
-        if(1 === ''){
-
-        }
-        else{
-            namesetState('Welcome, Back!')
-        }
-        
-        if(1 === ''){
-            emailsetState(<div className='settingscontent_infoval vallight'>no email provided</div>)
-        }
-        else{
-            let emailval = 'chrisioasdhiosadioasdiojsaio9ioasjdiosd@gmail.com'
-            if(emailval.length > 39){
-                emailval = emailval.slice(0, 37) + '...'
-            }
-            emailsetState(<div className='settingscontent_infoval'>{emailval}</div>)
-        }
-
-        if(1 === 1){
-            phonesetState(<div className='settingscontent_infoval vallight'>no phone number provided</div>)
-        }
-        else{
-
-        }
-
-        if(1 === 1){
-            adminsetState(
-                <div className='settingscontent_referal'>REFERAL CODES</div>
-            )
-        }
-        else{
-
-        }*/}
     }, [])
 
     async function GetUserInfo(){
@@ -144,7 +104,7 @@ export function Settings(){
             }
             
             if(response['is_admin'] === true){
-                adminsetState(<div className='settingscontent_referal'>REFERAL CODES</div>)
+                adminsetState(<Link to='/referalcodes'><div className='settingscontent_referal'>REFERAL CODES</div></Link>)
             }
             
         }

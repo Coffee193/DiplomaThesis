@@ -294,11 +294,7 @@
     font-size: 19px;
     padding: 7px 15px;
     border-radius: 25px;
-    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
     color: #fff;
-}
-.settingschange_button:hover{
-    background-color: var(--color-text-main-hover-blue-experimental-lighter);
 }
 .settingschange_inactive:hover{
     cursor: not-allowed;
@@ -366,16 +362,16 @@
     font-weight: 200;
     text-align: center;
 }
-.settingschange_img_blue:hover{
+.settingschange_blue:hover{
     background-color: var(--color-text-main-hover-blue-experimental-lighter);
 }
-.settingschange_img_red:hover{
+.settingschange_red:hover{
     background-color: var(--chatnav-color-delete-strong);
 }
-.settingschange_img_blue{
+.settingschange_blue{
     background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
 }
-.settingschange_img_red{
+.settingschange_red{
     background-color: var(--chatnav-color-delete-light);
 }
 

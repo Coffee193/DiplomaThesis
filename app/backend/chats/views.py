@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
-from django.http import HttpResponseBadRequest
-from oauth import VerifyAuthRequest, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired
+from django.http import HttpResponseBadRequest, HttpResponse
+from oauth import VerifyAuthRequest, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, VerifyJWT
 from backend.mongo_db_connection import mongo_db, mongo_clinet
 import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime
+from loginregister.models import User
+from loginregister.views import PasswordCheck
 
 # Create your views here.
 
@@ -164,3 +166,33 @@ def answearQuestion(request):
             return HttpResponseBadRequest('Http 400 Bad Request, something went wrong')
     else:
         return HttpResponseBadRequest('Http 400 Bad Request, method must be POST')
+    
+@api_view(['DELETE'])
+def DeleteAllChats(request):
+    if(request.method == 'DELETE'):
+        try:
+            if('access' not in request.COOKIES or 'refresh' not in request.COOKIES):
+                return HttpResponse(json.dumps('no jwt provided'), status = 401)
+            jwt_r = VerifyJWT(request)
+            if(jwt_r[0] == False):
+                return HttpResponse(json.dumps('not authenticated'), status = 403)
+            data = json.loads(request.body.decode('utf-8'))
+            if('p' not in data or 'vp' not in data):
+                return HttpResponse(json.dumps('Http 400 Bad Request, important values are missing'), status = 400)
+            if(type(data['p']) != str or type(data['vp']) != str):
+                return HttpResponse(json.loads('Http 400 Bad Request, invalid data types'), status = 400)
+            if(data['p'] != data['vp']):
+                return HttpResponse(json.dumps('Http 400 Bad Request, passed values are not equal'), status = 400)
+            user_password = User.objects.filter(id = int(jwt_r[1]['iss'])).values('password')[0]
+            if(PasswordCheck(data['p'], user_password['password']) == False):
+                return HttpResponse(json.dumps('Password is incorrect'), status = 409)
+            chat_del = chats.delete_many({"user_id": int(jwt_r[1]['iss'])})
+            print(';;;;;;;;;;')
+            print(chat_del)
+            print(type(chat_del.modified_count))
+            print(chat_del.modified_count)
+            return HttpResponse(json.dumps('All chats were deleted: ' + str(chat_del.modified_count)), status = 200)
+        except:
+            return HttpResponse(json.dumps('Http 400 Bad Request, something went wrong'), status = 400)
+    else:
+        return HttpResponse(json.dumps('Http 400 Bad request, method must be DELETE'), status = 405)

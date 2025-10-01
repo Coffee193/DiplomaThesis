@@ -43,7 +43,9 @@ export function Settings(){
     const imgpreviewRef = useRef()
     const screenshotRef = useRef()
     const changeimgprevvalRef = useRef([null, false])
-    
+    const [popupbuttonstate, popupbuttonsetState] = useState('Submit')
+    const [popuppasswordstate, popuppasswordsetState] = useState('Enter Password')
+    const deleteinfoRef = useRef(false)
 
     const reg_contains_only_num = new RegExp('^[0-9]+$')
     const reg_contains_atleast1_num = new RegExp(['[0-9]'])
@@ -113,7 +115,7 @@ export function Settings(){
         }
     }
 
-    function PopUpOpenClose(action='open', header = '', text = '', changetype = ''){
+    function PopUpOpenClose(action='open', header = '', text = '', changetype = '', deleteinfo = false){
         if(action === 'open'){
             popupRef.current.style.pointerEvents = 'all'
             popupRef.current.style.opacity = '1'
@@ -126,6 +128,20 @@ export function Settings(){
             
             changeheadersetState(header)
             
+            deleteinfoRef.current = deleteinfo
+            if(deleteinfo === false){
+                popuppasswordsetState('Enter Password')
+                popupbuttonsetState('Submit')
+                changebuttonRef.current.classList.remove('settingschange_red')
+                changebuttonRef.current.classList.add('settingschange_blue')
+            }
+            else{
+                popuppasswordsetState('Confirm Password')
+                popupbuttonsetState('Delete')
+                changebuttonRef.current.classList.remove('settingschange_blue')
+                changebuttonRef.current.classList.add('settingschange_red')
+            }
+
             if(changetype === 'password'){
                 newpasswordclasssetState('settingschange_valbox_extra settingschange_valbox_extra_passwordadd')
                 newpasswordeyesetState([<EyeIcon/>, true, 'password'])
@@ -205,25 +221,27 @@ export function Settings(){
 
     function ChangeValuesSubmitButton(){
         let passwordval = changepasswordRef.current.value
-        if(passwordval.length <= 8){
-            ChangeSettingsSetSubmitAcive(false, 'Password is too short')
-            return
-        }
-        else if(passwordval.length > 30){
-            ChangeSettingsSetSubmitAcive(false, 'Password is too long')
-            return
-        }
-        else if(!reg_contains_atleast1_num.test(passwordval)){
-            ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 number')
-            return
-        }
-        else if(!reg_contains_atleast1_lowercase.test(passwordval)){
-            ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 lowercase')
-            return
-        }
-        else if(!reg_contains_atleast1_uppercase.test(passwordval)){
-            ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 uppercase')
-            return
+        if(deleteinfoRef.current === false){
+            if(passwordval.length <= 8){
+                ChangeSettingsSetSubmitAcive(false, 'Password is too short')
+                return
+            }
+            else if(passwordval.length > 30){
+                ChangeSettingsSetSubmitAcive(false, 'Password is too long')
+                return
+            }
+            else if(!reg_contains_atleast1_num.test(passwordval)){
+                ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 number')
+                return
+            }
+            else if(!reg_contains_atleast1_lowercase.test(passwordval)){
+                ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 lowercase')
+                return
+            }
+            else if(!reg_contains_atleast1_uppercase.test(passwordval)){
+                ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 uppercase')
+                return
+            }
         }
 
         let inp_val = changeinputRef.current.value
@@ -258,30 +276,42 @@ export function Settings(){
             }
         }
         else if(changevaltypeRef.current === 'password'){
+            let passwordtext = 'New Password'
+            if(deleteinfoRef.current === true){
+                passwordtext = 'Password'
+            }
             if(inp_val.length === 0){
-                ChangeSettingsSetSubmitAcive(false, 'New password field is empty')
+                ChangeSettingsSetSubmitAcive(false, passwordtext + ' field is empty')
                 return
             }
             else if(inp_val.length < 8){
-                ChangeSettingsSetSubmitAcive(false, 'New password is too short')
+                ChangeSettingsSetSubmitAcive(false, passwordtext + ' is too short')
                 return
             }
             else if(inp_val.length > 30){
-                ChangeSettingsSetSubmitAcive(false, 'New password is too long')
+                ChangeSettingsSetSubmitAcive(false, passwordtext + ' is too long')
                 return
             }
             else if(!reg_contains_atleast1_num.test(inp_val)){
-                ChangeSettingsSetSubmitAcive(false, 'New password must contain at least 1 number')
+                ChangeSettingsSetSubmitAcive(false, passwordtext + ' must contain at least 1 number')
                 return
             }
             else if(!reg_contains_atleast1_lowercase.test(inp_val)){
-                ChangeSettingsSetSubmitAcive(false, 'New password must contain at least 1 lowercase')
+                ChangeSettingsSetSubmitAcive(false, passwordtext + ' must contain at least 1 lowercase')
                 return
             }
             else if(!reg_contains_atleast1_uppercase.test(inp_val)){
-                ChangeSettingsSetSubmitAcive(false, 'New password must contain at least 1 uppercase')
+                ChangeSettingsSetSubmitAcive(false, passwordtext + ' must contain at least 1 uppercase')
                 return
             }
+            
+            if(deleteinfoRef.current !== false){
+                if(inp_val !== passwordval){
+                    ChangeSettingsSetSubmitAcive(false, 'Confirm Password must match Password')
+                    return
+                }
+            }
+
             ChangeSettingsSetSubmitAcive(true)
             return
         }
@@ -329,16 +359,13 @@ export function Settings(){
                 body: JSON.stringify(request),
                 credentials: 'include',
             }).then(res => { response_status = res.status
-                res.json()}).then(data => data)
-            if(response_status === 403){
+                return res.json()}).then(data => data)
+            if(response_status === 403 || response_status === 401){
                 navigate('/login')
                 return
             }
-            else if(response_status === 401){
-                changewarningsetState('Password is incorrect')
-            }
             else if(response_status === 409){
-                changewarningsetState('Either Email or Phone Number must have a value')
+                changewarningsetState(response)
             }
             else if(response_status === 200){
                 if(changevaltypeRef.current === 'email'){
@@ -453,6 +480,23 @@ export function Settings(){
         changeimgpressRef.current.value = ''
     }
 
+    async function Logout(){
+        let response_status = null
+        let response = await fetch('http://127.0.0.1:8000/loginregister/logout/', {
+            method: 'DELETE',
+            credentials: 'include',
+        }).then(res => {
+            response_status = res.status
+            return res.json()
+        }).then(data => data)
+
+        if(response_status === 200){
+            navigate('/')
+            window.location.reload()
+        }
+
+    }
+
     return(
         <div className='settings_allholder'>
             <NavBar/>
@@ -484,11 +528,11 @@ export function Settings(){
                             <img src={changeimgstate} className='settingschange_img_pic'/>
                         </div>
                         <div className='settingschange_img_val'>
-                            <div className='settingschange_img_val_box settingschange_img_blue' onClick={() => ClickSelectImg()}>
+                            <div className='settingschange_img_val_box settingschange_blue' onClick={() => ClickSelectImg()}>
                                 {changeimguploadstate}
                             </div>
                             <input type='file' className='settingschange_img_inpimg' ref={changeimgpressRef} accept='image/*' onChange={() => ImgSelectChange()}/>
-                            <div className='settingschange_img_val_box settingschange_img_red' ref={changeimgvalRef} onClick={() => DeleteImg()}>
+                            <div className='settingschange_img_val_box settingschange_red' ref={changeimgvalRef} onClick={() => DeleteImg()}>
                                 DLEETE IMAGE
                             </div>
                         </div>
@@ -509,7 +553,7 @@ export function Settings(){
                     {/*AHA */}
                     </div>
                     <div className='settingschange_valbox' ref={changeboxpasswordRef}>
-                        <input placeholder='Enter Password' className='settingschange_valinput' ref={changepasswordRef} type={passwordeyestate[2]} onChange={() => ChangeValuesSubmitButton()} onFocus={() => changeboxpasswordRef.current.classList.add('settingschange_focus')} onBlur={() => changeboxpasswordRef.current.classList.remove('settingschange_focus')}/>
+                        <input placeholder={popuppasswordstate} className='settingschange_valinput' ref={changepasswordRef} type={passwordeyestate[2]} onChange={() => ChangeValuesSubmitButton()} onFocus={() => changeboxpasswordRef.current.classList.add('settingschange_focus')} onBlur={() => changeboxpasswordRef.current.classList.remove('settingschange_focus')}/>
                         <div className='settingschange_valbox_extra settingschange_valbox_extra_visible' onClick={() => PasswordVisibility()}>
                             {passwordeyestate[0]}
                         </div>
@@ -517,8 +561,8 @@ export function Settings(){
                     <div className='settingschange_warning'>{changewarningstate}</div>
                 </div>
                 <div className='settingschange_submit'>
-                    <div className='settingschange_button settingschange_inactive' ref={changebuttonRef} onClick={() => SettingsChangePressSubmit()}>
-                        Submit
+                    <div className='settingschange_button settingschange_inactive settingschange_blue' ref={changebuttonRef} onClick={() => SettingsChangePressSubmit()}>
+                        {popupbuttonstate}
                     </div>
                 </div>
             </div>
@@ -563,13 +607,13 @@ export function Settings(){
                     <div className='settings_line'/>
 
                     <div className='settingscontent'>
-                        <div className='settingscontent_infomajor'>
+                        <div className='settingscontent_infomajor' onClick={() => PopUpOpenClose('open', 'DELETE ALL CHATS', 'Enter Password', 'password', 'chats')}>
                             DELETE ALL CHATS
                         </div>
-                        <div className='settingscontent_infomajor'>
+                        <div className='settingscontent_infomajor' onClick={() => PopUpOpenClose('open', 'PERMANENTLY DELETE ACCOUNT', 'Enter Password', 'password', 'account')}>
                             DELETE ACCOUNT
                         </div>
-                        <div className='settingscontent_infomajor settingsmajor_blue'>
+                        <div className='settingscontent_infomajor settingsmajor_blue' onClick={() => Logout()}>
                             LOGOUT
                         </div>
                     </div>

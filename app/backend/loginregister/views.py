@@ -319,17 +319,17 @@ def UpdateValue(request):
         if(CheckDataValue(data['p'], 'password') == False):
             return HttpResponse(json.dumps('Bad Request Password'), status = 400)
         if(PasswordCheck(data['p'], uservals['password']) == False):
-            return HttpResponse(json.dumps('wrong password'), status = 401)
+            return HttpResponse(json.dumps('Password is incorrect'), status = 409)
         user_info = None
         
         if(data['v'] == ''):
             data['v'] = None
         if(data['k'] == 'email'):
             if(data['v'] == None and uservals['phone'] == None):
-                return HttpResponse(json.dumps('Either email or phone number must have a value'), status = 409)
+                return HttpResponse(json.dumps('Either Email or Phone Number must have a value'), status = 409)
         elif(data['k'] == 'phone'):
             if(data['v'] == None and uservals['email'] == None):
-                return HttpResponse(json.dumps('Either email or phone number must have a value'), status = 409)
+                return HttpResponse(json.dumps('Either Email or Phone Number must have a value'), status = 409)
         
         if data['k'] == 'email':
             if(CheckDataValue(data['v'], 'email') == False):

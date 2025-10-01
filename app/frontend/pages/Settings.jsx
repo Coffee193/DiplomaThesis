@@ -46,6 +46,7 @@ export function Settings(){
     const [popupbuttonstate, popupbuttonsetState] = useState('Submit')
     const [popuppasswordstate, popuppasswordsetState] = useState('Enter Password')
     const deleteinfoRef = useRef(false)
+    const settingsxcloseRef = useRef()
 
     const reg_contains_only_num = new RegExp('^[0-9]+$')
     const reg_contains_atleast1_num = new RegExp(['[0-9]'])
@@ -117,6 +118,7 @@ export function Settings(){
 
     function PopUpOpenClose(action='open', header = '', text = '', changetype = '', deleteinfo = false){
         if(action === 'open'){
+            deleteinfoRef.current = deleteinfo
             popupRef.current.style.pointerEvents = 'all'
             popupRef.current.style.opacity = '1'
             popupRef.current.style.transform = 'scale(1)'
@@ -126,9 +128,17 @@ export function Settings(){
 
             changevaltypeRef.current = changetype
             
-            changeheadersetState(header)
+            if(deleteinfoRef.current === false){
+                changeheadersetState(<div>{header}</div>)
+                settingsxcloseRef.current.classList.remove('settingsclose_red')
+                settingsxcloseRef.current.classList.add('settingsclose_blue')
+            }
+            else{
+                changeheadersetState(<div className='settingsheader_red'>{header}</div>)
+                settingsxcloseRef.current.classList.remove('settingsclose_blue')
+                settingsxcloseRef.current.classList.add('settingsclose_red')
+            }
             
-            deleteinfoRef.current = deleteinfo
             if(deleteinfo === false){
                 popuppasswordsetState('Enter Password')
                 popupbuttonsetState('Submit')
@@ -332,54 +342,65 @@ export function Settings(){
         }
     }
 
-    async function SettingsChangePressSubmit(){
+    function SettingsChangePressButton(){
         if(changesubmitactiveRef.current[0] === false){
             changewarningsetState(changesubmitactiveRef.current[1])
         }
         else{
-            let response_status = null
-            let request = {"k": changevaltypeRef.current, "v": changeinputRef.current.value, "p": changepasswordRef.current.value}
-            let response = await fetch('http://127.0.0.1:8000/loginregister/updatevalue/', {
-                method: 'POST',
-                body: JSON.stringify(request),
-                credentials: 'include',
-            }).then(res => { response_status = res.status
-                return res.json()}).then(data => data)
-            if(response_status === 403 || response_status === 401){
-                navigate('/login')
-                return
+            if(deleteinfoRef.current === false){
+                SettingsUpdateValue()
             }
-            else if(response_status === 409){
-                changewarningsetState(response)
+            else if(deleteinfoRef.current === 'chats'){
+                console.log('del chats')
             }
-            else if(response_status === 200){
-                if(changevaltypeRef.current === 'email'){
-                    if(changeinputRef.current.value === ''){
-                        emailsetState(<div className='settingscontent_infoval vallight'>no email provided</div>)
-                    }
-                    else{
-                        emailsetState(<div className='settingscontent_infoval'>{changeinputRef.current.value}</div>)
-                    }
-                }
-                else if(changevaltypeRef.current === 'phone'){
-                    if(changeinputRef.current.value === ''){
-                        phonesetState(<div className='settingscontent_infoval vallight'>no phone number provided</div>)
-                    }
-                    else{
-                        phonesetState(<div className='settingscontent_infoval'>{changeinputRef.current.value}</div>)
-                    }
-                }
-                else if(changevaltypeRef.current === 'name'){
-                    if(changeinputRef.current.value === ''){
-                        namesetState('Welcome, Back!')
-                    }
-                    else{
-                        namesetState('Welcome, ' + changeinputRef.current.value)
-                    }
-                }
-                PopUpOpenClose('close')
+            else if(deleteinfoRef.current === 'account'){
+                console.log('del account')
             }
+        }
+    }
 
+    async function SettingsUpdateValue(){
+        let response_status = null
+        let request = {"k": changevaltypeRef.current, "v": changeinputRef.current.value, "p": changepasswordRef.current.value}
+        let response = await fetch('http://127.0.0.1:8000/loginregister/updatevalue/', {
+            method: 'POST',
+            body: JSON.stringify(request),
+            credentials: 'include',
+        }).then(res => { response_status = res.status
+            return res.json()}).then(data => data)
+        if(response_status === 403 || response_status === 401){
+            navigate('/login')
+            return
+        }
+        else if(response_status === 409){
+            changewarningsetState(response)
+        }
+        else if(response_status === 200){
+            if(changevaltypeRef.current === 'email'){
+                if(changeinputRef.current.value === ''){
+                    emailsetState(<div className='settingscontent_infoval vallight'>no email provided</div>)
+                }
+                else{
+                    emailsetState(<div className='settingscontent_infoval'>{changeinputRef.current.value}</div>)
+                }
+            }
+            else if(changevaltypeRef.current === 'phone'){
+                if(changeinputRef.current.value === ''){
+                    phonesetState(<div className='settingscontent_infoval vallight'>no phone number provided</div>)
+                }
+                else{
+                    phonesetState(<div className='settingscontent_infoval'>{changeinputRef.current.value}</div>)
+                }
+            }
+            else if(changevaltypeRef.current === 'name'){
+                if(changeinputRef.current.value === ''){
+                    namesetState('Welcome, Back!')
+                }
+                else{
+                    namesetState('Welcome, ' + changeinputRef.current.value)
+                }
+            }
+            PopUpOpenClose('close')
         }
     }
 
@@ -505,7 +526,7 @@ export function Settings(){
             <div className='settingschangeval' ref = {popupRef}>
                 <div className='settingschange_header'>
                     {changeheaderstate}
-                    <XCloseIcon className = 'settingschange_headerclose' onClick={() => PopUpOpenClose('close')}/>
+                    <XCloseIcon className = 'settingschange_headerclose' onClick={() => PopUpOpenClose('close')} ref={settingsxcloseRef}/>
                 </div>
                 <div className='settingschange_val'>
                     <div className='settingschange_img' ref={changeimgholderRef}>
@@ -546,7 +567,7 @@ export function Settings(){
                     <div className='settingschange_warning'>{changewarningstate}</div>
                 </div>
                 <div className='settingschange_submit'>
-                    <div className='settingschange_button settingschange_inactive settingschange_blue' ref={changebuttonRef} onClick={() => SettingsChangePressSubmit()}>
+                    <div className='settingschange_button settingschange_inactive settingschange_blue' ref={changebuttonRef} onClick={() => SettingsChangePressButton()}>
                         {popupbuttonstate}
                     </div>
                 </div>

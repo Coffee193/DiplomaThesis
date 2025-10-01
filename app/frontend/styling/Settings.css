@@ -215,9 +215,6 @@
     right: 0;
     cursor: pointer;
 }
-.settingschange_headerclose:hover{
-    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
-}
 
 .settingschange_valbox{
     display: flex;
@@ -471,4 +468,14 @@
     height: 100%;
     background-color: var(--chat-color-gray);
     z-index: -1;
+}
+
+.settingsheader_red{
+    color: var(--chatnav-color-delete-light);
+}
+.settingsclose_red:hover{
+    color: var(--chatnav-color-delete-light);
+}
+.settingsclose_blue:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
 }

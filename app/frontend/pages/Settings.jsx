@@ -221,63 +221,29 @@ export function Settings(){
 
     function ChangeValuesSubmitButton(){
         let passwordval = changepasswordRef.current.value
-        if(deleteinfoRef.current === false){
-            if(passwordval.length <= 8){
-                ChangeSettingsSetSubmitAcive(false, 'Password is too short')
-                return
-            }
-            else if(passwordval.length > 30){
-                ChangeSettingsSetSubmitAcive(false, 'Password is too long')
-                return
-            }
-            else if(!reg_contains_atleast1_num.test(passwordval)){
-                ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 number')
-                return
-            }
-            else if(!reg_contains_atleast1_lowercase.test(passwordval)){
-                ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 lowercase')
-                return
-            }
-            else if(!reg_contains_atleast1_uppercase.test(passwordval)){
-                ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 uppercase')
-                return
-            }
-        }
 
         let inp_val = changeinputRef.current.value
         if(changevaltypeRef.current === 'email'){
-            if(inp_val.length === 0){
-                ChangeSettingsSetSubmitAcive(true)
-                return
-            }
-            else{
+            if(inp_val.length !== 0){
                 let contains_a = inp_val.indexOf('@')
                 let contains_dot = inp_val.indexOf('.')
                 if( (contains_a <= 0) || (contains_dot === -1) || (contains_a + 1 >= contains_dot) || (inp_val.length < 5) || (contains_dot === inp_val.length - 1)){
                     ChangeSettingsSetSubmitAcive(false, 'Enter a valid Email Address')
                     return
                 }
-                ChangeSettingsSetSubmitAcive(true)
-                return
             }
         }
         else if(changevaltypeRef.current === 'phone'){
-            if(inp_val.length === 0){
-                ChangeSettingsSetSubmitAcive(true)
-                return
-            }
-            else{
+            if(inp_val.length !== 0){
                 if(inp_val.length <5 || !reg_contains_only_num.test(inp_val.slice(1)) || inp_val[0] !== '+'){
                     ChangeSettingsSetSubmitAcive(false, 'Enter a valid phone number')
                     return
                 }
-                ChangeSettingsSetSubmitAcive(true)
-                return
             }
         }
         else if(changevaltypeRef.current === 'password'){
             let passwordtext = 'New Password'
-            if(deleteinfoRef.current === true){
+            if(deleteinfoRef.current !== false){
                 passwordtext = 'Password'
             }
             if(inp_val.length === 0){
@@ -311,9 +277,6 @@ export function Settings(){
                     return
                 }
             }
-
-            ChangeSettingsSetSubmitAcive(true)
-            return
         }
         else if(changevaltypeRef.current === 'image'){
             if(changeimgprevvalRef.current[1] === false){
@@ -328,10 +291,32 @@ export function Settings(){
                 ChangeSettingsSetSubmitAcive(false, 'Name is too big')
                 return
             }
-            ChangeSettingsSetSubmitAcive(true)
-            return
         }
 
+        if(deleteinfoRef.current === false){
+            if(passwordval.length <= 8){
+                ChangeSettingsSetSubmitAcive(false, 'Password is too short')
+                return
+            }
+            else if(passwordval.length > 30){
+                ChangeSettingsSetSubmitAcive(false, 'Password is too long')
+                return
+            }
+            else if(!reg_contains_atleast1_num.test(passwordval)){
+                ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 number')
+                return
+            }
+            else if(!reg_contains_atleast1_lowercase.test(passwordval)){
+                ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 lowercase')
+                return
+            }
+            else if(!reg_contains_atleast1_uppercase.test(passwordval)){
+                ChangeSettingsSetSubmitAcive(false, 'Password must contain at least 1 uppercase')
+                return
+            }
+        }
+
+        ChangeSettingsSetSubmitAcive(true)
     }
 
     function ChangeSettingsSetSubmitAcive(active = false, description = ''){

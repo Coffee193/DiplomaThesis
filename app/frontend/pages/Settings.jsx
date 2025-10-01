@@ -47,6 +47,8 @@ export function Settings(){
     const [popuppasswordstate, popuppasswordsetState] = useState('Enter Password')
     const deleteinfoRef = useRef(false)
     const settingsxcloseRef = useRef()
+    const [settingsnotificationstate, settingsnotificationsetState] = useState('Successfully Deleted')
+    const settingsnotificationRef = useRef()
 
     const reg_contains_only_num = new RegExp('^[0-9]+$')
     const reg_contains_atleast1_num = new RegExp(['[0-9]'])
@@ -293,8 +295,6 @@ export function Settings(){
                 ChangeSettingsSetSubmitAcive(false, 'You did not change your image')
                 return
             }
-            ChangeSettingsSetSubmitAcive(true)
-            return
         }
         else if(changevaltypeRef.current === 'name'){
             if(inp_val.length > 7){
@@ -348,10 +348,15 @@ export function Settings(){
         }
         else{
             if(deleteinfoRef.current === false){
-                SettingsUpdateValue()
+                if(changevaltypeRef.current === 'image'){
+                    SettingsUpdateImg()
+                }
+                else{
+                    SettingsUpdateValue()
+                }
             }
             else if(deleteinfoRef.current === 'chats'){
-                console.log('del chats')
+                DeleteAllChats()
             }
             else if(deleteinfoRef.current === 'account'){
                 console.log('del account')
@@ -400,6 +405,66 @@ export function Settings(){
                     namesetState('Welcome, ' + changeinputRef.current.value)
                 }
             }
+            else if(changevaltypeRef.current === 'password'){
+                settingsnotificationsetState('Password Updated!')
+                settingsnotificationRef.current.style.bottom = '35px'
+            }
+            PopUpOpenClose('close')
+        }
+    }
+
+    async function SettingsUpdateImg(){
+        let response_status = null
+        let request = {"p": changepasswordRef.current.value}
+        let formdata = new FormData()
+        formdata.append("data", JSON.stringify(request))
+        formdata.append("img", changeimgstate)
+        let response = await fetch('http://127.0.0.1:8000/loginregister/updateimage/', {
+            method: 'POST',
+            credentials: 'include',
+            body: formdata,
+        }).then(res => {
+            response_status = res.status
+            return res.json()
+        }).then(data => data)
+
+        if(response_status === 403 || response_status === 401){
+            navigate('/login')
+            return
+        }
+        else if(response_status === 415){
+            changewarningsetState('Image msut be of type JPEG, JPG, PNG or AVIF')
+            return
+        }
+        else if(response_status === 413){
+            changewarningsetState(response)
+        }
+        else if(response_status === 200){
+            console.log(response)
+        }
+
+    }
+
+    async function DeleteAllChats(){
+        let response_status = null
+        let request = {"p": changeinputRef.current.value, "vp": changepasswordRef.current.value}
+        let response = await fetch('http://127.0.0.1:8000/chats/deleteallchats/', {
+            method: 'DELETE',
+            credentials: 'include',
+            body: JSON.stringify(request),
+        }).then(res => {
+            response_status = res.status
+            return res.json()
+        }).then(data => data)
+
+        if(response_status === 403 || response_status === 401){
+            navigate('/login')
+            return
+        }
+        else if(response_status === 200){
+            console.log(response)
+            settingsnotificationsetState('All Chats Successfully Deleted! (' + response + ')')
+            settingsnotificationRef.current.style.bottom = '35px'
             PopUpOpenClose('close')
         }
     }
@@ -503,6 +568,20 @@ export function Settings(){
 
     }
 
+    function CloseNotification(){
+        settingsnotificationRef.current.classList.add('settingsnotification_close')
+        setTimeout(NotificationInitBottom, 700)
+        setTimeout(NotificationInitPosition, 1500)
+    }
+
+    function NotificationInitBottom(){
+        settingsnotificationRef.current.style.bottom = '-35px'
+    }
+
+    function NotificationInitPosition(){
+        settingsnotificationRef.current.classList.remove('settingsnotification_close')
+    }
+
     return(
         <div className='settings_allholder'>
             <NavBar/>
@@ -511,7 +590,7 @@ export function Settings(){
                     <div className='settingschange_img_confirmcircle'>
                         <div className='settingschange_img_screenshot' ref={screenshotRef}>
                             <div className='settingschange_img_preview' onMouseDown={(e) => handleImgMouseDown(e)} onMouseUp={() => handleImgMouseUp()} onMouseMove={(e) => handleImgMouseMove(e)} ref={imgpreviewRef}>
-                                <img src={imgpreviewstate} className='pointerevents_none'/>
+                                <img src={imgpreviewstate} className='settingschange_img_upload'/>
                                 <div className='settingschange_img_blackbg'/>
                             </div>
                         </div>
@@ -573,6 +652,10 @@ export function Settings(){
                 </div>
             </div>
             <div className='settingsdarken' ref = {darkenRef} onClick={() => PopUpOpenClose('close')}/>
+            {/*<div className='settingsnotification'>
+                <div>{settingsnotificationstate}</div>
+                <div><Tick height={24} width={24} className='settingsnotification_tick'/></div>
+            </div>*/}
             <div className='settings_mainholder'>
                 <div className='settingsbox'>
                     <div className='settingscontent_img'>
@@ -626,6 +709,11 @@ export function Settings(){
 
                     {adminstate}
 
+                </div>
+                <div className='settingsnotification' ref={settingsnotificationRef}>
+                    <div><Tick className='settingsnotification_tick'/></div>
+                    <div>{settingsnotificationstate}</div>
+                    <div><XCloseIcon className='settingsnotification_x' onClick={() => CloseNotification()}/></div>
                 </div>
             </div>
         </div>

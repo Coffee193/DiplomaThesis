@@ -8,4 +8,5 @@ urlpatterns = [
     path('renamechats/', views.renameChats, name = 'renameChats'),
     path('getchatconversation/<int:conv_id>/', views.getChatConv, name = 'getChatConv'),
     path('askquestion/', views.answearQuestion, name='answearQuestion'),
+    path('deleteallchats/', views.DeleteAllChats, name = 'DeleteAllChats'),
 ]

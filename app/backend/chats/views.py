@@ -7,7 +7,8 @@ import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime
 from loginregister.models import User
-from loginregister.views import PasswordCheck
+from loginregister.views import PasswordCheck, CheckDataValue
+import math
 
 # Create your views here.
 
@@ -183,16 +184,17 @@ def DeleteAllChats(request):
                 return HttpResponse(json.loads('Http 400 Bad Request, invalid data types'), status = 400)
             if(data['p'] != data['vp']):
                 return HttpResponse(json.dumps('Http 400 Bad Request, passed values are not equal'), status = 400)
+            if(CheckDataValue(data['p'], 'password') == False):
+                return HttpResponse(json.dumps('Bad Request Passowrd'), status = 400)
             user_password = User.objects.filter(id = int(jwt_r[1]['iss'])).values('password')[0]
             if(PasswordCheck(data['p'], user_password['password']) == False):
                 return HttpResponse(json.dumps('Password is incorrect'), status = 409)
             chat_del = chats.delete_many({"user_id": int(jwt_r[1]['iss'])})
-            print(';;;;;;;;;;')
-            print(chat_del)
-            print(type(chat_del.modified_count))
-            print(chat_del.modified_count)
-            return HttpResponse(json.dumps('All chats were deleted: ' + str(chat_del.modified_count)), status = 200)
+            if(math.floor(chat_del.raw_result['ok']) == 1):
+                return HttpResponse(json.dumps(chat_del.raw_result['n']), status = 200)
+            else:
+                return HttpResponse(json.dumps('Http 400 Bad request, something went wrong with deleting chats'), status = 400)
         except:
-            return HttpResponse(json.dumps('Http 400 Bad Request, something went wrong'), status = 400)
+           return HttpResponse(json.dumps('Http 400 Bad Request, something went wrong'), status = 400)
     else:
         return HttpResponse(json.dumps('Http 400 Bad request, method must be DELETE'), status = 405)

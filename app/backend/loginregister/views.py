@@ -362,29 +362,40 @@ def UpdateValue(request):
 @api_view(['POST'])
 def UpdateImg(request, max_size_mb = 10):
     if request.method == 'POST':
-        data = json.loads(request.data.get('data'))
         if('access' not in request.COOKIES or 'refresh' not in request.COOKIES):
             return HttpResponse(json.dumps('no jwt provided'), status = 401)
         jwt_r = VerifyJWT(request)
         if(jwt_r[0] == False):
             return HttpResponse(json.dumps('not authenticated'), status = 403)
+
+        data = json.loads(request.data.get('data'))
+        req_img = request.data.get('img')
+        if('p' not in data):
+            return HttpResponse(json.dumps('Http 400 Bad Request, important values are missing'), status = 400)
+        if(CheckDataValue(data['p'], 'password') == False):
+            return HttpResponse(json.dumps('Bad Request Password'), status = 400)
         passwuser = User.objects.filter(id = int(jwt_r[1]['iss'])).values('password')[0]
         if(PasswordCheck(data['p'], passwuser['password']) == False):
-            return HttpResponse(json.dumps('wrong password'), status = 401)
-        req_img = request.data.get('img').file.read()
+            return HttpResponse(json.dumps('Password is incorrect'), status = 409)
+        
+        #req_img = request.data.get('img').file.read()
         if(len(req_img)/1024/1024 > max_size_mb):
-            return HttpResponse(json.dumps('image too big'), status = 400)
+            return HttpResponse(json.dumps('Image must be smaller than 10MB'), status = 413)
+        print(req_img)
+        print('SAMURAIDATO')
         with Image.open(io.BytesIO(req_img)) as im:
             # Check its image
+            print('kukuku')
+            print(im)
             if(im.format != 'JPEG' and im.format != 'PNG' and im.format != 'JPG' and im.format != 'AVIF'):
                 return HttpResponse(json.dumps('Image Type not supported (only JPEG, PNG, JPG, AVIF are supported)'), status = 415)
             if(im.width > 10000 or im.height > 10000):
-                return HttpResponse(json.dumps('image width or height exceeds 10000 pixel'), status = 413)
+                return HttpResponse(json.dumps('Image width or height exceed 10000 pixels'), status = 413)
             if(im.format == 'PNG'):
                 im.convert('RGB')
             print(path_to_img)
             im.save(path_to_img + jwt_r[1]['iss'], quality = 100)
-            return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps('image successfully uploaded'), jwt_r = jwt_r)
+            return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps(json.dumps(path_to_img + jwt_r[1]['iss'])), jwt_r = jwt_r)
     else:
         return HttpResponse(json.dumps('Bad Method'), status = 405)
     

@@ -22,6 +22,8 @@ import re
 
 pepper_key = str.encode(os.environ.get('pepper_key'))
 path_to_img = str.encode(os.environ.get('path_to_img'))
+# Remove this once in production
+development = str.encode(os.environ.get('development'))
 
 # Logs User in
 @api_view(['POST'])
@@ -373,6 +375,8 @@ def UpdateImg(request, max_size_mb = 10):
         req_img = request.data.get('img')
         print('&&&NNN')
         print(req_img)
+        print(type(req_img))
+        print(req_img[:9])
         if('p' not in data):
             return HttpResponse(json.dumps('Http 400 Bad Request, important values are missing'), status = 400)
         if(CheckDataValue(data['p'], 'password') == False):
@@ -381,20 +385,40 @@ def UpdateImg(request, max_size_mb = 10):
         if(PasswordCheck(data['p'], passwuser['password']) == False):
             return HttpResponse(json.dumps('Password is incorrect'), status = 409)
         
-        #req_img = request.data.get('img').file.read()
+        if(type(req_img) != str):
+            return HttpResponse(json.dumps('Bad Request Image'), status = 400)
         if(len(req_img)/1024/1024 > max_size_mb):
             return HttpResponse(json.dumps('Image must be smaller than 10MB'), status = 413)
+        
+        if(len(req_img) < 10):
+            return HttpResponse(json.dumps('Http 400 Bad Request, Invalid image'), status = 400)
+        if(req_img[:10] != 'data:image'):
+            del_path = ''
+            if(development.decode('utf-8') == 'true'):
+                del_path = 'D:/Downloads/diplomat/actual_work/app/frontend/components/dev_images/' + jwt_r[1]['iss'] + '.JPEG'
+            else:
+                del_path = path_to_img.decode('utf-8') + '/' + jwt_r[1]['iss'] + '.JPEG'
+            if(os.path.exists(del_path) == False):
+                return HttpResponse(json.dumps('Http 400 Bad Request, Image deletion path does not exist'), status = 400)
+            os.remove(del_path)
+            user_info = User.objects.filter(id = int(jwt_r[1]['iss'])).update(img = False)
+            return HttpResponse(json.dumps('Image successfully deleted'), status = 200)
+
         req_img = re.sub('^data:image/.+;base64,', '', req_img)
         with Image.open(io.BytesIO(base64.b64decode(req_img))) as im:
-            # Check its image
-            if(im.format != 'JPEG' and im.format != 'PNG' and im.format != 'JPG' and im.format != 'AVIF'):
-                return HttpResponse(json.dumps('Image Type not supported (only JPEG, PNG, JPG, AVIF are supported)'), status = 415)
+            if(im.format != 'JPEG'):
+                return HttpResponse(json.dumps('Image Type not supported (only JPEG are supported)'), status = 415)
             if(im.width > 10000 or im.height > 10000):
                 return HttpResponse(json.dumps('Image width or height exceed 10000 pixels'), status = 413)
-            if(im.format == 'PNG'):
-                im.convert('RGB')
-            save_path = path_to_img.decode('utf-8') + '/' + jwt_r[1]['iss'] + '.' + im.format
-            im.save(save_path, quality = 100)
+            
+            if(development.decode('utf-8') == 'true'):
+                save_path = 'D:/Downloads/diplomat/actual_work/app/frontend/components/dev_images/' + jwt_r[1]['iss'] + '.' + im.format
+            else:
+                save_path = path_to_img.decode('utf-8') + '/' + jwt_r[1]['iss'] + '.' + im.format
+            if im.format == 'JPEG':
+                im.save(save_path, quality = 'keep')
+            else:
+                im.save(save_path, quality = 95)
             user_info = User.objects.filter(id = int(jwt_r[1]['iss'])).update(img = True)
             if(user_info != 1):
                 return HttpResponse(json.dumps('Something went wrong'), status = 500)
@@ -412,6 +436,8 @@ def GetUserInfo(request):
             return HttpResponse(json.dumps('Not authenticated'), status = 403)
         user_info = User.objects.filter(id = int(jwt_r[1]['iss']))
         user_ret = user_info.values('email', 'phone', 'name', 'img', 'is_admin')[0]
+        if(user_ret['img'] == True):
+            user_ret['img'] = jwt_r[1]['iss']
         return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps(user_ret),
                                                                          jwt_r = jwt_r)
     else:

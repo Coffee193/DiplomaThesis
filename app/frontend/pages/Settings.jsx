@@ -78,7 +78,10 @@ export function Settings(){
                 changeimgpicRef.current.classList.add('settingschange_img_inactive')
             }
             else{
+                let img_path = import.meta.env.VITE_IMG_PATH + response['img'] + '.JPEG'
+                iconsetState(<img src={img_path} className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
                 changeimguploadsetState('CHANGE IMAGE')
+                changeimgsetState(img_path)
                 changeimgpicRef.current.classList.add('settingschange_img_active')
                 changeimgvalRef.current.classList.add('settingschange_img_active')
             }
@@ -442,6 +445,13 @@ export function Settings(){
             changewarningsetState(response)
         }
         else if(response_status === 200){
+            if(response === 'Image successfully deleted'){
+                changeimguploadsetState('UPLOAD IMAGE')
+                ChangeImgVisible()
+                PopUpOpenClose('close')
+                iconsetState(<UserIconThin className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
+                return
+            }
             iconsetState(<img src={imgpreviewstate} className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
             changeimguploadsetState('CHANGE IMAGE')
             ChangeImgVisible(true)
@@ -515,7 +525,7 @@ export function Settings(){
     }
     
     function SaveScreenshot(){
-        html2canvas(screenshotRef.current).then((canvas) => {
+        html2canvas(screenshotRef.current, {scale: 2}).then((canvas) => {
             let img = canvas.toDataURL('image/jpeg')
             if(changeimgprevvalRef.current[1] === false){
                 changeimgprevvalRef.current = [changeimgstate, true]
@@ -529,6 +539,7 @@ export function Settings(){
         ChangeImgVisible(true)
         ImgConfirmClose()
         changeimguploadsetState('CHANGE IMAGE')
+        ChangeValuesSubmitButton()
     }
 
     function ChangeImgVisible(visible = false){
@@ -553,6 +564,7 @@ export function Settings(){
         ChangeImgVisible()
         changeimguploadsetState('UPLOAD IMAGE')
         changeimgpressRef.current.value = ''
+        ChangeValuesSubmitButton()
     }
 
     async function Logout(){

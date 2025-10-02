@@ -29,7 +29,7 @@ class User(models.Model):
 
     is_admin = models.BooleanField(null = False, blank = False, default = False)
 
-    img_path = models.CharField(max_length = 255,default = None, null = True)
+    img = models.BooleanField(blank = False, default = False, null = False)
 
     def __str__(self):
         if self.email:

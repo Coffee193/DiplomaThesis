@@ -71,16 +71,16 @@ export function Settings(){
 
         if(response_status === 200){
 
-            if(response['img_path'] === null){
+            if(response['img'] === false){
                 iconsetState(<UserIconThin className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
                 changeimguploadsetState('UPLOAD IMAGE')
                 changeimgvalRef.current.classList.add('settingschange_img_inactive')
                 changeimgpicRef.current.classList.add('settingschange_img_inactive')
             }
             else{
-                changeimguploadsetState('UPLAOD NEW IMAGE')
+                changeimguploadsetState('CHANGE IMAGE')
                 changeimgpicRef.current.classList.add('settingschange_img_active')
-                changeimgvalRef.current.calssList.add('settingschange_img_active')
+                changeimgvalRef.current.classList.add('settingschange_img_active')
             }
 
             if(response['name'] === null){
@@ -118,7 +118,7 @@ export function Settings(){
         }
     }
 
-    function PopUpOpenClose(action='open', header = '', text = '', changetype = '', deleteinfo = false){
+    function PopUpOpenClose(action='open', header = '', text = '', changetype = '', deleteinfo = false, keepimgval = false){
         if(action === 'open'){
             deleteinfoRef.current = deleteinfo
             popupRef.current.style.pointerEvents = 'all'
@@ -190,15 +190,17 @@ export function Settings(){
             SettingsInputChange()
             changesubmitactiveRef.current = [false, 'Fields are empty']
             newpasswordeyesetState([<EyeIcon/>, true, 'password'])
-            if(changeimgprevvalRef.current[1] === true){
-                changeimgsetState(changeimgprevvalRef.current[0])
-                if(changeimgprevvalRef.current[0] === null){
-                    ChangeImgVisible(false)
-                    changeimgpressRef.current.value = ''
-                    changeimguploadsetState('UPLOAD IMAGE')
-                    changeimgprevvalRef.current[0] = null
+            if(keepimgval === false){
+                if(changeimgprevvalRef.current[1] === true){
+                    changeimgsetState(changeimgprevvalRef.current[0])
+                    if(changeimgprevvalRef.current[0] === null){
+                        ChangeImgVisible(false)
+                        changeimgpressRef.current.value = ''
+                        changeimguploadsetState('UPLOAD IMAGE')
+                        changeimgprevvalRef.current[0] = null
+                    }
+                    changeimgprevvalRef.current[1] = false
                 }
-                changeimgprevvalRef.current[1] = false
             }
         }
     }
@@ -440,7 +442,10 @@ export function Settings(){
             changewarningsetState(response)
         }
         else if(response_status === 200){
-            console.log(response)
+            iconsetState(<img src={imgpreviewstate} className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
+            changeimguploadsetState('CHANGE IMAGE')
+            ChangeImgVisible(true)
+            PopUpOpenClose('close', '', '', '', false, true)
         }
 
     }
@@ -462,7 +467,6 @@ export function Settings(){
             return
         }
         else if(response_status === 200){
-            console.log(response)
             settingsnotificationsetState('All Chats Successfully Deleted! (' + response + ')')
             settingsnotificationRef.current.style.bottom = '35px'
             PopUpOpenClose('close')

@@ -18,6 +18,7 @@ from snowflake_id_gen import GenerateSnowflake
 from django.core.cache import cache
 from PIL import Image
 import io
+import re
 
 pepper_key = str.encode(os.environ.get('pepper_key'))
 path_to_img = str.encode(os.environ.get('path_to_img'))
@@ -353,7 +354,7 @@ def UpdateValue(request):
         else:
             return HttpResponse(json.dumps('Bad Request'), status = 400)
         if(user_info != 1):
-            return HttpResponse(json.dumps('Something wen wrong'), status = 500)
+            return HttpResponse(json.dumps('Something went wrong'), status = 500)
         return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps('value successfully updated'),
                                                                          jwt_r = jwt_r)
     else:
@@ -370,6 +371,8 @@ def UpdateImg(request, max_size_mb = 10):
 
         data = json.loads(request.data.get('data'))
         req_img = request.data.get('img')
+        print('&&&NNN')
+        print(req_img)
         if('p' not in data):
             return HttpResponse(json.dumps('Http 400 Bad Request, important values are missing'), status = 400)
         if(CheckDataValue(data['p'], 'password') == False):
@@ -381,21 +384,21 @@ def UpdateImg(request, max_size_mb = 10):
         #req_img = request.data.get('img').file.read()
         if(len(req_img)/1024/1024 > max_size_mb):
             return HttpResponse(json.dumps('Image must be smaller than 10MB'), status = 413)
-        print(req_img)
-        print('SAMURAIDATO')
-        with Image.open(io.BytesIO(req_img)) as im:
+        req_img = re.sub('^data:image/.+;base64,', '', req_img)
+        with Image.open(io.BytesIO(base64.b64decode(req_img))) as im:
             # Check its image
-            print('kukuku')
-            print(im)
             if(im.format != 'JPEG' and im.format != 'PNG' and im.format != 'JPG' and im.format != 'AVIF'):
                 return HttpResponse(json.dumps('Image Type not supported (only JPEG, PNG, JPG, AVIF are supported)'), status = 415)
             if(im.width > 10000 or im.height > 10000):
                 return HttpResponse(json.dumps('Image width or height exceed 10000 pixels'), status = 413)
             if(im.format == 'PNG'):
                 im.convert('RGB')
-            print(path_to_img)
-            im.save(path_to_img + jwt_r[1]['iss'], quality = 100)
-            return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps(json.dumps(path_to_img + jwt_r[1]['iss'])), jwt_r = jwt_r)
+            save_path = path_to_img.decode('utf-8') + '/' + jwt_r[1]['iss'] + '.' + im.format
+            im.save(save_path, quality = 100)
+            user_info = User.objects.filter(id = int(jwt_r[1]['iss'])).update(img = True)
+            if(user_info != 1):
+                return HttpResponse(json.dumps('Something went wrong'), status = 500)
+            return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps(json.dumps(save_path)), jwt_r = jwt_r)
     else:
         return HttpResponse(json.dumps('Bad Method'), status = 405)
     
@@ -408,7 +411,7 @@ def GetUserInfo(request):
         if(jwt_r[0] == False):
             return HttpResponse(json.dumps('Not authenticated'), status = 403)
         user_info = User.objects.filter(id = int(jwt_r[1]['iss']))
-        user_ret = user_info.values('email', 'phone', 'name', 'img_path', 'is_admin')[0]
+        user_ret = user_info.values('email', 'phone', 'name', 'img', 'is_admin')[0]
         return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps(user_ret),
                                                                          jwt_r = jwt_r)
     else:

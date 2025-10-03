@@ -479,3 +479,22 @@ def CheckDataValue(val, valtype, allownone = True):
     else:
         return False
     return True
+
+@api_view(['GET'])
+def GetUserImg(request):
+    if request.method == 'GET':
+        if 'access' not in request.COOKIES or 'refresh' not in request.COOKIES:
+            return HttpResponse(json.dumps('no jwt provided'), status = 401)
+        jwt_r = VerifyJWT(request)
+        if(jwt_r[0] == False):
+            return HttpResponse(json.dumps('Not authenticated'), status = 403)
+        userimg = User.objects.filter(id = int(jwt_r[1]['iss'])).values('img')[0]
+        print(userimg)
+        print('>>>>>>>>>>>')
+        if(userimg['img'] == True):
+            userimg = jwt_r[1]['iss']
+        else:
+            userimg = False
+        return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps(userimg), jwt_r = jwt_r)
+    else:
+        return HttpResponse(json.dumps('Bad Method'), status = 405)

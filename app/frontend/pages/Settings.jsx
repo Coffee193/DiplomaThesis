@@ -1,5 +1,4 @@
 import '../styling/Settings.css'
-import { NavBar } from './NavBar'
 import { useEffect, useState, useRef } from 'react'
 import { UserIconThin, PencilIcon, XCloseIcon, EyeIcon, EyeCloseIcon, Tick } from '../components/svgs/UtilIcons'
 import { useNavigate, Link } from 'react-router-dom'
@@ -600,7 +599,6 @@ export function Settings(){
 
     return(
         <div className='settings_allholder'>
-            <NavBar/>
             <div className='settingschange_img_confirm' ref={changeimgpopupRef}>
                 <div className='settingschange_img_confirmbox'>
                     <div className='settingschange_img_confirmcircle'>

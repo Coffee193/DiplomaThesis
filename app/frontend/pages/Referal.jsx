@@ -1,5 +1,4 @@
 import '../styling/Referal.css'
-import { NavBar } from './NavBar'
 import { ArrowDownIcon } from '../components/svgs/UtilIcons'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -62,7 +61,6 @@ export function Referal(){
 
     return(
         <div className='referal_holder'>
-            <NavBar/>
             <div className='referal_outer'>
                 <div className='referal_box'>
                     <div className='referal_utils'>

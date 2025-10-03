@@ -1,0 +1,8 @@
+When goin in production, check:
+
+.env frontned file from where user icons are loaded
+
+Check backend-> loginregister-> views.py -> UpdateImg for where imges are
+stored/deleted
+
+Delete frontend -> components -> dev_images

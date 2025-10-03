@@ -10,4 +10,5 @@ urlpatterns = [
     path('getuserinfo/', views.GetUserInfo, name = 'GetUserInfo'),
     path('updatevalue/', views.UpdateValue, name = 'UpdateValue'),
     path('updateimage/', views.UpdateImg, name = 'UpdateImage'),
+    path('getuserimg/', views.GetUserImg, name = 'GetUserImg'),
 ]

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     height: var(--nav-height);
-    width: 100%;
+    width: 100vw;
     position: sticky;
     background-color: #fff;
     padding: 10px 25px;
@@ -55,7 +55,6 @@
     padding: 0 25px;
 }
 .nav_logged{
-    display: flex;
     width: 90px;
     height: 100%;
     align-items: center;

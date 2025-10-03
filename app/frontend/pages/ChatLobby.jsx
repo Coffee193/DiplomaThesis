@@ -1,5 +1,4 @@
 import '../styling/ChatLobby.css'
-import { NavBar } from './NavBar'
 import { ChatNav } from './ChatNav'
 import { ChatBody } from './ChatBody'
 import { useState, useRef, useEffect } from 'react'
@@ -26,7 +25,6 @@ export function ChatLobby(){
 
     return(
         <div className='all_holder_clobby'>
-            <NavBar/>
             <div className='clobby'>
                 <div className='clobby_all'>
                     <ChatNav convState={conversationsState} convsetState={conversationssetState} chatlist={chatslist} newconv={newconvState}/>

@@ -1,11 +1,9 @@
 import '../styling/TermsPolicies.css'
-import { NavBar } from './NavBar'
 
 export function TermsPolicies(){
 
     return(
         <div className='termspolicies_allholder'>
-            <NavBar/>
             <div className='termspolicies_mainholder'>
                 <div className='termspolicies_title'>
                     <div className='termspolicies_titlemain'>

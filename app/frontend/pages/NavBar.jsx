@@ -3,7 +3,7 @@ import { Link, useNavigate, Outlet } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { SideBar, UserIcon, Logout, Settings, DiagonalArrow } from '../components/svgs/UtilIcons'
 
-export function NavBar(){
+export function NavBar({updatenavbarstate}){
 
     const navigate = useNavigate()
     const navloggedRef = useRef()
@@ -59,7 +59,6 @@ export function NavBar(){
                 loginRef.current.classList.add('display_none')
                 navloggedRef.current.classList.remove('display_none')
                 navloggedRef.current.classList.add('flex')
-                console.log('rerednerd*********')
                 GetUserImg()
             }    
     },[])
@@ -84,12 +83,34 @@ export function NavBar(){
             }
             else{
                 let img_path = import.meta.env.VITE_IMG_PATH + response + '.JPEG'
-                userimgsetState(<div className='nav_user flex justify-center align-center h-30px overflow-hidden'><img className='contain h-100 w-100' src={img_path}/></div>)
+                userimgsetState(<div className='nav_user nav_imgexist'><img className='nav_img' src={img_path}/></div>)
             }
 
         }
 
     }
+
+    useEffect(() => {
+        console.log('PUPUPUPUPU')
+        console.log('##############')
+        //return
+        if(updatenavbarstate[1] === 'name'){
+            if(updatenavbarstate[0] === ''){
+                namesetState('Info')
+            }
+            else{
+                namesetState('Hello, ' + updatenavbarstate[0])
+            }
+        }
+        else if(updatenavbarstate[1] === 'image'){
+            if(updatenavbarstate[0] === ''){
+                userimgsetState(<UserIcon width={30} height={30} className='nav_user'/>)
+            }
+            else{
+                userimgsetState(<div className='nav_user nav_imgexist'><img className='nav_img' src={updatenavbarstate[0]}/></div>)
+            }
+        }
+    },[updatenavbarstate])
 
     return(
         <>

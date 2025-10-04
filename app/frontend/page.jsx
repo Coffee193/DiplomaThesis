@@ -10,20 +10,24 @@ import { TermsPolicies } from './pages/TermsPolicies'
 import { Settings } from './pages/Settings'
 import { Referal } from './pages/Referal'
 import { NavBar } from './pages/NavBar'
+import { useState } from 'react'
 
 export function Home() {
+
+    const [updatenavbarstate, updatenavbarsetState] = useState(['', ''])
+
     return(
         <Routes>
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
-            <Route element={<NavBar/>}>
+            <Route element={<NavBar updatenavbarstate={updatenavbarstate}/>}>
                 <Route path = '/' element = {<HomeMain/>} />
                 <Route path = '/chat'>
                     <Route index element={<ChatLobby/>}/>
                     <Route path=':id' element={<ChatLobby/>}/>
                 </Route>
                 <Route path = '/termspolicies' element = {<TermsPolicies/>}/>
-                <Route path = '/settings' element = {<Settings/>}/>
+                <Route path = '/settings' element = {<Settings updatenavbarsetState={updatenavbarsetState}/>}/>
                 <Route path = '/referalcodes' element = {<Referal/>}/>
             </Route>
         </Routes>

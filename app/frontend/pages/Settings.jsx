@@ -4,7 +4,7 @@ import { UserIconThin, PencilIcon, XCloseIcon, EyeIcon, EyeCloseIcon, Tick } fro
 import { useNavigate, Link } from 'react-router-dom'
 import html2canvas from 'html2canvas'
 
-export function Settings(){
+export function Settings({updatenavbarsetState}){
 
     const [iconstate, iconsetState] = useState()
     const [namestate, namesetState] = useState()
@@ -404,9 +404,11 @@ export function Settings(){
             else if(changevaltypeRef.current === 'name'){
                 if(changeinputRef.current.value === ''){
                     namesetState('Welcome, Back!')
+                    updatenavbarsetState(['', 'name'])
                 }
                 else{
                     namesetState('Welcome, ' + changeinputRef.current.value)
+                    updatenavbarsetState([changeinputRef.current.value, 'name'])
                 }
             }
             else if(changevaltypeRef.current === 'password'){
@@ -449,9 +451,11 @@ export function Settings(){
                 ChangeImgVisible()
                 PopUpOpenClose('close')
                 iconsetState(<UserIconThin className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
+                updatenavbarsetState(['', 'image'])
                 return
             }
-            iconsetState(<img src={imgpreviewstate} className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
+            iconsetState(<img src={changeimgstate} className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
+            updatenavbarsetState([changeimgstate, 'image'])
             changeimguploadsetState('CHANGE IMAGE')
             ChangeImgVisible(true)
             PopUpOpenClose('close', '', '', '', false, true)

@@ -160,3 +160,15 @@
     background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
     color: #fff;
 }
+.nav_imgexist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 30px;
+}
+.nav_img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}

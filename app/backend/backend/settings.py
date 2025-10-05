@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'loginregister.apps.LoginregisterConfig',
+    'referal.apps.ReferalConfig',
 
     'rest_framework',
     'corsheaders',

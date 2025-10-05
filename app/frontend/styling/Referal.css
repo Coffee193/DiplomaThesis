@@ -117,3 +117,11 @@
     background-color: #fff;
     margin-bottom: 10px;
 }
+
+.referal_nocreated{
+    width: 100%;
+    text-align: center;
+    margin: 25px 0px;
+    font-weight: 300;
+    color: var(--chat-color-gray-strong);
+}

@@ -19,6 +19,7 @@ from django.core.cache import cache
 from PIL import Image
 import io
 import re
+from referal.models import Referal
 
 pepper_key = str.encode(os.environ.get('pepper_key'))
 path_to_img = str.encode(os.environ.get('path_to_img'))
@@ -180,35 +181,45 @@ def PasswordCheck(password, password_db):
 @api_view(['POST'])
 def handleRegister(request):
     if(request.method == 'POST'):
-        # register
         #try:
-            #print(request)
-            #print(request.body)
-            #print(request.body.decode('utf-8'))
-            #print(json.loads(request.body.decode('utf-8')))
             data = json.loads(request.body.decode('utf-8'))
-            #print('---')
-            #print(data)
-            #print(type(data))
+            if('r' not in data):
+                return HttpResponse(json.dumps('Http 400 Bad request'), status = 400)
+            if(type(data['r']) != str):
+                return HttpResponse(json.dumps('Http 400 Bad request'), status = 400)
+            if(len(data['r']) != 10):
+                return HttpResponse(json.dumps('Http 400 Bad Request'), status = 400)
             if(CheckData(data) == 'RE'):
                 #print('ayo')
                 return HttpResponseBadRequest('Http 400 Bad Request')
-            else:
-                userfound = Find_User(data)
-                if(userfound != None):
-                    return Response('This account already exists!')
-                fin_pass = PasswordSafe(password = data['p'])
-                user_id = GenerateSnowflake()
-                User.objects.create(email = data['e'], phone = data['n'], password = fin_pass, date_created = datetime.datetime.utcnow(), id = user_id)
-                # CHECK FOR THE REFERAL CODE HERE
-                print('What???')
-                jwtpair_dict = CreateJWTPair(user_id)
-                print(connection.queries)
-                response = HttpResponse('User Successfully Created!', status = 200)
-                response.set_cookie("access", jwtpair_dict["access"], httponly = True, secure=True)
-                response.set_cookie("refresh", jwtpair_dict["refresh"], httponly = True, secure=True)
+            referal_ret = list(Referal.objects.filter(value = data['r']).values('date_created', 'date_redeem', 'id'))
+            if(len(referal_ret) == 0):
+                return HttpResponse(json.dumps('Incorrect Referal Code'), status = 409)
+            if(len(referal_ret) > 1):
+                referal_ret = [i for i in referal_ret if i['date_redeem'] == None]
+            referal_ret = referal_ret[0]
+            if(referal_ret['date_redeem'] != None):
+                return HttpResponse(json.dumps('Referal Code has already been used'), status = 409)
+            exp_date = referal_ret['date_created'] + datetime.timedelta(days = 1)
+            if((datetime.datetime.now(datetime.timezone.utc) - exp_date).total_seconds() > 0):
+                return HttpResponse(json.dumps('Referal Code has expired'), status = 409)
+            
+            userfound = Find_User(data)
+            if(userfound != None):
+                return Response('This account already exists!')
+            fin_pass = PasswordSafe(password = data['p'])
+            user_id = GenerateSnowflake()
+            User.objects.create(email = data['e'], phone = data['n'], password = fin_pass, date_created = datetime.datetime.utcnow(), id = user_id)
+            # CHECK FOR THE REFERAL CODE HERE
+            Referal.objects.filter(id = referal_ret['id']).update(date_redeem = datetime.datetime.now(datetime.timezone.utc), userid_redeem = user_id)
+            print('What???')
+            jwtpair_dict = CreateJWTPair(user_id)
+            print(connection.queries)
+            response = HttpResponse('User Successfully Created!', status = 200)
+            response.set_cookie("access", jwtpair_dict["access"], httponly = True, secure=True)
+            response.set_cookie("refresh", jwtpair_dict["refresh"], httponly = True, secure=True)
 
-                return response
+            return response
         #except:
             #return Response('Http 400 Bad Request', status = status.HTTP_400_BAD_REQUEST)
             return HttpResponseBadRequest('Http 400 Bad Request')

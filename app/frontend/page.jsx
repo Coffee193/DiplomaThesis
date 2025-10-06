@@ -11,6 +11,7 @@ import { Settings } from './pages/Settings'
 import { Referal } from './pages/Referal'
 import { NavBar } from './pages/NavBar'
 import { useState } from 'react'
+import { LoginRegister } from './pages/LoginRegister'
 
 export function Home() {
 
@@ -18,6 +19,8 @@ export function Home() {
 
     return(
         <Routes>
+            <Route path='/lrlogin' element={<LoginRegister/>}/>
+            <Route path='/lrregister' element={<LoginRegister/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route element={<NavBar updatenavbarstate={updatenavbarstate}/>}>

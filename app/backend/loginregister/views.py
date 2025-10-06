@@ -41,11 +41,9 @@ def handleLogin(request):
                 print(userfound)
                 if(userfound == None):
                     return Response('User not Found')
+                if(userfound.status == 'D'):
+                    return HttpResponse(json.dumps('User Account has been deleted'), status = 409)
                 if(PasswordCheck(data['p'], userfound.password) == True):
-                    # Extra stuff -> Keeps track of when user logged in
-                    #if(LoginAdd(request) != 'OK'):
-                    #    return HttpResponseBadRequest('Http 400 Bad Request')
-                    #
                     jwtpair_dict = CreateJWTPair(userfound.id)
                     print(connection.queries)
                     exp_time = GetJWTExpTime(jwtpair_dict)
@@ -500,8 +498,6 @@ def GetUserImg(request):
         if(jwt_r[0] == False):
             return HttpResponse(json.dumps('Not authenticated'), status = 403)
         userimg = User.objects.filter(id = int(jwt_r[1]['iss'])).values('img')[0]
-        print(userimg)
-        print('>>>>>>>>>>>')
         if(userimg['img'] == True):
             userimg = jwt_r[1]['iss']
         else:
@@ -509,3 +505,66 @@ def GetUserImg(request):
         return ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired(json.dumps(userimg), jwt_r = jwt_r)
     else:
         return HttpResponse(json.dumps('Bad Method'), status = 405)
+    
+@api_view(['DELETE'])
+def DeleteUser(request):
+    if request.method == 'DELETE':
+        if 'access' not in request.COOKIES or 'refresh' not in request.COOKIES:
+            return HttpResponse(json.dumps('no jwt provided'), status = 401)
+        jwt_r = VerifyJWT(request)
+        if(jwt_r[0] == False):
+            return HttpResponse(json.dumps('Not authenticated'), status = 403)
+        data = json.loads(request.body.decode('utf-8'))
+        if('p' not in data or 'vp' not in data):
+            return HttpResponse(json.dumps('Important values are missing'), status = 400)
+        if(type(data['p']) != str or type(data['p']) != str):
+            return HttpResponse(json.dumps('Invalid data types'), status = 400)
+        if(data['p'] != data['vp']):
+            return HttpResponse(json.dumps('Passed values are not equal'), status = 400)
+        if(CheckDataValue(data['p'], 'password') == False):
+            return HttpResponse(json.dumps('Bad Request Password'), status = 400)
+        userfound = User.objects.filter(id = int(jwt_r[1]['iss'])).values('is_admin', 'status', 'password')
+        if(userfound.count() == 0):
+            return HttpResponse(json.dumps('User not found'), status = 409)
+        if(userfound[0]['is_admin'] == True):
+            return HttpResponse(json.dumps('User is admin. Admin Users cannot be deleted'), status = 409)
+        if(userfound[0]['status'] == 'D'):
+            return HttpResponse(json.dumps('User is already deleted'), status = 409)
+        if(PasswordCheck(data['p'], userfound[0]['password']) == False):
+            return HttpResponse(json.dumps('Password is incorrect'), status = 409)
+
+        userdel = User.objects.filter(id = int(jwt_r[1]['iss'])).update(status = 'D')
+        if(userdel == 0):
+            return HttpResponse(json.dumps('Something went wrong. User could not be deleted'), status = 409)
+        elif(userdel == 1):
+            response_ret = HttpResponse(json.dumps('User succesffully deleted'), status = 200)
+            response_ret.delete_cookie('access')
+            response_ret.delete_cookie('refresh')
+            response_ret.delete_cookie('user_name')
+            return response_ret
+        
+    else:
+        return HttpResponse(json.dumps('Bad Method'), status = 405)
+
+@api_view(['DELETE'])
+def TestDelete(request):
+    print('**********8')
+    print(request)
+    data = json.loads(request.body.decode('utf-8'))
+    print(data)
+    print(data['id'])
+    print(type(data['id']))
+    '''
+    userfound = User.objects.filter(id = data['id']).values('is_admin', 'status')
+    print(userfound)
+    print(type(userfound))
+    print('###########')
+    print(userfound.count())
+    print(type(userfound.count()))
+    print(userfound[0])
+    print(type(userfound[0]))
+    print(userfound[0]['is_admin'])
+    '''
+    userdel = User.objects.filter(id = data['id']).update(status = 'D')
+    print(userdel) # 0 NOT FOUND |||||| OR 1 WHEN FOUND
+    print(type(userdel)) # int

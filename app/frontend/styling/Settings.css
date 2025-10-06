@@ -523,3 +523,46 @@
     object-fit: contain;
     height: 200px;
 }
+
+.settings_deleteaccountadmin{
+    position: fixed;
+    width: var(--settings-popup-w);
+    min-height: var(--settings-popup-h);
+    background-color: #fff;
+    right: calc((100vw - var(--settings-popup-w)) /2);
+    top: calc((0px + var(--nav-height) + var(--settings-popup-h)) /2);
+    z-index: 3;
+    border-radius: 25px;
+    transition: 0.1s ease-out;
+    transform: scale(0.8);
+    padding: 25px;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;
+    justify-content: center;*/
+}
+.settings_deleteaccountadmin div{
+    font-weight: 300;
+    font-size: 17px;
+}
+
+.settings_deleteaccountadminclose{
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.settings_deleteaccountadminclose:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.settings_deleteaccountadmin_info{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}

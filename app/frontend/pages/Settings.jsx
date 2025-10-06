@@ -48,6 +48,9 @@ export function Settings({updatenavbarsetState}){
     const settingsxcloseRef = useRef()
     const [settingsnotificationstate, settingsnotificationsetState] = useState('Successfully Deleted')
     const settingsnotificationRef = useRef()
+    const deleteaccountadminpopupRef = useRef()
+    const deleteaccountadmindarkenRef = useRef()
+    const [deleteaccountstate, deleteaccountsetState] = useState()
 
     const reg_contains_only_num = new RegExp('^[0-9]+$')
     const reg_contains_atleast1_num = new RegExp(['[0-9]'])
@@ -112,6 +115,18 @@ export function Settings({updatenavbarsetState}){
             
             if(response['is_admin'] === true){
                 adminsetState(<Link to='/referalcodes'><div className='settingscontent_referal'>REFERAL CODES</div></Link>)
+                deleteaccountsetState(
+                    <div className='settingscontent_infomajor' onClick={() => AccountCannotbeDeletedOpenClose('open')}>
+                        DELETE ACCOUNT
+                    </div>
+                )
+            }
+            else{
+                deleteaccountsetState(
+                    <div className='settingscontent_infomajor' onClick={() => PopUpOpenClose('open', 'PERMANENTLY DELETE ACCOUNT', 'Enter Password', 'password', 'account')}>
+                        DELEETE ACCOUNT
+                    </div>
+                )
             }
             
         }
@@ -363,8 +378,32 @@ export function Settings({updatenavbarsetState}){
                 DeleteAllChats()
             }
             else if(deleteinfoRef.current === 'account'){
-                console.log('del account')
+                DeleteAccount()
             }
+        }
+    }
+
+    async function DeleteAccount(){
+        let response_status = null
+        let request = {"p": changeinputRef.current.value, "vp": changepasswordRef.current.value}
+        let response = await fetch('http://127.0.0.1:8000/loginregister/deleteaccount/', {
+            method: 'DELETE',
+            body: JSON.stringify(request),
+            credentials: 'include',
+        }).then(res => {
+            response_status = res.status
+            return res.json()
+        }).then(data => data)
+        if(response_status === 403 || response_status === 401){
+            navigate('/login')
+            return
+        }
+        else if(response_status === 200){
+            navigate('/')
+            window.location.reload()
+        }
+        else if(response_status === 409){
+            changewarningsetState(response)
         }
     }
 
@@ -601,6 +640,23 @@ export function Settings({updatenavbarsetState}){
         settingsnotificationRef.current.classList.remove('settingsnotification_close')
     }
 
+    function AccountCannotbeDeletedOpenClose(action = 'open'){
+        if(action === 'open'){
+            deleteaccountadminpopupRef.current.style.opacity = '1'
+            deleteaccountadminpopupRef.current.style.transform = 'scale(1)'
+            deleteaccountadminpopupRef.current.style.pointerEvents = 'all'
+            deleteaccountadmindarkenRef.current.style.opacity = '1'
+            deleteaccountadmindarkenRef.current.style.pointerEvents = 'all'
+        }
+        else if(action === 'close'){
+            deleteaccountadminpopupRef.current.style.opacity = '0'
+            deleteaccountadminpopupRef.current.style.transform = 'scale(0.8)'
+            deleteaccountadminpopupRef.current.style.pointerEvents = 'none'
+            deleteaccountadmindarkenRef.current.style.opacity = '0'
+            deleteaccountadmindarkenRef.current.style.pointerEvents = 'none'
+        }
+    }
+
     return(
         <div className='settings_allholder'>
             <div className='settingschange_img_confirm' ref={changeimgpopupRef}>
@@ -620,6 +676,17 @@ export function Settings({updatenavbarsetState}){
                 </div>
             </div>
             <div className='settingschange_img_darkenall' ref={changeimgdarkRef} onClick={() => ImgConfirmClose(true)}/>
+            <div className='settings_deleteaccountadmin' ref={deleteaccountadminpopupRef}>
+                <div className='settingschange_header'>
+                    <div style={{fontWeight: '400', fontSize: '19px'}}>DELETE ACCOUNT</div>
+                    <div><XCloseIcon className='settings_deleteaccountadminclose' onClick={() => AccountCannotbeDeletedOpenClose('close')}/></div>
+                </div>
+                <div className='settings_deleteaccountadmin_info'>
+                    <div>You <b>cannot</b> delete an admin account.</div>
+                    <div>In order to delete it, contact the appropriate department and delete it straight from the database</div>
+                </div>
+            </div>
+            <div className='settingsdarken' ref={deleteaccountadmindarkenRef} onClick={() => AccountCannotbeDeletedOpenClose('close')}/>
             <div className='settingschangeval' ref = {popupRef}>
                 <div className='settingschange_header'>
                     {changeheaderstate}
@@ -653,7 +720,6 @@ export function Settings({updatenavbarsetState}){
                         <div className={newpasswordclassstate} onClick={() => NewPasswordVisibility()}>
                             {newpasswordeyestate[0]}
                         </div>
-                    {/*AHA */}
                     </div>
                     <div className='settingschange_valbox' ref={changeboxpasswordRef}>
                         <input placeholder={popuppasswordstate} className='settingschange_valinput' ref={changepasswordRef} type={passwordeyestate[2]} onChange={() => ChangeValuesSubmitButton()} onFocus={() => changeboxpasswordRef.current.classList.add('settingschange_focus')} onBlur={() => changeboxpasswordRef.current.classList.remove('settingschange_focus')}/>
@@ -670,10 +736,6 @@ export function Settings({updatenavbarsetState}){
                 </div>
             </div>
             <div className='settingsdarken' ref = {darkenRef} onClick={() => PopUpOpenClose('close')}/>
-            {/*<div className='settingsnotification'>
-                <div>{settingsnotificationstate}</div>
-                <div><Tick height={24} width={24} className='settingsnotification_tick'/></div>
-            </div>*/}
             <div className='settings_mainholder'>
                 <div className='settingsbox'>
                     <div className='settingscontent_img'>
@@ -717,9 +779,7 @@ export function Settings({updatenavbarsetState}){
                         <div className='settingscontent_infomajor' onClick={() => PopUpOpenClose('open', 'DELETE ALL CHATS', 'Enter Password', 'password', 'chats')}>
                             DELETE ALL CHATS
                         </div>
-                        <div className='settingscontent_infomajor' onClick={() => PopUpOpenClose('open', 'PERMANENTLY DELETE ACCOUNT', 'Enter Password', 'password', 'account')}>
-                            DELETE ACCOUNT
-                        </div>
+                        {deleteaccountstate}
                         <div className='settingscontent_infomajor settingsmajor_blue' onClick={() => Logout()}>
                             LOGOUT
                         </div>

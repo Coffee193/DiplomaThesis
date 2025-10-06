@@ -11,4 +11,6 @@ urlpatterns = [
     path('updatevalue/', views.UpdateValue, name = 'UpdateValue'),
     path('updateimage/', views.UpdateImg, name = 'UpdateImage'),
     path('getuserimg/', views.GetUserImg, name = 'GetUserImg'),
+    path('testdelete/', views.TestDelete, name = 'TestDelete'),
+    path('deleteaccount/', views.DeleteUser, name = 'DeleteUser'),
 ]

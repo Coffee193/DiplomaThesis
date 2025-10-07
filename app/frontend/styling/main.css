@@ -217,6 +217,10 @@ textarea:focus{
     --settings-img-circle: 200px;
 
     --default-box-shadow: 0px 8px 20px 0px rgba(43, 50, 64, 0.12);
+
+    --color-text-dark-header: #3d3d3d;
+    --color-text-light-header: #a0a0a0;
+    --color-text-gray-light: #eaecef;
 }
 
 

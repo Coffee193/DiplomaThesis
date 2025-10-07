@@ -467,7 +467,9 @@ def CheckDataValue(val, valtype, allownone = True):
             return False
         contains_a = val.find('@')
         contains_dot = val.find('.')
-        if( (contains_a == -1) or (contains_dot == -1) or (contains_a + 1 >= contains_dot) or (len(val) < 5) or (contains_a == 0) or (contains_dot == (len(val) - 1)) or (len(val)>255)):
+        count_a = val.count('@')
+        count_dot = val.count('.')
+        if( (contains_a == -1) or (contains_dot == -1) or (contains_a + 1 >= contains_dot) or (len(val) < 5) or (contains_a == 0) or (contains_dot == (len(val) - 1)) or (len(val)>255) or (count_a != 1) or (count_dot != 1)):
             return False
     elif(valtype == 'phone'):
         if(allownone == True):
@@ -568,3 +570,36 @@ def TestDelete(request):
     userdel = User.objects.filter(id = data['id']).update(status = 'D')
     print(userdel) # 0 NOT FOUND |||||| OR 1 WHEN FOUND
     print(type(userdel)) # int
+
+@api_view(['POST'])
+def findUser(request):
+    data = json.loads(request.body.decode('utf-8'))
+    if("v" not in data or "t" not in data):
+        return HttpResponse(json.dumps('Important data are missing'), status = 400)
+    if(CheckDataValue(data["v"], data["t"], False) == False):
+        return HttpResponse(json.dumps('Invalid data passed'), status = 400)
+    matchuser = matchUserEmailPhone(data["v"], data["t"])
+    if(matchuser[0] == False):
+        return HttpResponse(json.dumps(matchuser[1]), status = 404)
+    else:
+        return HttpResponse(json.dumps('User Found'), status = 200)
+
+def matchUserEmailPhone(val, valtype):
+    userfound = None
+    if(valtype == 'email'):
+        userfound = User.objects.filter(email = val).values('status')
+    elif(valtype == 'phone'):
+        userfound = User.objects.filter(phone = val).values('status')
+    
+    if(userfound.count() == 0):
+        return [False, 'User Not Found']
+    elif(userfound.count() == 1):
+        if(userfound[0]['status'] == 'D'):
+            return [False, 'Account Deleted']
+        
+    return [True, '']
+
+@api_view(['POST'])
+def Login(request):
+    data = json.loads(request.body.decode('utf-8'))
+    

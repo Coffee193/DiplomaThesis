@@ -2,7 +2,7 @@ import '../styling/PasswordInput.css'
 import { useState, useEffect, useRef } from 'react'
 import { EyeIcon, EyeCloseIcon } from '../components/svgs/UtilIcons'
 
-export function PasswordInput({classtype, placeholder, valuesRef}){
+export function PasswordInput({classtype, placeholder, valuesRef, passwordIndex, warningIndex, warningtextIndex}){
 
     const [pi_classstate, pi_classsetState] = useState([null, null, null, null])
     const [pi_eyestate, pi_eyesetState] = useState(['password', <EyeIcon/>])
@@ -50,11 +50,13 @@ export function PasswordInput({classtype, placeholder, valuesRef}){
         }
 
         if(warning === null){
-            valuesRef.current[2] = checkval
+            valuesRef.current[passwordIndex] = checkval
+            valuesRef.current[warningIndex] = false
+            valuesRef.current[warningtextIndex] = ''
         }
         else{
-            valuesRef.current[3] = true
-            valuesRef.current[4] = warning
+            valuesRef.current[warningIndex] = true
+            valuesRef.current[warningtextIndex] = warning
         }
 
     }

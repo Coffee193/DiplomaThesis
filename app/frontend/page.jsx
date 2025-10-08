@@ -19,8 +19,8 @@ export function Home() {
 
     return(
         <Routes>
-            <Route path='/lrlogin' element={<LoginRegister/>}/>
-            <Route path='/lrregister' element={<LoginRegister/>}/>
+            <Route path='/lrlogin' element={<LoginRegister lrtype={'l'}/>}/>
+            <Route path='/lrregister' element={<LoginRegister lrtype={'r'}/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route element={<NavBar updatenavbarstate={updatenavbarstate}/>}>

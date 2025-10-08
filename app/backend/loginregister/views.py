@@ -573,33 +573,83 @@ def TestDelete(request):
 
 @api_view(['POST'])
 def findUser(request):
+    # c -> l: login, r: register
     data = json.loads(request.body.decode('utf-8'))
-    if("v" not in data or "t" not in data):
+    print(data)
+    if("v" not in data or "t" not in data or "c" not in data):
         return HttpResponse(json.dumps('Important data are missing'), status = 400)
-    if(CheckDataValue(data["v"], data["t"], False) == False):
+    if( (CheckDataValue(data["v"], data["t"], False) == False) or ( (data["c"] != "l") and (data["c"] != "r") )):
         return HttpResponse(json.dumps('Invalid data passed'), status = 400)
-    matchuser = matchUserEmailPhone(data["v"], data["t"])
-    if(matchuser[0] == False):
-        return HttpResponse(json.dumps(matchuser[1]), status = 404)
+    matchuser = matchUserEmailPhone(data["v"], data["t"], False)
+    if(data["c"] == 'l'):
+        if(matchuser[0] == False):
+            return HttpResponse(json.dumps(matchuser[1]), status = 404)
+        else:
+            return HttpResponse(json.dumps('User Found'), status = 200)
     else:
-        return HttpResponse(json.dumps('User Found'), status = 200)
+        if( (matchuser[0] == True) or (matchuser[1] == 'Account Deleted')):
+            return HttpResponse(json.dumps('Email / Phone already in use'), status = 409)
+        else:
+            return HttpResponse(json.dumps('Valid Email / Phone'), status = 200)
 
-def matchUserEmailPhone(val, valtype):
+def matchUserEmailPhone(val, valtype, returnpassword = False):
     userfound = None
-    if(valtype == 'email'):
-        userfound = User.objects.filter(email = val).values('status')
-    elif(valtype == 'phone'):
-        userfound = User.objects.filter(phone = val).values('status')
+    if(returnpassword == False):
+        if(valtype == 'email'):
+            userfound = User.objects.filter(email = val).values('status')
+        elif(valtype == 'phone'):
+            userfound = User.objects.filter(phone = val).values('status')
+        else:
+            return [False, 'Invalid data type']
+    elif(returnpassword == True):
+        if(valtype == 'email'):
+            userfound = User.objects.filter(email = val).values('status', 'password', 'name', 'id')
+        elif(valtype == 'phone'):
+            userfound = User.objects.filter(phone = val).values('status', 'password', 'name', 'id')
+    else:
+        return [False, 'Something went wrong with the server']
     
     if(userfound.count() == 0):
         return [False, 'User Not Found']
     elif(userfound.count() == 1):
         if(userfound[0]['status'] == 'D'):
             return [False, 'Account Deleted']
-        
-    return [True, '']
+    else:
+        return [False, 'Something went wrong with the server']
+    
+    if(returnpassword == False):
+        return [True, '', '', '']
+    else:
+        return [True, userfound[0]['password'], userfound[0]['name'], userfound[0]['id']]
+    
 
 @api_view(['POST'])
 def Login(request):
     data = json.loads(request.body.decode('utf-8'))
+    if("v" not in data or "t" not in data or "p" not in data):
+        return HttpResponse(json.dumps('Important data are missing'), status = 400)
+    if( (CheckDataValue(data["v"], data["t"]) == False) or (CheckDataValue(data["p"], 'password') == False) ):
+        return HttpResponse(json.dumps('Invalid data passed'), status = 400)
+    matchuser = matchUserEmailPhone(data["v"], data["t"], True)
+    if(matchuser[0] == False):
+        return HttpResponse(json.dumps(matchuser[1]), status = 404)
+    # Check From here after completed the Register!!!
+    if(PasswordCompare(data["p"] ,matchuser[1]) == False):
+        return HttpResponse(json.dumps('Incorrect Password'), status = 401)
+    # Probably better to go with Register First!!!! Stopped here
+    jwtpair_dict = CreateJWTPair()
     
+def PasswordCompare(password, password_db):
+    password_split = password_db.split('$')
+    salt_db = password_split[2]
+    pass_db = password_split[3]
+
+    salted_pass = argon2.PasswordHasher(encoding = 'utf-8', time_cost=16, memory_cost=4096, parallelism=4,hash_len=32).hash(password = password, salt = base64.b64decode(salt_db))
+    salted_pass = salted_pass.split('$')[5]
+    peppered_pass = hmac.new(pepper_key, salted_pass.encode('UTF-8'), hashlib.sha256).hexdigest()
+    hash_pass = hashlib.sha256(peppered_pass.encode('UTF-8')).hexdigest()
+
+    if(hash_pass == pass_db):
+        return True
+    else:
+        return False

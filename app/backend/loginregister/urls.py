@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('login/', views.handleLogin, name = 'handleLogin'),
+    path('login/', views.Login, name = 'Login'),
     path('finduser/', views.findUser, name = 'findUser'),
     path('register/', views.handleRegister, name = 'handleRegister'),
     path('create_referal/', views.CreateReferalCode, name = 'createReferalCode'),

@@ -6,11 +6,7 @@ import { ArrowDownIcon } from '../components/svgs/UtilIcons'
 import { PasswordInput } from './PasswordInput'
 
 
-export function LoginRegister(){
-    const [lrheaderstate, lrheadersetState] = useState()
-    const [lrlinkclickstate, lrlinkclicksetState] = useState([null , null])
-    const [lrsubmitbuttonstate, lrsubmitbuttonsetState] = useState(['', ''])
-    const [lrextravalstate, lrextravalsetState] = useState({'lr_keepsignedin': null})
+export function LoginRegister({ lrtype }){
     const lrsignedinexplainRef = useRef()
     const [lrsignedinstate, lrsignedinsetState] = useState(['rotate(0deg)', 'none'])
     const [lrheaderbackstate, lrheaderbacksetState] = useState()
@@ -19,23 +15,9 @@ export function LoginRegister(){
     const lr_firststepRef = useRef()
     const lr_secondstepRef = useRef()
     const lr_arrowsignedinRef = useRef()
+    const [warningsubmitstate, warningsubmitsetState] = useState('')
 
     const navigate = useNavigate()
-
-    useEffect(() => {
-        if(window.location.pathname === '/lrlogin'){
-            lrheadersetState('Log In')
-            lrlinkclicksetState(['Sign Up', '/lrregister'])
-            lrsubmitbuttonsetState(['Log In', 'l'])
-            lrextravalsetState({'lr_keepsignedin': 'display_block'})
-        }
-        else if(window.location.pathname === '/lrregister'){
-            lrheadersetState('Sign Up')
-            lrlinkclicksetState(['Log In', '/lrlogin'])
-            lrsubmitbuttonsetState(['Sign Up', 's'])
-            lrextravalsetState({'lr_keepsignedin': 'display_none'})
-        }
-    },[window.location.pathname])
 
     async function LoginRegister_NextClick(){
         if(valuesRef.current[3] === true){
@@ -43,7 +25,7 @@ export function LoginRegister(){
             return
         }
         let response_status = null
-        let request = {"v": valuesRef.current[0], "t": valuesRef.current[1]}
+        let request = {"v": valuesRef.current[0], "t": valuesRef.current[1], "c": lrtype}
         let response = await fetch(import.meta.env.VITE_URL + '/loginregister/finduser/', {
             method: 'POST',
             body: JSON.stringify(request),
@@ -52,7 +34,7 @@ export function LoginRegister(){
             return res.json()
         }).then(data => data)
 
-        if(response_status === 404){
+        if(response_status === 404 || response_status === 409){
             warningsetState(response)
         }
         else if(response_status === 200){
@@ -107,26 +89,34 @@ export function LoginRegister(){
     }
 
     function LoginRegister_SubmitClick(){
-        if(lrsubmitbuttonstate[1] === 'l'){
+        if(lrtype === 'l'){
             SubmitLogIn()
         }
-        else if(lrsubmitbuttonstate[1] === 'r'){
+        else if(lrtype === 'r'){
             SubmitRegister()
         }
     }
 
     async function SubmitLogIn(){
-        console.log(valuesRef)
-        return
+        if(valuesRef.current[3] === true){
+            warningsubmitsetState(valuesRef.current[4])
+            return
+        }
+        console.log('SUUUU')
         let response_status = null
-        let response = await fetch(import.meta.env.VIET_URL + 'loginregister/login/', {
-
-        })
+        let request = {"v": valuesRef.current[0], "t": valuesRef.current[1], "p": valuesRef.current[2]}
+        let response = await fetch(import.meta.env.VITE_URL + 'loginregister/login/', {
+            method: 'POST',
+            body: JSON.stringify(request),
+        }).then(res => {
+            response_status = res.status
+            return res.json()
+        }).then(data => data)
     }
 
     async function SubmitRegister(){
         let response_status = null
-        let response = await fetch(import.meta.env.VITE_URL + 'loginregister/register/', {
+        let response = await fetch(import.meta.env.VITE_URL + '/loginregister/register/', {
 
         })
     }
@@ -141,11 +131,11 @@ export function LoginRegister(){
                         
                         <div className='lr_firststep' ref={lr_firststepRef}>
                             <div className='lr_inputnextholder'>
-                                <div className='lr_header'>{lrheaderstate}</div>
+                                <div className='lr_header'>{lrtype === 'l' ? ('Log In') : ('Sign Up')}</div>
                                 <div className='lr_maincontent'>
                                     <div className='lr_emailphone'>
                                         <div className='lr_firststep_label'>Email / Phone Number</div>
-                                        <UsernamePhoneInput valuesRef={valuesRef}/>
+                                        <UsernamePhoneInput valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningtextIndex={4}/>
                                     </div>
                                     <div className='lr_warningholder' onClick={() => warningsetState('')}>
                                         <div className='lr_warning'>{warningstate}</div>
@@ -154,8 +144,8 @@ export function LoginRegister(){
                                 </div>
                             </div>
                             <div className='lr_loginregisterholder'>
-                                <span>Don't have an account?</span>
-                                <Link to={lrlinkclickstate[1]} ><div className='lr_loginregisterclick'>{lrlinkclickstate[0]}</div></Link>
+                                <span>{lrtype === 'l' ? ("Don't have an account?") : ("Already have an account?")}</span>
+                                <Link to={lrtype === 'l' ? ('/lrregister'): ('/lrlogin')} ><div className='lr_loginregisterclick'>{lrtype === 'l' ? ('Sign Up') : ('Log In')}</div></Link>
                             </div>
                         </div>
 
@@ -163,9 +153,16 @@ export function LoginRegister(){
                             <div className='lr_backbutton' onClick={() => GoBack()}><ArrowDownIcon className='lr_backbuttonsvg'/><span className='lr_backbuttonspan'>Back</span></div>
                             <div className='lr_backheader' onClick={() => GoBack()}><span className='lr_backheaderspan'>{lrheaderbackstate}</span></div>
                             <div className='lr_maincontent_second'>
-                                <PasswordInput classtype={'loginregister'} placeholder={'Password'} valuesRef={valuesRef}/>
-                                <div className='lr_clickbutton' style={{marginTop: '35px'}} onClick={() => LoginRegister_SubmitClick()}>{lrsubmitbuttonstate[0]}</div>
-                                <div className={lrextravalstate['lr_keepsignedin']}>
+                                <PasswordInput classtype={'loginregister'} placeholder={'Password'} valuesRef={valuesRef} passwordindex={2} warningIndex={3} warningtextIndex={4}/>
+                                {lrtype === 'r' ? (
+                                <PasswordInput classtype={'loginregister'} placeholder={'Confirm Password'} valuesRef={valuesRef} />
+                                ) : (<></>)}
+                                <div className='lr_warningholder' onClick={() => warningsubmitsetState('')}>
+                                    <div className='lr_warning'>{warningsubmitstate}</div>
+                                </div>
+                                <div className='lr_clickbutton' onClick={() => LoginRegister_SubmitClick()}>{lrtype === 'l'? ('Log In') : ('Sign Up')}</div>
+                                {lrtype === 'l'? (
+                                    <>
                                     <div className='lr_signedinholder'>
                                         <input type='checkbox'/>
                                         <div className='lr_signedintext' onClick={() => ClickArrowSignedIn()}>
@@ -174,7 +171,9 @@ export function LoginRegister(){
                                         </div>
                                     </div>
                                     <div className='lr_signedinexplain' ref={lrsignedinexplainRef} style={{display: lrsignedinstate[1]}}>You'll be automatically signed in to your account when using this device</div>
-                                </div>
+                                    </>
+                                ) : (<></>)
+                                }
                             </div>
                         </div>
 

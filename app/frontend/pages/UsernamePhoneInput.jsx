@@ -4,7 +4,7 @@ import { ArrowDownIcon } from '../components/svgs/UtilIcons'
 import { AustraliaIcon } from '../components/svgs/CountriesIcons'
 import { AreaCode } from './AreaCode'
 
-export function UsernamePhoneInput({ valuesRef }){
+export function UsernamePhoneInput({ valuesRef, valueIndex, typeIndex, warningIndex, warningtextIndex }){
 
     const [countrysvgstate, countrysvgsetState] = useState(<AustraliaIcon/>)
     const [upi_inputvalstate, upi_inputvalsetState] = useState('')
@@ -68,19 +68,19 @@ export function UsernamePhoneInput({ valuesRef }){
         }
 
         if(warning === null){
-            valuesRef.current[3] = false
+            valuesRef.current[warningIndex] = false
             if(upi_valtype.current === 'email'){
-                valuesRef.current[0] = upi_usernamephoneinputRef.current.value
-                valuesRef.current[1] = 'email'
+                valuesRef.current[valueIndex] = upi_usernamephoneinputRef.current.value
+                valuesRef.current[typeIndex] = 'email'
             }
             else if(upi_valtype.current === 'phone'){
-                valuesRef.current[0] = '+' + upi_inputvalstate + ' ' + upi_usernamephoneinputRef.current.value
-                valuesRef.current[1] = 'phone'
+                valuesRef.current[valueIndex] = '+' + upi_inputvalstate + ' ' + upi_usernamephoneinputRef.current.value
+                valuesRef.current[typeIndex] = 'phone'
             }
         }
         else{
-            valuesRef.current[4] = warning
-            valuesRef.current[3] = true
+            valuesRef.current[warningtextIndex] = warning
+            valuesRef.current[warningIndex] = true
         }
         
     }

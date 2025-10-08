@@ -12,8 +12,7 @@ export function LoginRegister({ lrtype }){
     const [lrheaderbackstate, lrheaderbacksetState] = useState()
     const valuesRef = useRef([null, null, null, true,'Field is empty']) // emailphonewarningval, type (:e-> email, p->phone, w->warning), password
     const [warningstate, warningsetState] = useState('')
-    const lr_firststepRef = useRef()
-    const lr_secondstepRef = useRef()
+    const lrinfoholderRef = useRef()
     const lr_arrowsignedinRef = useRef()
     const [warningsubmitstate, warningsubmitsetState] = useState('')
 
@@ -52,19 +51,10 @@ export function LoginRegister({ lrtype }){
 
     function ClickSlide(move){
         if(move === 'forward'){
-            lr_firststepRef.current.style.left = 'calc(-100% - 20px)'
-            lr_firststepRef.current.style.right = 'calc(100% + 20px)'
-
-            lr_secondstepRef.current.style.left = '20px'
-            lr_secondstepRef.current.style.right = '20px'
+            lrinfoholderRef.current.style.left = '-425px'
         }
         else if(move === 'back'){
-            console.log('back')
-            lr_firststepRef.current.style.left = '20px'
-            lr_firststepRef.current.style.right = '20px'
-
-            lr_secondstepRef.current.style.left = 'calc(100% + 20px)'
-            lr_secondstepRef.current.style.right = 'calc(-100% + 20px)'
+            lrinfoholderRef.current.style.left = '0px'
         }
     }
 
@@ -127,9 +117,9 @@ export function LoginRegister({ lrtype }){
             <div className='lr_body'>
                 <div className='lr_mainbox'>
                     <Link to='/'><div className='lr_LogoHome'><img src='../components/images/MainLogo.png'/></div></Link>
-                    <div className='lr_infoholder'>
+                    <div className='lr_infoholder' ref={lrinfoholderRef}>
                         
-                        <div className='lr_firststep' ref={lr_firststepRef}>
+                        <div className='lr_firststep'>
                             <div className='lr_inputnextholder'>
                                 <div className='lr_header'>{lrtype === 'l' ? ('Log In') : ('Sign Up')}</div>
                                 <div className='lr_maincontent'>
@@ -149,13 +139,29 @@ export function LoginRegister({ lrtype }){
                             </div>
                         </div>
 
-                        <div className='lr_secondstep' ref={lr_secondstepRef}>
+                        <div className='lr_secondstep'>
                             <div className='lr_backbutton' onClick={() => GoBack()}><ArrowDownIcon className='lr_backbuttonsvg'/><span className='lr_backbuttonspan'>Back</span></div>
                             <div className='lr_backheader' onClick={() => GoBack()}><span className='lr_backheaderspan'>{lrheaderbackstate}</span></div>
                             <div className='lr_maincontent_second'>
                                 <PasswordInput classtype={'loginregister'} placeholder={'Password'} valuesRef={valuesRef} passwordindex={2} warningIndex={3} warningtextIndex={4}/>
                                 {lrtype === 'r' ? (
-                                <PasswordInput classtype={'loginregister'} placeholder={'Confirm Password'} valuesRef={valuesRef} />
+                                <div className='lr_rholder'>
+                                    <PasswordInput classtype={'loginregister'} placeholder={'Confirm Password'} valuesRef={valuesRef} />
+                                    <div className='lr_referal'>
+                                        <div className='lr_referalheader'>
+                                            <span>Referal Code</span><div className='lr_referalsvg'><ArrowDownIcon/></div>
+                                        </div>
+                                        <input className='lr_referalinput' maxLength='10' autoComplete='off' autocapitalize='off' spellCheck='false' />
+                                    </div>
+                                    <div className='lr_termsholder'>
+                                        <div className='lr_termscheckbox'>
+                                            <input type='checkbox'/>
+                                        </div>
+                                        <div className=''>
+                                            By Signing Up you agree to our <Link className='lr_termslink' to='/termspolicies'>Terms of Use</Link> and our <Link className='lr_termslink' to='/termspolicies'>Privacy Policy</Link>
+                                        </div>
+                                    </div>
+                                </div>
                                 ) : (<></>)}
                                 <div className='lr_warningholder' onClick={() => warningsubmitsetState('')}>
                                     <div className='lr_warning'>{warningsubmitstate}</div>

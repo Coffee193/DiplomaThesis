@@ -4,7 +4,7 @@ import { ArrowDownIcon } from '../components/svgs/UtilIcons'
 import { AustraliaIcon } from '../components/svgs/CountriesIcons'
 import { AreaCode } from './AreaCode'
 
-export function UsernamePhoneInput({ valuesRef, valueIndex, typeIndex, warningIndex, warningtextIndex }){
+export function UsernamePhoneInput({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex }){
 
     const [countrysvgstate, countrysvgsetState] = useState(<AustraliaIcon/>)
     const [upi_inputvalstate, upi_inputvalsetState] = useState('')
@@ -67,22 +67,15 @@ export function UsernamePhoneInput({ valuesRef, valueIndex, typeIndex, warningIn
             }
         }
 
-        if(warning === null){
-            valuesRef.current[warningIndex] = false
-            if(upi_valtype.current === 'email'){
-                valuesRef.current[valueIndex] = upi_usernamephoneinputRef.current.value
-                valuesRef.current[typeIndex] = 'email'
-            }
-            else if(upi_valtype.current === 'phone'){
-                valuesRef.current[valueIndex] = '+' + upi_inputvalstate + ' ' + upi_usernamephoneinputRef.current.value
-                valuesRef.current[typeIndex] = 'phone'
-            }
+        valuesRef.current[warningIndex][warningvalueIndex] = warning
+        if(upi_valtype.current === 'email'){
+            valuesRef.current[valueIndex] = upi_usernamephoneinputRef.current.value
+            valuesRef.current[typeIndex] = 'email'
         }
-        else{
-            valuesRef.current[warningtextIndex] = warning
-            valuesRef.current[warningIndex] = true
+        else if(upi_valtype.current === 'phone'){
+            valuesRef.current[valueIndex] = '+' + upi_inputvalstate + ' ' + upi_usernamephoneinputRef.current.value
+            valuesRef.current[typeIndex] = 'phone'
         }
-        
     }
     
 

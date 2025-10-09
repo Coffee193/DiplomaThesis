@@ -2,7 +2,7 @@ import '../styling/PasswordInput.css'
 import { useState, useEffect, useRef } from 'react'
 import { EyeIcon, EyeCloseIcon } from '../components/svgs/UtilIcons'
 
-export function PasswordInput({classtype, placeholder, valuesRef, passwordIndex, warningIndex, warningtextIndex}){
+export function PasswordInput({classtype, placeholder, valuesRef, passwordIndex, warningIndex, warningvalueIndex, isconfirmpassword}){
 
     const [pi_classstate, pi_classsetState] = useState([null, null, null, null])
     const [pi_eyestate, pi_eyesetState] = useState(['password', <EyeIcon/>])
@@ -48,22 +48,22 @@ export function PasswordInput({classtype, placeholder, valuesRef, passwordIndex,
         else if( (reg_contains_at_least_1_uppercase.test(checkval)) === false){
             warning = 'Pssword must contain at least 1 uppercase letter'
         }
+        valuesRef.current[passwordIndex] = checkval
+        valuesRef.current[warningIndex][warningvalueIndex] = warning
+    }
 
-        if(warning === null){
-            valuesRef.current[passwordIndex] = checkval
-            valuesRef.current[warningIndex] = false
-            valuesRef.current[warningtextIndex] = ''
+    function CheckPasswordsEqual(){
+        if(pi_inputRef.current.value !== valuesRef.current[passwordIndex]){
+            valuesRef.current[warningIndex][warningvalueIndex] = 'Passwords do not match'
         }
         else{
-            valuesRef.current[warningIndex] = true
-            valuesRef.current[warningtextIndex] = warning
+            valuesRef.current[warningIndex][warningvalueIndex] = null
         }
-
     }
 
     return(
         <div className={pi_classstate[0]}>
-            <input type={pi_eyestate[0]} autoComplete='off' autoCapitalize='off' spellcheck='false' className={pi_classstate[1]} placeholder={placeholder} ref={pi_inputRef} onChange={() => CheckValues()}/>
+            <input type={pi_eyestate[0]} autoComplete='off' autoCapitalize='off' spellcheck='false' className={pi_classstate[1]} placeholder={placeholder} ref={pi_inputRef} onChange={() => {isconfirmpassword === true ? (CheckPasswordsEqual()) : (CheckValues())}}/>
             <div className={pi_classstate[2]}>
                 <div className={pi_classstate[3]} onClick={() => ClickEye()}>{pi_eyestate[1]}</div>
             </div>

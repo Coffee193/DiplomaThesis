@@ -10,7 +10,7 @@ export function LoginRegister({ lrtype }){
     const lrsignedinexplainRef = useRef()
     const [lrsignedinstate, lrsignedinsetState] = useState(['rotate(0deg)', 'none'])
     const [lrheaderbackstate, lrheaderbacksetState] = useState()
-    const valuesRef = useRef([null, null, null, true,'Field is empty']) // emailphonewarningval, type (:e-> email, p->phone, w->warning), password
+    const valuesRef = useRef([null, null, null, ['Field is empty', 'Field is empty', 'Passwords do not match']]) // emailphonewarningval, type (:e-> email, p->phone, w->warning), password, warning -> [0: emailphonewarning, 1: passwordwarning, 2: passwordconfirmwarning]
     const [warningstate, warningsetState] = useState('')
     const lrinfoholderRef = useRef()
     const lr_arrowsignedinRef = useRef()
@@ -19,8 +19,8 @@ export function LoginRegister({ lrtype }){
     const navigate = useNavigate()
 
     async function LoginRegister_NextClick(){
-        if(valuesRef.current[3] === true){
-            warningsetState(valuesRef.current[4])
+        if(valuesRef.current[3][0] !== null){
+            warningsetState(valuesRef.current[3][0])
             return
         }
         let response_status = null
@@ -44,27 +44,19 @@ export function LoginRegister({ lrtype }){
             warningsetState('')
             lrheaderbacksetState(headerval)
             ClickSlide('forward')
-            valuesRef.current[3] = true
-            valuesRef.current[4] = 'Field is empty'
         }
     }
 
     function ClickSlide(move){
         if(move === 'forward'){
             lrinfoholderRef.current.style.left = '-425px'
+            warningsetState('')
         }
         else if(move === 'back'){
             lrinfoholderRef.current.style.left = '0px'
+            warningsubmitsetState('')
         }
     }
-
-    function GoBack(){
-        ClickSlide('back')
-        valuesRef.current[3] = false
-        valuesRef.current[4] = ''
-    }
-
-    /* Maybe put the firststep and secondstep in a position relative div and move that parent div */
 
     function ClickArrowSignedIn(){
         let pos = lr_arrowsignedinRef.current.getAttribute('data-pos')
@@ -92,7 +84,6 @@ export function LoginRegister({ lrtype }){
             warningsubmitsetState(valuesRef.current[4])
             return
         }
-        console.log('SUUUU')
         let response_status = null
         let request = {"v": valuesRef.current[0], "t": valuesRef.current[1], "p": valuesRef.current[2]}
         let response = await fetch(import.meta.env.VITE_URL + 'loginregister/login/', {
@@ -105,9 +96,19 @@ export function LoginRegister({ lrtype }){
     }
 
     async function SubmitRegister(){
+        console.log(valuesRef.current)
+        if(valuesRef.current[3][1] !== null){
+            warningsubmitsetState(valuesRef.current[3][1])
+            return
+        }
+        if(valuesRef.current[3][2] !== null){
+            warningsubmitsetState(valuesRef.current[3][2])
+            return
+        }
+        return
         let response_status = null
         let response = await fetch(import.meta.env.VITE_URL + '/loginregister/register/', {
-
+            method: 'POST'
         })
     }
 
@@ -125,7 +126,7 @@ export function LoginRegister({ lrtype }){
                                 <div className='lr_maincontent'>
                                     <div className='lr_emailphone'>
                                         <div className='lr_firststep_label'>Email / Phone Number</div>
-                                        <UsernamePhoneInput valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningtextIndex={4}/>
+                                        <UsernamePhoneInput valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0}/>
                                     </div>
                                     <div className='lr_warningholder' onClick={() => warningsetState('')}>
                                         <div className='lr_warning'>{warningstate}</div>
@@ -140,13 +141,13 @@ export function LoginRegister({ lrtype }){
                         </div>
 
                         <div className='lr_secondstep'>
-                            <div className='lr_backbutton' onClick={() => GoBack()}><ArrowDownIcon className='lr_backbuttonsvg'/><span className='lr_backbuttonspan'>Back</span></div>
-                            <div className='lr_backheader' onClick={() => GoBack()}><span className='lr_backheaderspan'>{lrheaderbackstate}</span></div>
+                            <div className='lr_backbutton' onClick={() => ClickSlide('back')}><ArrowDownIcon className='lr_backbuttonsvg'/><span className='lr_backbuttonspan'>Back</span></div>
+                            <div className='lr_backheader' onClick={() => ClickSlide('back')}><span className='lr_backheaderspan'>{lrheaderbackstate}</span></div>
                             <div className='lr_maincontent_second'>
-                                <PasswordInput classtype={'loginregister'} placeholder={'Password'} valuesRef={valuesRef} passwordindex={2} warningIndex={3} warningtextIndex={4}/>
+                                <PasswordInput classtype={'loginregister'} placeholder={'Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={1} isconfirmpassword={false}/>
                                 {lrtype === 'r' ? (
                                 <div className='lr_rholder'>
-                                    <PasswordInput classtype={'loginregister'} placeholder={'Confirm Password'} valuesRef={valuesRef} />
+                                    <PasswordInput classtype={'loginregister'} placeholder={'Confirm Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={2} isconfirmpassword={true}/>
                                     <div className='lr_referal'>
                                         <div className='lr_referalheader'>
                                             <span>Referal Code</span><div className='lr_referalsvg'><ArrowDownIcon/></div>

@@ -2,7 +2,7 @@ import '../styling/LoginRegister.css'
 import { useState, useRef } from 'react'
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { UsernamePhoneInput } from './UsernamePhoneInput'
-import { ArrowDownIcon } from '../components/svgs/UtilIcons'
+import { ArrowDownIcon, BlocksLoad } from '../components/svgs/UtilIcons'
 import { PasswordInput } from './PasswordInput'
 import { ReferalInput } from './ReferalInput'
 import { TermsPoliciesCheckbox } from './TermsPoliciesCheckbox'
@@ -14,7 +14,6 @@ export function LoginRegister({ lrtype }){
     const valuesRef = useRef([null, null, null, ['Field is empty', 'Password field is empty', 'Passwords do not match', 'Referal code must be 10 characters long', 'You must agree to our Terms and Policies'], null, false]) // emailphoneval, type (:e-> email, p->phone), password, warning -> [0: emailphonewarning, 1: passwordwarning, 2: passwordconfirmwarning, 3: referalwarning, 4: checkboxwarning], referal, keepmesignedin
     const [warningstate, warningsetState] = useState('')
     const lrinfoholderRef = useRef()
-    const lr_arrowsignedinRef = useRef()
     const [warningsubmitstate, warningsubmitsetState] = useState('')
     const usernamephoneinputRef = useRef()
     const passwordinputRef = useRef()
@@ -22,6 +21,10 @@ export function LoginRegister({ lrtype }){
     const referalinputRef = useRef()
     const termspoliciesinputRef = useRef()
     const keepmesignedininputRef = useRef()
+    const [nextbuttonState, nextbuttonsetState] = useState('Next')
+    const [submitbuttonState, submitbuttonsetState] = useState(lrtype === 'l' ? ('Log In') : ('Sign Up'))
+    const nextbuttonRef = useRef()
+    const submitbuttonRef = useRef()
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -31,6 +34,7 @@ export function LoginRegister({ lrtype }){
             warningsetState(valuesRef.current[3][0])
             return
         }
+        ClickButton(false, nextbuttonRef, nextbuttonsetState)
         let response_status = null
         let request = {"v": valuesRef.current[0], "t": valuesRef.current[1], "c": lrtype}
         let response = await fetch(import.meta.env.VITE_URL + '/loginregister/finduser/', {
@@ -40,6 +44,7 @@ export function LoginRegister({ lrtype }){
             response_status = res.status
             return res.json()
         }).then(data => data)
+        ClickButton(true, nextbuttonRef, nextbuttonsetState)
 
         if(response_status === 404 || response_status === 409){
             warningsetState(response)
@@ -82,12 +87,16 @@ export function LoginRegister({ lrtype }){
     }
 
     async function SubmitLogIn(){
-        if(valuesRef.current[3] === true){
-            warningsubmitsetState(valuesRef.current[4])
-            return
+        for(let i = 0; i < 2; i++){
+            if(valuesRef.current[3][i] !== null){
+                warningsubmitsetState(valuesRef.current[3][i])
+                return
+            }
         }
+        ClickButton(false, submitbuttonRef, submitbuttonsetState)
+
         let response_status = null
-        let request = {"v": valuesRef.current[0], "t": valuesRef.current[1], "p": valuesRef.current[2]}
+        let request = {"v": valuesRef.current[0], "t": valuesRef.current[1], "p": valuesRef.current[2], "k": valuesRef.current[5]}
         let response = await fetch(import.meta.env.VITE_URL + 'loginregister/login/', {
             method: 'POST',
             body: JSON.stringify(request),
@@ -96,6 +105,14 @@ export function LoginRegister({ lrtype }){
             response_status = res.status
             return res.json()
         }).then(data => data)
+        ClickButton(true, submitbuttonRef, submitbuttonsetState)
+
+        if(response_status === 401){
+            warningsubmitsetState(response)
+        }
+        else if(response_status === 200){
+            location.state === null ? (navigate('/')) : navigate(location.state)
+        }
     }
 
     async function SubmitRegister(){
@@ -105,6 +122,7 @@ export function LoginRegister({ lrtype }){
                 return
             }
         }
+        ClickButton(false, submitbuttonRef, submitbuttonsetState)
         
         let response_status = null
         let request = {"v": valuesRef.current[0], "t": valuesRef.current[1], "p": valuesRef.current[2], "r": valuesRef.current[4]}
@@ -116,12 +134,13 @@ export function LoginRegister({ lrtype }){
             response_status = res.status
             return res.json()
         }).then(data => data)
+        ClickButton(true, submitbuttonRef, submitbuttonsetState)
 
         if(response_status === 409){
             warningsubmitsetState(response)
         }
         else if(response_status === 200){
-            /*location.state === null ? (navigate('/')) : navigate(location.state)*/
+            location.state === null ? (navigate('/')) : navigate(location.state)
         }
     }
 
@@ -153,6 +172,17 @@ export function LoginRegister({ lrtype }){
         }
     }
 
+    function ClickButton(active, buttonref, buttonsetstate){
+        if(active === false){
+            buttonref.current.classList.remove('lr_clickbuttonactive')
+            buttonsetstate(<BlocksLoad/>)
+        }
+        else{
+            buttonref.current.classList.add('lr_clickbuttonactive')
+            buttonsetstate('Next')
+        }
+    }
+
     return(
         <div className='lr_holderall'>
 
@@ -172,7 +202,7 @@ export function LoginRegister({ lrtype }){
                                     <div className='lr_warningholder' onClick={() => warningsetState('')}>
                                         <div className='lr_warning'>{warningstate}</div>
                                     </div>
-                                    <div className='lr_clickbutton' onClick={() => LoginRegister_NextClick()}>Next</div>
+                                    <div className='lr_clickbutton lr_clickbuttonactive' onClick={() => LoginRegister_NextClick()} ref={nextbuttonRef}>{nextbuttonState}</div>
                                 </div>
                             </div>
                             <div className='lr_loginregisterholder'>
@@ -196,7 +226,7 @@ export function LoginRegister({ lrtype }){
                                 <div className='lr_warningholder' onClick={() => warningsubmitsetState('')}>
                                     <div className='lr_warning'>{warningsubmitstate}</div>
                                 </div>
-                                <div className='lr_clickbutton' onClick={() => LoginRegister_SubmitClick()}>{lrtype === 'l'? ('Log In') : ('Sign Up')}</div>
+                                <div className='lr_clickbutton lr_clickbuttonactive' onClick={() => LoginRegister_SubmitClick()} ref={submitbuttonRef}>{submitbuttonState}</div>
                                 {lrtype === 'l'? (
                                     <KeepMeSignedIn ref={keepmesignedininputRef} valuesRef={valuesRef} keepmesignedinIndex={5} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'p'} onpressEnter={'self'}/>
                                 ) : (<></>)

@@ -77,15 +77,20 @@
     background-color: var(--color-blue-aapl-stronger);
     border-radius: 7px;
     color: #fff;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 45px;
+    height: 45px;
     margin-bottom: 35px;
+    pointer-events: none;
 }
-.lr_clickbutton:hover{
+.lr_clickbuttonactive:hover{
     background-color: var(--color-blue-aapl-stronger-hover);
+}
+.lr_clickbuttonactive{
+    cursor: pointer;
+    pointer-events: all;
 }
 
 .lr_loginregisterholder{

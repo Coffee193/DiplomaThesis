@@ -35,7 +35,7 @@ export const KeepMeSignedIn = forwardRef(({valuesRef, keepmesignedinIndex, tabIn
     return(
         <>
         <div className='kms_signedinholder'>
-            <input type='checkbox' ref={(element) => {kms_inputRef.current = element; keepmesignedinRef !== null ? (keepmesignedinRef.current = element) : ('')}} className='kms_input' onKeyDown={(event) => pressKey(event, onpressEnter === 'self' ? (ClickCheckBox) : (onpressEnter), onpressEnter !== 'self' ? (onpressEnterValue) : (undefined), onpressTab, onpressTabValue)} onClick={() => ClickCheckBox()} tabIndex={tabIndex}/>
+            <input type='checkbox' ref={(element) => {kms_inputRef.current = element; keepmesignedinRef !== null ? (keepmesignedinRef.current = element) : ('')}} className='kms_input' onKeyDown={(event) => pressKey(event, onpressEnter === 'self' ? (ClickCheckBox) : (onpressEnter), onpressEnter !== 'self' ? (onpressEnterValue) : (undefined), onpressTab, onpressTabValue)} onClick={(event) => {event.target.checked === true ? (valuesRef.current[keepmesignedinIndex] = true): (valuesRef.current[keepmesignedinIndex] = false)}} tabIndex={tabIndex}/>
             <div className='kms_signedintext' onClick={() => ClickArrowSignedIn()}>
                 <span>Keep me signed in</span>
                 <ArrowDownIcon className='kms_signedinarrow' style={{transform: kms_signedinState[0]}} ref={kms_arrowsignedinRef} data-pos='down'/>

@@ -64,3 +64,18 @@ def GenerateSnowflake(return_type = 'int'):
     #       https://www.google.com/search?q=does+netflix+use+headless+commerce&sca_esv=596374102&rlz=1C1JJTC_enGR995GR995&sxsrf=AM9HkKkkm288fkiIsNpbEIIJ6xZYmuCTAQ%3A1704642105202&ei=OcaaZdmBDLOZi-gPndWS6Ak&udm=&ved=0ahUKEwiZgpnZzsuDAxWzzAIHHZ2qBJ0Q4dUDCBA&uact=5&oq=does+netflix+use+headless+commerce&gs_lp=Egxnd3Mtd2l6LXNlcnAiImRvZXMgbmV0ZmxpeCB1c2UgaGVhZGxlc3MgY29tbWVyY2UyCBAAGIAEGKIEMggQABiABBiiBDIIEAAYgAQYogQyCBAAGIAEGKIESIwWUIMFWPYRcAJ4AJABAJgBlgGgAd0GqgEDMC43uAEDyAEA-AEBwgIIECEYoAEYwwTCAgoQIRgKGKABGMMEwgIMECEYChigARjDBBgK4gMEGAEgQYgGAQ&sclient=gws-wiz-serp
     #       Also Netflix, Amazon, Uber (Check above Link)
     ###
+
+def CreateSnowflake():
+    # https://en.wikipedia.org/wiki/Snowflake_ID
+    # https://stackoverflow.com/questions/1938048/high-precision-clock-in-python
+    # Chose to count from: 10 Oct 2025 00:00:00 UTC. Also these are milliseconds
+    # Essentially no more than one request can be received per millisecond (note: the accuracy)
+    global request_counter
+    global saved_lastreq_time
+    req_time = int(time.time_ns() / 1000000)
+    if(req_time - saved_lastreq_time > 1):
+        saved_lastreq_time = int(time.time_ns() / 1000000)
+        request_counter = -1
+    request_counter += 1
+    
+    return int('{0:042}'.format(req_time - 1760054400000) + '{0:05b}'.format(1) + '{0:05}'.format(1) + '{0:012b}'.format(request_counter), 2)

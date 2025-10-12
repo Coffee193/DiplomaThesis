@@ -1,0 +1,15 @@
+.tpc_termsholder{
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 15px;
+}
+
+.tpc_termscheckbox{
+    margin: 0px 25px;
+}
+
+.tpc_termslink{
+    cursor: pointer;
+    color: var(--color-blue-aapl-stronger);
+}

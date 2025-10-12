@@ -1,17 +1,18 @@
 import '../styling/UsernamePhoneInput.css'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, forwardRef } from 'react'
 import { ArrowDownIcon } from '../components/svgs/UtilIcons'
 import { AustraliaIcon } from '../components/svgs/CountriesIcons'
 import { AreaCode } from './AreaCode'
+import { pressKey } from './pressKeyFunc'
 
-export function UsernamePhoneInput({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex }){
+export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex, alwaysEmail, alwaysPhone, autoFocus, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue}, usernamephoneinputRef) => {
 
     const [countrysvgstate, countrysvgsetState] = useState(<AustraliaIcon/>)
     const [upi_inputvalstate, upi_inputvalsetState] = useState('')
     const upi_countrycodeRef = useRef()
     const upi_usernamephoneRef = useRef()
     const upi_usernamephoneinputRef = useRef()
-    const upi_valtype = useRef('email')
+    const upi_valtype = useRef(alwaysPhone === true ? ('phone') : ('email'))
 
     const [areacodevisibilitystate, areacodevisibilitysetState] = useState(0)
 
@@ -27,14 +28,16 @@ export function UsernamePhoneInput({ valuesRef, valueIndex, typeIndex, warningIn
     }
 
     function CheckIsPhone(){
-        let checkval = upi_usernamephoneinputRef.current.value
-        if((checkval.length > 5) && (checkval.search(reg_only_contains_numbers) === 0)){
-            upi_usernamephoneRef.current.style.display = 'flex'
-            upi_valtype.current = 'phone'
-        }
-        else{
-            upi_usernamephoneRef.current.style.display = 'none'
-            upi_valtype.current = 'email'
+        if(alwaysEmail === false && alwaysPhone === false){
+            let checkval = upi_usernamephoneinputRef.current.value
+            if((checkval.length > 5) && (checkval.search(reg_only_contains_numbers) === 0)){
+                upi_usernamephoneRef.current.style.display = 'flex'
+                upi_valtype.current = 'phone'
+            }
+            else{
+                upi_usernamephoneRef.current.style.display = 'none'
+                upi_valtype.current = 'email'
+            }
         }
         CheckValues()
     }
@@ -77,20 +80,19 @@ export function UsernamePhoneInput({ valuesRef, valueIndex, typeIndex, warningIn
             valuesRef.current[typeIndex] = 'phone'
         }
     }
-    
 
     return(
         <>
         <AreaCode areacodevisibility={areacodevisibilitystate} areacodeinputsetState={upi_inputvalsetState} areacodecountrysetState={countrysvgsetState}/>
         <div className='upi_allholder'>
-            <div className='upi_usernamephone' ref={upi_usernamephoneRef}>
+            <div className='upi_usernamephone' ref={upi_usernamephoneRef} style={alwaysPhone === true ? ({display: 'flex'}) : ({display: 'none'})}>
                 <div className='upi_svgcountry'>{countrysvgstate}</div>
                 <div className='upi_numberareacode'><div>+</div><input className='upi_numberinput' ref={upi_countrycodeRef} placeholder='' value={upi_inputvalstate} onChange={(e) => upi_inputvalsetState(e.target.value)}/></div>
                 <div className='upi_arrow' onMouseEnter={() => Upi_ArrowEnterLeave('enter')} onMouseLeave={() => Upi_ArrowEnterLeave('leave')} onClick={() => AreaCodeOpen()}><ArrowDownIcon width={15} height={15}/></div>
             </div>
             <input className='upi_usernamephoneinput' autoComplete='off' autoCapitalize='off' spellCheck='false' 
-            onChange={() => CheckIsPhone()} ref={upi_usernamephoneinputRef}/>
+            onChange={() => CheckIsPhone()} ref={ (el) => {upi_usernamephoneinputRef.current = el; usernamephoneinputRef !== null ? (usernamephoneinputRef.current = el) : ('')}} autoFocus={autoFocus} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue)}/>
         </div>
         </>
     )
-}
+})

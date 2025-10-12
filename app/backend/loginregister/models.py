@@ -9,8 +9,8 @@ USER_STATUS = [
 ]
 
 class User(models.Model):
-    email = models.CharField(max_length = 255, null = True, blank = True)
-    phone = models.CharField(null = True, blank = True, max_length = 25)
+    email = models.CharField(max_length = 255, null = True, default = None)
+    phone = models.CharField(max_length = 25, null = True, default = None)
     password = models.CharField(max_length = 97, null = False)
     id = models.BigIntegerField(primary_key = True)
 
@@ -26,9 +26,9 @@ class User(models.Model):
     # id = models.BigIntegerField(primary_key = True, default = GenerateSnowflake())
     # date_created = models.DateTimeField(default = datetime.datetime.utcnow(), null = False)
 
-    is_admin = models.BooleanField(null = False, blank = False, default = False)
+    is_admin = models.BooleanField(null = False, default = False)
 
-    img = models.BooleanField(blank = False, default = False, null = False)
+    img = models.BooleanField(null = False, default = False)
 
     def __str__(self):
         if self.email:

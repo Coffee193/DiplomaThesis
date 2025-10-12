@@ -9,6 +9,8 @@ import jwt
 from rest_framework.decorators import api_view
 import json
 from django.core.cache import cache
+import string
+import os
 
 secret_jwt_key = "DpfBxh575Q"
 secret_jwt_key_refresh = "Q71sIzsD0X"
@@ -109,6 +111,10 @@ kwEQ3j7Xtac5RyLW1DBWzpowINW3HE75CwusX3LaZbMLlasgmGFf8hrEJ0kkb7vc
 jwt_algos = ['HS256', 'HS384', 'HS512', 'ES256', 'ES256K', 'ES384', 'ES512', 'RS256', 'RS384', 'RS512',
                          'PS256', 'PS384', 'PS512'] #EdDSA not supported as i cannot get it to work or some reason
 
+encrypt_algos = ['PS256']
+# PS256 CHECK
+# HS256, RS256, ES256 OK
+
 
 secret_rsa_private_key_refresh = """
 -----BEGIN RSA PRIVATE KEY-----
@@ -196,6 +202,23 @@ VerifyJWT returns a tuple
 3rd -> dict: if acces token was refreshed then the dict holds two values {"access":,"refresh":}. These are the new 
             access token and the new rotated refresh token. Otherwise its empty
 '''
+
+# https://8gwifi.org/jwsgen.jsp -> to generate keys
+
+public_rsa_access = os.environ.get('PUBLIC_RSA_KEY_ACCESS')
+private_rsa_access = os.environ.get('PRIVATE_RSA_KEY_ACCESS')
+public_rsa_refresh = os.environ.get('PUBLIC_RSA_KEY_REFRESH')
+private_rsa_refresh = os.environ.get('PRIVATE_RSA_KEY_REFRESH')
+public_ps_access = os.environ.get('PUBLIC_PS_KEY_ACCESS')
+private_ps_access = os.environ.get('PRIVATE_PS_KEY_ACCESS')
+public_ps_refresh = os.environ.get('PUBLIC_PS_KEY_REFRESH')
+private_ps_refresh = os.environ.get('PRIVATE_PS_KEY_REFRESH')
+hs_access = os.environ.get('HS_KEY_ACCESS')
+hs_refresh = os.environ.get('HS_KEY_REFRESH')
+public_es_access = os.environ.get('PUBLIC_ES_KEY_ACCESS')
+private_es_access = os.environ.get('PRIVATE_ES_KEY_ACCESS')
+public_es_refresh = os.environ.get('PUBLIC_ES_KEY_REFRESH')
+private_es_refresh = os.environ.get('PRIVATE_ES_KEY_REFRESH')
 
 def AppendNewRefreshAccessTokens(response, jwt_r):
     if(jwt_r[2] != {}):
@@ -547,3 +570,62 @@ def VerifyAuthRequest(request, message401 = 'No JWT Provided', message403 = 'Not
         return (False, HttpResponse(json.dumps(message403), status = 403))
     else:
         return jwt_r
+
+def CreateJWT(userid, rememberme = False):
+    '''
+    # Variables
+    @param: userid (int)
+                The userid, for who a JWT will be created
+            rememberme (bool)
+                If True: both refresh& access key will have a value. The refresh key will have an expiration of 60 days and
+                access key of 15 minutes. The refresh will be stored in Redis with key: rk_{userid}
+                If False: refresh = None & access will have a value. The access key will be a session cookie. Also in Redis we
+                will store the access key with key name: ak_{userid}. In Redis it will have an expiration of 10 minutes. In
+                the function VerifyJWT, if the key has not expired those 10 minutes will refresh. That way the user will stay
+                logged in either until he closes the session OR 10 minutes of iactivity pass
+    # Description
+    Creates a JWT for the user
+    # Returns
+    A dict with keys "access", "refresh", "time. {"access" someval, "refresh": someval, "time": someval}
+    If access=None & refresh=None, means something went wrong
+    If type(access)=str & refresh=None, means user selected rememberme=False
+    If type(access)=str & type(refresh)=str, means user selected rememberme=True
+    If rememberme=True, type(time)=int and holds the expiration date of refresh in seconds. In any other case time=None
+    '''
+    if(type(userid) != int):
+        return {"access": None, "refresh": None}
+    iat = int(datetime.datetime.now(datetime.timezone.utc).timestamp())
+    iss = str(userid)
+    nonce_access = ''.join(secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(10))
+    nonce_refresh = ''.join(secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(10))
+    algo = secrets.choice(encrypt_algos)
+
+    access_key = None
+    refresh_key = None
+
+    if(algo == 'RS256'):
+        access_key = private_rsa_access
+        refresh_key = private_rsa_refresh
+    elif(algo == 'PS256'):
+        access_key = private_ps_access
+        refresh_key = private_ps_refresh
+    elif(algo == 'HS256'):
+        access_key = hs_access
+        refresh_key = hs_refresh
+    elif(algo == 'ES256'):
+        access_key = private_es_access
+        refresh_key = private_es_refresh
+    else:
+        return {"access": None, "refresh": None, "time": None}
+    if(rememberme == False):
+        access_val = jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_access, "alg": algo}, access_key, algo)
+        cache.set('ac_' + iss, access_val, iat + 600)
+        return {"access": access_val, "refresh": None, "time": None}
+    elif(rememberme == True):
+        # exp refresh: iat + 2592000
+        refresh_val = jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_refresh, "alg": algo}, refresh_key, algo)
+        cache.set('rk_' + iss, refresh_val, iat + 2592000)
+        return {"access": jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_access, "alg": algo}, access_key, algo),
+                "refresh": refresh_val, "time": iat + 2592000}
+    else:
+        return {"access": None, "refresh": None, "time": None}

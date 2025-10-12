@@ -1,8 +1,9 @@
 import '../styling/PasswordInput.css'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, forwardRef } from 'react'
 import { EyeIcon, EyeCloseIcon } from '../components/svgs/UtilIcons'
+import { pressKey } from './pressKeyFunc'
 
-export function PasswordInput({classtype, placeholder, valuesRef, passwordIndex, warningIndex, warningvalueIndex, isconfirmpassword}){
+export const PasswordInput = forwardRef(({classtype, placeholder, valuesRef, passwordIndex, warningIndex, warningvalueIndex, isconfirmpassword, tabIndex, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue}, passwordinputRef) => {
 
     const [pi_classstate, pi_classsetState] = useState([null, null, null, null])
     const [pi_eyestate, pi_eyesetState] = useState(['password', <EyeIcon/>])
@@ -61,12 +62,35 @@ export function PasswordInput({classtype, placeholder, valuesRef, passwordIndex,
         }
     }
 
+    /*function pressKey(event){
+        if(onpressEnter !== undefined){
+            if(event.key === 'Enter'){
+                onpressEnter()
+            }
+        }
+        if(event.key === 'Tab'){
+            if(onpressTab !== undefined){
+                if(onpressTabValue !== undefined){
+                    setTimeout(function(){
+                        onpressTab(onpressTabValue)
+                    }, 50)
+                }
+                else{
+                    onpressTab()
+                }
+            }
+            else{
+                event.preventDefault()
+            }
+        }
+    }*/
+
     return(
         <div className={pi_classstate[0]}>
-            <input type={pi_eyestate[0]} autoComplete='off' autoCapitalize='off' spellcheck='false' className={pi_classstate[1]} placeholder={placeholder} ref={pi_inputRef} onChange={() => {isconfirmpassword === true ? (CheckPasswordsEqual()) : (CheckValues())}}/>
+            <input type={pi_eyestate[0]} autoComplete='off' autoCapitalize='off' spellcheck='false' className={pi_classstate[1]} placeholder={placeholder} ref={(element) => {pi_inputRef.current = element; passwordinputRef !== null ? (passwordinputRef.current = element): ('')}} onChange={() => {isconfirmpassword === true ? (CheckPasswordsEqual()) : (CheckValues())}} tabIndex={tabIndex} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue )}/>
             <div className={pi_classstate[2]}>
                 <div className={pi_classstate[3]} onClick={() => ClickEye()}>{pi_eyestate[1]}</div>
             </div>
         </div>
     )
-}
+})

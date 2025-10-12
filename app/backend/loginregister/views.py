@@ -13,8 +13,8 @@ import datetime
 import secrets
 import string
 from .models import User, Referal
-from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired
-from snowflake_id_gen import GenerateSnowflake
+from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, CreateJWT
+from snowflake_id_gen import GenerateSnowflake, CreateSnowflake
 from django.core.cache import cache
 from PIL import Image
 import io
@@ -235,7 +235,7 @@ def PasswordSafe(password):
     # Description
     Salts Peppers Hashes the password
     # Returns
-    The salted, peppered, hashed password
+    The salted, peppered, hashed password (str)
     '''
 
     # Salting
@@ -575,7 +575,6 @@ def TestDelete(request):
 def findUser(request):
     # c -> l: login, r: register
     data = json.loads(request.body.decode('utf-8'))
-    print(data)
     if("v" not in data or "t" not in data or "c" not in data):
         return HttpResponse(json.dumps('Important data are missing'), status = 400)
     if( (CheckDataValue(data["v"], data["t"], False) == False) or ( (data["c"] != "l") and (data["c"] != "r") )):
@@ -592,16 +591,34 @@ def findUser(request):
         else:
             return HttpResponse(json.dumps('Valid Email / Phone'), status = 200)
 
-def matchUserEmailPhone(val, valtype, returnpassword = False):
+def matchUserEmailPhone(val, valtype, returninfo = False):
+    '''
+    # Variables
+    @param: val (str)
+                must be the value of the email address or the value of the phone number. Example: 'test@testmail.com' or '1555333'
+            valtype (str: 'email', 'phone')
+                what is the val. An email address or a phone number
+            returninfo (bool)
+                Set to True to return additional information. Specifically the User's password, name, id
+    # Description
+    Searches the database to find a User based on the passed values. Specifically if valtype='email', searches the db for a user
+    with email=val. If valtype='phone', searches the db for a user with phone=val. Note that if the user in the db has status='D'
+    (Deleted), then the User will not be found
+    # Returns
+    A list. If the User is not found (either val did not match with email, phone OR user's status='D') in the db, then the list
+    is of the form: [False (bool), message (str)]. If the User is found list is of the form:
+    [True (bool), '' (str), '' (str), '' (str)] if returninfo=False OR
+    [True (bool). userpassword (str), username (str), userid (int)]
+    '''
     userfound = None
-    if(returnpassword == False):
+    if(returninfo == False):
         if(valtype == 'email'):
             userfound = User.objects.filter(email = val).values('status')
         elif(valtype == 'phone'):
             userfound = User.objects.filter(phone = val).values('status')
         else:
             return [False, 'Invalid data type']
-    elif(returnpassword == True):
+    elif(returninfo == True):
         if(valtype == 'email'):
             userfound = User.objects.filter(email = val).values('status', 'password', 'name', 'id')
         elif(valtype == 'phone'):
@@ -617,12 +634,13 @@ def matchUserEmailPhone(val, valtype, returnpassword = False):
     else:
         return [False, 'Something went wrong with the server']
     
-    if(returnpassword == False):
+    if(returninfo == False):
         return [True, '', '', '']
     else:
         return [True, userfound[0]['password'], userfound[0]['name'], userfound[0]['id']]
     
-
+#######################
+# Check these 2
 @api_view(['POST'])
 def Login(request):
     data = json.loads(request.body.decode('utf-8'))
@@ -653,3 +671,58 @@ def PasswordCompare(password, password_db):
         return True
     else:
         return False
+    
+#############################3
+
+@api_view(['POST'])
+def Register(request):
+    data = json.loads(request.body.decode('utf-8'))
+    if("v" not in data or "t" not in data or "p" not in data or "r" not in data):
+        return HttpResponse(json.dumps('Important data are missing'), status = 400)
+    if( ((data["t"] != 'email') and (data["t"] != 'phone')) or (CheckDataValue(data["v"], data["t"], False) == False) or (CheckDataValue(data["p"], 'password', False) == False) or (type(data["r"]) != str) or (len(data["r"]) != 10) ):
+        return HttpResponse(json.dumps('Invalid data passed'), status = 400)
+    
+    referal_find = FindReferal(data["r"])
+    if(referal_find[0] == False):
+        return HttpResponse(json.dumps(referal_find[1]), status = referal_find[2])
+    
+    userfound = matchUserEmailPhone(data["v"], data["t"], True)
+    if( (userfound[0] == True) or (userfound[1] == 'Account Deleted')):
+            return HttpResponse(json.dumps('Email / Phone already in use'), status = 409)
+    
+    userid = GenerateSnowflake()
+
+    #if(data["t"] == 'email'):
+        #User.objects.create(email = data["v"], password = PasswordSafe(data["p"]), date_created = datetime.datetime.now(datetime.timezone.utc), id = userid)
+    #elif(data["t"] == 'phone'):
+        #User.objects.create(phone = data["v"], password = PasswordSafe(data["p"]), date_created = datetime.datetime.now(datetime.timezone.utc), id = userid)
+    #else:
+        #return HttpResponse(json.dumps('Something went wrong with the server'), status = 500)
+    #Referal.objects.filter(id = referal_find[1]).update(userid_redeem = userid)
+    jwt_keys = CreateJWT(userid)
+    if(jwt_keys["access"] == None and jwt_keys["refresh"] == None):
+        return HttpResponse(json.dumps('Something went wrong with the server'), status = 500)
+    else:
+        response = HttpResponse(json.dumps('User successfully created'), status = 200)
+        cookieexp = None
+        if(jwt_keys["refresh"] != None):
+            cookieexp = jwt_keys["time"]
+            response.set_cookie("refresh", jwt_keys["refresh"], httponly = True, secure = False, max_age = cookieexp, samesite = "Lax")
+        response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = cookieexp, samesite = "Lax")
+        response.set_cookie("username", None, httponly = False, secure = True, max_age = cookieexp, samesite = "Lax")
+
+        return response
+
+
+def FindReferal(referal_value):
+    referal_ret = Referal.objects.filter(value = referal_value).values('date_created', 'userid_redeem', 'id')
+    if(referal_ret.count() >= 1):
+        referal_ret = referal_ret.filter(userid_redeem = None)
+        if(referal_ret.count() == 0):
+            return [False, 'Referal Code has already been used', 409]
+        for i in range(0, referal_ret.count()):
+            exp_date = referal_ret[i]['date_created'] + datetime.timedelta(days = 1)
+            if( (datetime.datetime.now(datetime.timezone.utc) - exp_date).total_seconds() < 0):
+                return [True, referal_ret[i]['id'], 200]
+        return [False, 'Referal Code has expired', 409]
+    return [False, 'Incorrect Referal Code', 409]

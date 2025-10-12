@@ -10,7 +10,6 @@ class Referal(models.Model):
     date_created = models.DateTimeField(null = False, blank = False)
     value = models.CharField(null = False, blank = False, max_length = 10)
     userid_redeem = models.ForeignKey(User, null = True, blank = False, default = None, on_delete = models.SET_NULL)
-    date_redeem = models.DateTimeField(null = True, blank = False, default = None)
 
     class Meta:
         db_table = 'referals'

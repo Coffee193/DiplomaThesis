@@ -62,29 +62,6 @@ export const PasswordInput = forwardRef(({classtype, placeholder, valuesRef, pas
         }
     }
 
-    /*function pressKey(event){
-        if(onpressEnter !== undefined){
-            if(event.key === 'Enter'){
-                onpressEnter()
-            }
-        }
-        if(event.key === 'Tab'){
-            if(onpressTab !== undefined){
-                if(onpressTabValue !== undefined){
-                    setTimeout(function(){
-                        onpressTab(onpressTabValue)
-                    }, 50)
-                }
-                else{
-                    onpressTab()
-                }
-            }
-            else{
-                event.preventDefault()
-            }
-        }
-    }*/
-
     return(
         <div className={pi_classstate[0]}>
             <input type={pi_eyestate[0]} autoComplete='off' autoCapitalize='off' spellcheck='false' className={pi_classstate[1]} placeholder={placeholder} ref={(element) => {pi_inputRef.current = element; passwordinputRef !== null ? (passwordinputRef.current = element): ('')}} onChange={() => {isconfirmpassword === true ? (CheckPasswordsEqual()) : (CheckValues())}} tabIndex={tabIndex} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue )}/>

@@ -168,34 +168,6 @@
     margin-top: 45px;
 }
 
-.lr_signedinholder{
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.lr_signedintext{
-    display: flex;
-    align-items: center;
-    color: var(--color-text-strong-faded-gray);
-    margin-left: 15px;
-}
-
-.lr_signedinarrow{
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    margin-left: 5px;
-}
-.lr_signedinarrow > path{
-    pointer-events: none;
-}
-
-.lr_signedinexplain{
-    margin-top: 25px;
-    color: var(--color-text-strong-faded-gray);
-}
-
 .lr_warningholder{
     position: relative;
     width: 100%;

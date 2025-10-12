@@ -1,0 +1,32 @@
+.kms_signedinholder{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.kms_signedintext{
+    display: flex;
+    align-items: center;
+    color: var(--color-text-strong-faded-gray);
+    margin-left: 15px;
+}
+
+.kms_signedinarrow{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.kms_signedinarrow > path{
+    pointer-events: none;
+}
+
+.kms_signedinexplain{
+    margin-top: 25px;
+    color: var(--color-text-strong-faded-gray);
+}
+
+.kms_input:focus{
+    outline-style: solid;
+    outline-offset: 2px;
+}

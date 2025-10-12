@@ -12,6 +12,7 @@ export function pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onp
             }
         }
         if(event.key === 'Tab'){
+            event.preventDefault()
             if(onpressTab !== undefined){
                 if(onpressTabValue !== undefined){
                     setTimeout(function(){
@@ -21,9 +22,6 @@ export function pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onp
                 else{
                     onpressTab()
                 }
-            }
-            else{
-                event.preventDefault()
             }
         }
     }

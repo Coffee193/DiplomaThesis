@@ -13,3 +13,10 @@
     cursor: pointer;
     color: var(--color-blue-aapl-stronger);
 }
+
+
+.tpc_input:focus{
+    outline-style: solid;
+    outline-offset: 2px;
+    
+}

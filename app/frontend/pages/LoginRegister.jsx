@@ -6,13 +6,12 @@ import { ArrowDownIcon } from '../components/svgs/UtilIcons'
 import { PasswordInput } from './PasswordInput'
 import { ReferalInput } from './ReferalInput'
 import { TermsPoliciesCheckbox } from './TermsPoliciesCheckbox'
+import { KeepMeSignedIn } from './KeepMeSignedIn'
 
 
 export function LoginRegister({ lrtype }){
-    const lrsignedinexplainRef = useRef()
-    const [lrsignedinstate, lrsignedinsetState] = useState(['rotate(0deg)', 'none'])
     const [lrheaderbackstate, lrheaderbacksetState] = useState()
-    const valuesRef = useRef([null, null, null, ['Field is empty', 'Password field is empty', 'Passwords do not match', 'Referal code must be 10 characters long', 'You must agree to our Terms and Policies'], null]) // emailphoneval, type (:e-> email, p->phone), password, warning -> [0: emailphonewarning, 1: passwordwarning, 2: passwordconfirmwarning, 3: referalwarning, 4: checkboxwarning], referal
+    const valuesRef = useRef([null, null, null, ['Field is empty', 'Password field is empty', 'Passwords do not match', 'Referal code must be 10 characters long', 'You must agree to our Terms and Policies'], null, false]) // emailphoneval, type (:e-> email, p->phone), password, warning -> [0: emailphonewarning, 1: passwordwarning, 2: passwordconfirmwarning, 3: referalwarning, 4: checkboxwarning], referal, keepmesignedin
     const [warningstate, warningsetState] = useState('')
     const lrinfoholderRef = useRef()
     const lr_arrowsignedinRef = useRef()
@@ -22,6 +21,7 @@ export function LoginRegister({ lrtype }){
     const confirmpasswordinputRef = useRef()
     const referalinputRef = useRef()
     const termspoliciesinputRef = useRef()
+    const keepmesignedininputRef = useRef()
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -52,9 +52,6 @@ export function LoginRegister({ lrtype }){
             warningsetState('')
             lrheaderbacksetState(headerval)
             ClickSlide('forward')
-            setTimeout(function(){
-                FocusElement('p')
-            }, 200)
         }
     }
 
@@ -62,22 +59,16 @@ export function LoginRegister({ lrtype }){
         if(move === 'forward'){
             lrinfoholderRef.current.style.left = '-425px'
             warningsetState('')
+            setTimeout(function(){
+                FocusElement('p')
+            }, 200)
         }
         else if(move === 'back'){
             lrinfoholderRef.current.style.left = '0px'
             warningsubmitsetState('')
-        }
-    }
-
-    function ClickArrowSignedIn(){
-        let pos = lr_arrowsignedinRef.current.getAttribute('data-pos')
-        if(pos === 'down'){
-            lr_arrowsignedinRef.current.setAttribute('data-pos', 'up')
-            lrsignedinsetState(['rotate(180deg)', 'block'])
-        }
-        else if(pos === 'up'){
-            lr_arrowsignedinRef.current.setAttribute('data-pos', 'down')
-            lrsignedinsetState(['rotate(0deg)', 'none'])
+            setTimeout(function(){
+                FocusElement('u')
+            }, 200)
         }
     }
 
@@ -138,7 +129,7 @@ export function LoginRegister({ lrtype }){
         FocusElement('u')
         usernamephoneinputRef.current.value = ''
         passwordinputRef.current.value = ''
-        valuesRef.current = [null, null, null, ['Field is empty', 'Password field is empty', 'Passwords do not match', 'Referal code must be 10 characters long', 'You must agree to our Terms and Policies'], null]
+        valuesRef.current = [null, null, null, ['Field is empty', 'Password field is empty', 'Passwords do not match', 'Referal code must be 10 characters long', 'You must agree to our Terms and Policies'], null, false]
     }
 
     function FocusElement(element){
@@ -156,6 +147,9 @@ export function LoginRegister({ lrtype }){
         }
         else if(element === 'tp' || element === 4){
             termspoliciesinputRef.current.focus()
+        }
+        else if(element === 'kms' || element === 5){
+            keepmesignedininputRef.current.focus()
         }
     }
 
@@ -191,12 +185,12 @@ export function LoginRegister({ lrtype }){
                             <div className='lr_backbutton' onClick={() => ClickSlide('back')}><ArrowDownIcon className='lr_backbuttonsvg'/><span className='lr_backbuttonspan'>Back</span></div>
                             <div className='lr_backheader' onClick={() => ClickSlide('back')}><span className='lr_backheaderspan'>{lrheaderbackstate}</span></div>
                             <div className='lr_maincontent_second'>
-                                <PasswordInput classtype={'loginregister'} placeholder={'Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={1} isconfirmpassword={false} ref={passwordinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'cp'}/>
+                                <PasswordInput classtype={'loginregister'} placeholder={'Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={1} isconfirmpassword={false} ref={passwordinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={lrtype === 'r' ? ('cp') : ('kms')} onpressEnter={lrtype === 'r' ? (SubmitRegister) : (SubmitLogIn)}/>
                                 {lrtype === 'r' ? (
                                 <div className='lr_rholder'>
-                                    <PasswordInput classtype={'loginregister'} placeholder={'Confirm Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={2} isconfirmpassword={true} ref={confirmpasswordinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'r'}/>
-                                    <ReferalInput valuesRef={valuesRef} referalIndex={4} warningIndex={3} warningvalueIndex={3} tabIndex="-1" ref={referalinputRef} onpressTab={FocusElement} onpressTabValue={'tp'}/>
-                                    <TermsPoliciesCheckbox valuesRef={valuesRef} warningIndex={3} warningvalueIndex={4} ref={termspoliciesinputRef}/>
+                                    <PasswordInput classtype={'loginregister'} placeholder={'Confirm Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={2} isconfirmpassword={true} ref={confirmpasswordinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'r'} onpressEnter={SubmitRegister}/>
+                                    <ReferalInput valuesRef={valuesRef} referalIndex={4} warningIndex={3} warningvalueIndex={3} tabIndex="-1" ref={referalinputRef} onpressTab={FocusElement} onpressTabValue={'tp'} onpressEnter={SubmitRegister}/>
+                                    <TermsPoliciesCheckbox valuesRef={valuesRef} warningIndex={3} warningvalueIndex={4} ref={termspoliciesinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'p'} onpressEnter={'self'}/>
                                 </div>
                                 ) : (<></>)}
                                 <div className='lr_warningholder' onClick={() => warningsubmitsetState('')}>
@@ -204,16 +198,7 @@ export function LoginRegister({ lrtype }){
                                 </div>
                                 <div className='lr_clickbutton' onClick={() => LoginRegister_SubmitClick()}>{lrtype === 'l'? ('Log In') : ('Sign Up')}</div>
                                 {lrtype === 'l'? (
-                                    <>
-                                    <div className='lr_signedinholder'>
-                                        <input type='checkbox'/>
-                                        <div className='lr_signedintext' onClick={() => ClickArrowSignedIn()}>
-                                            <span>Keep me signed in</span>
-                                            <ArrowDownIcon className='lr_signedinarrow' style={{transform: lrsignedinstate[0]}} ref={lr_arrowsignedinRef} data-pos='down'/>
-                                        </div>
-                                    </div>
-                                    <div className='lr_signedinexplain' ref={lrsignedinexplainRef} style={{display: lrsignedinstate[1]}}>You'll be automatically signed in to your account when using this device</div>
-                                    </>
+                                    <KeepMeSignedIn ref={keepmesignedininputRef} valuesRef={valuesRef} keepmesignedinIndex={5} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'p'} onpressEnter={'self'}/>
                                 ) : (<></>)
                                 }
                             </div>

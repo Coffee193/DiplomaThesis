@@ -13,8 +13,7 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
     const upi_usernamephoneRef = useRef()
     const upi_usernamephoneinputRef = useRef()
     const upi_valtype = useRef(alwaysPhone === true ? ('phone') : ('email'))
-
-    const [areacodevisibilitystate, areacodevisibilitysetState] = useState(0)
+    const [areacodevisibleState, areacodevisiblesetState] = useState(false)
 
     const reg_only_contains_numbers = new RegExp('^[0-9]+$')
 
@@ -40,10 +39,6 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
             }
         }
         CheckValues()
-    }
-
-    function AreaCodeOpen(){
-        areacodevisibilitysetState(oldvalue => oldvalue + 1)
     }
 
     function CheckValues(){
@@ -83,12 +78,12 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
 
     return(
         <>
-        <AreaCode areacodevisibility={areacodevisibilitystate} areacodeinputsetState={upi_inputvalsetState} areacodecountrysetState={countrysvgsetState}/>
+        <AreaCode areacodeinputsetState={upi_inputvalsetState} areacodecountrysetState={countrysvgsetState} areacodevisibleState={areacodevisibleState} areacodevisiblesetState={areacodevisiblesetState}/>
         <div className='upi_allholder'>
             <div className='upi_usernamephone' ref={upi_usernamephoneRef} style={alwaysPhone === true ? ({display: 'flex'}) : ({display: 'none'})}>
                 <div className='upi_svgcountry'>{countrysvgstate}</div>
                 <div className='upi_numberareacode'><div>+</div><input className='upi_numberinput' ref={upi_countrycodeRef} placeholder='' value={upi_inputvalstate} onChange={(e) => upi_inputvalsetState(e.target.value)}/></div>
-                <div className='upi_arrow' onMouseEnter={() => Upi_ArrowEnterLeave('enter')} onMouseLeave={() => Upi_ArrowEnterLeave('leave')} onClick={() => AreaCodeOpen()}><ArrowDownIcon width={15} height={15}/></div>
+                <div className='upi_arrow' onMouseEnter={() => Upi_ArrowEnterLeave('enter')} onMouseLeave={() => Upi_ArrowEnterLeave('leave')} onClick={() => areacodevisiblesetState(true)}><ArrowDownIcon width={15} height={15}/></div>
             </div>
             <input className='upi_usernamephoneinput' autoComplete='off' autoCapitalize='off' spellCheck='false' 
             onChange={() => CheckIsPhone()} ref={ (el) => {upi_usernamephoneinputRef.current = el; usernamephoneinputRef !== null ? (usernamephoneinputRef.current = el) : ('')}} autoFocus={autoFocus} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue)}/>

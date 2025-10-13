@@ -1,6 +1,5 @@
 import * as Countries from "./svgs/CountriesIcons"
 
-export const country_list = ['Andorra', 'United Arab Emirates', 'Afganistan', 'Antigua and Barbuda', 'Anguilla', 'Albania', 'Armenia', 'Angola', 'Argentina', 'Austria', 'Australia', 'Aruba', 'Åland Islands', 'Azerbaijan', 'Bosnia and Herzegovina', 'Barbados', 'Bangladesh', 'Belgium', 'Burkina Faso', 'Bulgaria', 'Bahrain', 'Burundi', 'Benin', 'Bermuda', 'Brunei', 'Bolivia', 'Caribbean Netherlands', 'Brazil', 'Bahamas', 'Bhutan', 'Botswana', 'Belarus', 'Belize', 'Canada', 'Cocos (Keeling) Islands', 'Congo (DRC) (Congo-Kinshasa)', 'Central African Republic','Congo (Republic)']
 export const country_list_full = {  'Andorra':
                             {'svg': <Countries.AndorraIcon/>,
                             'ac': '+376'},
@@ -116,4 +115,65 @@ export const country_list_full = {  'Andorra':
                             'ac': '+236'},
                         'Congo (Republic)':
                             {'svg': <Countries.CongoRepublicIcon/>,
-                            'ac': '+242'}}
+                            'ac': '+242'},
+                        'Cook Islands':
+                            {'svg': <Countries.CookIslandsIcon/>,
+                                'ac': '+682'},
+                        'Croatia':
+                            {'svg': <Countries.CroatiaIcon/>,
+                            'ac': '+385'},
+                        'Cyprus':
+                            {'svg': <Countries.CyprusIcon/>,
+                            'ac': '+357'},
+                        'Denmark (Danmark)':
+                            {'svg': <Countries.DenmarkIcon/>,
+                            'ac': '+45'},
+                        'Czech Republic':
+                            {'svg': <Countries.CzechRepublicIcon/>,
+                            'ac': '+420'},
+                        'Djibouti':
+                            {'svg': <Countries.DjiboutiIcon/>,
+                            'ac': '+253'},
+                        'Dominica':
+                            {'svg': <Countries.DominicaIcon/>,
+                            'ac': '+1767'},
+                        'Ecuador':
+                            {'svg': <Countries.EcuadorIcon/>,
+                            'ac': '+593'},
+                        'Egypt':
+                            {'svg': <Countries.EgyptIcon/>,
+                            'ac': '+20'},
+                        'El Salvador':
+                            {'svg': <Countries.ElSalvadorIcon/>,
+                            'ac': '+503'},
+                        'Fiji':
+                            {'svg': <Countries.FijiIcon/>,
+                            'ac': '+679'},
+                        'Finland (Suomi)':
+                            {'svg': <Countries.FinlandIcon/>,
+                            'ac': '+358'},
+                        'France':
+                            {'svg': <Countries.FranceIcon/>,
+                            'ac': '+33'},
+                        'French Guiana':
+                            {'svg': <Countries.FranceIcon/>,
+                            'ac': '+594'},
+                        'French Polynesia':
+                            {'svg': <Countries.FrenchPolynesiaIcon/>,
+                            'ac': '+689'},
+                        'Germany':
+                            {'svg': <Countries.GermanyIcon/>,
+                            'ac': '+49'},
+                        'Greece':
+                            {'svg': <Countries.GreeceIcon/>,
+                            'ac': '+30'},
+                        'Hong Kong':
+                            {'svg': <Countries.HongKongIcon/>,
+                            'ac': '+852'},
+                        'Hungary':
+                            {'svg': <Countries.HungaryIcon/>,
+                            'ac': '+36'},
+                        'Iceland':
+                            {'svg': <Countries.IcelandIcon/>,
+                            'ac': '+354'}
+                }

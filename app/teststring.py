@@ -6,6 +6,7 @@ import secrets
 import string
 from cryptography.hazmat.primitives.asymmetric import rsa, ec
 
+
 print(time.time())
 print(time.time_ns())
 print(time.perf_counter())

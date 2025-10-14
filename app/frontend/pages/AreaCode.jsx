@@ -1,16 +1,13 @@
 import '../styling/AreaCode.css'
 import { XCloseIcon, SearchIcon } from '../components/svgs/UtilIcons'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
-import { country_list_full } from '../components/CountriesList'
+export function AreaCode({ areacodenumbercountrysvgsetState, areacodevisibleState, areacodevisiblesetState, country_list_full, country_list_keys, valuesRef, warningIndex, warningvalueIndex, valueIndex }){
 
-export function AreaCode({ areacodeinputsetState, areacodecountrysetState, areacodevisibleState, areacodevisiblesetState }){
-
-    const country_list = Object.keys(country_list_full)
-    const [ac_infostate, ac_infosetState] = useState(Object.keys(country_list_full).map(item => CreateAreaCodeItem(item)))
+    const [ac_infostate, ac_infosetState] = useState(country_list_keys.map(item => CreateAreaCodeItem(item)))
 
     function ChangeSearchBody(inputvalue){
-        let filtered_items = country_list.filter(item => { return item.toLowerCase().includes(inputvalue.toLowerCase()) })
+        let filtered_items = country_list_keys.filter(item => { return item.toLowerCase().includes(inputvalue.toLowerCase()) })
             
             ac_infosetState(
                 filtered_items.map(item => (
@@ -21,9 +18,12 @@ export function AreaCode({ areacodeinputsetState, areacodecountrysetState, areac
 
     function CreateAreaCodeItem(item){
         return( <li key={item} onClick={() => {
-                    areacodeinputsetState(country_list_full[item]['ac'].slice(1))
-                    areacodecountrysetState(country_list_full[item]['svg'])
+                    areacodenumbercountrysvgsetState([country_list_full[item]['svg'], country_list_full[item]['ac'].slice(1)])
                     areacodevisiblesetState(false)
+                    if(valuesRef !== undefined){
+                        valuesRef.current[valueIndex] = country_list_full[item]['ac'] + ' ' + valuesRef.current[valueIndex].split(' ')[1]
+                        valuesRef.current[warningIndex][warningvalueIndex] = null
+                    }
                 }}>
                     <div className='ac_search_body_infomain'>
                         {country_list_full[item]['svg']}
@@ -33,12 +33,6 @@ export function AreaCode({ areacodeinputsetState, areacodecountrysetState, areac
                 </li>
         )
     }
-
-    function InitialAreaCode(){
-        let country = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        
-    }
-
         
 
     return(

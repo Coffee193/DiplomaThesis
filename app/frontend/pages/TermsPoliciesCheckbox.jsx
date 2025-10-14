@@ -24,7 +24,7 @@ export const TermsPoliciesCheckbox = forwardRef(({ valuesRef, warningIndex, warn
                 <input type='checkbox' onClick={(event) => {event.target.checked === true ? (valuesRef.current[warningIndex][warningvalueIndex] = null) : (valuesRef.current[warningIndex][warningvalueIndex] = 'You must agree to our Terms and Policies')}} ref={(element) => {tpc_inputRef.current = element;termspoliciesRef !== null ? (termspoliciesRef.current = element) : ('')}} className='tpc_input' tabIndex={tabIndex} onKeyDown={(event) => pressKey(event, onpressEnter === 'self' ? (ClickCheckBox) : (onpressEnter), onpressEnter !== 'self' ? (onpressEnterValue) : (undefined), onpressTab, onpressTabValue)} onMouseDown={(event) => event.preventDefault()}/>
             </div>
             <div>
-                By Signing Up you agree to our <Link className='tpc_termslink' to='/termspolicies'>Terms of Use</Link> and our <Link className='tpc_termslink' to='/termspolicies'>Privacy Policy</Link>
+                By Signing Up you agree to our <Link className='tpc_termslink' to='/termspolicies' tabIndex={tabIndex}>Terms of Use</Link> and our <Link className='tpc_termslink' to='/termspolicies' tabIndex={tabIndex}>Privacy Policy</Link>
             </div>
         </div>
     )

@@ -479,6 +479,11 @@ def CheckDataValue(val, valtype, allownone = True):
             return False
         if( (len(val)<5) or (len(val)>25)):
             return False
+        if(val.count(' ') != 1):
+            return False
+        valsplit = val.split(' ')
+        if((len(valsplit[0]) < 2) or (valsplit[0][0] != '+') or (valsplit[0][1:].isdigit() == False) or (valsplit[1].isdigit() == False) or (len(valsplit[0]) > 6) or (len(valsplit[1]) < 5) ):
+            return False
     elif(valtype == 'name'):
         if(allownone == True):
             if(val == None):
@@ -644,9 +649,9 @@ def matchUserEmailPhone(val, valtype, returninfo = False):
 @api_view(['POST'])
 def Login(request):
     data = json.loads(request.body.decode('utf-8'))
-    if("v" not in data or "t" not in data or "p" not in data):
+    if("v" not in data or "t" not in data or "p" not in data or "k" not in data):
         return HttpResponse(json.dumps('Important data are missing'), status = 400)
-    if( (CheckDataValue(data["v"], data["t"]) == False) or (CheckDataValue(data["p"], 'password') == False) ):
+    if( (CheckDataValue(data["v"], data["t"]) == False) or (CheckDataValue(data["p"], 'password') == False) or ((data["k"] != False) and (data["k"] != True)) ):
         return HttpResponse(json.dumps('Invalid data passed'), status = 400)
     matchuser = matchUserEmailPhone(data["v"], data["t"], True)
     if(matchuser[0] == False):
@@ -692,13 +697,13 @@ def Register(request):
     
     userid = GenerateSnowflake()
 
-    #if(data["t"] == 'email'):
-        #User.objects.create(email = data["v"], password = PasswordSafe(data["p"]), date_created = datetime.datetime.now(datetime.timezone.utc), id = userid)
-    #elif(data["t"] == 'phone'):
-        #User.objects.create(phone = data["v"], password = PasswordSafe(data["p"]), date_created = datetime.datetime.now(datetime.timezone.utc), id = userid)
-    #else:
-        #return HttpResponse(json.dumps('Something went wrong with the server'), status = 500)
-    #Referal.objects.filter(id = referal_find[1]).update(userid_redeem = userid)
+    if(data["t"] == 'email'):
+        User.objects.create(email = data["v"], password = PasswordSafe(data["p"]), date_created = datetime.datetime.now(datetime.timezone.utc), id = userid)
+    elif(data["t"] == 'phone'):
+        User.objects.create(phone = data["v"], password = PasswordSafe(data["p"]), date_created = datetime.datetime.now(datetime.timezone.utc), id = userid)
+    else:
+        return HttpResponse(json.dumps('Something went wrong with the server'), status = 500)
+    Referal.objects.filter(id = referal_find[1]).update(userid_redeem = userid)
     jwt_keys = CreateJWT(userid)
     if(jwt_keys["access"] == None and jwt_keys["refresh"] == None):
         return HttpResponse(json.dumps('Something went wrong with the server'), status = 500)

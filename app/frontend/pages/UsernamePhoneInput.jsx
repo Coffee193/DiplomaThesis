@@ -1,21 +1,26 @@
 import '../styling/UsernamePhoneInput.css'
 import { useState, useRef, forwardRef } from 'react'
 import { ArrowDownIcon } from '../components/svgs/UtilIcons'
-import { AustraliaIcon } from '../components/svgs/CountriesIcons'
 import { AreaCode } from './AreaCode'
 import { pressKey } from './pressKeyFunc'
+import { country_list_full } from '../components/CountriesList'
 
-export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex, alwaysEmail, alwaysPhone, autoFocus, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue}, usernamephoneinputRef) => {
+export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex, alwaysEmail, alwaysPhone, autoFocus, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue, tabIndex}, usernamephoneinputRef) => {
+    
+    const country_list_keys = Object.keys(country_list_full)
 
-    const [countrysvgstate, countrysvgsetState] = useState(<AustraliaIcon/>)
-    const [upi_inputvalstate, upi_inputvalsetState] = useState('')
-    const upi_countrycodeRef = useRef()
+    const [upi_areacodenumbersvgState, upi_areacodenumbersvgsetState] = useState(InitAreaCode())
+    //const [upi_countrysvgState, upi_countrysvgsetState] = useState(InitAreaCode())
+    //const [upi_inputvalstate, upi_inputvalsetState] = useState('')
+    const upi_countrycodeinputRef = useRef()
     const upi_usernamephoneRef = useRef()
     const upi_usernamephoneinputRef = useRef()
     const upi_valtype = useRef(alwaysPhone === true ? ('phone') : ('email'))
     const [areacodevisibleState, areacodevisiblesetState] = useState(false)
 
     const reg_only_contains_numbers = new RegExp('^[0-9]+$')
+
+    
 
     function Upi_ArrowEnterLeave(val){
         if(val === 'enter'){
@@ -29,7 +34,7 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
     function CheckIsPhone(){
         if(alwaysEmail === false && alwaysPhone === false){
             let checkval = upi_usernamephoneinputRef.current.value
-            if((checkval.length > 5) && (checkval.search(reg_only_contains_numbers) === 0)){
+            if((checkval.length >= 5) && (reg_only_contains_numbers.test(checkval) === true)){
                 upi_usernamephoneRef.current.style.display = 'flex'
                 upi_valtype.current = 'phone'
             }
@@ -57,11 +62,12 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
             }
         }
         else if(upi_valtype.current === 'phone'){
-            if(upi_inputvalstate === ''){
+            let areacodeval = upi_countrycodeinputRef.current.value
+            if(areacodeval === ''){
                 warning = 'Enter an area code'
             }
-            if(upi_inputvalstate.length + checkval.length > 24){
-                warning = 'Phone number cannot exceed 24 characters'
+            if(areacodeval.length + checkval.length > 23){
+                warning = 'Phone number cannot exceed 25 characters'
             }
         }
 
@@ -71,22 +77,61 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
             valuesRef.current[typeIndex] = 'email'
         }
         else if(upi_valtype.current === 'phone'){
-            valuesRef.current[valueIndex] = '+' + upi_inputvalstate + ' ' + upi_usernamephoneinputRef.current.value
+            valuesRef.current[valueIndex] = '+' + upi_countrycodeinputRef.current.value + ' ' + upi_usernamephoneinputRef.current.value
             valuesRef.current[typeIndex] = 'phone'
         }
     }
 
+    function InitAreaCode(){
+        let country = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        for(let i = 0; i < country_list_keys.length; i++){
+            if(country_list_full[country_list_keys[i]]['tz'] === country){
+                return [country_list_full[country_list_keys[i]]['svg'], country_list_full[country_list_keys[i]]['ac'].slice(1)]
+            }
+        }
+        return [<div className='upi_countryempty'/>, '']
+    }
+
+    function ChangeAreaCodeCheckSvg(event){
+        if(reg_only_contains_numbers.test(event.target.value) === false && event.target.value !== ''){
+            upi_countrycodeinputRef.current.value = event.target.value.slice()
+            return
+        }
+        let changesvgval = null
+        for(let i=0; i < country_list_keys.length; i++){
+            if(country_list_full[country_list_keys[i]]['ac'].slice(1) === event.target.value){
+                changesvgval = country_list_full[country_list_keys[i]]['svg']
+                break
+            }
+        }
+        if(changesvgval === null){
+            changesvgval = <div className='upi_countryempty'/>
+        }
+        upi_areacodenumbersvgsetState([changesvgval, event.target.value])
+    }
+
+    function FocusUsernamePhoneInput(){
+        upi_usernamephoneinputRef.current.focus()
+    }
+    function FocusAreaCodeInput(){
+        upi_countrycodeinputRef.current.focus()
+    }
+    function PressEnterOnAreaCodeInput(){
+        areacodevisiblesetState(true)
+        upi_countrycodeinputRef.current.blur()
+    }
+
     return(
         <>
-        <AreaCode areacodeinputsetState={upi_inputvalsetState} areacodecountrysetState={countrysvgsetState} areacodevisibleState={areacodevisibleState} areacodevisiblesetState={areacodevisiblesetState}/>
+        <AreaCode areacodenumbercountrysvgsetState={upi_areacodenumbersvgsetState} areacodevisibleState={areacodevisibleState} areacodevisiblesetState={areacodevisiblesetState} country_list_full={country_list_full} country_list_keys={country_list_keys} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} valueIndex={valueIndex}/>
         <div className='upi_allholder'>
             <div className='upi_usernamephone' ref={upi_usernamephoneRef} style={alwaysPhone === true ? ({display: 'flex'}) : ({display: 'none'})}>
-                <div className='upi_svgcountry'>{countrysvgstate}</div>
-                <div className='upi_numberareacode'><div>+</div><input className='upi_numberinput' ref={upi_countrycodeRef} placeholder='' value={upi_inputvalstate} onChange={(e) => upi_inputvalsetState(e.target.value)}/></div>
+                <div className='upi_svgcountry'>{upi_areacodenumbersvgState[0]}</div>
+                <div className='upi_numberareacode'><div>+</div><input className='upi_numberinput' ref={upi_countrycodeinputRef} placeholder='' value={upi_areacodenumbersvgState[1]} onChange={(event) => {ChangeAreaCodeCheckSvg(event); (reg_only_contains_numbers.test(event.target.value) === true || event.target.value === '') ? (CheckValues()) : ('')}} onKeyDown={(event) => pressKey(event, PressEnterOnAreaCodeInput, undefined, FocusUsernamePhoneInput, undefined)} onFocus={() => Upi_ArrowEnterLeave('enter')} onBlur={() => Upi_ArrowEnterLeave('leave')} tabIndex={tabIndex} maxLength="5"/></div>
                 <div className='upi_arrow' onMouseEnter={() => Upi_ArrowEnterLeave('enter')} onMouseLeave={() => Upi_ArrowEnterLeave('leave')} onClick={() => areacodevisiblesetState(true)}><ArrowDownIcon width={15} height={15}/></div>
             </div>
             <input className='upi_usernamephoneinput' autoComplete='off' autoCapitalize='off' spellCheck='false' 
-            onChange={() => CheckIsPhone()} ref={ (el) => {upi_usernamephoneinputRef.current = el; usernamephoneinputRef !== null ? (usernamephoneinputRef.current = el) : ('')}} autoFocus={autoFocus} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue)}/>
+            onChange={() => CheckIsPhone()} ref={ (el) => {upi_usernamephoneinputRef.current = el; usernamephoneinputRef !== null ? (usernamephoneinputRef.current = el) : ('')}} autoFocus={autoFocus} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, upi_valtype.current === 'email' ? (onpressTab) : (FocusAreaCodeInput), upi_valtype.current === 'email' ? (onpressTabValue) : (undefined))} tabIndex={tabIndex}/>
         </div>
         </>
     )

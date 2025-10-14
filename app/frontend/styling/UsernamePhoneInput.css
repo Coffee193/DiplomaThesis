@@ -27,7 +27,7 @@
 
 .upi_numberinput{
     position: relative;
-    width: 50%;
+    width: 60%;
 }
 
 .upi_arrow{
@@ -62,4 +62,12 @@
 }
 .upi_hover div{
     color: var(--color-blue-aapl-stronger);
+}
+
+.upi_countryempty{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #d1d1d1;
+    background: linear-gradient(45deg,rgba(209, 209, 209, 1) 0%, rgba(156, 156, 156, 1) 100%);
 }

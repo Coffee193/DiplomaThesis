@@ -30,6 +30,7 @@ export function LoginRegister({ lrtype }){
     const location = useLocation()
 
     async function LoginRegister_NextClick(){
+        console.log(valuesRef.current)
         if(valuesRef.current[3][0] !== null){
             warningsetState(valuesRef.current[3][0])
             return
@@ -43,7 +44,7 @@ export function LoginRegister({ lrtype }){
         }).then(res => {
             response_status = res.status
             return res.json()
-        }).then(data => data)
+        }).then(data => data).catch(() => warningsetState('Could not connect to the server'))
         ClickButton(true, nextbuttonRef, nextbuttonsetState)
 
         if(response_status === 404 || response_status === 409){
@@ -104,7 +105,7 @@ export function LoginRegister({ lrtype }){
         }).then(res => {
             response_status = res.status
             return res.json()
-        }).then(data => data)
+        }).then(data => data).catch(() => warningsetState('Could not connect to the server'))
         ClickButton(true, submitbuttonRef, submitbuttonsetState)
 
         if(response_status === 401){
@@ -133,7 +134,7 @@ export function LoginRegister({ lrtype }){
         }).then(res => {
             response_status = res.status
             return res.json()
-        }).then(data => data)
+        }).then(data => data).catch(() => warningsubmitsetState('Could not connect to the server'))
         ClickButton(true, submitbuttonRef, submitbuttonsetState)
 
         if(response_status === 409){
@@ -149,6 +150,8 @@ export function LoginRegister({ lrtype }){
         usernamephoneinputRef.current.value = ''
         passwordinputRef.current.value = ''
         valuesRef.current = [null, null, null, ['Field is empty', 'Password field is empty', 'Passwords do not match', 'Referal code must be 10 characters long', 'You must agree to our Terms and Policies'], null, false]
+        warningsetState('')
+        warningsubmitsetState('')
     }
 
     function FocusElement(element){
@@ -188,7 +191,7 @@ export function LoginRegister({ lrtype }){
 
             <div className='lr_body'>
                 <div className='lr_mainbox'>
-                    <Link to='/'><div className='lr_LogoHome'><img src='../components/images/MainLogo.png'/></div></Link>
+                    <Link to='/' tabIndex="-1"><div className='lr_LogoHome'><img src='../components/images/MainLogo.png'/></div></Link>
                     <div className='lr_infoholder' ref={lrinfoholderRef}>
                         
                         <div className='lr_firststep'>
@@ -197,7 +200,7 @@ export function LoginRegister({ lrtype }){
                                 <div className='lr_maincontent'>
                                     <div className='lr_emailphone'>
                                         <div className='lr_firststep_label'>Email / Phone Number</div>
-                                        <UsernamePhoneInput valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0} alwaysPhone={false} alwaysEmail={false} ref={usernamephoneinputRef} autoFocus={true} onpressEnter={LoginRegister_NextClick}/>
+                                        <UsernamePhoneInput valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0} alwaysPhone={false} alwaysEmail={false} ref={usernamephoneinputRef} autoFocus={true} onpressEnter={LoginRegister_NextClick} tabIndex="-1"/>
                                     </div>
                                     <div className='lr_warningholder' onClick={() => warningsetState('')}>
                                         <div className='lr_warning'>{warningstate}</div>

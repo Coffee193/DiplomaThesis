@@ -10,8 +10,6 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
     const country_list_keys = Object.keys(country_list_full)
 
     const [upi_areacodenumbersvgState, upi_areacodenumbersvgsetState] = useState(InitAreaCode())
-    //const [upi_countrysvgState, upi_countrysvgsetState] = useState(InitAreaCode())
-    //const [upi_inputvalstate, upi_inputvalsetState] = useState('')
     const upi_countrycodeinputRef = useRef()
     const upi_usernamephoneRef = useRef()
     const upi_usernamephoneinputRef = useRef()

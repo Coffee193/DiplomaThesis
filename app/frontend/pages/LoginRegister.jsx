@@ -218,10 +218,10 @@ export function LoginRegister({ lrtype }){
                             <div className='lr_backbutton' onClick={() => ClickSlide('back')}><ArrowDownIcon className='lr_backbuttonsvg'/><span className='lr_backbuttonspan'>Back</span></div>
                             <div className='lr_backheader' onClick={() => ClickSlide('back')}><span className='lr_backheaderspan'>{lrheaderbackstate}</span></div>
                             <div className='lr_maincontent_second'>
-                                <PasswordInput classtype={'loginregister'} placeholder={'Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={1} isconfirmpassword={false} ref={passwordinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={lrtype === 'r' ? ('cp') : ('kms')} onpressEnter={lrtype === 'r' ? (SubmitRegister) : (SubmitLogIn)}/>
+                                <PasswordInput classtype={'lr'} placeholder={'Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={1} isconfirmpassword={false} ref={passwordinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={lrtype === 'r' ? ('cp') : ('kms')} onpressEnter={lrtype === 'r' ? (SubmitRegister) : (SubmitLogIn)}/>
                                 {lrtype === 'r' ? (
                                 <div className='lr_rholder'>
-                                    <PasswordInput classtype={'loginregister'} placeholder={'Confirm Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={2} isconfirmpassword={true} ref={confirmpasswordinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'r'} onpressEnter={SubmitRegister}/>
+                                    <PasswordInput classtype={'lr'} placeholder={'Confirm Password'} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={2} isconfirmpassword={true} ref={confirmpasswordinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'r'} onpressEnter={SubmitRegister}/>
                                     <ReferalInput valuesRef={valuesRef} referalIndex={4} warningIndex={3} warningvalueIndex={3} tabIndex="-1" ref={referalinputRef} onpressTab={FocusElement} onpressTabValue={'tp'} onpressEnter={SubmitRegister}/>
                                     <TermsPoliciesCheckbox valuesRef={valuesRef} warningIndex={3} warningvalueIndex={4} ref={termspoliciesinputRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'p'} onpressEnter={'self'}/>
                                 </div>

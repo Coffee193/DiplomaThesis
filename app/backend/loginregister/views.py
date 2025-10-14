@@ -13,7 +13,7 @@ import datetime
 import secrets
 import string
 from .models import User, Referal
-from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, CreateJWT
+from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, CreateJWT, CreateResponseWithCookies
 from snowflake_id_gen import GenerateSnowflake, CreateSnowflake
 from django.core.cache import cache
 from PIL import Image
@@ -613,7 +613,7 @@ def matchUserEmailPhone(val, valtype, returninfo = False):
     A list. If the User is not found (either val did not match with email, phone OR user's status='D') in the db, then the list
     is of the form: [False (bool), message (str)]. If the User is found list is of the form:
     [True (bool), '' (str), '' (str), '' (str)] if returninfo=False OR
-    [True (bool). userpassword (str), username (str), userid (int)]
+    [True (bool). userpassword (str), username (str), userid (int)] if returninfo=True
     '''
     userfound = None
     if(returninfo == False):
@@ -644,33 +644,36 @@ def matchUserEmailPhone(val, valtype, returninfo = False):
     else:
         return [True, userfound[0]['password'], userfound[0]['name'], userfound[0]['id']]
     
-#######################
-# Check these 2
+
 @api_view(['POST'])
 def Login(request):
     data = json.loads(request.body.decode('utf-8'))
     if("v" not in data or "t" not in data or "p" not in data or "k" not in data):
         return HttpResponse(json.dumps('Important data are missing'), status = 400)
-    if( (CheckDataValue(data["v"], data["t"]) == False) or (CheckDataValue(data["p"], 'password') == False) or ((data["k"] != False) and (data["k"] != True)) ):
+    if( ((data["t"] != 'email') and (data["t"] != 'phone')) or (CheckDataValue(data["v"], data["t"]) == False) or (CheckDataValue(data["p"], 'password') == False) or ((data["k"] != False) and (data["k"] != True)) ):
         return HttpResponse(json.dumps('Invalid data passed'), status = 400)
+    
     matchuser = matchUserEmailPhone(data["v"], data["t"], True)
     if(matchuser[0] == False):
         return HttpResponse(json.dumps(matchuser[1]), status = 404)
-    # Check From here after completed the Register!!!
     if(PasswordCompare(data["p"] ,matchuser[1]) == False):
         return HttpResponse(json.dumps('Incorrect Password'), status = 401)
-    # Probably better to go with Register First!!!! Stopped here
-    jwtpair_dict = CreateJWTPair()
+    
+    return CreateResponseWithCookies(matchuser[3], response_msg = 'User successfully logged in', username_cookie = matchuser[2], rememberme = data["k"])
     
 def PasswordCompare(password, password_db):
     password_split = password_db.split('$')
     salt_db = password_split[2]
     pass_db = password_split[3]
 
-    salted_pass = argon2.PasswordHasher(encoding = 'utf-8', time_cost=16, memory_cost=4096, parallelism=4,hash_len=32).hash(password = password, salt = base64.b64decode(salt_db))
+    salted_pass = argon2.PasswordHasher(encoding='utf-8', time_cost=16, memory_cost=4096, parallelism=4,hash_len=32).hash(password=password, salt=base64.b64decode(salt_db))
     salted_pass = salted_pass.split('$')[5]
     peppered_pass = hmac.new(pepper_key, salted_pass.encode('UTF-8'), hashlib.sha256).hexdigest()
-    hash_pass = hashlib.sha256(peppered_pass.encode('UTF-8')).hexdigest()
+    hash_pass = None
+    if(password_split[1] == 'SHA256'):
+        hash_pass = hashlib.sha256(peppered_pass.encode('UTF-8')).hexdigest()
+    else:
+        return False
 
     if(hash_pass == pass_db):
         return True
@@ -704,6 +707,9 @@ def Register(request):
     else:
         return HttpResponse(json.dumps('Something went wrong with the server'), status = 500)
     Referal.objects.filter(id = referal_find[1]).update(userid_redeem = userid)
+
+    return CreateResponseWithCookies(userid, response_msg='User successfully created')
+    # Remove the below
     jwt_keys = CreateJWT(userid)
     if(jwt_keys["access"] == None and jwt_keys["refresh"] == None):
         return HttpResponse(json.dumps('Something went wrong with the server'), status = 500)

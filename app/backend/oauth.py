@@ -619,13 +619,26 @@ def CreateJWT(userid, rememberme = False):
         return {"access": None, "refresh": None, "time": None}
     if(rememberme == False):
         access_val = jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_access, "alg": algo}, access_key, algo)
-        cache.set('ac_' + iss, access_val, iat + 600)
-        return {"access": access_val, "refresh": None, "time": None}
+        cache.set('ac_' + iss, access_val, iat + int(os.environ.get('JWT_ACCESS_TIME')))
+        return {"access": access_val, "refresh": None, "time": iat}
     elif(rememberme == True):
         # exp refresh: iat + 2592000
         refresh_val = jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_refresh, "alg": algo}, refresh_key, algo)
-        cache.set('rk_' + iss, refresh_val, iat + 2592000)
+        cache.set('rk_' + iss, refresh_val, iat + int(os.environ.get('JWT_REFRESH_TIME')))
         return {"access": jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_access, "alg": algo}, access_key, algo),
-                "refresh": refresh_val, "time": iat + 2592000}
+                "refresh": refresh_val, "time": iat}
     else:
         return {"access": None, "refresh": None, "time": None}
+    
+def CreateResponseWithCookies(userid, jwtfail_msg = 'Something went wrong with the server', jwtfail_status = 500, response_msg = '', response_status = 200, username_cookie = None, rememberme = False):
+    jwt_keys = CreateJWT(userid, rememberme = rememberme)
+    if(jwt_keys["access"] == None and jwt_keys["refresh"] == None):
+        return HttpResponse(json.dumps(jwtfail_msg), status = jwtfail_status)
+    response = HttpResponse(json.dumps(response_msg), status = response_status)
+    cookieexp = None
+    if(jwt_keys["refresh"] != None):
+        cookieexp = jwt_keys["time"]
+        response.set_cookie("refresh", jwt_keys["refresh"], httponly = True, secure = False, max_age = int(os.environ.get('JWT_REFRESH_TIME')), samesite = "Lax")
+    response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = int(os.environ.get('JWT_ACCESS_TIME')) if cookieexp != None else None, samesite = "Lax")
+    response.set_cookie("username", username_cookie, httponly = False, secure = True, max_age = int(os.environ.get('JWT_REFRESH_TIME')) if cookieexp != None else None, samesite = "Lax")
+    return response

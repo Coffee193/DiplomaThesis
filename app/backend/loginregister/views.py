@@ -301,7 +301,7 @@ def CheckAdminKey(admin_key):
     return 'RE'
 
 @api_view(['DELETE'])
-def Logout(request):
+def Logout_OLDDEPRECATED(request):
     if(request.method == 'DELETE'):
         jwt_r = VerifyJWT(request)
         print(jwt_r)
@@ -659,7 +659,7 @@ def Login(request):
     if(PasswordCompare(data["p"] ,matchuser[1]) == False):
         return HttpResponse(json.dumps('Incorrect Password'), status = 401)
     
-    return CreateResponseWithCookies(matchuser[3], response_msg = 'User successfully logged in', username_cookie = matchuser[2], rememberme = data["k"])
+    return CreateResponseWithCookies(matchuser[3], response_msg = 'User successfully logged in', username_cookie = matchuser[2] if matchuser[2] != None else 'None', rememberme = data["k"])
     
 def PasswordCompare(password, password_db):
     password_split = password_db.split('$')
@@ -737,3 +737,8 @@ def FindReferal(referal_value):
                 return [True, referal_ret[i]['id'], 200]
         return [False, 'Referal Code has expired', 409]
     return [False, 'Incorrect Referal Code', 409]
+
+
+@api_view(['DELETE'])
+def Logout(request):
+    

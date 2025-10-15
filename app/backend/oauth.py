@@ -111,9 +111,7 @@ kwEQ3j7Xtac5RyLW1DBWzpowINW3HE75CwusX3LaZbMLlasgmGFf8hrEJ0kkb7vc
 jwt_algos = ['HS256', 'HS384', 'HS512', 'ES256', 'ES256K', 'ES384', 'ES512', 'RS256', 'RS384', 'RS512',
                          'PS256', 'PS384', 'PS512'] #EdDSA not supported as i cannot get it to work or some reason
 
-encrypt_algos = ['PS256']
-# PS256 CHECK
-# HS256, RS256, ES256 OK
+encrypt_algos = ['PS256', 'HS256', 'RS256', 'ES256']
 
 
 secret_rsa_private_key_refresh = """
@@ -619,18 +617,18 @@ def CreateJWT(userid, rememberme = False):
         return {"access": None, "refresh": None, "time": None}
     if(rememberme == False):
         access_val = jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_access, "alg": algo}, access_key, algo)
-        cache.set('ac_' + iss, access_val, iat + int(os.environ.get('JWT_ACCESS_TIME')))
+        cache.set('uc_' + iss, access_val, iat + int(os.environ.get('JWT_ACCESS_TIME')))
         return {"access": access_val, "refresh": None, "time": iat}
     elif(rememberme == True):
-        # exp refresh: iat + 2592000
+        # uc = user cookie
         refresh_val = jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_refresh, "alg": algo}, refresh_key, algo)
-        cache.set('rk_' + iss, refresh_val, iat + int(os.environ.get('JWT_REFRESH_TIME')))
+        cache.set('uc_' + iss, refresh_val, iat + int(os.environ.get('JWT_REFRESH_TIME')))
         return {"access": jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_access, "alg": algo}, access_key, algo),
                 "refresh": refresh_val, "time": iat}
     else:
         return {"access": None, "refresh": None, "time": None}
     
-def CreateResponseWithCookies(userid, jwtfail_msg = 'Something went wrong with the server', jwtfail_status = 500, response_msg = '', response_status = 200, username_cookie = None, rememberme = False):
+def CreateResponseWithCookies(userid, jwtfail_msg = 'Something went wrong with the server', jwtfail_status = 500, response_msg = '', response_status = 200, username_cookie = 'None', rememberme = False):
     jwt_keys = CreateJWT(userid, rememberme = rememberme)
     if(jwt_keys["access"] == None and jwt_keys["refresh"] == None):
         return HttpResponse(json.dumps(jwtfail_msg), status = jwtfail_status)
@@ -640,5 +638,12 @@ def CreateResponseWithCookies(userid, jwtfail_msg = 'Something went wrong with t
         cookieexp = jwt_keys["time"]
         response.set_cookie("refresh", jwt_keys["refresh"], httponly = True, secure = False, max_age = int(os.environ.get('JWT_REFRESH_TIME')), samesite = "Lax")
     response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = int(os.environ.get('JWT_ACCESS_TIME')) if cookieexp != None else None, samesite = "Lax")
-    response.set_cookie("username", username_cookie, httponly = False, secure = True, max_age = int(os.environ.get('JWT_REFRESH_TIME')) if cookieexp != None else None, samesite = "Lax")
+    response.set_cookie("userinfo", username_cookie + "$" + str(userid), httponly = False, secure = True, max_age = int(os.environ.get('JWT_REFRESH_TIME')) if cookieexp != None else None, samesite = "Lax")
     return response
+
+def ValidateJWT(request):
+    cookies = request.COOKIES
+    if("access" not in cookies or "refresh" not in cookies):
+        return [False, 'Access, Refresh cookies are missing', 400]
+    
+    

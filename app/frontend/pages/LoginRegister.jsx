@@ -210,7 +210,7 @@ export function LoginRegister({ lrtype }){
                             </div>
                             <div className='lr_loginregisterholder'>
                                 <span>{lrtype === 'l' ? ("Don't have an account?") : ("Already have an account?")}</span>
-                                <Link to={lrtype === 'l' ? ('/lrregister'): ('/lrlogin')} onClick={() => RefreshValues()} tabIndex="-1" replace><div className='lr_loginregisterclick'>{lrtype === 'l' ? ('Sign Up') : ('Log In')}</div></Link>
+                                <Link to={lrtype === 'l' ? ('/register'): ('/login')} onClick={() => RefreshValues()} tabIndex="-1" replace><div className='lr_loginregisterclick'>{lrtype === 'l' ? ('Sign Up') : ('Log In')}</div></Link>
                             </div>
                         </div>
 

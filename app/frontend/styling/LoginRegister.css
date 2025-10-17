@@ -188,3 +188,33 @@
 .lr_rholder{
     margin-top: 25px;
 }
+
+.lr_expired{
+    position: absolute;
+    width: max-content;
+    background-color: #fff;
+    top: 10px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: var(--default-box-shadow);
+}
+.lr_expired > span{
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--color-warning-red);
+}
+.lr_expired > div > svg {
+    width: 19px;
+    height: 19px;
+}
+.lr_expired > div {
+    width: 19px;
+    height: 19px;
+    cursor: pointer;
+}
+.lr_expired > div :hover{
+    color: var(--color-warning-red);
+}

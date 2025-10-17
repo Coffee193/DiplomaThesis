@@ -13,13 +13,14 @@ import datetime
 import secrets
 import string
 from .models import User, Referal
-from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, CreateJWT, CreateResponseWithCookies
+from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, CreateJWTKeyPair, CreateResponseWithCookies, ValidateAndCreateJWT, ValidateJWT
 from snowflake_id_gen import GenerateSnowflake, CreateSnowflake
 from django.core.cache import cache
 from PIL import Image
 import io
 import re
 from referal.models import Referal
+import jwt
 
 pepper_key = str.encode(os.environ.get('pepper_key'))
 path_to_img = str.encode(os.environ.get('path_to_img'))
@@ -709,20 +710,6 @@ def Register(request):
     Referal.objects.filter(id = referal_find[1]).update(userid_redeem = userid)
 
     return CreateResponseWithCookies(userid, response_msg='User successfully created')
-    # Remove the below
-    jwt_keys = CreateJWT(userid)
-    if(jwt_keys["access"] == None and jwt_keys["refresh"] == None):
-        return HttpResponse(json.dumps('Something went wrong with the server'), status = 500)
-    else:
-        response = HttpResponse(json.dumps('User successfully created'), status = 200)
-        cookieexp = None
-        if(jwt_keys["refresh"] != None):
-            cookieexp = jwt_keys["time"]
-            response.set_cookie("refresh", jwt_keys["refresh"], httponly = True, secure = False, max_age = cookieexp, samesite = "Lax")
-        response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = cookieexp, samesite = "Lax")
-        response.set_cookie("username", None, httponly = False, secure = True, max_age = cookieexp, samesite = "Lax")
-
-        return response
 
 
 def FindReferal(referal_value):
@@ -741,4 +728,41 @@ def FindReferal(referal_value):
 
 @api_view(['DELETE'])
 def Logout(request):
+    cookies = request.COOKIES
+    if "access" not in cookies:
+        return LogoutInvalidResponse('Access Cookie Missing', 400)
     
+    jwt_info = jwt.decode(cookies["access"], options={"verify_signature":False})
+    if('alg' not in jwt_info):
+        return LogoutInvalidResponse('Invalid Access Key', 400)
+    jwtval = ValidateJWT(cookies["access"], "access", jwt_info)
+    
+    if(jwtval[2] == 498):
+        if('iss' not in jwt_info):
+            return LogoutInvalidResponse('Invalid Access Key', 400)
+        if "refresh" not in cookies:
+            if(cache.get('uc_' + jwt_info['iss']) == None):
+                return LogoutInvalidResponse('Cookie Expired', 498)
+            else:
+                return LogoutInvalidResponse('Something went wrong with the server', 500)
+        else:
+            refreshcookie = cache.get('uc_' + jwt_info['iss'])
+            if(refreshcookie != cookies["refresh"]):
+                return LogoutInvalidResponse('Invalid Refresh Key', 400)
+            elif(refreshcookie == None):
+                return LogoutInvalidResponse('Cookie Expired', 498)
+
+    elif(jwtval[2] != 200):
+        return LogoutInvalidResponse(jwtval[1], jwtval[2])
+
+    response = HttpResponse(json.dumps('Logged Out Successfully'), status = 200)
+    response.delete_cookie("access")
+    response.delete_cookie("refresh")
+    response.delete_cookie("userinfo")
+    cache.delete('uc_' + jwt_info['iss'])
+    return response
+
+def LogoutInvalidResponse(response, status):
+    response = HttpResponse(json.dumps(response), status = status)
+    response.delete_cookie('userinfo')
+    return response

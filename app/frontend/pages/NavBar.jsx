@@ -26,41 +26,11 @@ export function NavBar({updatenavbarstate}){
             navigate('/')
             window.location.reload()
         }
+        else{
+            navigate('/login', {state: 'expired'})
+        }
     }
 
-    /*useEffect(() => {
-        let cookie_var = document.cookie
-
-        if(cookie_var.includes('user_name=') === true){
-                let cookie_val = null
-                cookie_var = cookie_var.split(';')
-                for(let i=0;i<cookie_var.length;i++){
-                    if(cookie_var[i][0] === ' '){
-                        cookie_var[i] = cookie_var[i].slice(1)
-                    }
-
-                    if(cookie_var[i].slice(0,10) === 'user_name='){
-                        cookie_val = cookie_var[i].slice(10)
-                        break
-                    }
-                    else{
-                        continue
-                    }
-                }
-
-                if(cookie_val === 'None'){
-                    namesetState('Info')
-                }
-                else{
-                    namesetState('Hello, ' + cookie_val)
-                }
-
-                loginRef.current.classList.add('display_none')
-                navloggedRef.current.classList.remove('display_none')
-                navloggedRef.current.classList.add('flex')
-                GetUserImg()
-            }    
-    },[])*/
 
     function GetImg(){
         let cookievar = document.cookie.split('; ')

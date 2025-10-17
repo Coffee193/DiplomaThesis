@@ -2,7 +2,7 @@ import '../styling/LoginRegister.css'
 import { useState, useRef } from 'react'
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { UsernamePhoneInput } from './UsernamePhoneInput'
-import { ArrowDownIcon, BlocksLoad } from '../components/svgs/UtilIcons'
+import { ArrowDownIcon, BlocksLoad, XCloseIcon } from '../components/svgs/UtilIcons'
 import { PasswordInput } from './PasswordInput'
 import { ReferalInput } from './ReferalInput'
 import { TermsPoliciesCheckbox } from './TermsPoliciesCheckbox'
@@ -25,6 +25,7 @@ export function LoginRegister({ lrtype }){
     const [submitbuttonState, submitbuttonsetState] = useState(lrtype === 'l' ? ('Log In') : ('Sign Up'))
     const nextbuttonRef = useRef()
     const submitbuttonRef = useRef()
+    const expiredRef = useRef()
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -112,7 +113,7 @@ export function LoginRegister({ lrtype }){
             warningsubmitsetState(response)
         }
         else if(response_status === 200){
-            location.state === null ? (navigate('/')) : navigate(location.state)
+            location.state !== null && location.state !== 'expired' ? (navigate(location.state)) : (navigate('/'))
         }
     }
 
@@ -141,7 +142,7 @@ export function LoginRegister({ lrtype }){
             warningsubmitsetState(response)
         }
         else if(response_status === 200){
-            location.state === null ? (navigate('/')) : navigate(location.state)
+            location.state !== null && location.state !== 'expired' ? (navigate(location.state)) : (navigate('/'))
         }
     }
 
@@ -190,6 +191,10 @@ export function LoginRegister({ lrtype }){
         <div className='lr_holderall'>
 
             <div className='lr_body'>
+                {location.state === 'expired' ? (
+                <div className='lr_expired' ref={expiredRef} onClick={() => expiredRef.current.style.display = 'none'}>
+                    <span>Session Expired</span><div><XCloseIcon/></div>
+                </div>) : (<></>)}
                 <div className='lr_mainbox'>
                     <Link to='/' tabIndex="-1"><div className='lr_LogoHome'><img src='../components/images/MainLogo.png'/></div></Link>
                     <div className='lr_infoholder' ref={lrinfoholderRef}>

@@ -111,7 +111,9 @@ kwEQ3j7Xtac5RyLW1DBWzpowINW3HE75CwusX3LaZbMLlasgmGFf8hrEJ0kkb7vc
 jwt_algos = ['HS256', 'HS384', 'HS512', 'ES256', 'ES256K', 'ES384', 'ES512', 'RS256', 'RS384', 'RS512',
                          'PS256', 'PS384', 'PS512'] #EdDSA not supported as i cannot get it to work or some reason
 
-encrypt_algos = ['PS256', 'HS256', 'RS256', 'ES256']
+encrypt_algos = ['PS256', 'HS256', 'RS256']
+
+# Cant Get ES256 to Work. Probelm is in validation. It gets validated Both by public AND private key
 
 
 secret_rsa_private_key_refresh = """
@@ -569,7 +571,7 @@ def VerifyAuthRequest(request, message401 = 'No JWT Provided', message403 = 'Not
     else:
         return jwt_r
 
-def CreateJWT(userid, rememberme = False):
+def CreateJWTKeyPair(userid, rememberme = False):
     '''
     # Variables
     @param: userid (int)
@@ -593,43 +595,29 @@ def CreateJWT(userid, rememberme = False):
     if(type(userid) != int):
         return {"access": None, "refresh": None}
     iat = int(datetime.datetime.now(datetime.timezone.utc).timestamp())
-    iss = str(userid)
-    nonce_access = ''.join(secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(10))
-    nonce_refresh = ''.join(secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(10))
-    algo = secrets.choice(encrypt_algos)
 
-    access_key = None
-    refresh_key = None
-
-    if(algo == 'RS256'):
-        access_key = private_rsa_access
-        refresh_key = private_rsa_refresh
-    elif(algo == 'PS256'):
-        access_key = private_ps_access
-        refresh_key = private_ps_refresh
-    elif(algo == 'HS256'):
-        access_key = hs_access
-        refresh_key = hs_refresh
-    elif(algo == 'ES256'):
-        access_key = private_es_access
-        refresh_key = private_es_refresh
-    else:
-        return {"access": None, "refresh": None, "time": None}
     if(rememberme == False):
-        access_val = jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_access, "alg": algo}, access_key, algo)
-        cache.set('uc_' + iss, access_val, iat + int(os.environ.get('JWT_ACCESS_TIME')))
-        return {"access": access_val, "refresh": None, "time": iat}
+        access_val = CreateJWTKey(userid, iat, "access", "private")
+        if(access_val[0] == False):
+            return {"access": None, "refresh": None, "time": None}
+        print(access_val)
+        print(access_val[1])
+        print('yyy')
+        cache.set('uc_' + str(userid), access_val[1], int(os.environ.get('JWT_ACCESS_TIME')))
+        return {"access": access_val[1], "refresh": None, "time": iat}
     elif(rememberme == True):
         # uc = user cookie
-        refresh_val = jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_refresh, "alg": algo}, refresh_key, algo)
-        cache.set('uc_' + iss, refresh_val, iat + int(os.environ.get('JWT_REFRESH_TIME')))
-        return {"access": jwt.encode({"iat": str(iat), "iss": iss, "nonce": nonce_access, "alg": algo}, access_key, algo),
-                "refresh": refresh_val, "time": iat}
+        refresh_val = CreateJWTKey(userid, iat, "refresh", "private")
+        access_val = CreateJWTKey(userid, iat, "access", "private")
+        if(access_val[0] == False or refresh_val[0] == False):
+            return {"access": None, "refresh": None, "time": None}
+        cache.set('uc_' + str(userid), refresh_val[1], int(os.environ.get('JWT_REFRESH_TIME')))
+        return {"access": access_val[1], "refresh": refresh_val[1], "time": iat}
     else:
         return {"access": None, "refresh": None, "time": None}
     
 def CreateResponseWithCookies(userid, jwtfail_msg = 'Something went wrong with the server', jwtfail_status = 500, response_msg = '', response_status = 200, username_cookie = 'None', rememberme = False):
-    jwt_keys = CreateJWT(userid, rememberme = rememberme)
+    jwt_keys = CreateJWTKeyPair(userid, rememberme = rememberme)
     if(jwt_keys["access"] == None and jwt_keys["refresh"] == None):
         return HttpResponse(json.dumps(jwtfail_msg), status = jwtfail_status)
     response = HttpResponse(json.dumps(response_msg), status = response_status)
@@ -637,13 +625,124 @@ def CreateResponseWithCookies(userid, jwtfail_msg = 'Something went wrong with t
     if(jwt_keys["refresh"] != None):
         cookieexp = jwt_keys["time"]
         response.set_cookie("refresh", jwt_keys["refresh"], httponly = True, secure = False, max_age = int(os.environ.get('JWT_REFRESH_TIME')), samesite = "Lax")
-    response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = int(os.environ.get('JWT_ACCESS_TIME')) if cookieexp != None else None, samesite = "Lax")
+    #response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = int(os.environ.get('JWT_REFRESH_TIME')) if cookieexp != None else None, samesite = "Lax")
+    response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = None, samesite = "Lax")
     response.set_cookie("userinfo", username_cookie + "$" + str(userid), httponly = False, secure = True, max_age = int(os.environ.get('JWT_REFRESH_TIME')) if cookieexp != None else None, samesite = "Lax")
     return response
 
-def ValidateJWT(request):
+def ValidateJWT(jwt_value, jwt_type, jwt_info = None):
+    if(jwt_type != "access" and jwt_type != "refresh"):
+        return [False, 'jwt_type value must be "access" or "refresh"']
+    if(jwt_info == None):
+        jwt_info = jwt.decode(jwt_value, options={"verify_signature":False})
+        if('alg' not in jwt_info):
+            return [False, 'Invalid JWT', 400]
+    jwt_key = GetJWTKey(jwt_info['alg'], jwt_type, "public")
+    if(jwt_key == None):
+        return [False, 'Invalid Encryption Algo', 400]
+    
+    try:
+        jwtkey = jwt.decode(jwt_value, jwt_key, jwt_info['alg'])
+    except:
+        return [False, 'Somwthing went wrong with the Server: Invalid Private Key', 400]
+    
+    time_val = 'JWT_ACCESS_TIME' if jwt_type == "access" else 'JWT_REFRESH_TIME'
+    if(int(jwtkey['iat']) + int(os.environ.get(time_val)) < datetime.datetime.now(datetime.timezone.utc).timestamp()):
+        return [False, 'Access Key Expired', 498]
+    
+    return [True, '', 200]
+
+def GetJWTKey(jwtalgo, jwttype = "access", jwtcontent = "public"):
+    if((jwttype != "access" and jwttype != "refresh") or (jwtcontent != "public" and jwtcontent != "private")):
+        return None
+    jwtkey = None
+    if(jwtalgo == 'PS256'):
+        if(jwttype == "access"):
+            if(jwtcontent == "public"):
+                jwtkey = public_ps_access
+            else:
+                jwtkey = private_ps_access
+        else:
+            if(jwtcontent == "public"):
+                jwtkey = public_ps_refresh
+            else:
+                jwtkey = private_ps_refresh
+    elif(jwtalgo == 'HS256'):
+        if(jwttype == "access"):
+            jwtkey = hs_access
+        else:
+            jwtkey = hs_refresh
+    elif(jwtalgo == 'RS256'):
+        if(jwttype == "access"):
+            if(jwtcontent == "public"):
+                jwtkey = public_rsa_access
+            else:
+                jwtkey = private_rsa_access
+        else:
+            if(jwtcontent == "public"):
+                jwtkey = public_rsa_refresh
+            else:
+                jwtkey = private_rsa_refresh
+    else:
+        return None
+    return jwtkey
+
+def CreateNewAccess(access, refresh, access_info = None):
+    if(access_info == None):
+        access_info = jwt.decode(access, options={"verify_signature":False})
+    if('iss' not in access_info):
+        return [False, 'Invalid Access Key', 400]
+    if(refresh == None):
+        if(cache.get('uc_' + access_info['iss']) != access):
+            return [False, 'Invalid Access Key', 400]
+        new_access = CreateJWTKey(int(access_info['iss']), keytype = "access", keycontent = "private")
+        cache.set('uc_' + access_info['iss'], new_access[1], int(os.environ.get('JWT_ACCESS_TIME')))
+        return [True, new_access, 200]
+    else:
+        jwt_valid = ValidateJWT(refresh, "refresh")
+        if(jwt_valid[0] == False):
+            return [False, 'Refresh Key Expired or Invalid', 400]
+        if(cache.get('uc_' + access_info['iss']) != refresh):
+            return [False, 'Invalid Refresh Key', 400]
+        new_access = CreateJWTKey(int(access_info['iss']), keytype = "access", keycontent = "private")
+        return [True, new_access, 200]
+
+def CreateJWTKey(userid, timestamp = None, keytype = "access", keycontent = "public"):
+    if(type(userid) != int):
+        return [False, 'userid must be an int']
+    if(timestamp != None and type(timestamp) != int):
+        return [False, 'timestamp must be an int or None']
+    if(keytype != "access" and keytype != "refresh"):
+        return [False, 'keytype value must be either "access" or "refresh"']
+    if(keycontent != "public" and keycontent != "private"):
+        return [False, 'keycontent value must be either "public" or "private"']
+    if(timestamp == None):
+        timestamp = int(datetime.datetime.now(datetime.timezone.utc).timestamp())
+    nonce = ''.join(secrets.choice(string.ascii_letters + string.digits + string.punctuation) for _ in range(10))
+    algo = secrets.choice(encrypt_algos)
+    key = GetJWTKey(algo, keytype, keycontent)
+
+    jwtkey = jwt.encode({"iat": str(timestamp), "iss": str(userid), "nonce": nonce, "alg": algo}, key, algo)
+    return [True, jwtkey]
+
+def ValidateAndCreateJWT(request, newifexpired = True):
     cookies = request.COOKIES
-    if("access" not in cookies or "refresh" not in cookies):
-        return [False, 'Access, Refresh cookies are missing', 400]
+    if("access" not in cookies):
+        return [False, "Access Key Not Sent", 400]
+    access_info = jwt.decode(cookies["access"], options={"verify_signature":False})
+    if('alg' not in access_info):
+        return [False, 'Invalid JWT', 400]
     
+    valid_jwt = ValidateJWT(cookies["access"], "access", access_info)
     
+    if( (valid_jwt[2] == 498 and newifexpired == True) or ("refresh" not in cookies)):
+        return CreateNewAccess(cookies["access"], None if "refresh" not in cookies else cookies["refresh"], access_info)
+    elif(valid_jwt[2] == 200):
+        return [True, None, valid_jwt[2]]
+    else:
+        return [False, valid_jwt[1], valid_jwt[2]]
+    
+def CreateResponseNewAccess(newaccess, response_msg = '', response_status = 200):
+    response = HttpResponse(json.dumps(response_msg), status = response_status)
+    response.set_cookie("access", newaccess, httponly = True, secure = True, max_age = None, samesite = "Lax")
+    return response

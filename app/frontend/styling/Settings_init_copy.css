@@ -1,0 +1,568 @@
+.settings_allholder{
+    position: relative;
+    width: 100vw;
+    height: 100%;
+}
+
+.settings_mainholder{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
+    padding: 25px 0px;
+}
+
+.settingsbox{
+    position: relative;
+    width: 550px;
+    /*height: 800px;*/
+    box-shadow: 0px 8px 20px 0px rgba(43, 50, 64, 0.12);
+    border-radius: 25px;
+    padding: 25px 20px;
+}
+
+.settingscontent_img{
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.settings_imgholder{
+    position: relative;
+    width: 100%;
+    height: var(--settings-imgheight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.settings_greetings{
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 300;
+    cursor: pointer;
+}
+.settings_greetings:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.settingsicon{
+    cursor: pointer;
+    border-radius: 50%;
+    border: solid #000 5px;
+    position: relative;
+    transition: 0.1s ease-out;
+    height: var(--settings-imgheight);
+    width: var(--settings-imgheight);
+}
+.settingsicon:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    border: solid var(--color-text-main-hover-blue-experimental-lighter-evenmore) 5px;
+}
+
+.settingscontent{
+    width: 100%;
+    position: relative;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.settingscontent_info{
+    width: 100%;
+    padding: 7px 15px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    /*background-color: var(--color-text-gray-root-light);*/
+    background-color: var(--chat-color-gray-light);
+    border-radius: 25px;
+    align-items: center;
+    font-size: 19px;
+}
+.settingscontent_info:hover{
+    /*background-color: var(--chat-color-gray);*/
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+}
+.settingscontent_info:hover .settingscontent_infochange{
+    opacity: 1;
+}
+.settingscontent_info:hover *{
+    color: #fff;
+}
+
+.settingscontent_infomain{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.settingscontent_infoheader{
+    font-weight: 300;
+    color: var(--chat-color-gray-strong-more);
+}
+.settingscontent_infoval{
+    font-weight: 200;
+}
+.settingscontent_infomain{
+    color: var(--chat-color-gray-strong-more);
+}
+
+.settingscontent_infochange{
+    opacity:  0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vallight{
+    color: var(--chat-color-gray);
+}
+
+.settings_line{
+    width: 100%;
+    height: 2px;
+    background-color: var(--chat-color-gray-light);
+    margin: 25px 0;
+}
+
+.settingscontent_infomajor{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    /*background-color: var(--chat-color-gray-light);*/
+    padding: 9px 15px;
+    border-radius: 25px;
+    font-size: 19px;
+    font-weight: 300;
+    color: var(--chat-color-gray-strong-more);
+}
+.settingscontent_infomajor:hover{
+    background-color: var(--chatnav-color-delete-light);
+    color: #fff;
+}
+.settingsmajor_blue:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.settingscontent_referal{
+    width: 100%;
+    position: relative;
+    padding: 9px 15px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 200;
+    cursor: pointer;
+    margin-top: 50px;
+    border-radius: 25px;
+}
+.settingscontent_referal:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    color: #fff;
+}
+
+
+.settingsdarken{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1;
+}
+
+.settingschangeval{
+    position: fixed;
+    width: var(--settings-popup-w);
+    min-height: var(--settings-popup-h);
+    background-color: #fff;
+    right: calc((100vw - var(--settings-popup-w)) /2);
+    top: calc((0px + var(--nav-height) + var(--settings-popup-h)) /2);
+    z-index: 3;
+    border-radius: 25px;
+    transition: 0.1s ease-out;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.8);
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    justify-content: space-between;
+}
+
+.settingschange_header{
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.settingschange_headerclose{
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.settingschange_valbox{
+    display: flex;
+    position: relative;
+    width: 100%;
+    border: 2px solid var(--chat-color-gray-light);
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 15px;
+    border-radius: 25px;
+    height: 42px;
+}
+.settingschange_valinput{
+    display: block;
+    background-color: transparent;
+    width: 90%;
+}
+.settingschange_valbox_extra{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+}
+.settingschange_valbox_extra:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.settingschange_focus{
+    border: 2px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.settingschange_valbox_extra_visible{
+    opacity: 1;
+    pointer-events: all;
+}
+
+.settingschange_valbox_extra_passwordremove{
+    display: none;
+    pointer-events: none;
+}
+.settingschange_valbox_extra_passwordadd{
+    display: flex;
+    opacity: 1;
+    pointer-events: all;
+    margin-left: 5px;
+}
+
+.settingschange_valbox_remove{
+    display: none;
+    pointer-events: none;
+}
+.settingschange_valbox_add{
+    display: flex;
+    pointer-events: all;
+}
+
+.settingschange_val{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.settingschange_submit{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settingschange_button{
+    font-size: 19px;
+    padding: 7px 15px;
+    border-radius: 25px;
+    color: #fff;
+}
+.settingschange_inactive:hover{
+    cursor: not-allowed;
+}
+.settingschange_active:hover{
+    cursor: pointer;
+}
+
+.settingschange_warning{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--chatnav-color-delete-light);
+}
+
+.settingschange_img{
+    position: relative;
+    width: 100%;
+    display: none;
+    height: 200px;
+    pointer-events: none;
+}
+.settingschange_img_active{
+    display: flex;
+    pointer-events: all;
+}
+.settingschange_img_inactive{
+    display: none;
+    pointer-events: none;
+}
+
+.settingschange_img_imgholder{
+    position: relative;
+    height: 100%;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.settingschange_img_val{
+    position: relative;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.settingschange_img_pic{
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 200px;
+    width: 200px;
+}
+
+.settingschange_img_val_box{
+    color: #fff;
+    padding: 9px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 200;
+    text-align: center;
+}
+.settingschange_blue:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter);
+}
+.settingschange_red:hover{
+    background-color: var(--chatnav-color-delete-strong);
+}
+.settingschange_blue{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+.settingschange_red{
+    background-color: var(--chatnav-color-delete-light);
+}
+
+.settingschange_img_inpimg{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.settingschange_img_darkenall{
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.settingschange_img_confirm{
+    position: fixed;
+    width: var(--settings-img-popup-w);
+    height: var(--settings-img-popup-h);
+    background-color: #fff;
+    z-index: 7;
+    border-radius: 25px;
+    right: calc((100vw - var(--settings-img-popup-w))/2);
+    top: calc((0px + var(--nav-height) + var(--settings-img-popup-h))/2);
+    display: none;
+    padding: 25px 15px;
+}
+
+.settingschange_img_confirmbox{
+    width: 100%;
+    height: 225px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.settingschange_img_confirmcircle{
+    position: absolute;
+    width: var(--settings-img-circle);
+    height: var(--settings-img-circle);
+    border: 3px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    right: calc(50% - var(--settings-img-circle)/2);
+    top: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.settingschange_img_screenshot{
+    position:relative;
+    width: var(--settings-img-circle);
+    height: var(--settings-img-circle);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.settingschange_img_confirmbuttons{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 50px;
+    color: var(--chat-color-gray-strong);
+}
+
+.settingschange_img_confirmbuttonval{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
+}
+.settingschange_img_confirmcancel:hover{
+    color: #fff;
+    background-color: var(--chatnav-color-delete-light);
+}
+.settingschange_img_confirmaccept:hover{
+    color: #fff;
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.settingschange_img_preview{
+    cursor: move;
+    position: absolute;
+}
+.settingschange_img_blackbg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--chat-color-gray);
+    z-index: -1;
+}
+
+.settingsheader_red{
+    color: var(--chatnav-color-delete-light);
+}
+.settingsclose_red:hover{
+    color: var(--chatnav-color-delete-light);
+}
+.settingsclose_blue:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.settingsnotification{
+    position: fixed;
+    bottom: -35px;
+    transition: 0.1s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: var(--default-box-shadow);
+    border-radius: 20px;
+    padding: 7px 20px;
+    background-color: #fff;
+}
+.settingsnotification>div{
+    font-weight: 200;
+}
+
+.settingsnotification_tick{
+    color: var(--color-walmart-green);
+    width: 24px;
+    height: 24px;
+}
+
+.settingsnotification_x{
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    color: var(--chat-color-gray);
+}
+.settingsnotification_x:hover{
+    color: var(--chat-color-gray-strong);
+}
+
+.settingsnotification_close{
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+}
+
+.settingschange_img_upload{
+    pointer-events: none;
+    object-fit: contain;
+    height: 200px;
+}
+
+.settings_deleteaccountadmin{
+    position: fixed;
+    width: var(--settings-popup-w);
+    min-height: var(--settings-popup-h);
+    background-color: #fff;
+    right: calc((100vw - var(--settings-popup-w)) /2);
+    top: calc((0px + var(--nav-height) + var(--settings-popup-h)) /2);
+    z-index: 3;
+    border-radius: 25px;
+    transition: 0.1s ease-out;
+    transform: scale(0.8);
+    padding: 25px;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;
+    justify-content: center;*/
+}
+.settings_deleteaccountadmin div{
+    font-weight: 300;
+    font-size: 17px;
+}
+
+.settings_deleteaccountadminclose{
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.settings_deleteaccountadminclose:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.settings_deleteaccountadmin_info{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}

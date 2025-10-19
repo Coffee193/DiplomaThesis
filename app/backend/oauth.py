@@ -11,6 +11,7 @@ import json
 from django.core.cache import cache
 import string
 import os
+from backend.redis_connection import redis_client
 
 secret_jwt_key = "DpfBxh575Q"
 secret_jwt_key_refresh = "Q71sIzsD0X"
@@ -584,13 +585,16 @@ def CreateJWTKeyPair(userid, rememberme = False):
                 the function VerifyJWT, if the key has not expired those 10 minutes will refresh. That way the user will stay
                 logged in either until he closes the session OR 10 minutes of iactivity pass
     # Description
-    Creates a JWT for the user
+    Creates a JWT for the user. Also saves the approprite values in Redis database. If rememberme=True, it will set a keyvalue
+    pair with key: ('ut_' + userid) AND value: (the value of the refresh key). The expiration of that keyvalue pair is defined
+    by the enviroment variable: JWT_ACCESS_TIME. If rememberme=False, it will set a keyvalue pair with key: ('ut_' + userid) AND
+    value: 
     # Returns
     A dict with keys "access", "refresh", "time. {"access" someval, "refresh": someval, "time": someval}
     If access=None & refresh=None, means something went wrong
     If type(access)=str & refresh=None, means user selected rememberme=False
     If type(access)=str & type(refresh)=str, means user selected rememberme=True
-    If rememberme=True, type(time)=int and holds the expiration date of refresh in seconds. In any other case time=None
+    If rememberme=True, type(time)=int and holds the creation date of refresh in seconds. In any other case time=None
     '''
     if(type(userid) != int):
         return {"access": None, "refresh": None}
@@ -600,35 +604,93 @@ def CreateJWTKeyPair(userid, rememberme = False):
         access_val = CreateJWTKey(userid, iat, "access", "private")
         if(access_val[0] == False):
             return {"access": None, "refresh": None, "time": None}
-        print(access_val)
-        print(access_val[1])
-        print('yyy')
-        cache.set('uc_' + str(userid), access_val[1], int(os.environ.get('JWT_ACCESS_TIME')))
+        redis_client.lpush('ut_' + str(userid), access_val[1])
+        redis_client.expire('ut_' + str(userid), int(os.environ.get('JWT_ACCESS_TIME')))
         return {"access": access_val[1], "refresh": None, "time": iat}
     elif(rememberme == True):
-        # uc = user cookie
         refresh_val = CreateJWTKey(userid, iat, "refresh", "private")
         access_val = CreateJWTKey(userid, iat, "access", "private")
         if(access_val[0] == False or refresh_val[0] == False):
             return {"access": None, "refresh": None, "time": None}
-        cache.set('uc_' + str(userid), refresh_val[1], int(os.environ.get('JWT_REFRESH_TIME')))
+        redis_client.set('ur_' + str(userid), refresh_val[1], ex = int(os.environ.get('JWT_REFRESH_TIME')))
         return {"access": access_val[1], "refresh": refresh_val[1], "time": iat}
     else:
         return {"access": None, "refresh": None, "time": None}
     
 def CreateResponseWithCookies(userid, jwtfail_msg = 'Something went wrong with the server', jwtfail_status = 500, response_msg = '', response_status = 200, username_cookie = 'None', rememberme = False):
-    jwt_keys = CreateJWTKeyPair(userid, rememberme = rememberme)
-    if(jwt_keys["access"] == None and jwt_keys["refresh"] == None):
+    '''
+    # Variables
+    @param: userid (int)
+                The userid, for who a JWT will be created
+            jwtfail_msg (str)
+                The string of the Response, if the Server couldnt create the JWT keys. That essentially means that
+                the function CreateJWTKeyPair returned a dict with "access": None
+            jwtfail_status (int)
+                The status code of thr Response, if the Server couldnt crete the JWT keys.
+            response_msg (str)
+                The string of the Response, if everything is successfull
+            response_status (int)
+                The status code of the Response, if everything is successfull
+            user_cookie (str)
+                The username of the user. Essentially this affects the value of a returned cookie with key: 'userinfo'.
+                That cookie hasa a value of the form: (username) + '$' + (userid). This cookie is accessed by the
+                javascript frontend code, to recognise if someone is logged in or not
+            rememberme (bool)
+                If True: both refresh& access key will have a value. The refresh key will have an expiration of 60 days and
+                access key of 15 minutes. The refresh will be stored in Redis with key: ur_{userid}
+                If False: refresh = None & access will have a value. The access key will be a session cookie. Also in Redis we
+                will store the access key with key name: ut_{userid}. In Redis it will have an expiration of 10 minutes. In
+                the function VerifyJWT, if the key has not expired those 10 minutes will refresh. That way the user will stay
+                logged in either until he closes the session OR 10 minutes of iactivity pass.
+                ut_ -> usertemporary
+                ur_ -> useremember
+                NOTE: if rememberme=True, the stored cookie will be of the form: ur_+(userid): (refresh key value) -> expiration 60 days
+                if rememberme=False, the stored cookie will be of the form: ut_+(userid): [(access key 1 value), (access key 2 value), ...] -> expiration 10 minutes
+
+                That way if one device loggs in with rememberme=True, it will create the ur_(userid) key in Redis, pass the refresh value and set
+                the expiration of the key. If another device loggs in with rememberme=True, it will get that same key from Redis 
+                AND will NOT set a different key. That way all devices with rememberme=True share the shame refresh key.
+                If a device loggs in with rememberme=False, it will create the ut_(userid) key in Redis (which is a list) and
+                set its expiration and push its access key value. If another devices loggs in with rememberme=False, it will find
+                the ut_(userid) key, and push its access key value in that list and reset the list's expiration. That way each
+                device with rememberme=False is independent from one another
+    # Description
+    Creates an HttpRespone, with the appropriate cookies. If rememberme=False, the HttpResponse will have a userinfo AND access
+    cookie. If rememberme=True, the HttpResponse will have a userinfo AND access AND refresh cookie
+    value: 
+    # Returns
+    A HttpResponse
+    '''
+    jwt_keys = None
+    if(rememberme == True):
+        jwt_keys = GetRefreshCookie(userid)
+    if(jwt_keys == None or jwt_keys["access"] == None):
+        jwt_keys = CreateJWTKeyPair(userid, rememberme = rememberme)
+    if(jwt_keys["access"] == None):
         return HttpResponse(json.dumps(jwtfail_msg), status = jwtfail_status)
     response = HttpResponse(json.dumps(response_msg), status = response_status)
     cookieexp = None
     if(jwt_keys["refresh"] != None):
         cookieexp = jwt_keys["time"]
         response.set_cookie("refresh", jwt_keys["refresh"], httponly = True, secure = False, max_age = int(os.environ.get('JWT_REFRESH_TIME')), samesite = "Lax")
-    #response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = int(os.environ.get('JWT_REFRESH_TIME')) if cookieexp != None else None, samesite = "Lax")
-    response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = None, samesite = "Lax")
+    response.set_cookie("access", jwt_keys["access"], httponly = True, secure = True, max_age = int(os.environ.get('JWT_REFRESH_TIME')) if cookieexp != None else None, samesite = "Lax")
     response.set_cookie("userinfo", username_cookie + "$" + str(userid), httponly = False, secure = True, max_age = int(os.environ.get('JWT_REFRESH_TIME')) if cookieexp != None else None, samesite = "Lax")
     return response
+
+def GetRefreshCookie(userid):
+    if(type(userid) != int):
+        return [False, 'userid must be of type int']
+    refresh = redis_client.get('ur_' + str(userid))
+    if(refresh == None):
+        return {"access": None, "refresh": None, "time": None}
+    else:
+        iat = int(jwt.decode(refresh, options={"verify_signature":False})['iat'])
+        access = CreateJWTKey(userid, iat, "access", "private")
+        if(access[0] == False):
+            return {"access": None, "refresh": None, "time": None}
+        else:
+            return {"access": access[1], "refresh": refresh, "time": iat}
+        
 
 def ValidateJWT(jwt_value, jwt_type, jwt_info = None):
     if(jwt_type != "access" and jwt_type != "refresh"):
@@ -647,7 +709,8 @@ def ValidateJWT(jwt_value, jwt_type, jwt_info = None):
         return [False, 'Somwthing went wrong with the Server: Invalid Private Key', 400]
     
     time_val = 'JWT_ACCESS_TIME' if jwt_type == "access" else 'JWT_REFRESH_TIME'
-    if(int(jwtkey['iat']) + int(os.environ.get(time_val)) < datetime.datetime.now(datetime.timezone.utc).timestamp()):
+    
+    if(int(jwtkey['iat']) + int(os.environ.get(time_val)) < int(datetime.datetime.now(datetime.timezone.utc).timestamp())):
         return [False, 'Access Key Expired', 498]
     
     return [True, '', 200]

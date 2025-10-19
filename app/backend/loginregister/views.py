@@ -21,6 +21,7 @@ import io
 import re
 from referal.models import Referal
 import jwt
+from backend.redis_connection import redis_client
 
 pepper_key = str.encode(os.environ.get('pepper_key'))
 path_to_img = str.encode(os.environ.get('path_to_img'))
@@ -730,39 +731,43 @@ def FindReferal(referal_value):
 def Logout(request):
     cookies = request.COOKIES
     if "access" not in cookies:
-        return LogoutInvalidResponse('Access Cookie Missing', 400)
+        return LogoutResponse('Access Cookie Missing', 400)
     
     jwt_info = jwt.decode(cookies["access"], options={"verify_signature":False})
     if('alg' not in jwt_info):
-        return LogoutInvalidResponse('Invalid Access Key', 400)
+        return LogoutResponse('Invalid Access Key', 400)
     jwtval = ValidateJWT(cookies["access"], "access", jwt_info)
-    
-    if(jwtval[2] == 498):
+    if(jwtval[2] == 200 or ("refresh" in cookies and jwtval[2] == 498)):
         if('iss' not in jwt_info):
-            return LogoutInvalidResponse('Invalid Access Key', 400)
+            return LogoutResponse('Invalid Access Key', 400)
         if "refresh" not in cookies:
-            if(cache.get('uc_' + jwt_info['iss']) == None):
-                return LogoutInvalidResponse('Cookie Expired', 498)
+            access_list = redis_client.lrange('ut_' + jwt_info['iss'], 0, -1)
+            if(access_list == []):
+                return LogoutResponse('Cookie Expired', 498)
             else:
-                return LogoutInvalidResponse('Something went wrong with the server', 500)
+                if(cookies["access"] not in access_list):
+                    return LogoutResponse('Something went wrong with the server', 500)
+                elif('iat' not in jwt_info):
+                    return LogoutResponse('Invalid Access Key', 400)
+                elif( int(jwt_info['iat']) + int(os.environ.get('JWT_ACCESS_TIME')) < int(datetime.datetime.now(datetime.timezone.utc).timestamp()) ):
+                    return LogoutResponse('Cookie Expired', 498)
         else:
-            refreshcookie = cache.get('uc_' + jwt_info['iss'])
+            refreshcookie = redis_client.get('ur_' + jwt_info['iss'])
             if(refreshcookie != cookies["refresh"]):
-                return LogoutInvalidResponse('Invalid Refresh Key', 400)
+                return LogoutResponse('Invalid Refresh Key', 400)
             elif(refreshcookie == None):
-                return LogoutInvalidResponse('Cookie Expired', 498)
+                return LogoutResponse('Cookie Expired', 498)
 
     elif(jwtval[2] != 200):
-        return LogoutInvalidResponse(jwtval[1], jwtval[2])
+        return LogoutResponse(jwtval[1], jwtval[2])
 
-    response = HttpResponse(json.dumps('Logged Out Successfully'), status = 200)
-    response.delete_cookie("access")
-    response.delete_cookie("refresh")
-    response.delete_cookie("userinfo")
-    cache.delete('uc_' + jwt_info['iss'])
-    return response
+    redis_client.delete('ur_' + jwt_info['iss'], 'ut_' + jwt_info['iss'])
+    
+    return LogoutResponse('Logged Out Successfully', 200)
 
-def LogoutInvalidResponse(response, status):
+def LogoutResponse(response, status):
     response = HttpResponse(json.dumps(response), status = status)
     response.delete_cookie('userinfo')
+    response.delete_cookie("access")
+    response.delete_cookie("refresh")
     return response

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from django.http import HttpResponseBadRequest, HttpResponse
 from oauth import VerifyAuthRequest, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, VerifyJWT
-from backend.mongo_db_connection import mongo_db, mongo_clinet
+from backend.mongo_db_connection import mongo_db
 import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime

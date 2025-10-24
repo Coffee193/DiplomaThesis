@@ -678,8 +678,22 @@ def CreateResponseWithCookies(userid, jwtfail_msg = 'Something went wrong with t
     return response
 
 def GetRefreshCookie(userid):
+    '''
+    # Variables
+    @param: userid (int)
+                The userid, for who the JWT refresh key will be retrieved
+    # Description
+    Gets the JWT refresh key of the user stored in Redis. Specifically it will try and search for the key with name:
+    ur_+(userid).
+    # Returns
+    A dict with keys: "access", "refresh", "time".
+    If the JWT key in Redis does not exist, then it will return: {"access": None, "refresh": None, "time": None}
+    If the JWT key exists, then it will create an access key and return:
+    {"access": (value of created access key), "refresh": (value of refresh key that was found in Redis), "time": (the creation time of the refresh key)}
+    If an invalid userid is passed it will return: None
+    '''
     if(type(userid) != int):
-        return [False, 'userid must be of type int']
+        return None
     refresh = redis_client.get('ur_' + str(userid))
     if(refresh == None):
         return {"access": None, "refresh": None, "time": None}
@@ -693,8 +707,31 @@ def GetRefreshCookie(userid):
         
 
 def ValidateJWT(jwt_value, jwt_type, jwt_info = None):
+    '''
+    # Variables
+    @param: jwt_value (str)
+                the value of the JWT key (access OR refresh) that will be validated
+            jwt_type (str)
+                this value must either be "access" OR "refresh". If the key you are validating is an access key, pass
+                "access". If the key you are validating is a refresh key, pass "refresh"
+            jwt_info (None OR dict)
+                If None, it will run the jwt_value through the function: jwt.decode(jwt_value, options={"verify_signature":False})
+                This will essentially return a dict with the headers of the key. For keys it will have the names of the key
+                headers AND for values it will have the corresponding values. You also may pass that dict yourself in jwt_info
+                (If you have already gotten it before at some point in a parent function, you can pass it here and skip
+                uneccessary computations).
+    # Description
+    Validates the key passed
+    # Returns
+    A list with len=3.
+    The first value is a (bool): False -> if the key is invalid, True -> if the key is valid
+    The second value is a (str): If key is valid it will be an empty string: ''.
+        If the key is invalid, it will have the appropriate string explaining why the key is invalid
+    The third value is an (int): A status code to be used in an HttpResponse. For example: If the key is valid then this value
+        will be 200. For example: If the key has expired then this value will be 498
+    '''
     if(jwt_type != "access" and jwt_type != "refresh"):
-        return [False, 'jwt_type value must be "access" or "refresh"']
+        return [False, 'jwt_type value must be "access" or "refresh"', 400]
     if(jwt_info == None):
         jwt_info = jwt.decode(jwt_value, options={"verify_signature":False})
         if('alg' not in jwt_info):
@@ -716,6 +753,22 @@ def ValidateJWT(jwt_value, jwt_type, jwt_info = None):
     return [True, '', 200]
 
 def GetJWTKey(jwtalgo, jwttype = "access", jwtcontent = "public"):
+    '''
+     # Variables
+    @param: jwtalgo (str)
+                The algorythm you are using to encode/decode a JWT key.
+            jwttype (str)
+                this value must either be "access" OR "refresh". If the key you are trying to encode/decode is an access key then
+                pass the value "access". If the key you are trying to encode/decode is a refresh key then pass the value "refresh"
+            jwtcontent (str)
+                this value must either be "public" OR "private". If the key you are trying to encode a key, then pass the value
+                "private". If you are trying to decode a key, then pass the value "public"
+    # Description
+    Gets the appropriate secret/private or public key, that will be used to encode OR decode a value/key
+    # Returns
+    None or str. If an invalid argument is passed then None will be returned. If everything is valid, it will return a string
+    that is the value of the wanted key (private or public for the specific algorythm)
+    '''
     if((jwttype != "access" and jwttype != "refresh") or (jwtcontent != "public" and jwtcontent != "private")):
         return None
     jwtkey = None
@@ -754,21 +807,25 @@ def CreateNewAccess(access, refresh, access_info = None):
     if(access_info == None):
         access_info = jwt.decode(access, options={"verify_signature":False})
     if('iss' not in access_info):
-        return [False, 'Invalid Access Key', 400]
+        return [False, 'Invalid Access Key', 400, '']
     if(refresh == None):
-        if(cache.get('uc_' + access_info['iss']) != access):
-            return [False, 'Invalid Access Key', 400]
+        #if(access not in redis_client.lrange('ut_' + access_info['iss'], 0, -1)):
+        if(redis_client.lrem('ut_' + access_info['iss'], 1, access) == 0):
+            return [False, 'Invalid Access Key', 400, '']
         new_access = CreateJWTKey(int(access_info['iss']), keytype = "access", keycontent = "private")
-        cache.set('uc_' + access_info['iss'], new_access[1], int(os.environ.get('JWT_ACCESS_TIME')))
-        return [True, new_access, 200]
+        if(new_access[0] == False):
+            return [False, 'Could not create new access key', 500]
+        redis_client.expire('ut_' + access_info['iss'], int(os.environ.get('JWT_ACCESS_TIME')))
+        redis_client.lpush('ut_' + access_info['iss'], new_access[1])
+        return [True, new_access[1], 200, int(access_info['iss'])]
     else:
-        jwt_valid = ValidateJWT(refresh, "refresh")
-        if(jwt_valid[0] == False):
-            return [False, 'Refresh Key Expired or Invalid', 400]
-        if(cache.get('uc_' + access_info['iss']) != refresh):
-            return [False, 'Invalid Refresh Key', 400]
+        #jwt_valid = ValidateJWT(refresh, "refresh")
+        #if(jwt_valid[0] == False):
+        #    return [False, 'Refresh Key Expired or Invalid', 400]
+        if(redis_client.get('ur_' + access_info['iss']) != refresh):
+            return [False, 'Invalid Refresh Key', 400, '']
         new_access = CreateJWTKey(int(access_info['iss']), keytype = "access", keycontent = "private")
-        return [True, new_access, 200]
+        return [True, new_access, 200, int(access_info['iss'])]
 
 def CreateJWTKey(userid, timestamp = None, keytype = "access", keycontent = "public"):
     if(type(userid) != int):
@@ -791,21 +848,28 @@ def CreateJWTKey(userid, timestamp = None, keytype = "access", keycontent = "pub
 def ValidateAndCreateJWT(request, newifexpired = True):
     cookies = request.COOKIES
     if("access" not in cookies):
-        return [False, "Access Key Not Sent", 400]
+        return [False, "Access Key Not Sent", 400, '']
     access_info = jwt.decode(cookies["access"], options={"verify_signature":False})
     if('alg' not in access_info):
-        return [False, 'Invalid JWT', 400]
+        return [False, 'Invalid JWT', 400, '']
     
-    valid_jwt = ValidateJWT(cookies["access"], "access", access_info)
+    valid_jwt = None
+    if("refresh" in cookies):
+        valid_jwt = ValidateJWT(cookies["access"], "access", access_info)
     
-    if( (valid_jwt[2] == 498 and newifexpired == True) or ("refresh" not in cookies)):
+
+    if( ("refresh" not in cookies) or (valid_jwt[2] == 498 and newifexpired == True) ):
         return CreateNewAccess(cookies["access"], None if "refresh" not in cookies else cookies["refresh"], access_info)
     elif(valid_jwt[2] == 200):
-        return [True, None, valid_jwt[2]]
+        return [True, None, valid_jwt[2], int(access_info['iss'])]
     else:
-        return [False, valid_jwt[1], valid_jwt[2]]
+        return [False, valid_jwt[1], valid_jwt[2], '']
     
 def CreateResponseNewAccess(newaccess, response_msg = '', response_status = 200):
     response = HttpResponse(json.dumps(response_msg), status = response_status)
-    response.set_cookie("access", newaccess, httponly = True, secure = True, max_age = None, samesite = "Lax")
+    if(newaccess != None):
+        response.set_cookie("access", newaccess, httponly = True, secure = True, max_age = None, samesite = "Lax")
     return response
+
+def ReturnHttpInvalidJWT(jwt):
+    return HttpResponse(json.dumps(jwt[1]), status = jwt[2])

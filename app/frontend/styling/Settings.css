@@ -82,3 +82,59 @@
     gap: 15px;
     margin-top: 35px;
 }
+
+.s_line{
+    width: 100%;
+    height: 2px;
+    background-color: var(--chat-color-gray-light);
+    margin: 25px 0;
+}
+
+.s_util{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    padding: 9px 15px;
+    border-radius: 25px;
+    font-size: 19px;
+    font-weight: 300;
+    color: var(--chat-color-gray-strong-more);
+}
+.s_util:hover{
+    background-color: var(--chatnav-color-delete-light);
+    color: #fff;
+}
+.s_blue:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.s_referal{
+    width: 100%;
+    position: relative;
+    padding: 9px 15px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 200;
+    cursor: pointer;
+    margin-top: 50px;
+    border-radius: 25px;
+}
+.s_referal:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    color: #fff;
+}
+
+.s_icon{
+    cursor: pointer;
+    border-radius: 50%;
+    border: solid #000 5px;
+    position: relative;
+    transition: 0.1s ease-out;
+    height: var(--settings-imgheight);
+    width: var(--settings-imgheight);
+}
+.s_icon:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    border: solid var(--color-text-main-hover-blue-experimental-lighter-evenmore) 5px;
+}

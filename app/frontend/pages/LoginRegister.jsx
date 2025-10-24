@@ -205,7 +205,7 @@ export function LoginRegister({ lrtype }){
                                 <div className='lr_maincontent'>
                                     <div className='lr_emailphone'>
                                         <div className='lr_firststep_label'>Email / Phone Number</div>
-                                        <UsernamePhoneInput valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0} alwaysPhone={false} alwaysEmail={false} ref={usernamephoneinputRef} autoFocus={true} onpressEnter={LoginRegister_NextClick} tabIndex="-1"/>
+                                        <UsernamePhoneInput valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0} alwaysPhone={false} alwaysEmail={false} ref={usernamephoneinputRef} autoFocus={true} onpressEnter={LoginRegister_NextClick} tabIndex="-1" classtype='lr'/>
                                     </div>
                                     <div className='lr_warningholder' onClick={() => warningsetState('')}>
                                         <div className='lr_warning'>{warningstate}</div>

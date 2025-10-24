@@ -7,7 +7,6 @@ export function NavBar({updatenavbarstate}){
 
     
     const navigate = useNavigate()
-    const navloggedRef = useRef()
     const loginRef = useRef()
     const userinfovals = GetUserInfoValues()
     const [namestate, namesetState] = useState(userinfovals[0] === 'None' ? ('Info') : ('Hello, ' + userinfovals[0]))
@@ -15,7 +14,7 @@ export function NavBar({updatenavbarstate}){
 
     async function ClickLogout(){
         let response_status = null
-        let response =  await fetch(import.meta.env.VITE_URL + '/loginregister/logout/', {
+        await fetch(import.meta.env.VITE_URL + '/loginregister/logout/', {
             method:'DELETE',
             credentials: 'include',
         }).then(res => {

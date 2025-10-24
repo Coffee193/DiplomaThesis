@@ -7,6 +7,7 @@ export const PasswordInput = forwardRef(({classtype, placeholder, valuesRef, pas
 
     const [pi_eyestate, pi_eyesetState] = useState(['password', <EyeIcon/>])
     const pi_inputRef = useRef()
+    const [pi_classState, pi_classsetState] = useState()
 
     const reg_contains_at_least_1_num = new RegExp('[0-9]')
     const reg_contains_at_least_1_lowercase = new RegExp('[a-z]')
@@ -55,11 +56,20 @@ export const PasswordInput = forwardRef(({classtype, placeholder, valuesRef, pas
         }
     }
 
+    function ClassType(){
+        if(classtype === 'lr'){
+            return ['lr_password', 'lr_passwordinput', 'lr_passwordsvgholder', 'lr_passwordsvgeye']
+        }
+        else if(classtype === 's'){
+            return ['sp_box', 'sp_input', 'lr_passwordsvgholder', 'sp_inputsvg']
+        }
+    }
+
     return(
-        <div className={classtype === 'lr' ? ('lr_password') : ('')}>
-            <input type={pi_eyestate[0]} autoComplete='off' autoCapitalize='off' spellcheck='false' className={classtype === 'lr' ? ('lr_passwordinput') : ('')} placeholder={placeholder} ref={(element) => {pi_inputRef.current = element; passwordinputRef !== null ? (passwordinputRef.current = element): ('')}} onChange={() => {isconfirmpassword === true ? (CheckPasswordsEqual()) : (CheckValues())}} tabIndex={tabIndex} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue )}/>
-            <div className={classtype === 'lr' ? ('lr_passwordsvgholder'): ('')}>
-                <div className={classtype === 'lr' ? ('lr_passwordsvgeye') : ('')} onClick={() => ClickEye()}>{pi_eyestate[1]}</div>
+        <div className={ClassType()[0]}>
+            <input type={pi_eyestate[0]} autoComplete='off' autoCapitalize='off' spellcheck='false' className={ClassType()[1]} placeholder={placeholder} ref={(element) => {pi_inputRef.current = element; passwordinputRef !== null ? (passwordinputRef.current = element): ('')}} onChange={() => {isconfirmpassword === true ? (CheckPasswordsEqual()) : (CheckValues())}} tabIndex={tabIndex} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue )}/>
+            <div className={ClassType()[2]}>
+                <div className={ClassType()[3]} onClick={() => ClickEye()}>{pi_eyestate[1]}</div>
             </div>
         </div>
     )

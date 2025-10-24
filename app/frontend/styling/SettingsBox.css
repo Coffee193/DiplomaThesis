@@ -1,0 +1,48 @@
+.sb_box{
+    width: 100%;
+    padding: 7px 15px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: var(--chat-color-gray-light);
+    border-radius: 25px;
+    align-items: center;
+    font-size: 19px;
+}
+.sb_box:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+}
+.sb_box:hover .sb_change{
+    opacity: 1;
+}
+.sb_box:hover *{
+    color: #fff;
+}
+
+.sb_header{
+    font-weight: 300;
+    color: var(--chat-color-gray-strong-more);
+}
+
+.sb_main{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--chat-color-gray-strong-more);
+}
+
+.sb_change{
+    opacity:  0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sb_val{
+    font-weight: 200;
+}
+
+.sb_vallight{
+    color: var(--chat-color-gray);
+}

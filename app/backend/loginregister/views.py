@@ -13,7 +13,7 @@ import datetime
 import secrets
 import string
 from .models import User, Referal
-from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, CreateJWTKeyPair, CreateResponseWithCookies, ValidateAndCreateJWT, ValidateJWT
+from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, CreateJWTKeyPair, CreateResponseWithCookies, ValidateAndCreateJWT, ValidateJWT, ReturnHttpInvalidJWT, CreateResponseNewAccess
 from snowflake_id_gen import GenerateSnowflake, CreateSnowflake
 from django.core.cache import cache
 from PIL import Image
@@ -438,7 +438,7 @@ def UpdateImg(request, max_size_mb = 10):
         return HttpResponse(json.dumps('Bad Method'), status = 405)
     
 @api_view(['GET'])
-def GetUserInfo(request):
+def GetUserInfo_Old(request):
     if request.method == 'GET':
         if('access' not in request.COOKIES or 'refresh' not in request.COOKIES):
             return HttpResponse(json.dumps('no jwt provided'), status = 401)
@@ -771,3 +771,13 @@ def LogoutResponse(response, status):
     response.delete_cookie("access")
     response.delete_cookie("refresh")
     return response
+
+@api_view(['GET'])
+def GetUserInfo(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    userinfo = User.objects.filter(id = valjwt[3]).values('email', 'phone', 'name', 'img', 'is_admin')[0]
+    if(userinfo['img'] == True):
+        userinfo['img'] = str(valjwt[3])
+    return CreateResponseNewAccess(valjwt[1], userinfo, 200)

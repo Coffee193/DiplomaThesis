@@ -1,4 +1,4 @@
-import '../styling/Settings.css'
+import '../styling/Settings_init_copy.css'
 import { useEffect, useState, useRef } from 'react'
 import { UserIconThin, PencilIcon, XCloseIcon, EyeIcon, EyeCloseIcon, Tick } from '../components/svgs/UtilIcons'
 import { useNavigate, Link } from 'react-router-dom'

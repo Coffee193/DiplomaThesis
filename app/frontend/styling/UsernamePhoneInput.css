@@ -6,9 +6,9 @@
 .upi_usernamephone{
     position: relative;
     width: 135px;
-    border: 2px solid var(--color-text-faded-gray);
-    border-radius: 7px;
-    padding: 0px 10px;
+    /*border: 2px solid var(--color-text-faded-gray);
+    border-radius: 7px;*/
+    /*padding: 0px 10px;*/
     cursor: pointer;
     display: none;
     align-items: center;
@@ -43,14 +43,14 @@
 .upi_usernamephoneinput{
     flex: 1;
     position: relative;
-    height: 49px;
+    /*height: 49px;
     border: 2px solid var(--color-text-faded-gray);
     border-radius: 7px;
-    padding: 0px 10px;
+    padding: 0px 10px;*/
 }
 .upi_usernamephoneinput:focus{
     outline: none;
-    border: 2px solid var(--color-blue-aapl-stronger);
+    /*border: 2px solid var(--color-blue-aapl-stronger);*/
 }
 
 .upi_svgcountry{
@@ -70,4 +70,36 @@
     border-radius: 50%;
     background: #d1d1d1;
     background: linear-gradient(45deg,rgba(209, 209, 209, 1) 0%, rgba(156, 156, 156, 1) 100%);
+}
+
+.upi_lr_border{
+    border: 2px solid var(--color-text-faded-gray);
+    border-radius: 7px;
+}
+.upi_lr_border:focus{
+    border: 2px solid var(--color-blue-aapl-stronger);
+}
+
+.upi_lr_height{
+    height: 49px;
+}
+
+.upi_lr_padding{
+    padding: 0px 10px;
+}
+
+.upi_s_border{
+    border: 2px solid var(--chat-color-gray-light);
+    border-radius: 25px;
+}
+.upi_s_border:focus{
+    border: 2px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.upi_s_height{
+    height: 42px;
+}
+
+.upi_s_padding{
+    padding: 7px 15px;
 }

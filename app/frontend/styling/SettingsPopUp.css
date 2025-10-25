@@ -113,3 +113,30 @@
     opacity: 0;
     z-index: 1;
 }
+
+.sp_bgred{
+    background-color: var(--chatnav-color-delete-light);
+}
+.sp_bgred:hover{
+    background-color: var(--chatnav-color-delete-strong);
+}
+
+.sp_closered:hover{
+    color: var(--chatnav-color-delete-light);
+}
+
+.sp_red{
+    color: var(--chatnav-color-delete-light);
+}
+
+.sp_deleteadminaccount{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+.sp_deleteadminaccount div{
+    font-weight: 300;
+}

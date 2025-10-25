@@ -1,7 +1,7 @@
 import '../styling/SettingsName.css'
 import { useState } from 'react'
 
-export function SettingsName({ value }){
+export function SettingsName({ value, popupvalue, popupsetState }){
     
     const [nameState, namesetState] = useState(SetName(value))
 
@@ -10,7 +10,7 @@ export function SettingsName({ value }){
     }
     
     return(
-        <div className='sn'>
+        <div className='sn' onClick={() => popupsetState(popupvalue)}>
             {nameState}
         </div>
     )

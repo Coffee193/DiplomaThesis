@@ -2,7 +2,7 @@ import '../styling/AreaCode.css'
 import { XCloseIcon, SearchIcon } from '../components/svgs/UtilIcons'
 import { useState } from 'react'
 
-export function AreaCode({ areacodenumbercountrysvgsetState, areacodevisibleState, areacodevisiblesetState, country_list_full, country_list_keys, valuesRef, warningIndex, warningvalueIndex, valueIndex }){
+export function AreaCode({ areacodenumbercountrysvgsetState, areacodevisibleState, areacodevisiblesetState, country_list_full, country_list_keys, valuesRef, warningIndex, warningvalueIndex, valueIndex, existnavbar }){
 
     const [ac_infostate, ac_infosetState] = useState(country_list_keys.map(item => CreateAreaCodeItem(item)))
 
@@ -33,11 +33,16 @@ export function AreaCode({ areacodenumbercountrysvgsetState, areacodevisibleStat
                 </li>
         )
     }
+
+    function CalcNavBarOffset(){
+        return 'calc( (100vh - var(--ac-height))/2 + ' + (Math.max( parseInt(window.getComputedStyle(document.getElementsByClassName('nav_all_holder')[0]).getPropertyValue('--nav-height').slice(0, 2)) - document.body.scrollTop, 0 ) /2).toString() + 'px)'
+    }
         
 
     return(
         <>
-        <div className='ac_allholder' style={areacodevisibleState === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.75)', pointerEvents: 'none'})}>
+        {/*<div className='ac_allholder' style={areacodevisibleState === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.75)', pointerEvents: 'none'})}>*/}
+            <div className='ac_allholder' style={{...areacodevisibleState === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.75)', pointerEvents: 'none'}), ...existnavbar === true ? ({top: CalcNavBarOffset()}) : ({}) }}>
             <div className='ac_header'>
                 <div className='ac_header_text'>Select Area Code</div>
                 <div className='ac_header_x' onClick={() => areacodevisiblesetState(false)}>

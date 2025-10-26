@@ -9,7 +9,7 @@ export function SettingsPopUp({ popupState, popupsetState}){
 
     return(
         <>
-        <div className='sp' style={popupState['visible'] === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.8)', pointerEvents: 'none'})}>
+        <div className='sp' style={popupState['visible'] === true ? ({opacity: '1', transform: 'none', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.8)', pointerEvents: 'none'})}>
             <div className='sp_header'>
                 <div className={popupState['headerred'] === true ? ('sp_red') : ('')}>{popupState['header']}</div>
                 <XCloseIcon className={'sp_close ' + popupState['classclose']} onClick={() => popupsetState({'visible': false})}/>
@@ -30,7 +30,7 @@ export function SettingsPopUp({ popupState, popupsetState}){
                             }
                             else if(popupState['inputtype'] === 'phone'){
                                 return(
-                                    <UsernamePhoneInput alwaysPhone={true} classtype='s' placeholder={popupState['placeholderfirst']}/>
+                                    <UsernamePhoneInput alwaysPhone={true} classtype='s' placeholder={popupState['placeholderfirst']} existnavbar={true}/>
                                 )
                             }
                             else if(popupState['inputtype'] === 'password'){

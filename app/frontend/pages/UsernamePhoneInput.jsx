@@ -5,7 +5,7 @@ import { AreaCode } from './AreaCode'
 import { pressKey } from './pressKeyFunc'
 import { country_list_full } from '../components/CountriesList'
 
-export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex, alwaysEmail, alwaysPhone, autoFocus, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue, tabIndex, classtype, placeholder}, usernamephoneinputRef) => {
+export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex, alwaysEmail, alwaysPhone, autoFocus, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue, tabIndex, classtype, placeholder, existnavbar}, usernamephoneinputRef) => {
     
     const country_list_keys = Object.keys(country_list_full)
 
@@ -134,7 +134,7 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
 
     return(
         <>
-        <AreaCode areacodenumbercountrysvgsetState={upi_areacodenumbersvgsetState} areacodevisibleState={areacodevisibleState} areacodevisiblesetState={areacodevisiblesetState} country_list_full={country_list_full} country_list_keys={country_list_keys} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} valueIndex={valueIndex}/>
+        <AreaCode areacodenumbercountrysvgsetState={upi_areacodenumbersvgsetState} areacodevisibleState={areacodevisibleState} areacodevisiblesetState={areacodevisiblesetState} country_list_full={country_list_full} country_list_keys={country_list_keys} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} valueIndex={valueIndex} existnavbar={existnavbar}/>
         <div className='upi_allholder'>
             <div className={'upi_usernamephone ' + ClassType()[0] + ' ' + ClassType()[2]} ref={upi_usernamephoneRef} style={alwaysPhone === true ? ({display: 'flex'}) : ({display: 'none'})}>
                 <div className='upi_svgcountry'>{upi_areacodenumbersvgState[0]}</div>

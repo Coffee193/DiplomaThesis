@@ -140,3 +140,11 @@
 .sp_deleteadminaccount div{
     font-weight: 300;
 }
+
+.sp_warning{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--chatnav-color-delete-light);
+}

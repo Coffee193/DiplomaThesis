@@ -64,7 +64,7 @@ export function Settings({updatenavbarsetState}){
     }
 
     function ImageNotFound(){
-        simagesetState(<UserIconThin className='s_icon'/>)
+        simagesetState(<UserIconThin className='s_icon' onClick={() => spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'existimage': true})}/>)
     }
 
     return(
@@ -95,7 +95,7 @@ export function Settings({updatenavbarsetState}){
                             <div className='s_util' onClick={() => spopupsetState({'visible': true, 'header': 'DELETE ALL CHATS', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true})}>DELETE ALL CHATS</div>
                             <div className='s_util' onClick={() => spopupsetState({'visible': true, 'header': 'DELETE ACCOUNT', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true, 'isadmin': sadminState})}>DELETE ACCOUNT</div>
                             <div className='s_util s_blue'>LOGOUT</div>
-                            {sadminState === true ? (<Link to='/referalcodes'><div className='s_referal'>REFERAL CODES</div></Link>): ('')}
+                            {sadminState === true ? (<Link to='/referalcodes' tabIndex="-1"><div className='s_referal'>REFERAL CODES</div></Link>): ('')}
                         </div>
                     </div>
 

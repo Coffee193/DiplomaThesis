@@ -3,7 +3,7 @@ import { useState, useRef, forwardRef } from 'react'
 import { EyeIcon, EyeCloseIcon } from '../components/svgs/UtilIcons'
 import { pressKey } from './pressKeyFunc'
 
-export const PasswordInput = forwardRef(({classtype, placeholder, valuesRef, passwordIndex, warningIndex, warningvalueIndex, isconfirmpassword, tabIndex, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue}, passwordinputRef) => {
+export const PasswordInput = forwardRef(({classtype, placeholder, valuesRef, passwordIndex, warningIndex, warningvalueIndex, isconfirmpassword, tabIndex, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue, autoFocus}, passwordinputRef) => {
 
     const [pi_eyestate, pi_eyesetState] = useState(['password', <EyeIcon/>])
     const pi_inputRef = useRef()
@@ -67,7 +67,7 @@ export const PasswordInput = forwardRef(({classtype, placeholder, valuesRef, pas
 
     return(
         <div className={ClassType()[0]}>
-            <input type={pi_eyestate[0]} autoComplete='off' autoCapitalize='off' spellcheck='false' className={ClassType()[1]} placeholder={placeholder} ref={(element) => {pi_inputRef.current = element; passwordinputRef !== null ? (passwordinputRef.current = element): ('')}} onChange={() => {isconfirmpassword === true ? (CheckPasswordsEqual()) : (CheckValues())}} tabIndex={tabIndex} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue )}/>
+            <input type={pi_eyestate[0]} autoComplete='off' autoCapitalize='off' spellcheck='false' className={ClassType()[1]} placeholder={placeholder} ref={(element) => {pi_inputRef.current = element; passwordinputRef !== null ? (passwordinputRef.current = element): ('')}} onChange={() => {isconfirmpassword === true ? (CheckPasswordsEqual()) : (CheckValues())}} tabIndex={tabIndex} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue )} autoFocus={autoFocus}/>
             <div className={ClassType()[2]}>
                 <div className={ClassType()[3]} onClick={() => ClickEye()}>{pi_eyestate[1]}</div>
             </div>

@@ -59,7 +59,7 @@ export function NavBar({updatenavbarstate}){
     return(
         <>
         <div className='nav_all_holder' onClick={() => {GetImg();console.log(imgstate)}}>
-            <Link to = '/'><div className = 'nav_logo'>Sapling<img src = '../components/images/MainLogo.png'/></div></Link>
+            <Link to = '/' tabIndex="-1"><div className = 'nav_logo'>Sapling<img src = '../components/images/MainLogo.png'/></div></Link>
             <div className='nav_info'>
                 {document.cookie.includes('userinfo=') === true ? (
                     <div className='nav_logged'>
@@ -81,7 +81,7 @@ export function NavBar({updatenavbarstate}){
                         </div>    
                     </div>
                 ) : (
-                    <Link to='/login' ref={loginRef}><div className='nav_loginbutton'>Log In</div></Link>
+                    <Link to='/login' ref={loginRef} tabIndex="-1"><div className='nav_loginbutton'>Log In</div></Link>
                 )}
             </div>
         </div>

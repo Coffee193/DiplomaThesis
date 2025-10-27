@@ -62,6 +62,7 @@ export function Settings({updatenavbarsetState}){
     }, [])
 
     async function GetUserInfo(){
+        /*//
         let response_status = null
         let response = await fetch('http://127.0.0.1:8000/loginregister/getuserinfo/', {
             method: 'GET',
@@ -69,10 +70,14 @@ export function Settings({updatenavbarsetState}){
         }).then(res => {
             response_status = res.status
             return res.json()
-        }).then(data => data)
+        }).then(data => data)*///
 
-        if(response_status === 200){
-
+        let response = {'img': false}//
+        console.log('fufu')//
+        console.log(response['img'])//
+        let response_status=500//
+        if(response_status !== 200){//
+            
             if(response['img'] === false){
                 iconsetState(<UserIconThin className='settingsicon' onClick={() => PopUpOpenClose('open', 'Change Image', '', 'image')}/>)
                 changeimguploadsetState('UPLOAD IMAGE')

@@ -1,5 +1,5 @@
 import '../styling/UsernamePhoneInput.css'
-import { useState, useRef, forwardRef } from 'react'
+import { useState, useRef, forwardRef, useImperativeHandle } from 'react'
 import { ArrowDownIcon } from '../components/svgs/UtilIcons'
 import { AreaCode } from './AreaCode'
 import { pressKey } from './pressKeyFunc'
@@ -18,6 +18,12 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
 
     const reg_only_contains_numbers = new RegExp('^[0-9]+$')
 
+    useImperativeHandle(usernamephoneinputRef, () => {
+        return{
+            focusInput: () => FocusUsernamePhoneInput(),
+            focusAreaCode: () => FocusAreaCodeInput()
+        }
+    })
     
 
     function Upi_ArrowEnterLeave(val){
@@ -142,7 +148,7 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
                 <div className='upi_arrow' onMouseEnter={() => Upi_ArrowEnterLeave('enter')} onMouseLeave={() => Upi_ArrowEnterLeave('leave')} onClick={() => areacodevisiblesetState(true)}><ArrowDownIcon width={15} height={15}/></div>
             </div>
             <input className={'upi_usernamephoneinput ' + ClassType()[0] + ' ' + ClassType()[1] + ' ' + ClassType()[2]} autoComplete='off' autoCapitalize='off' spellCheck='false' placeholder={placeholder}
-            onChange={() => CheckIsPhone()} ref={ (el) => {upi_usernamephoneinputRef.current = el; usernamephoneinputRef !== null ? (usernamephoneinputRef.current = el) : ('')}} autoFocus={autoFocus} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, upi_valtype.current === 'email' ? (onpressTab) : (FocusAreaCodeInput), upi_valtype.current === 'email' ? (onpressTabValue) : (undefined))} tabIndex={tabIndex}/>
+            onChange={() => CheckIsPhone()} ref={ (el) => {upi_usernamephoneinputRef.current = el; usernamephoneinputRef !== null ? (usernamephoneinputRef.current = el) : ('')}} autoFocus={autoFocus} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab !== undefined ? (onpressTab) : (FocusAreaCodeInput), onpressTabValue)} tabIndex={tabIndex}/>
         </div>
         </>
     )

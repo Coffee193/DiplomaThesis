@@ -7,9 +7,12 @@ import { country_list_full } from '../components/CountriesList'
 
 export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex, alwaysEmail, alwaysPhone, autoFocus, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue, tabIndex, classtype, placeholder, existnavbar}, usernamephoneinputRef) => {
     
+    console.log('i got rerendered')
     const country_list_keys = Object.keys(country_list_full)
+    const areacodeinfo = InitAreaCode()
 
-    const [upi_areacodenumbersvgState, upi_areacodenumbersvgsetState] = useState(InitAreaCode())
+    const [upi_areacodesvgState, upi_areacodesvgsetState] = useState(areacodeinfo[0])
+    const [upi_areacodenumberState, upi_areacodenumbersetState] = useState(areacodeinfo[1])
     const upi_countrycodeinputRef = useRef()
     const upi_usernamephoneRef = useRef()
     const upi_usernamephoneinputRef = useRef()
@@ -97,10 +100,10 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
     }
 
     function ChangeAreaCodeCheckSvg(event){
-        if(reg_only_contains_numbers.test(event.target.value) === false && event.target.value !== ''){
+        /*if(reg_only_contains_numbers.test(event.target.value) === false && event.target.value !== ''){
             upi_countrycodeinputRef.current.value = event.target.value.slice()
             return
-        }
+        }*/
         let changesvgval = null
         for(let i=0; i < country_list_keys.length; i++){
             if(country_list_full[country_list_keys[i]]['ac'].slice(1) === event.target.value){
@@ -111,7 +114,7 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
         if(changesvgval === null){
             changesvgval = <div className='upi_countryempty'/>
         }
-        upi_areacodenumbersvgsetState([changesvgval, event.target.value])
+        upi_areacodesvgsetState(changesvgval)
     }
 
     function FocusUsernamePhoneInput(){
@@ -138,17 +141,25 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
         }
     }
 
+    function CheckOnlyNumbers(event, inputRef){
+        if(reg_only_contains_numbers.test(event.target.value) === false && event.target.value !== ''){
+            inputRef.current.value = event.target.value.slice(0, -1)
+            return false
+        }
+        return true
+    }
+
     return(
         <>
-        <AreaCode areacodenumbercountrysvgsetState={upi_areacodenumbersvgsetState} areacodevisibleState={areacodevisibleState} areacodevisiblesetState={areacodevisiblesetState} country_list_full={country_list_full} country_list_keys={country_list_keys} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} valueIndex={valueIndex} existnavbar={existnavbar}/>
+        <AreaCode areacodesvgsetState={upi_areacodesvgsetState} areacodeinputRef={upi_countrycodeinputRef} areacodevisibleState={areacodevisibleState} areacodevisiblesetState={areacodevisiblesetState} country_list_full={country_list_full} country_list_keys={country_list_keys} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} valueIndex={valueIndex} existnavbar={existnavbar}/>
         <div className='upi_allholder'>
             <div className={'upi_usernamephone ' + ClassType()[0] + ' ' + ClassType()[2]} ref={upi_usernamephoneRef} style={alwaysPhone === true ? ({display: 'flex'}) : ({display: 'none'})}>
-                <div className='upi_svgcountry'>{upi_areacodenumbersvgState[0]}</div>
-                <div className='upi_numberareacode'><div>+</div><input className='upi_numberinput' ref={upi_countrycodeinputRef} placeholder='' value={upi_areacodenumbersvgState[1]} onChange={(event) => {ChangeAreaCodeCheckSvg(event); (reg_only_contains_numbers.test(event.target.value) === true || event.target.value === '') ? (CheckValues()) : ('')}} onKeyDown={(event) => pressKey(event, PressEnterOnAreaCodeInput, undefined, FocusUsernamePhoneInput, undefined)} onFocus={() => Upi_ArrowEnterLeave('enter')} onBlur={() => Upi_ArrowEnterLeave('leave')} tabIndex={tabIndex} maxLength="5"/></div>
+                <div className='upi_svgcountry'>{upi_areacodesvgState}</div>
+                <div className='upi_numberareacode'><div>+</div><input className='upi_numberinput' ref={upi_countrycodeinputRef} placeholder='' defaultValue={upi_areacodenumberState} onChange={(event) => {CheckOnlyNumbers(event, upi_countrycodeinputRef) === true ? (ChangeAreaCodeCheckSvg(event), CheckValues()) : ''/*ChangeAreaCodeCheckSvg(event); (reg_only_contains_numbers.test(event.target.value) === true || event.target.value === '') ? (CheckValues()) : ('')*/}} onKeyDown={(event) => pressKey(event, PressEnterOnAreaCodeInput, undefined, FocusUsernamePhoneInput, undefined)} onFocus={() => Upi_ArrowEnterLeave('enter')} onBlur={() => Upi_ArrowEnterLeave('leave')} tabIndex={tabIndex} maxLength="5"/></div>
                 <div className='upi_arrow' onMouseEnter={() => Upi_ArrowEnterLeave('enter')} onMouseLeave={() => Upi_ArrowEnterLeave('leave')} onClick={() => areacodevisiblesetState(true)}><ArrowDownIcon width={15} height={15}/></div>
             </div>
             <input className={'upi_usernamephoneinput ' + ClassType()[0] + ' ' + ClassType()[1] + ' ' + ClassType()[2]} autoComplete='off' autoCapitalize='off' spellCheck='false' placeholder={placeholder}
-            onChange={() => CheckIsPhone()} ref={ (el) => {upi_usernamephoneinputRef.current = el; usernamephoneinputRef !== null ? (usernamephoneinputRef.current = el) : ('')}} autoFocus={autoFocus} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab !== undefined ? (onpressTab) : (FocusAreaCodeInput), onpressTabValue)} tabIndex={tabIndex}/>
+            onChange={(event) => {alwaysPhone === true && CheckOnlyNumbers(event, upi_usernamephoneinputRef) === false ? '' : CheckIsPhone()}} ref={ (el) => {upi_usernamephoneinputRef.current = el; usernamephoneinputRef !== null ? (usernamephoneinputRef.current = el) : ('')}} autoFocus={autoFocus} onKeyDown={(event) => pressKey(event, onpressEnter, onpressEnterValue, onpressTab !== undefined ? (onpressTab) : (FocusAreaCodeInput), onpressTabValue)} tabIndex={tabIndex}/>
         </div>
         </>
     )

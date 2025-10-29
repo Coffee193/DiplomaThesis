@@ -2,7 +2,7 @@ import '../styling/AreaCode.css'
 import { XCloseIcon, SearchIcon } from '../components/svgs/UtilIcons'
 import { useState } from 'react'
 
-export function AreaCode({ areacodenumbercountrysvgsetState, areacodevisibleState, areacodevisiblesetState, country_list_full, country_list_keys, valuesRef, warningIndex, warningvalueIndex, valueIndex, existnavbar }){
+export function AreaCode({ areacodesvgsetState, areacodeinputRef, areacodevisibleState, areacodevisiblesetState, country_list_full, country_list_keys, valuesRef, warningIndex, warningvalueIndex, valueIndex, existnavbar }){
 
     const [ac_infostate, ac_infosetState] = useState(country_list_keys.map(item => CreateAreaCodeItem(item)))
 
@@ -18,7 +18,8 @@ export function AreaCode({ areacodenumbercountrysvgsetState, areacodevisibleStat
 
     function CreateAreaCodeItem(item){
         return( <li key={item} onClick={() => {
-                    areacodenumbercountrysvgsetState([country_list_full[item]['svg'], country_list_full[item]['ac'].slice(1)])
+                    areacodesvgsetState(country_list_full[item]['svg'])
+                    areacodeinputRef.current.value = country_list_full[item]['ac'].slice(1)
                     areacodevisiblesetState(false)
                     if(valuesRef !== undefined){
                         valuesRef.current[valueIndex] = country_list_full[item]['ac'] + ' ' + valuesRef.current[valueIndex].split(' ')[1]

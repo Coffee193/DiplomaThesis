@@ -47,7 +47,7 @@ export function Settings({updatenavbarsetState}){
         }).then(data => data)*/
         //
         let response_status = 200
-        let response = {"email": "test@test.test", "phone": null, "name": "Goku", "isadmin": true, "img": "237346999496364032"}
+        let response = {"email": "test@test.test", "phone": null, "name": "Goku", "isadmin": true, /*"img": "237346999496364032"*/ "img": false}
         //
 
         if(response_status === 200){
@@ -72,7 +72,7 @@ export function Settings({updatenavbarsetState}){
     }
 
     function ImageNotFound(){
-        simagesetState(<UserIconThin className='s_icon' onClick={() => spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'existimage': true})}/>)
+        simagesetState(<UserIconThin className='s_icon' onClick={() => spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'existimage': false})}/>)
     }
 
     return(

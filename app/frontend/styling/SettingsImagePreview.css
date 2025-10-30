@@ -1,0 +1,103 @@
+.sip_holder{
+    position: fixed;
+    width: var(--settings-img-popup-w);
+    height: var(--settings-img-popup-h);
+    background-color: #fff;
+    z-index: 7;
+    border-radius: 25px;
+    right: calc((100vw - var(--settings-img-popup-w))/2);
+    top: calc((0px + var(--nav-height) + var(--settings-img-popup-h))/2);
+    padding: 25px 15px;
+}
+
+.sip_box{
+    width: 100%;
+    height: 225px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.sip_circle{
+    position: absolute;
+    width: var(--settings-img-circle);
+    height: var(--settings-img-circle);
+    border: 3px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    right: calc(50% - var(--settings-img-circle)/2);
+    top: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.sip_circlescreenshot{
+    position:relative;
+    width: var(--settings-img-circle);
+    height: var(--settings-img-circle);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.sip_imgholder{
+    cursor: move;
+    position: absolute;
+}
+
+.sip_img{
+    pointer-events: none;
+    object-fit: contain;
+    height: 200px;
+}
+
+.sip_imgbg{
+    position: absolute;
+    width: 150%;
+    height: 100%;
+    top: 0;
+    left: -25%;
+    background-color: var(--chat-color-gray);
+    z-index: -1;
+}
+
+.sip_utilholder{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 50px;
+    color: var(--chat-color-gray-strong);
+}
+
+.sip_util{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.sip_accept:hover{
+    color: #fff;
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.sip_cancel:hover{
+    color: #fff;
+    background-color: var(--chatnav-color-delete-light);
+}
+
+.sip_darkbg{
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+}

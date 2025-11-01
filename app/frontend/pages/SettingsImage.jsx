@@ -2,10 +2,11 @@ import '../styling/SettingsImage.css'
 import { useState, useRef } from 'react'
 import { SettingsImagePreview } from './SettingsImagePreview'
 
-export function SettingsImage({ existimage }){
+export function SettingsImage({ imageval, valuesRef, warningIndex, warningvalueIndex }){
 
-    const [siboxState, siboxsetState] = useState(existimage)
-    const [siimageState, siimagesetState] = useState()
+    const [siboxState, siboxsetState] = useState(imageval === undefined ? false : true)
+    const [siimageState, siimagesetState] = useState(imageval)
+    const imageprevvalRef = useRef([undefined, false])
 
     const siinputRef = useRef()
     const [sipreviewState, sipreviewsetState] = useState({'visible': false})
@@ -23,18 +24,31 @@ export function SettingsImage({ existimage }){
         }
     }
 
+    function DeleteImage(){
+        if(imageprevvalRef.current[1] === false){
+            imageprevvalRef.current = [siimageState, true]
+            valuesRef.current[warningIndex][warningvalueIndex] = null
+        }
+        else if(imageprevvalRef.current[0] === undefined){
+            imageprevvalRef.current = [undefined, false]
+            valuesRef.current[warningIndex][warningvalueIndex] = 'Image was not changed'
+        }
+        siboxsetState(false)
+        siinputRef.current.value = ''
+    }
+
     return(
         <>
-            <SettingsImagePreview previewState={sipreviewState} previewsetState={sipreviewsetState}/>
+            <SettingsImagePreview previewState={sipreviewState} previewsetState={sipreviewsetState} imageinputRef={siinputRef} imageprevvalRef={imageprevvalRef} boxsetState={siboxsetState} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} imagesetState={siimagesetState}/>
             <div className='si_box'>
                 { siboxState === true ? (
                 <>
                     <div className='si_holder'>
-                        {siimageState}
+                        <img src={siimageState} className='si_image'/>
                     </div>
                     <div className='si_utilholder'>
-                        <div className='si_util si_utilblue'>CHANGE IMAGE</div>
-                        <div className='si_util si_utilred'>DELETE IMAGE</div>
+                        <div className='si_util si_utilblue' onClick={() => SelectImage()}>CHANGE IMAGE</div>
+                        <div className='si_util si_utilred' onClick={() => DeleteImage()}>DELETE IMAGE</div>
                     </div>
                 </>
                 ) : (

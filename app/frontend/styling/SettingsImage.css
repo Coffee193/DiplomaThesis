@@ -14,6 +14,14 @@
     justify-content: center;
 }
 
+.si_image{
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 200px;
+    width: 200px;
+}
+
 .si_utilholder{
     position: relative;
     flex: 1;

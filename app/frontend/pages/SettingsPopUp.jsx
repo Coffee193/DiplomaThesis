@@ -37,11 +37,6 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
     }
 
     function ClickSubmitDelete(){
-        UpdateValue()
-    }
-
-    async function UpdateValue(){
-        console.log(valuesRef.current)
         let ivalstart = popupState['inputtype'] === 'password' ? 1 : 0
         let ivalend = popupState['inputtype'] === 'password' ? 3 : 2
         for(let i=ivalstart; i<ivalend; i++){
@@ -52,6 +47,21 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
         }
         ClickButton(false)
 
+        if(popupState['inputtype'] === 'image'){
+            UpdateImage()
+        }
+        else if(popupState['extrainfo'] === 'deleteaccount'){
+
+        }
+        else if(popupState['extrainfo'] === 'deletechats'){
+
+        }
+        else{
+            UpdateValue()
+        }
+    }
+
+    async function UpdateValue(){
         let response_status = null
         let request = {"v": valuesRef.current[0], "t": valuesRef.current[1], "p": valuesRef.current[2]}
         let response = await fetch(import.meta.env.VITE_URL + 'loginregister/updatevalue/', {
@@ -72,6 +82,13 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
             popupState['setState'](valuesRef.current[0])
             spnotificationsetState({'visible': false})
         }
+    }
+
+    async function UpdateImage(){
+        popupState['setState'](null, valuesRef.current[0])
+        ClickButton(true)
+        ClosePopUp()
+        //valuesRef.current[1] = false
     }
 
     function ClickButton(active){
@@ -99,7 +116,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
                 <XCloseIcon className={'sp_close ' + popupState['classclose']} onClick={() => ClosePopUp()}/>
             </div>
 
-            { (popupState['isadmin'] === true && popupState['header'] === 'DELETE ACCOUNT') ? (
+            { (popupState['isadmin'] === true && popupState['extrainfo'] === 'deleteaccount') ? (
                 <div className='sp_deleteadminaccount'>
                     <div>You <b>cannot</b> delete an admin account.</div>
                     <div>In order to delete it, contact the appropriate department and delete it straight from the database</div>
@@ -130,7 +147,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
                             }
                             else if(popupState['inputtype'] === 'image'){
                                 return(
-                                    <SettingsImage existimage={popupState['existimage']}/>
+                                    <SettingsImage imageval={popupState['imageval']} valuesRef={valuesRef} warningIndex={3} warningvalueIndex={0}/>
                                 )
                             }
                         })()

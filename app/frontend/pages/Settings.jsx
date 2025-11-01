@@ -47,7 +47,7 @@ export function Settings({updatenavbarsetState}){
         }).then(data => data)*/
         //
         let response_status = 200
-        let response = {"email": "test@test.test", "phone": null, "name": "Goku", "isadmin": true, /*"img": "237346999496364032"*/ "img": false}
+        let response = {"email": "test@test.test", "phone": null, "name": "Goku", "isadmin": true, /*"img": "193694535228608512"*/ "img": null}
         //
 
         if(response_status === 200){
@@ -59,7 +59,10 @@ export function Settings({updatenavbarsetState}){
     }
 
     function SettingsBoxBuild(response){
-        simagesetState(<img className='s_img_dim s_loading' src={import.meta.env.VITE_IMG_PATH + response['img'] + '.JPEG'} onError={ImageNotFound}/>)
+        //fetch(import.meta.env.VITE_IMG_PATH + response['img'] + '.JPEG').then(response => response.arrayBuffer()).then(buf => console.log(buf))
+        console.log('***')
+        CreateImage(response['img'])
+        //simagesetState(<img className='s_img_dim s_loading' src={import.meta.env.VITE_IMG_PATH + response['img'] + '.JPEG'} onError={ImageNotFound}/>)
         snamesetState(response['name'])
         console.log(response['name'])
         semailsetState(response['email'])
@@ -72,12 +75,31 @@ export function Settings({updatenavbarsetState}){
     }
 
     function ImageNotFound(){
-        simagesetState(<UserIconThin className='s_icon' onClick={() => spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'existimage': false})}/>)
+        simagesetState(<UserIconThin className='s_icon' onClick={() => {spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': CreateImage}); valuesRef.current[3][0] = 'Image was not changed'}}/>)
+    }
+
+    async function CreateImage(soft_src = null, hard_src = null){
+        let img_src = null
+        if(hard_src === null){
+            if(soft_src != null){
+                let imgdata = await fetch(import.meta.env.VITE_IMG_PATH + soft_src + '.JPEG')
+                .then(response => response.arrayBuffer())
+                img_src ='data:image/jpeg;base64,' + btoa(String.fromCharCode(...new Uint8Array(imgdata)));
+            }
+            else{
+                img_src = 'a'
+            }
+        }
+        else{
+            img_src = hard_src
+        }
+
+        simagesetState(<img className='s_icon' src={img_src} onError={ImageNotFound} onClick={() => {spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'imageval': img_src, 'setState': CreateImage}); valuesRef.current[3][0] = 'Image was not changed'}}/>)
     }
 
     return(
         <div className='s_allholder'>
-            <SettingsPopUp popupState={spopupState} popupsetState={spopupsetState} valuesRef={valuesRef} setState={spopupState['setState']}/>
+            <SettingsPopUp popupState={spopupState} popupsetState={spopupsetState} valuesRef={valuesRef}/>
             <div className='s_mainholder'>
                 <div className='s_box'>
 
@@ -103,8 +125,8 @@ export function Settings({updatenavbarsetState}){
                         <div className='s_line' onClick={() => console.log(valuesRef.current)}/>
 
                         <div className='s_content'>
-                            <div className='s_util' onClick={() => spopupsetState({'visible': true, 'header': 'DELETE ALL CHATS', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true})}>DELETE ALL CHATS</div>
-                            <div className='s_util' onClick={() => spopupsetState({'visible': true, 'header': 'DELETE ACCOUNT', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true, 'isadmin': sadminState})}>DELETE ACCOUNT</div>
+                            <div className='s_util' onClick={() => spopupsetState({'visible': true, 'header': 'DELETE ALL CHATS', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true, 'extrainfo': 'deletechats'})}>DELETE ALL CHATS</div>
+                            <div className='s_util' onClick={() => spopupsetState({'visible': true, 'header': 'DELETE ACCOUNT', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true, 'isadmin': sadminState, 'extrainfo': 'deleteaccount'})}>DELETE ACCOUNT</div>
                             <div className='s_util s_blue'>LOGOUT</div>
                             {sadminState === true ? (<Link to='/referalcodes' tabIndex="-1"><div className='s_referal'>REFERAL CODES</div></Link>): ('')}
                         </div>

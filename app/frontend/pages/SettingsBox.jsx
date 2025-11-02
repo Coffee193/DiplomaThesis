@@ -1,7 +1,7 @@
 import '../styling/SettingsBox.css'
 import { PencilIcon } from '../components/svgs/UtilIcons'
 
-export function SettingsBox({header, value, valueempty, shortenvalue = false, popupsetState, popupvalue}){
+export function SettingsBox({header, value, valueempty, shortenvalue = false, popupsetState, popupvalue, valuesRef, typeIndex, warningIndex, warningvalueIndex}){
 
     function ShortValue(value){
         if(value.length > 39){
@@ -12,7 +12,7 @@ export function SettingsBox({header, value, valueempty, shortenvalue = false, po
     }
 
     return(
-        <div className='sb_box' onClick={() => popupsetState(popupvalue)}>
+        <div className='sb_box' onClick={() => {popupsetState(popupvalue); valuesRef.current[typeIndex] = popupvalue['inputtype']; valuesRef.current[warningIndex][warningvalueIndex] = null}}>
             <span className='sb_header'>{header}</span>
             <div className='sb_main'>
                 <div className={value === null ? ('sb_val sb_vallight') : ('sb_val')}>{value === null ? (valueempty) : (shortenvalue === false ? (value) : (ShortValue(value)))}</div>

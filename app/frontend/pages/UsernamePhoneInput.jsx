@@ -5,7 +5,7 @@ import { AreaCode } from './AreaCode'
 import { pressKey } from './pressKeyFunc'
 import { country_list_full } from '../components/CountriesList'
 
-export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex, alwaysEmail, alwaysPhone, autoFocus, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue, tabIndex, classtype, placeholder, existnavbar}, usernamephoneinputRef) => {
+export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex, alwaysEmail, alwaysPhone, autoFocus, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue, tabIndex, classtype, placeholder, existnavbar, allowEmpty}, usernamephoneinputRef) => {
     
     console.log('i got rerendered')
     const country_list_keys = Object.keys(country_list_full)
@@ -57,7 +57,18 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
         let warning = null
         let checkval = upi_usernamephoneinputRef.current.value
         if(checkval === ''){
-            warning = 'Field is empty'
+            checkval = null
+            if(alwaysEmail === true){
+                if(allowEmpty != true){
+                    warning = 'Field is empty'
+                }
+            }
+            else if(alwaysPhone === true){
+                //<-------------------------------------!!!
+            }
+            else{
+                warning = 'Field is empty'
+            }
         }
         else if(upi_valtype.current === 'email'){
             let contains_a = checkval.indexOf('@')
@@ -80,7 +91,8 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
 
         valuesRef.current[warningIndex][warningvalueIndex] = warning
         if(upi_valtype.current === 'email'){
-            valuesRef.current[valueIndex] = upi_usernamephoneinputRef.current.value
+            //valuesRef.current[valueIndex] = upi_usernamephoneinputRef.current.value
+            valuesRef.current[valueIndex] = checkval
             valuesRef.current[typeIndex] = 'email'
         }
         else if(upi_valtype.current === 'phone'){

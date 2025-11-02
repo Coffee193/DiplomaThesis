@@ -112,7 +112,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
         <>
         <div className='sp' style={popupState['visible'] === true ? ({opacity: '1', transform: 'none', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.8)', pointerEvents: 'none'})}>
             <div className='sp_header'>
-                <div className={popupState['headerred'] === true ? ('sp_red') : ('')}>{popupState['header']}</div>
+                <div className={popupState['headerred'] === true ? ('sp_red') : ('')} onClick={() => console.log(valuesRef.current)}>{popupState['header']}</div>
                 <XCloseIcon className={'sp_close ' + popupState['classclose']} onClick={() => ClosePopUp()}/>
             </div>
 
@@ -127,7 +127,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
                         (() => {
                             if(popupState['inputtype'] === 'email'){
                                 return(
-                                    <UsernamePhoneInput alwaysEmail={true} classtype='s' placeholder={popupState['placeholderfirst']} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'ps'} ref={spemailRef} autoFocus={true} valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0} onpressEnter={ClickSubmitDelete}/>
+                                    <UsernamePhoneInput alwaysEmail={true} classtype='s' placeholder={popupState['placeholderfirst']} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'ps'} ref={spemailRef} autoFocus={true} valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0} onpressEnter={ClickSubmitDelete} allowEmpty={popupState['allowEmpty']}/>
                                 )
                             }
                             else if(popupState['inputtype'] === 'phone'){
@@ -142,12 +142,12 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
                             }
                             else if(popupState['inputtype'] === 'name'){
                                 return(
-                                    <SettingsNameInput placeholder={popupState['placeholderfirst']} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'ps'} autoFocus={true} ref={spnameRef} valuesRef={valuesRef} nameIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0} onpressEnter={ClickSubmitDelete}/>
+                                    <SettingsNameInput placeholder={popupState['placeholderfirst']} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'ps'} autoFocus={true} ref={spnameRef} valuesRef={valuesRef} nameIndex={0} warningIndex={3} warningvalueIndex={0} onpressEnter={ClickSubmitDelete} allowEmpty={popupState['allowEmpty']}/>
                                 )
                             }
                             else if(popupState['inputtype'] === 'image'){
                                 return(
-                                    <SettingsImage imageval={popupState['imageval']} valuesRef={valuesRef} warningIndex={3} warningvalueIndex={0}/>
+                                    <SettingsImage imageval={popupState['imageval']} valuesRef={valuesRef} warningIndex={3} warningvalueIndex={0} imageIndex={0}/>
                                 )
                             }
                         })()

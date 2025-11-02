@@ -1,8 +1,7 @@
 import '../styling/Settings.css'
 import { useEffect, useState, useRef } from 'react'
-import { UserIconThin, PencilIcon, XCloseIcon, EyeIcon, EyeCloseIcon, Tick } from '../components/svgs/UtilIcons'
+import { UserIconThin } from '../components/svgs/UtilIcons'
 import { useNavigate, Link } from 'react-router-dom'
-import html2canvas from 'html2canvas'
 import { SettingsBox } from './SettingsBox'
 import { SettingsName } from './SettingsName'
 import { SettingsPopUp } from './SettingsPopUp'
@@ -33,21 +32,22 @@ export function Settings({updatenavbarsetState}){
     }, [])
 
     async function GetUserInfo(){
-        /*if(document.cookie.includes('userinfo=') === false){
+        if(document.cookie.includes('userinfo=') === false){
             navigate('/login', {state: '/settings'})
         }
 
         let response_status = null
-        let response = await fetch(import.meta.env.VITE_URL + '/loginregister/getuserinfo/', {
+        /*let response = await fetch(import.meta.env.VITE_URL + '/loginregister/getuserinfo/', {
             method: 'GET',
             credentials: 'include',
         }).then(res => {
             response_status = res.status
             return res.json()
         }).then(data => data)*/
+
         //
-        let response_status = 200
-        let response = {"email": "test@test.test", "phone": null, "name": "Goku", "isadmin": true, /*"img": "193694535228608512"*/ "img": null}
+        response_status = 200
+        let response = {"name": null, "img": null, "email": "t@t.t", "phone": null, "isadmin": true}
         //
 
         if(response_status === 200){
@@ -59,12 +59,8 @@ export function Settings({updatenavbarsetState}){
     }
 
     function SettingsBoxBuild(response){
-        //fetch(import.meta.env.VITE_IMG_PATH + response['img'] + '.JPEG').then(response => response.arrayBuffer()).then(buf => console.log(buf))
-        console.log('***')
         CreateImage(response['img'])
-        //simagesetState(<img className='s_img_dim s_loading' src={import.meta.env.VITE_IMG_PATH + response['img'] + '.JPEG'} onError={ImageNotFound}/>)
         snamesetState(response['name'])
-        console.log(response['name'])
         semailsetState(response['email'])
         sphonesetState(response['phone'])
         sadminsetState(response['isadmin'])
@@ -75,7 +71,7 @@ export function Settings({updatenavbarsetState}){
     }
 
     function ImageNotFound(){
-        simagesetState(<UserIconThin className='s_icon' onClick={() => {spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': CreateImage}); valuesRef.current[3][0] = 'Image was not changed'}}/>)
+        simagesetState(<UserIconThin className='s_icon' onClick={() => {spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': CreateImage}); valuesRef.current[3][0] = 'Image was not changed'; valuesRef.current[1] = 'image'}}/>)
     }
 
     async function CreateImage(soft_src = null, hard_src = null){
@@ -94,7 +90,7 @@ export function Settings({updatenavbarsetState}){
             img_src = hard_src
         }
 
-        simagesetState(<img className='s_icon' src={img_src} onError={ImageNotFound} onClick={() => {spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'imageval': img_src, 'setState': CreateImage}); valuesRef.current[3][0] = 'Image was not changed'}}/>)
+        simagesetState(<img className='s_icon' src={img_src} onError={ImageNotFound} onClick={() => {spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'imageval': img_src, 'setState': CreateImage}); valuesRef.current[3][0] = 'Image was not changed'; valuesRef.current[1] = 'image'}}/>)
     }
 
     return(
@@ -109,7 +105,7 @@ export function Settings({updatenavbarsetState}){
                         </div>
                         <div className='s_loading_box s_loading' ref={nameskeletonRef}/>
                         <div ref={nameloadedRef} style={{display: 'none'}}>
-                            <SettingsName value={snameState} popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Name', 'classclose': 'sp_closeblue', 'inputtype': 'name', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Name', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': snamesetState}}/>
+                            <SettingsName value={snameState} popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Name', 'classclose': 'sp_closeblue', 'inputtype': 'name', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Name', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': snamesetState, 'allowEmpty': true}} valuesRef={valuesRef} typeIndex={1} warningIndex={3} warningvalueIndex={0}/>
                         </div>
                     </div>
 
@@ -118,9 +114,9 @@ export function Settings({updatenavbarsetState}){
                         <div className='s_loading_box s_loading' style={{width: '75%'}}/>
                     </div>
                     <div className='s_content' style={{display: 'none'}} ref={loadedRef}>
-                        <SettingsBox header='Email' value={semailState} valueempy='no email address provided' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Email', 'classclose': 'sp_closeblue', 'inputtype': 'email', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Email Address', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': semailsetState}}/>
-                        <SettingsBox header='Phone' value={sphoneState} valueempty='no phone number provided' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Phone', 'classclose': 'sp_closeblue', 'inputtype': 'phone', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Phone Number', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': sphonesetState}}/>
-                        <SettingsBox header='Password' value='*****' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Password', 'classclose': 'sp_closeblue', 'inputtype': 'password', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Password', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit'}}/>
+                        <SettingsBox header='Email' value={semailState} valueempy='no email address provided' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Email', 'classclose': 'sp_closeblue', 'inputtype': 'email', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Email Address', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': semailsetState, 'allowEmpty': true}} valuesRef={valuesRef} typeIndex={1} warningIndex={3} warningvalueIndex={0}/>
+                        <SettingsBox header='Phone' value={sphoneState} valueempty='no phone number provided' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Phone', 'classclose': 'sp_closeblue', 'inputtype': 'phone', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Phone Number', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': sphonesetState, 'allowEmpty': true}} valuesRef={valuesRef} typeIndex={1} warningIndex={3} warningvalueIndex={0}/>
+                        <SettingsBox header='Password' value='*****' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Password', 'classclose': 'sp_closeblue', 'inputtype': 'password', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Password', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit'}} valuesRef={valuesRef} typeIndex={1}/>
                         
                         <div className='s_line' onClick={() => console.log(valuesRef.current)}/>
 

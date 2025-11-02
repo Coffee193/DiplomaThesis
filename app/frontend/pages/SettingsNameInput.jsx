@@ -2,7 +2,7 @@ import '../styling/SettingsNameInput.css'
 import { pressKey } from './pressKeyFunc'
 import { forwardRef, useRef } from 'react'
 
-export const SettingsNameInput = forwardRef(({ placeholder, autoFocus, onpressTab, onpressTabValue, onpressEnter, onpressEnterValue, valuesRef, typeIndex, nameIndex, warningIndex, warningvalueIndex }, nameinputRef) => {
+export const SettingsNameInput = forwardRef(({ placeholder, autoFocus, onpressTab, onpressTabValue, onpressEnter, onpressEnterValue, valuesRef, nameIndex, warningIndex, warningvalueIndex, allowEmpty }, nameinputRef) => {
 
     const sni_inputRef = useRef()
 
@@ -12,9 +12,15 @@ export const SettingsNameInput = forwardRef(({ placeholder, autoFocus, onpressTa
         if(checkval.length > 7){
             warning = 'Name cannot exceed 7 characters'
         }
+        if(checkval === ''){
+            checkval = null
+            if(allowEmpty != true){
+                warning = 'Field is empty'
+            }
+        }
         valuesRef.current[nameIndex] = checkval
         valuesRef.current[warningIndex][warningvalueIndex] = warning
-        valuesRef.current[typeIndex] = 'name'
+        //valuesRef.current[typeIndex] = 'name'
     }
 
     return(

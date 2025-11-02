@@ -319,7 +319,7 @@ def Logout_OLDDEPRECATED(request):
         return HttpResponse(json.dumps('Bad Method'), status = 405)
     
 @api_view(['POST'])
-def UpdateValue(request):
+def UpdateValue_old(request):
     if(request.method == 'POST'):
         data = json.loads(request.body.decode('utf-8'))
         if('access' not in request.COOKIES or 'refresh' not in request.COOKIES):
@@ -681,8 +681,6 @@ def PasswordCompare(password, password_db):
         return True
     else:
         return False
-    
-#############################3
 
 @api_view(['POST'])
 def Register(request):
@@ -781,3 +779,20 @@ def GetUserInfo(request):
     if(userinfo['img'] == True):
         userinfo['img'] = str(valjwt[3])
     return CreateResponseNewAccess(valjwt[1], userinfo, 200)
+
+@api_view(['POST'])
+def UpdateValue(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+
+    if('v' not in data or 't' not in data or 'p' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    if(CheckDataValue(data['v'], data['t']) == False):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    
+    uservals = User.objects.filter(id = valjwt[3]).values(('email', 'phone', 'password') if (data['t'] != 'password' and data['t'] != 'name') else 'password')[0]
+    if(PasswordCompare(data['p'], uservals['password']) == False):
+        return HttpResponse(json.dumps('Password is incorrect'), status = 409)
+    

@@ -3,7 +3,7 @@ import { XCloseIcon, Tick } from '../components/svgs/UtilIcons'
 import { useRef } from 'react'
 import html2canvas from 'html2canvas'
 
-export function SettingsImagePreview({ previewState, previewsetState, imageinputRef, imageprevvalRef, imageState, imagesetState, boxsetState, valuesRef, warningIndex, warningvalueIndex }){
+export function SettingsImagePreview({ previewState, previewsetState, imageinputRef, imageprevvalRef, imageState, imagesetState, boxsetState, valuesRef, warningIndex, warningvalueIndex, imageIndex }){
 
     const imgcanmoveRef = useRef(false)
     const imgmoveposRef = useRef()
@@ -44,8 +44,8 @@ export function SettingsImagePreview({ previewState, previewsetState, imageinput
             imagesetState(img)
             boxsetState(true)
             PreviewClose()
-            valuesRef.current[0] = img
-            valuesRef.current[1] = 'image'
+            valuesRef.current[imageIndex] = img
+            //valuesRef.current[1] = 'image'
         })
     }
 

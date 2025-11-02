@@ -2,7 +2,7 @@ import '../styling/SettingsImage.css'
 import { useState, useRef } from 'react'
 import { SettingsImagePreview } from './SettingsImagePreview'
 
-export function SettingsImage({ imageval, valuesRef, warningIndex, warningvalueIndex }){
+export function SettingsImage({ imageval, valuesRef, warningIndex, warningvalueIndex, imageIndex }){
 
     const [siboxState, siboxsetState] = useState(imageval === undefined ? false : true)
     const [siimageState, siimagesetState] = useState(imageval)
@@ -39,7 +39,7 @@ export function SettingsImage({ imageval, valuesRef, warningIndex, warningvalueI
 
     return(
         <>
-            <SettingsImagePreview previewState={sipreviewState} previewsetState={sipreviewsetState} imageinputRef={siinputRef} imageprevvalRef={imageprevvalRef} boxsetState={siboxsetState} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} imagesetState={siimagesetState}/>
+            <SettingsImagePreview previewState={sipreviewState} previewsetState={sipreviewsetState} imageinputRef={siinputRef} imageprevvalRef={imageprevvalRef} boxsetState={siboxsetState} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} imagesetState={siimagesetState} imageIndex={imageIndex}/>
             <div className='si_box'>
                 { siboxState === true ? (
                 <>

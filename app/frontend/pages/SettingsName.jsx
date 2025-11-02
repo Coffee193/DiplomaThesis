@@ -1,6 +1,6 @@
 import '../styling/SettingsName.css'
 
-export function SettingsName({ value, popupvalue, popupsetState }){
+export function SettingsName({ value, popupvalue, popupsetState, valuesRef, typeIndex, warningIndex, warningvalueIndex }){
     
     //const [nameState, namesetState] = useState(SetName(value))
 
@@ -9,7 +9,7 @@ export function SettingsName({ value, popupvalue, popupsetState }){
     }
     
     return(
-        <div className='sn' onClick={() => popupsetState(popupvalue)}>
+        <div className='sn' onClick={() => {popupsetState(popupvalue); valuesRef.current[typeIndex] = popupvalue['inputtype']; popupvalue['allowEmpty'] === true ? valuesRef.current[warningIndex][warningvalueIndex] = null : ''}}>
             {SetName(value)}
         </div>
     )

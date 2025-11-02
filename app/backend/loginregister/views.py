@@ -791,8 +791,34 @@ def UpdateValue(request):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
     if(CheckDataValue(data['v'], data['t']) == False):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
-    
-    uservals = User.objects.filter(id = valjwt[3]).values(('email', 'phone', 'password') if (data['t'] != 'password' and data['t'] != 'name') else 'password')[0]
+    print('yoyoyo')
+    uservals = None
+    if(data['t'] != 'password' and data['t'] != 'name'):
+        uservals = User.objects.filter(id = valjwt[3]).values('email', 'phone', 'password')[0]
+    else:
+        uservals = User.objects.filter(id = valjwt[3]).values('password')[0]
+    #uservals = User.objects.filter(id = valjwt[3]).values(('email', 'phone', 'password') if (data['t'] != 'password' and data['t'] != 'name') else 'password')[0]
+    print('sesese')
     if(PasswordCompare(data['p'], uservals['password']) == False):
-        return HttpResponse(json.dumps('Password is incorrect'), status = 409)
+        return CreateResponseNewAccess(valjwt[1], 'Password is incorrect', 409)
     
+    if(data['t'] == 'email'):
+        if(data['v'] == None and uservals['phone'] == None):
+            return CreateResponseNewAccess(valjwt[1], 'Either Email or Phone Number must have a value', 409)
+    elif(data['t'] == 'phone'):
+        if(data['v'] == None and uservals['email'] == None):
+            return CreateResponseNewAccess(valjwt[1], 'Either Email or Phone Number must have a value', 409)
+    
+    user_info = None
+    if(data['t'] == 'email'):
+        user_info = User.objects.filter(id = valjwt[3]).update(email = data['v'])
+    elif(data['t'] == 'phone'):
+        user_info = User.objects.filter(id = valjwt[3]).update(phone = data['v'])
+    elif(data['t'] == 'name'):
+        user_info = User.objects.filter(id = valjwt[3]).update(name = data['v'])
+    elif(data['t'] == 'password'):
+        user_info = User.objects.filter(id = valjwt[3]).update(password = PasswordSafe(data['v']))
+
+    if(user_info != 1):
+            return HttpResponse(json.dumps('Something went wrong'), status = 500)
+    return CreateResponseNewAccess(valjwt[1], data['t'][0].upper() + data['t'][1:] + ' successfully updated', 200)

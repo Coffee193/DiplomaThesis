@@ -58,13 +58,19 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
         let checkval = upi_usernamephoneinputRef.current.value
         if(checkval === ''){
             checkval = null
-            if(alwaysEmail === true){
+            if(alwaysEmail === true || alwaysPhone === true){
                 if(allowEmpty != true){
                     warning = 'Field is empty'
                 }
-            }
-            else if(alwaysPhone === true){
-                //<-------------------------------------!!!
+                else{
+                    if(alwaysPhone === true){
+                        let areacodeval = upi_countrycodeinputRef.current.value
+
+                        if(areacodeval !== ''){
+                            warning = 'Area Code must be empty Or both fields must have a value'
+                        }
+                    }
+                }
             }
             else{
                 warning = 'Field is empty'
@@ -96,7 +102,8 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
             valuesRef.current[typeIndex] = 'email'
         }
         else if(upi_valtype.current === 'phone'){
-            valuesRef.current[valueIndex] = '+' + upi_countrycodeinputRef.current.value + ' ' + upi_usernamephoneinputRef.current.value
+            //valuesRef.current[valueIndex] = '+' + upi_countrycodeinputRef.current.value + ' ' + upi_usernamephoneinputRef.current.value
+            valuesRef.current[valueIndex] = checkval === null ? null : '+' + upi_countrycodeinputRef.current.value + ' ' + upi_usernamephoneinputRef.current.value
             valuesRef.current[typeIndex] = 'phone'
         }
     }
@@ -105,6 +112,9 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
         let country = Intl.DateTimeFormat().resolvedOptions().timeZone;
         for(let i = 0; i < country_list_keys.length; i++){
             if(country_list_full[country_list_keys[i]]['tz'] === country){
+                if(alwaysPhone === true && allowEmpty == true){
+                    //valuesRef.current[warningIndex][warningvalueIndex] = 'Area Code must be empty Or both fields must have a value'
+                }
                 return [country_list_full[country_list_keys[i]]['svg'], country_list_full[country_list_keys[i]]['ac'].slice(1)]
             }
         }

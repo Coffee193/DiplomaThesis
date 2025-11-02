@@ -24,6 +24,7 @@ export function Settings({updatenavbarsetState}){
     const [snameState, snamesetState] = useState()
 
     const [spopupState, spopupsetState] = useState({'visible': false, 'header': ''})
+    const [snotificationState, snotificationsetState] = useState({'text': '', 'svg': null, 'visible': false, 'class': null})
 
     const valuesRef = useRef([null, null, null, ['Field is empty', 'Password field is empty', 'Passwords do not match']]) // value, type (e -> email, p -> phone, n -> name, i -> img), password, warning [1: valuewarning, 2:passwordwarning, 3:passwordconfirmwarning]
 
@@ -37,18 +38,16 @@ export function Settings({updatenavbarsetState}){
         }
 
         let response_status = null
-        /*let response = await fetch(import.meta.env.VITE_URL + '/loginregister/getuserinfo/', {
+        let response = await fetch(import.meta.env.VITE_URL + '/loginregister/getuserinfo/', {
             method: 'GET',
             credentials: 'include',
         }).then(res => {
             response_status = res.status
             return res.json()
-        }).then(data => data)*/
+        }).then(data => data)
 
-        //
-        response_status = 200
-        let response = {"name": null, "img": null, "email": "t@t.t", "phone": null, "isadmin": true}
-        //
+        //response_status = 200
+        //let response = {"name": null, "img": null, "email": "t@t.t", "phone": null, "isadmin": true}
 
         if(response_status === 200){
             SettingsBoxBuild(response)
@@ -95,7 +94,7 @@ export function Settings({updatenavbarsetState}){
 
     return(
         <div className='s_allholder'>
-            <SettingsPopUp popupState={spopupState} popupsetState={spopupsetState} valuesRef={valuesRef}/>
+            <SettingsPopUp popupState={spopupState} popupsetState={spopupsetState} valuesRef={valuesRef} notificationsetState={snotificationsetState}/>
             <div className='s_mainholder'>
                 <div className='s_box'>
 
@@ -128,6 +127,12 @@ export function Settings({updatenavbarsetState}){
                         </div>
                     </div>
 
+                </div>
+            </div>
+            <div className='s_notificationholder' style={snotificationState['visible'] === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.8)', pointerEvents: 'none'})}>
+                <div className='s_notification'>
+                    <div>{snotificationState['text']}</div>
+                    <div className={'s_notificationsvg ' + snotificationState['class']} onClick={() => snotificationsetState(prevState => ({...prevState, 'visible': false}))}>{snotificationState['svg']}</div>
                 </div>
             </div>
         </div>

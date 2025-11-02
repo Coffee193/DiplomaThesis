@@ -142,7 +142,7 @@
     font-weight: 300;
 }
 
-.sp_notificationholder{
+/*.sp_notificationholder{
     position: fixed;
     bottom: 20px;
     width: 100%;
@@ -183,4 +183,4 @@
 
 .sp_notificationred:hover{
     color: var(--chatnav-color-delete-light);
-}
+}*/

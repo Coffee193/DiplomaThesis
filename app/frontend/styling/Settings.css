@@ -138,3 +138,54 @@
     color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
     border: solid var(--color-text-main-hover-blue-experimental-lighter-evenmore) 5px;
 }
+
+.s_notificationholder{
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    opacity: 0;
+    transform: 'scale(0.8)';
+    pointer-events: none;
+    transition: 0.05s ease-out;
+}
+
+.s_notification{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 7px 20px;
+    border-radius: 20px;
+    gap: 20px;
+    &>div{
+        font-weight: 200;
+    }
+    box-shadow: var(--default-box-shadow);
+}
+
+.s_notificationsvg{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    color: var(--chat-color-gray);
+}
+
+.s_notificationred:hover{
+    color: var(--chatnav-color-delete-light);
+}
+
+.s_notificationgreen{
+    width: 24px;
+    height: 24p;
+}
+.s_notificationgreen:hover{
+    color: var(--color-walmart-green);
+}

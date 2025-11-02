@@ -1,5 +1,5 @@
 import '../styling/SettingsPopUp.css'
-import { XCloseIcon, BlocksLoad } from '../components/svgs/UtilIcons'
+import { XCloseIcon, BlocksLoad, Tick } from '../components/svgs/UtilIcons'
 import { UsernamePhoneInput } from './UsernamePhoneInput'
 import { PasswordInput } from './PasswordInput'
 import { SettingsNameInput } from './SettingsNameInput'
@@ -7,9 +7,9 @@ import { SettingsImage } from './SettingsImage'
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
+export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificationsetState}){
 
-    const [spnotificationState, spnotificationsetState] = useState({'text': '', 'svg': null, 'visible': false, 'class': null})
+    //const [spnotificationState, spnotificationsetState] = useState({'text': '', 'svg': null, 'visible': false, 'class': null})
     const sppasswordRef = useRef()
     const spemailRef = useRef()
     const sppasswordfirstRef = useRef()
@@ -37,11 +37,11 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
     }
 
     function ClickSubmitDelete(){
-        let ivalstart = popupState['inputtype'] === 'password' ? 1 : 0
-        let ivalend = popupState['inputtype'] === 'password' ? 3 : 2
+        let ivalstart = popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? 1 : 0
+        let ivalend = popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? 3 : 2
         for(let i=ivalstart; i<ivalend; i++){
             if(valuesRef.current[3][i] !== null){
-                spnotificationsetState({'text': valuesRef.current[3][i], 'svg': <XCloseIcon/>, 'visible': true, 'class': 'sp_notificationred'})
+                notificationsetState({'text': valuesRef.current[3][i], 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'})
                 return
             }
         }
@@ -69,18 +69,25 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
             body: JSON.stringify(request),
             credentials: 'include',
         }).then(res => {
-            response_status = res.status()
+            response_status = res.status
             return res.json()
-        }).then(data => data).catch(() => spnotificationsetState({'text': 'Could not connect to the server', 'svg': <XCloseIcon/>, 'visible': true, 'class': 'sp_notificationred'}))
+        }).then(data => data)
+        .catch(() => notificationsetState({'text': 'Could not connect to the server', 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'}))
 
         ClickButton(true)
         if(response_status === 401 || response_status === 403){
             navigate('/login', {state: '/settings'})
             return
         }
+        else if(response_status === 409){
+            notificationsetState({'text': response, 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'})
+        }
         else if(response_status === 200){
-            popupState['setState'](valuesRef.current[0])
-            spnotificationsetState({'visible': false})
+            if(popupState['setState'] !== undefined){
+                popupState['setState'](valuesRef.current[0])
+            }
+            notificationsetState({'text': response, 'visible': true, 'svg': <Tick/>, 'class': 's_notificationgreen'})
+            ClosePopUp(true)
         }
     }
 
@@ -102,10 +109,12 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
         }
     }
 
-    function ClosePopUp(){
+    function ClosePopUp(keepnotification = false){
         popupsetState({'visible': false})
         valuesRef.current = [null, null, null, ['Field is empty', 'Password field is empty', 'Passwords do not match']]
-        spnotificationsetState({'visible': false})
+        if(keepnotification === false){
+            notificationsetState({'visible': false})
+        }
     }
 
     return(
@@ -132,12 +141,12 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
                             }
                             else if(popupState['inputtype'] === 'phone'){
                                 return(
-                                    <UsernamePhoneInput alwaysPhone={true} classtype='s' placeholder={popupState['placeholderfirst']} existnavbar={true} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'ps'} autoFocus={true} ref={spphoneRef} valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0} onpressEnter={ClickSubmitDelete}/>
+                                    <UsernamePhoneInput alwaysPhone={true} classtype='s' placeholder={popupState['placeholderfirst']} existnavbar={true} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={'ps'} autoFocus={true} ref={spphoneRef} valuesRef={valuesRef} valueIndex={0} typeIndex={1} warningIndex={3} warningvalueIndex={0} onpressEnter={ClickSubmitDelete} allowEmpty={popupState['allowEmpty']}/>
                                 )
                             }
                             else if(popupState['inputtype'] === 'password'){
                                 return(
-                                    <PasswordInput classtype='s' placeholder={popupState['placeholderfirst']} tabIndex="-1"  onpressTab={FocusElement} onpressTabValue={'ps'} ref={sppasswordfirstRef} autoFocus={true} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={1} isconfirmpassword={false} onpressEnter={ClickSubmitDelete}/>
+                                    <PasswordInput classtype='s' placeholder={popupState['placeholderfirst']} tabIndex="-1"  onpressTab={FocusElement} onpressTabValue={'ps'} ref={sppasswordfirstRef} autoFocus={true} valuesRef={valuesRef} passwordIndex={0} warningIndex={3} warningvalueIndex={0} isconfirmpassword={false} onpressEnter={ClickSubmitDelete}/>
                                 )
                             }
                             else if(popupState['inputtype'] === 'name'){
@@ -153,7 +162,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
                         })()
                     }
                     { popupState['visible'] === true ? (
-                        <PasswordInput classtype='s' placeholder={popupState['placeholdersecond']} ref={sppasswordRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={popupState['inputtype'] !== undefined ? popupState['inputtype'].slice(0, 2) : ''} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={popupState['inputtype'] === 'password' ? 2 : 1} isconfirmpassword={popupState['inputtype'] === 'password' ? true : false} onpressEnter={ClickSubmitDelete}/>
+                        <PasswordInput classtype='s' placeholder={popupState['placeholdersecond']} ref={sppasswordRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={popupState['inputtype'] !== undefined ? popupState['inputtype'].slice(0, 2) : ''} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? 2 : 1} isconfirmpassword={popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? true : false} onpressEnter={ClickSubmitDelete}/>
                     ) : (<></>)}
                     {popupState['inputtype'] === 'image' ? <div/> : ''}
                 </div>
@@ -162,12 +171,12 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef}){
                 </div>
             </>)}
         </div>
-        <div className='sp_notificationholder' style={spnotificationState['visible'] === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.8)', pointerEvents: 'none'})}>
+        {/*<div className='sp_notificationholder' style={spnotificationState['visible'] === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.8)', pointerEvents: 'none'})}>
             <div className='sp_notification'>
                 <div>{spnotificationState['text']}</div>
                 <div className={'sp_notificationsvg ' + spnotificationState['class']} onClick={() => spnotificationsetState(prevState => ({...prevState, 'visible': false}))}>{spnotificationState['svg']}</div>
             </div>
-        </div>
+        </div>*/}
         <div className='sp_darkbg' style={popupState['visible'] === true ? ({ opacity: '1', pointerEvents: 'all' }) : ({ opacity: '0', pointerEvents: 'none' })} onClick={() => ClosePopUp()}/>
         </>
     )

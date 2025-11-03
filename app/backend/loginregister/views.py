@@ -516,7 +516,7 @@ def GetUserImg(request):
         return HttpResponse(json.dumps('Bad Method'), status = 405)
     
 @api_view(['DELETE'])
-def DeleteUser(request):
+def DeleteUser_old(request):
     if request.method == 'DELETE':
         if 'access' not in request.COOKIES or 'refresh' not in request.COOKIES:
             return HttpResponse(json.dumps('no jwt provided'), status = 401)
@@ -791,14 +791,13 @@ def UpdateValue(request):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
     if(CheckDataValue(data['v'], data['t']) == False):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
-    print('yoyoyo')
+    
     uservals = None
     if(data['t'] != 'password' and data['t'] != 'name'):
         uservals = User.objects.filter(id = valjwt[3]).values('email', 'phone', 'password')[0]
     else:
         uservals = User.objects.filter(id = valjwt[3]).values('password')[0]
-    #uservals = User.objects.filter(id = valjwt[3]).values(('email', 'phone', 'password') if (data['t'] != 'password' and data['t'] != 'name') else 'password')[0]
-    print('sesese')
+    
     if(PasswordCompare(data['p'], uservals['password']) == False):
         return CreateResponseNewAccess(valjwt[1], 'Password is incorrect', 409)
     
@@ -822,3 +821,45 @@ def UpdateValue(request):
     if(user_info != 1):
             return HttpResponse(json.dumps('Something went wrong'), status = 500)
     return CreateResponseNewAccess(valjwt[1], data['t'][0].upper() + data['t'][1:] + ' successfully updated', 200)
+
+@api_view(['DELETE'])
+def DeleteUser(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+    if('v' not in data or 't' not in data or data['t'] != 'password'):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    
+    userfound = User.objects.filter(id = valjwt[3]).values('is_admin', 'status', 'password')
+    if(userfound.count() == 0):
+        return HttpResponse(json.dumps('User not found'), status = 409)
+    
+    userfound = userfound[0]
+    if(userfound['is_admin'] == True):
+        return HttpResponse(json.dumps('User is admin. Admin Users cannot be deleted'), status = 409)
+    if(userfound['status'] == 'D'):
+        return HttpResponse(json.dumps('User is already deleted'), status = 409)
+    if(PasswordCompare(data['v'], userfound['password']) == False):
+        return HttpResponse(json.dumps('Password is incorrect'), status = 409)
+
+    userdel = User.objects.filter(id = valjwt[3]).update(status = 'D')
+    if(userdel == 0):
+        return HttpResponse(json.dumps('Something went wrong. User could not be deleted'), status = 409)
+    elif(userdel == 1):
+        response_ret = HttpResponse(json.dumps('User succesffully deleted'), status = 200)
+        response_ret.delete_cookie('access')
+        response_ret.delete_cookie('refresh')
+        response_ret.delete_cookie('userinfo')
+        return response_ret
+
+@api_view(['POST'])
+def UpdateImage(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    
+    data = json.loads(request.data.get('data'))
+    image = request.data.get('img')
+    if('p' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)

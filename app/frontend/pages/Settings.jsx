@@ -92,6 +92,24 @@ export function Settings({updatenavbarsetState}){
         simagesetState(<img className='s_icon' src={img_src} onError={ImageNotFound} onClick={() => {spopupsetState({'visible': true, 'header': 'Change Image', 'classclose': 'sp_closeblue', 'inputtype': 'image', 'classbutton': 'sp_bgblue', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'imageval': img_src, 'setState': CreateImage}); valuesRef.current[3][0] = 'Image was not changed'; valuesRef.current[1] = 'image'}}/>)
     }
 
+    async function Logout(){
+        let response_status = null
+        await fetch(import.meta.env.VITE_URL + '/loginregister/logout/', {
+            method:'DELETE',
+            credentials: 'include',
+        }).then(res => {
+            response_status = res.status
+            return res.json()}).then(data => data)
+            
+        if(response_status === 200){
+            navigate('/')
+            window.location.reload()
+        }
+        else{
+            navigate('/login', {state: 'expired'})
+        }
+    }
+
     return(
         <div className='s_allholder'>
             <SettingsPopUp popupState={spopupState} popupsetState={spopupsetState} valuesRef={valuesRef} notificationsetState={snotificationsetState}/>
@@ -113,16 +131,16 @@ export function Settings({updatenavbarsetState}){
                         <div className='s_loading_box s_loading' style={{width: '75%'}}/>
                     </div>
                     <div className='s_content' style={{display: 'none'}} ref={loadedRef}>
-                        <SettingsBox header='Email' value={semailState} valueempy='no email address provided' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Email', 'classclose': 'sp_closeblue', 'inputtype': 'email', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Email Address', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': semailsetState, 'allowEmpty': true}} valuesRef={valuesRef} typeIndex={1} warningIndex={3} warningvalueIndex={0}/>
+                        <SettingsBox header='Email' value={semailState} valueempty='no email address provided' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Email', 'classclose': 'sp_closeblue', 'inputtype': 'email', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Email Address', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': semailsetState, 'allowEmpty': true}} valuesRef={valuesRef} typeIndex={1} warningIndex={3} warningvalueIndex={0}/>
                         <SettingsBox header='Phone' value={sphoneState} valueempty='no phone number provided' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Phone', 'classclose': 'sp_closeblue', 'inputtype': 'phone', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Phone Number', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': sphonesetState, 'allowEmpty': true}} valuesRef={valuesRef} typeIndex={1} warningIndex={3} warningvalueIndex={0}/>
                         <SettingsBox header='Password' value='*****' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Password', 'classclose': 'sp_closeblue', 'inputtype': 'password', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Password', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit'}} valuesRef={valuesRef} typeIndex={1}/>
                         
                         <div className='s_line' onClick={() => console.log(valuesRef.current)}/>
 
                         <div className='s_content'>
-                            <div className='s_util' onClick={() => spopupsetState({'visible': true, 'header': 'DELETE ALL CHATS', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true, 'extrainfo': 'deletechats'})}>DELETE ALL CHATS</div>
-                            <div className='s_util' onClick={() => spopupsetState({'visible': true, 'header': 'DELETE ACCOUNT', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true, 'isadmin': sadminState, 'extrainfo': 'deleteaccount'})}>DELETE ACCOUNT</div>
-                            <div className='s_util s_blue'>LOGOUT</div>
+                            <div className='s_util' onClick={() => {spopupsetState({'visible': true, 'header': 'DELETE ALL CHATS', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true, 'extrainfo': 'deletechats'}); valuesRef.current[1] = 'password'}}>DELETE ALL CHATS</div>
+                            <div className='s_util' onClick={() => {spopupsetState({'visible': true, 'header': 'DELETE ACCOUNT', 'classclose': 'sp_closered', 'inputtype': 'password', 'classbutton': 'sp_bgred', 'placeholderfirst': 'Enter Password', 'placeholdersecond': 'Confirm Password', 'textbutton': 'Delete', 'headerred': true, 'isadmin': sadminState, 'extrainfo': 'deleteaccount'}); valuesRef.current[1] = 'password'}}>DELETE ACCOUNT</div>
+                            <div className='s_util s_blue' onClick={() => Logout()}>LOGOUT</div>
                             {sadminState === true ? (<Link to='/referalcodes' tabIndex="-1"><div className='s_referal'>REFERAL CODES</div></Link>): ('')}
                         </div>
                     </div>

@@ -51,10 +51,10 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
             UpdateImage()
         }
         else if(popupState['extrainfo'] === 'deleteaccount'){
-
+            DeleteAccount()
         }
         else if(popupState['extrainfo'] === 'deletechats'){
-
+            DeleteAllChats()
         }
         else{
             UpdateValue()
@@ -92,9 +92,38 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
     }
 
     async function UpdateImage(){
-        popupState['setState'](null, valuesRef.current[0])
+        let response_status = null
+        let request = {"p": valuesRef.current[2]}
+        let formdata = new FormData()
+        formdata.append("data", JSON.stringify(request))
+        formdata.append("img", valuesRef.current[0])
+        let response = await fetch(import.meta.env.VITE_URL + 'loginregister/updateimage/', {
+            method: 'POST',
+            credentials: 'include',
+            body: formdata,
+        }).then(res => {
+            response_status = res.status
+            return res.json()
+        }).then(data => data)
+        .catch(() => notificationsetState({'text': 'Could not connect to the server', 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'}))
+
         ClickButton(true)
-        ClosePopUp()
+        if(response_status === 403 || response_status === 401){
+            navigate('/login')
+            return
+        }
+        else if(response_status === 415){
+            notificationsetState({'text': 'Image msut be of type JPEG, JPG, PNG or AVIF', 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'})
+            return
+        }
+        else if(response_status === 413){
+            notificationsetState({'text': response, 'visible': true, 'svg': <XCloseIcon/>, 'class': 's_notificationred'})
+        }
+        else if(response_status === 200){
+            popupState['setState'](null, valuesRef.current[0])
+            notificationsetState({'text': 'Image successfully updated', 'visible': true, 'svg': <Tick/>, 'class': 's_notificationgreen'})
+            ClosePopUp()
+        }
         //valuesRef.current[1] = false
     }
 
@@ -114,6 +143,58 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
         valuesRef.current = [null, null, null, ['Field is empty', 'Password field is empty', 'Passwords do not match']]
         if(keepnotification === false){
             notificationsetState({'visible': false})
+        }
+    }
+
+    async function DeleteAllChats(){
+        let response_status = null
+        let request = {"v": valuesRef.current[0], "t": valuesRef.current[1]}
+        let response = await fetch(import.meta.env.VITE_URL + 'chats/deleteallchats/', {
+            method: 'DELETE',
+            credentials: 'include',
+            body: JSON.stringify(request),
+        }).then(res => {
+            response_status = res.status
+            return res.json()
+        }).then(data => data)
+        .catch(() => notificationsetState({'text': 'Could not connect to the server', 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'}))
+
+
+        ClickButton(true)
+        if(response_status === 403 || response_status === 401){
+            navigate('/login')
+            return
+        }
+        else if(response_status === 200){
+            notificationsetState('All Chats Successfully Deleted! (' + response + ')')
+            ClosePopUp(true)
+        }
+    }
+
+    async function DeleteAccount(){
+        let response_status = null
+        let request = {"v": valuesRef.current[0], "t": valuesRef.current[1]}
+        let response = await fetch(import.meta.env.VITE_URL + 'loginregister/deleteaccount/', {
+            method: 'DELETE',
+            body: JSON.stringify(request),
+            credentials: 'include',
+        }).then(res => {
+            response_status = res.status
+            return res.json()
+        }).then(data => data)
+        .catch(() => notificationsetState({'text': 'Could not connect to the server', 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'}))
+
+        ClickButton(true)
+        if(response_status === 403 || response_status === 401){
+            navigate('/login')
+            return
+        }
+        else if(response_status === 200){
+            navigate('/')
+            window.location.reload()
+        }
+        else if(response_status === 409){
+            notificationsetState({'text': response, 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'})
         }
     }
 
@@ -146,7 +227,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
                             }
                             else if(popupState['inputtype'] === 'password'){
                                 return(
-                                    <PasswordInput classtype='s' placeholder={popupState['placeholderfirst']} tabIndex="-1"  onpressTab={FocusElement} onpressTabValue={'ps'} ref={sppasswordfirstRef} autoFocus={true} valuesRef={valuesRef} passwordIndex={0} warningIndex={3} warningvalueIndex={0} isconfirmpassword={false} onpressEnter={ClickSubmitDelete}/>
+                                    <PasswordInput classtype='s' placeholder={popupState['placeholderfirst']} tabIndex="-1"  onpressTab={FocusElement} onpressTabValue={'ps'} ref={sppasswordfirstRef} autoFocus={true} valuesRef={valuesRef} passwordIndex={0} warningIndex={3} warningvalueIndex={popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? 1 : 0} isconfirmpassword={false} onpressEnter={ClickSubmitDelete}/>
                                 )
                             }
                             else if(popupState['inputtype'] === 'name'){
@@ -162,7 +243,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
                         })()
                     }
                     { popupState['visible'] === true ? (
-                        <PasswordInput classtype='s' placeholder={popupState['placeholdersecond']} ref={sppasswordRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={popupState['inputtype'] !== undefined ? popupState['inputtype'].slice(0, 2) : ''} valuesRef={valuesRef} passwordIndex={2} warningIndex={3} warningvalueIndex={popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? 2 : 1} isconfirmpassword={popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? true : false} onpressEnter={ClickSubmitDelete}/>
+                        <PasswordInput classtype='s' placeholder={popupState['placeholdersecond']} ref={sppasswordRef} tabIndex="-1" onpressTab={FocusElement} onpressTabValue={popupState['inputtype'] !== undefined ? popupState['inputtype'].slice(0, 2) : ''} valuesRef={valuesRef} passwordIndex={popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? 0 : 2} warningIndex={3} warningvalueIndex={popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? 2 : 1} isconfirmpassword={popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? true : false} onpressEnter={ClickSubmitDelete}/>
                     ) : (<></>)}
                     {popupState['inputtype'] === 'image' ? <div/> : ''}
                 </div>

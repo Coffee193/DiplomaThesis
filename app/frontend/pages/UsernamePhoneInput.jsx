@@ -9,10 +9,9 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
     
     console.log('i got rerendered')
     const country_list_keys = Object.keys(country_list_full)
-    const areacodeinfo = InitAreaCode()
 
-    const [upi_areacodesvgState, upi_areacodesvgsetState] = useState(areacodeinfo[0])
-    const [upi_areacodenumberState, upi_areacodenumbersetState] = useState(areacodeinfo[1])
+    const [upi_areacodesvgState, upi_areacodesvgsetState] = useState(() => InitAreaCode()[0])
+    const [upi_areacodenumberState, upi_areacodenumbersetState] = useState(() => InitAreaCode()[1])
     const upi_countrycodeinputRef = useRef()
     const upi_usernamephoneRef = useRef()
     const upi_usernamephoneinputRef = useRef()
@@ -93,6 +92,9 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
             if(areacodeval.length + checkval.length > 23){
                 warning = 'Phone number cannot exceed 25 characters'
             }
+            if(checkval.length < 5){
+                warning = 'Phone number must be at least 5 characters (without Area Code)'
+            }
         }
 
         valuesRef.current[warningIndex][warningvalueIndex] = warning
@@ -109,11 +111,13 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
     }
 
     function InitAreaCode(){
+        console.log('I was called')
+        console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
         let country = Intl.DateTimeFormat().resolvedOptions().timeZone;
         for(let i = 0; i < country_list_keys.length; i++){
             if(country_list_full[country_list_keys[i]]['tz'] === country){
                 if(alwaysPhone === true && allowEmpty == true){
-                    //valuesRef.current[warningIndex][warningvalueIndex] = 'Area Code must be empty Or both fields must have a value'
+                    valuesRef.current[warningIndex][warningvalueIndex] = 'Area Code must be empty Or both fields must have a value'
                 }
                 return [country_list_full[country_list_keys[i]]['svg'], country_list_full[country_list_keys[i]]['ac'].slice(1)]
             }

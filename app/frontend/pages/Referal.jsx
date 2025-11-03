@@ -60,7 +60,7 @@ export function Referal(){
         }).then(data => data)
 
         if(response_status === 401 || response_status === 403){
-            navigate('/login', {state: '/referalcodes'})
+            navigate('login/')
             return
         }
         else if(response_status === 200){
@@ -74,7 +74,7 @@ export function Referal(){
                 
                 if(response[i]['date_redeem'] !== null){
                     status = 'REDEEMED'
-                    extr_class = ['referal_line', 'referal_val_extra']
+                    extr_class = ['r_line', 'r_val_extra']
                     date_redeem = new Date(Date.parse(response[i]['date_redeem'])).toLocaleString()
                     if(response[i]['userid_redeem__email'] === null){
                         user_redeem = response[i]['userid_redeem__phone']
@@ -113,8 +113,7 @@ export function Referal(){
                     </div>
                 )
             }
-            console.log(update_val)
-            console.log(update_val.length)
+            
             referalsetState(update_val)
             isloadingsetState(false)
 
@@ -153,7 +152,11 @@ export function Referal(){
                             </>
                             ) : (
                                 <>
-                                {referalstate}
+                                {referalstate.length === 0 ? (
+                                    <div className='r_empty'>
+                                        No referal codes created
+                                    </div>
+                                ) : (referalstate)}
                                 </>
                                 )
                             }

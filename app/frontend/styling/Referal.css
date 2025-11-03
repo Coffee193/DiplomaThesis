@@ -124,3 +124,13 @@
     font-weight: 300;
     color: var(--chat-color-gray-strong);
 }
+
+.r_empty{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--chat-color-gray-strong);
+    font-size: 17px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}

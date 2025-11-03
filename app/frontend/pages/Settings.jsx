@@ -62,7 +62,7 @@ export function Settings({updatenavbarsetState}){
         snamesetState(response['name'])
         semailsetState(response['email'])
         sphonesetState(response['phone'])
-        sadminsetState(response['isadmin'])
+        sadminsetState(response['is_admin'])
         skeletonRef.current.style.display = 'none'
         loadedRef.current.style.display = 'flex'
         nameskeletonRef.current.style.display = 'none'

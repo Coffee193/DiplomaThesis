@@ -29,7 +29,7 @@ export function Home() {
                     <Route path=':id' element={<ChatLobby/>}/>
                 </Route>
                 <Route path = '/termspolicies' element = {<TermsPolicies/>}/>
-                <Route path = '/settingss' element = {<Settings updatenavbarsetState={updatenavbarsetState}/>}/>
+                {/*<Route path = '/settingss' element = {<Settings updatenavbarsetState={updatenavbarsetState}/>}/>*/}
                 <Route path = '/settings' element = {<Settings updatenavbarsetState={updatenavbarsetState}/>}/>
                 <Route path = '/referalcodes' element = {<Referal/>}/>
             </Route>

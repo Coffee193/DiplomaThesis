@@ -839,9 +839,9 @@ def DeleteUser(request):
     if(userfound['is_admin'] == True):
         return HttpResponse(json.dumps('User is admin. Admin Users cannot be deleted'), status = 409)
     if(userfound['status'] == 'D'):
-        return HttpResponse(json.dumps('User is already deleted'), status = 409)
+        return CreateResponseNewAccess(valjwt[1], 'User is already deleted', 409)
     if(PasswordCompare(data['v'], userfound['password']) == False):
-        return HttpResponse(json.dumps('Password is incorrect'), status = 409)
+        return CreateResponseNewAccess(valjwt[1], 'Password is incorrect', 409)
 
     userdel = User.objects.filter(id = valjwt[3]).update(status = 'D')
     if(userdel == 0):
@@ -854,12 +854,62 @@ def DeleteUser(request):
         return response_ret
 
 @api_view(['POST'])
-def UpdateImage(request):
+def UpdateImage(request, max_size_mb = 10):
     valjwt = ValidateAndCreateJWT(request)
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
     
     data = json.loads(request.data.get('data'))
-    image = request.data.get('img')
+    image = json.loads(request.data.get('img'))
     if('p' not in data):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
+    print(data)
+    print(type(data))
+    print(image)
+    print(type(image))
+    print('************')
+    
+    if(image != None):
+        if(len(image)/1024/1024 > max_size_mb):
+            return CreateResponseNewAccess(valjwt[1], 'Image must be smaller than 10MB', 413)
+        if(len(image) < 10):
+            return HttpResponse(json.dumps('Http 400 Bad Request, Invalid image'), status = 400)
+    
+    passworduser = User.objects.filter(id = valjwt[3]).values('password')
+    if(passworduser.count() == 0):
+        return HttpResponse(json.dumps('User not found'), status = 409)
+    passworduser = passworduser[0]
+    if(PasswordCheck(data['p'], passworduser['password']) == False):
+        return CreateResponseNewAccess(valjwt[1], 'Password is incorrect', 409)
+    
+    if(image == None):
+        del_path = ''
+        if(development.decode('utf-8') == 'true'):
+            del_path = 'D:/Downloads/diplomat/actual_work/app/frontend/components/dev_images/' + str(valjwt[3]) + '.JPEG'
+        else:
+            del_path = path_to_img.decode('utf-8') + '/' + str(valjwt[3]) + '.JPEG'
+        if(os.path.exists(del_path) == False):
+            return HttpResponse(json.dumps('Http 400 Bad Request, Image deletion path does not exist'), status = 400)
+        os.remove(del_path)
+        user_info = User.objects.filter(id = valjwt[3]).update(img = False)
+        return CreateResponseNewAccess(valjwt[1], 'Image successfully deleted', 200)
+    
+    image = re.sub('^data:image/.+;base64,', '', image)
+    with Image.open(io.BytesIO(base64.b64decode(image))) as im:
+        if(im.format != 'JPEG'):
+            return CreateResponseNewAccess(valjwt[1], 'Image Type not supported (only JPEG are supported)', 415)
+        if(im.width > 10000 or im.height > 10000):
+            return CreateResponseNewAccess(valjwt[1], 'Image width or height exceed 10000 pixels', 413)
+        
+        if(development.decode('utf-8') == 'true'):
+            save_path = 'D:/Downloads/diplomat/actual_work/app/frontend/components/dev_images/' + str(valjwt[3]) + '.' + im.format
+        else:
+            save_path = path_to_img.decode('utf-8') + '/' + str(valjwt[3]) + '.' + im.format
+        if im.format == 'JPEG':
+            im.save(save_path, quality = 'keep')
+        else:
+            im.save(save_path, quality = 95)
+        user_info = User.objects.filter(id = valjwt[3]).update(img = True)
+        if(user_info != 1):
+            return HttpResponse(json.dumps('Something went wrong'), status = 500)
+        return CreateResponseNewAccess(valjwt[1], 'Image successfully created', 200)

@@ -65,9 +65,16 @@ export function NavBar({updatenavbarstate}){
                     <div className='nav_logged'>
                         <Link to = '/chat'><SideBar width={30} height={30} className='nav_linkchat'/></Link>
                         <div className='nav_user_holder'>
-                            {imgstate}
+                            {updatenavbarstate['image'] === '' ? imgstate : (
+                                updatenavbarstate['image'] === null ? (<UserIcon width={30} height={30} className='nav_user'/>) : (<div className='nav_user nav_imgexist'><img className='nav_img' src={updatenavbarstate['image']}/></div>)
+                            )}
                             <div className='nav_user_info'>
-                                <div className='nav_user_name'>{namestate}</div>
+                                <div className='nav_user_name'>
+                                    {/*{namestate}*/}
+                                    {updatenavbarstate['name'] === '' ? namestate : (
+                                        updatenavbarstate['name'] === null ? ('Info') : ('Hello, ' + updatenavbarstate['name'])
+                                    )}
+                                </div>
                                 <div className='nav_user_clicks'>
                                     <ul>
                                         <Link to='/settings'><Settings/>Settings</Link>

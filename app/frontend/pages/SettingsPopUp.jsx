@@ -7,7 +7,7 @@ import { SettingsImage } from './SettingsImage'
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificationsetState}){
+export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificationsetState, updatenavbarsetState}){
 
     //const [spnotificationState, spnotificationsetState] = useState({'text': '', 'svg': null, 'visible': false, 'class': null})
     const sppasswordRef = useRef()
@@ -87,6 +87,9 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
                 popupState['setState'](valuesRef.current[0])
             }
             notificationsetState({'text': response, 'visible': true, 'svg': <Tick/>, 'class': 's_notificationgreen'})
+            if(valuesRef.current[1] === 'name'){
+                updatenavbarsetState(prevState => ({...prevState, 'name': valuesRef.current[0]}))
+            }
             ClosePopUp(true)
         }
     }
@@ -96,7 +99,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
         let request = {"p": valuesRef.current[2]}
         let formdata = new FormData()
         formdata.append("data", JSON.stringify(request))
-        formdata.append("img", valuesRef.current[0])
+        formdata.append("img", JSON.stringify(valuesRef.current[0]))
         let response = await fetch(import.meta.env.VITE_URL + 'loginregister/updateimage/', {
             method: 'POST',
             credentials: 'include',
@@ -112,17 +115,15 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
             navigate('/login')
             return
         }
-        else if(response_status === 415){
-            notificationsetState({'text': 'Image msut be of type JPEG, JPG, PNG or AVIF', 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'})
+        else if(response_status === 415 || response_status === 409 || response_status === 413){
+            notificationsetState({'text': response, 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'})
             return
-        }
-        else if(response_status === 413){
-            notificationsetState({'text': response, 'visible': true, 'svg': <XCloseIcon/>, 'class': 's_notificationred'})
         }
         else if(response_status === 200){
             popupState['setState'](null, valuesRef.current[0])
             notificationsetState({'text': 'Image successfully updated', 'visible': true, 'svg': <Tick/>, 'class': 's_notificationgreen'})
-            ClosePopUp()
+            updatenavbarsetState(prevState => ({...prevState, 'image': valuesRef.current[0]}))
+            ClosePopUp(true)
         }
         //valuesRef.current[1] = false
     }

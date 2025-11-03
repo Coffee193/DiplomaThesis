@@ -16,7 +16,7 @@ import { LoginRegister } from './pages/LoginRegister'
 
 export function Home() {
 
-    const [updatenavbarstate, updatenavbarsetState] = useState(['', ''])
+    const [updatenavbarstate, updatenavbarsetState] = useState({'name': '', 'image': ''})
 
     return(
         <Routes>

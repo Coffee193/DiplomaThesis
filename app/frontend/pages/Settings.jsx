@@ -112,7 +112,7 @@ export function Settings({updatenavbarsetState}){
 
     return(
         <div className='s_allholder'>
-            <SettingsPopUp popupState={spopupState} popupsetState={spopupsetState} valuesRef={valuesRef} notificationsetState={snotificationsetState}/>
+            <SettingsPopUp popupState={spopupState} popupsetState={spopupsetState} valuesRef={valuesRef} notificationsetState={snotificationsetState} updatenavbarsetState={updatenavbarsetState}/>
             <div className='s_mainholder'>
                 <div className='s_box'>
 

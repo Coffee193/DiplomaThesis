@@ -1,17 +1,17 @@
-.r_holder{
+.referal_holder{
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.r_outer{
+.referal_outer{
     width: 100%;
     display: flex;
     justify-content: center;
     padding: 25px 0px;
 }
 
-.r_box{
+.referal_box{
     width: 500px;
     padding: 25px 15px;
     box-shadow: 0px 8px 20px 0px rgba(43, 50, 64, 0.12);
@@ -19,21 +19,21 @@
     border-radius: 25px;
 }
 
-.r_utils{
+.referal_utils{
     display: flex;
     align-items: center;
     padding: 0px 15px;
     justify-content: space-between;
 }
 
-.r_util{
+.referal_util{
     display: flex;
     align-items: center;
     cursor: pointer;
     gap: 5px;
 }
 
-.r_create{
+.referal_create{
     display: flex;
     align-items: center;
     gap: 7px;
@@ -42,32 +42,27 @@
     border-radius: 25px;
     color: #fff;
 }
-.r_create:hover{
+.referal_create:hover{
     background-color: var(--color-text-main-hover-blue-experimental-lighter);
 }
 
-.r_create_plus{
+.referal_create_plus{
     font-size: 25px;
     font-weight: 300;
 }
 
-.r_main{
+.referal_main{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.r_header{
+.referal_header{
     font-size: 20px;
     margin: 50px 0px;
 }
 
-.r_val_outer{
-    position: relative;
-    width: 100%;
-}
-
-.r_val_holder{
+.referal_val_holder{
     position: relative;
     width: 80%;
     display: flex;
@@ -75,41 +70,47 @@
     gap: 25px;
 }
 
-.r_val{
+.referal_val{
     width: 100%;
     padding: 15px 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 25px;
+    /*border: 2px solid var(--chat-color-gray-light);*/
+    /*background-color: var(--chat-color-gray-light-2);*/
+    /*background-color: var(--chat-color-blue);*/
+    /*color: var(--chat-color-gray-strong-more);*/
     background-color: var(--chat-color-blue-strong-more);
+    /*background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);*/
     color: #fff;
 }
-.r_val:hover{
+.referal_val:hover{
+    /*background-color: var(--color-text-main-hover-blue-experimental-lighter);*/
     background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
 }
 
-.r_val_header{
+.referal_val_header{
     font-size: 17px;
     font-weight: 700;
 }
 
-.r_val_extra{
+.referal_val_extra{
     width: 100%;
     display: flex;
     margin: 10px 0px;
     justify-content: space-between;
 }
 
-.r_val_exp{
+.referal_val_exp{
     display: flex;
     gap: 10px;
 }
-.r_val_exp>span{
+.referal_val_exp>span{
     font-weight: 300;
 }
 
-.r_line{
+.referal_line{
     height: 1px;
     width: 100%;
     position: relative;
@@ -117,7 +118,7 @@
     margin-bottom: 10px;
 }
 
-.r_nocreated{
+.referal_nocreated{
     width: 100%;
     text-align: center;
     margin: 25px 0px;

@@ -863,11 +863,6 @@ def UpdateImage(request, max_size_mb = 10):
     image = json.loads(request.data.get('img'))
     if('p' not in data):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
-    print(data)
-    print(type(data))
-    print(image)
-    print(type(image))
-    print('************')
     
     if(image != None):
         if(len(image)/1024/1024 > max_size_mb):

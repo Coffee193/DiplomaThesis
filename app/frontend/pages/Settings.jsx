@@ -8,7 +8,7 @@ import { SettingsPopUp } from './SettingsPopUp'
 
 export function Settings({updatenavbarsetState}){
     
-    const [simgState, simagesetState] = useState(<div className='s_img_dim s_loading'/>)
+    const [simgState, simagesetState] = useState(<div className='s_img_dim loading'/>)
 
     const navigate = useNavigate()
 
@@ -120,15 +120,15 @@ export function Settings({updatenavbarsetState}){
                         <div className='s_imgholder'>
                             {simgState}
                         </div>
-                        <div className='s_loading_box s_loading' ref={nameskeletonRef}/>
+                        <div className='loading_box loading' ref={nameskeletonRef}/>
                         <div ref={nameloadedRef} style={{display: 'none'}}>
                             <SettingsName value={snameState} popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Name', 'classclose': 'sp_closeblue', 'inputtype': 'name', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Name', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': snamesetState, 'allowEmpty': true}} valuesRef={valuesRef} typeIndex={1} warningIndex={3} warningvalueIndex={0}/>
                         </div>
                     </div>
 
                     <div className='s_content' ref={skeletonRef}>
-                        <div className='s_loading_box s_loading'/>
-                        <div className='s_loading_box s_loading' style={{width: '75%'}}/>
+                        <div className='loading_box loading'/>
+                        <div className='loading_box loading' style={{width: '75%'}}/>
                     </div>
                     <div className='s_content' style={{display: 'none'}} ref={loadedRef}>
                         <SettingsBox header='Email' value={semailState} valueempty='no email address provided' popupsetState={spopupsetState} popupvalue={{'visible': true, 'header': 'Change Email', 'classclose': 'sp_closeblue', 'inputtype': 'email', 'classbutton': 'sp_bgblue', 'placeholderfirst': 'Enter New Email Address', 'placeholdersecond': 'Enter Password', 'textbutton': 'Submit', 'setState': semailsetState, 'allowEmpty': true}} valuesRef={valuesRef} typeIndex={1} warningIndex={3} warningvalueIndex={0}/>

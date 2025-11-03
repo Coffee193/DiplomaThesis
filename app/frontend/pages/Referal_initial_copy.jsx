@@ -8,15 +8,13 @@ export function Referal(){
     const [referalstate, referalsetState] = useState([])
     const navigate = useNavigate()
 
-    const [isloadingState, isloadingsetState] = useState(true)
-
     useEffect(() => {
         GetAllReferals()
     },[])
 
     async function CreateReferal(){
         let response_status = null
-        let response = await fetch(import.meta.env.VITE_URL + 'referal/createreferal/', {
+        let response = await fetch('http://127.0.0.1:8000/referal/createreferal/', {
             method: 'POST',
             credentials: 'include',
         }).then(res => {
@@ -25,20 +23,20 @@ export function Referal(){
         }).then(data => data)
 
         if(response_status === 401 || response_status === 403){
-            navigate('/login', {state: '/referalcodes'})
+            navigate('login/')
             return
         }
         else if(response_status === 200){
             let date_created = new Date(response['date_created'])
             referalsetState(oldstate => [
-                <div className='r_val'>
-                    <div className='r_val_header'>{response['value']}</div>
-                    <div className='r_val_extra'>
-                        <div className='r_val_exp'>
+                <div className='referal_val'>
+                    <div className='referal_val_header'>{response['value']}</div>
+                    <div className='referal_val_extra'>
+                        <div className='referal_val_exp'>
                             <span>EXP</span>
                             <span>{date_created.toLocaleString()}</span>
                         </div>
-                        <div className='r_val_info'>
+                        <div className='referal_val_info'>
                             ACTIVE
                         </div>
                     </div>
@@ -51,7 +49,7 @@ export function Referal(){
 
     async function GetAllReferals(){
         let response_status = null
-        let response = await fetch(import.meta.env.VITE_URL + 'referal/getallreferals/', {
+        let response = await fetch('http://127.0.0.1:8000/referal/getallreferals/', {
             method: 'GET',
             credentials: 'include',
         }).then(res => {
@@ -60,7 +58,7 @@ export function Referal(){
         }).then(data => data)
 
         if(response_status === 401 || response_status === 403){
-            navigate('/login', {state: '/referalcodes'})
+            navigate('login/')
             return
         }
         else if(response_status === 200){
@@ -94,14 +92,14 @@ export function Referal(){
                 }
 
                 update_val.push(
-                    <div className='r_val'>
-                        <div className='r_val_header'>{response[i]['value']}</div>
-                        <div className='r_val_extra'>
-                            <div className='r_val_exp'>
+                    <div className='referal_val'>
+                        <div className='referal_val_header'>{response[i]['value']}</div>
+                        <div className='referal_val_extra'>
+                            <div className='referal_val_exp'>
                                 <span>EXP</span>
                                 <span>{exp_date.toLocaleString()}</span>
                             </div>
-                            <div className='r_val_info'>
+                            <div className='referal_val_info'>
                                 {status}
                             </div>
                         </div>
@@ -113,50 +111,37 @@ export function Referal(){
                     </div>
                 )
             }
-            console.log(update_val)
-            console.log(update_val.length)
+            
             referalsetState(update_val)
-            isloadingsetState(false)
 
         }
 
     }
 
     return(
-        <div className='r_holder'>
-            <div className='r_outer'>
-                <div className='r_box'>
-                    <div className='r_utils'>
+        <div className='referal_holder'>
+            <div className='referal_outer'>
+                <div className='referal_box'>
+                    <div className='referal_utils'>
                         <Link to='/settings'>
-                            <div className='r_util'>
+                            <div className='referal_util'>
                                 <ArrowDownIcon style={{transform: 'rotate(90deg)'}} height={24} width={24}/>
                                 Back
                             </div>
                         </Link>
-                        <div className='r_util'>
-                            <div className='r_create' style={isloadingState === true ? {backgroundColor: 'var(--color-text-main-hover-blue-experimental-lighter)', cursor: 'default'} : {}} onClick={() => isloadingState === false ? CreateReferal() : ''}>
+                        <div className='referal_util'>
+                            <div className='referal_create' onClick={() => CreateReferal()}>
                                 Create
-                                <div className='r_create_plus'>&#43;</div>
+                                <div className='referal_create_plus'>&#43;</div>
                             </div>
                         </div>
                     </div>
-                    <div className='r_main'>
-                        <div className='r_header'>
+                    <div className='referal_main'>
+                        <div className='referal_header'>
                             Referal Codes
                         </div>
-                        <div className='r_val_holder' style={isloadingState === true ? {width: '100%'} : {width: '80%'}}>
-                            {isloadingState === true ? (
-                            <>
-                                <div className='loading_box loading'/>
-                                <div className='loading_box loading'/>
-                                <div className='loading_box loading' style={{width: '90%'}}/>
-                            </>
-                            ) : (
-                                <>
-                                {referalstate}
-                                </>
-                                )
-                            }
+                        <div className='referal_val_holder'>
+                            {referalstate}
                         </div>
                     </div>
                 </div>

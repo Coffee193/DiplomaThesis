@@ -5,7 +5,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
 import json
-from oauth import VerifyJWT, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired
+from oauth import VerifyJWT, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, ValidateAndCreateJWT, ReturnHttpInvalidJWT, CreateResponseNewAccess
 from snowflake_id_gen import GenerateSnowflake
 import datetime
 import secrets
@@ -14,7 +14,7 @@ from .models import Referal
 from loginregister.models import User
 
 @api_view(['POST'])
-def CreateReferal(request):
+def CreateReferal_old(request):
     if(request.method == 'POST'):
         if 'access' not in request.COOKIES or 'refresh' not in request.COOKIES:
             return HttpResponse(json.dumps('no jwt provided'), status = 401)
@@ -43,7 +43,7 @@ def CreateReferal(request):
         return HttpResponse(json.dumps('Bad Method'), status = 405)
     
 @api_view(['GET'])
-def GetAllReferals(request):
+def GetAllReferals_old(request):
     if request.method == 'GET':
         if 'access' not in request.COOKIES or 'refresh' not in request.COOKIES:
             return HttpResponse(json.dumps('no jwt provided'), status = 401)
@@ -60,3 +60,26 @@ def GetAllReferals(request):
                                                                          jwt_r = jwt_r)
     else:
         return HttpResponse(json.dumps('Bad Method'), status = 405)
+    
+@api_view(['GET'])
+def GetAllReferals(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    
+    referal_ret = list(Referal.objects.filter(user_id = valjwt[3]).order_by('-date_created').values('value', 'date_created', 'userid_redeem__email', 'userid_redeem__phone'))
+    if(len(referal_ret) != 0):
+        for i in range(0, len(referal_ret)):
+            referal_ret[i]['date_created'] = str(referal_ret[i]['date_created'].replace(microsecond=0))
+            if(referal_ret[i]['date_redeem'] != None):
+                referal_ret[i]['date_redeem'] = str(referal_ret[i]['date_redeem'].replace(microsecond=0))
+    
+    return CreateResponseNewAccess(valjwt[1], referal_ret, 200)
+
+@api_view(['POST'])
+def CreateReferal(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    
+    ### <-------------

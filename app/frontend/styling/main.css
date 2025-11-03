@@ -279,3 +279,25 @@ textarea:focus{
 .overflow-hidden{
     overflow: hidden;
 }
+
+.loading{
+    background: linear-gradient(90deg, var(--loading-edge-col), var(--loading-center-col), var(--loading-edge-col));
+    background-size: 200%;
+    animation: skeleton 2s infinite reverse;
+}
+
+@keyframes skeleton{
+    0%{
+        background-position: -100% 0;
+    }
+    100%{
+        background-position: 100% 0;
+    }
+}
+
+.loading_box{
+    position: relative;
+    width: 100%;
+    height: 25px;
+    border-radius: 25px;
+}

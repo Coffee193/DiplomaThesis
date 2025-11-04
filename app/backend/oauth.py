@@ -848,7 +848,7 @@ def CreateJWTKey(userid, timestamp = None, keytype = "access", keycontent = "pub
 def ValidateAndCreateJWT(request, newifexpired = True):
     cookies = request.COOKIES
     if("access" not in cookies):
-        return [False, "Access Key Not Sent", 400, '']
+        return [False, "Access Key Not Sent", 401, '']
     access_info = jwt.decode(cookies["access"], options={"verify_signature":False})
     if('alg' not in access_info):
         return [False, 'Invalid JWT', 400, '']

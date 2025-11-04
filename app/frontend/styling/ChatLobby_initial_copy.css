@@ -1,4 +1,4 @@
-.cl_holder{
+.all_holder_clobby{
     width: 100vw;
     height: 100%;
     position: relative;
@@ -6,14 +6,14 @@
     flex-direction: column;
 }
 
-.cl_box{
+.clobby{
     position: relative;
     width: 100%;
     height: calc(100vh - var(--nav-height));
     overflow-y: hidden;
 }
 
-.cl_main{
+.clobby_all{
     position: relative;
     width: 100%;
     height: 100%;

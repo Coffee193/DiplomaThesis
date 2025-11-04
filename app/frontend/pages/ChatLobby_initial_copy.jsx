@@ -13,23 +13,23 @@ export function ChatLobby(){
     const conv_id = useParams()
     const [mainbodyState, mainbodysetState] = useState()
 
-    const [isloadingState, isloadingsetState] = useState(true)
-
     function ConversationSelect(){
         if(conv_id.id === undefined){
-            mainbodysetState(<ChatBody chatlist={chatslist} setnewconv={newconvsetState} isloadingState={isloadingState} isloadingsetState={isloadingsetState}/>)
+            mainbodysetState(<ChatBody chatlist={chatslist} setnewconv={newconvsetState}/>)
         }
         else{
-            mainbodysetState(<ChatMain isloadingState={isloadingState} isloadingsetState={isloadingsetState}/>)
+            mainbodysetState(<ChatMain/>)
         }
     }
     useEffect(() => ConversationSelect(), [conv_id])
 
     return(
-        <div className='cl_holder'>
-            <div className='cl_box'>
-                <div className='cl_main'>
-                    <ChatNav convState={conversationsState} convsetState={conversationssetState} chatlist={chatslist} newconv={newconvState} isloadingState={isloadingState} isloadingsetState={isloadingsetState}/>
+        <div className='all_holder_clobby'>
+            <div className='clobby'>
+                <div className='clobby_all'>
+                    <ChatNav convState={conversationsState} convsetState={conversationssetState} chatlist={chatslist} newconv={newconvState}/>
+                    
+                    {/*<ChatBody chatlist={chatslist} setnewconv={newconvsetState}/>*/}
                     {mainbodyState}
                 </div>
             </div>

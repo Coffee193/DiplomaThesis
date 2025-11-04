@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from django.http import HttpResponseBadRequest, HttpResponse
-from oauth import VerifyAuthRequest, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, VerifyJWT
+from oauth import VerifyAuthRequest, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, VerifyJWT, ValidateAndCreateJWT, ReturnHttpInvalidJWT, CreateResponseNewAccess
 from backend.mongo_db_connection import mongo_db
 import json
 from snowflake_id_gen import GenerateSnowflake
@@ -198,3 +198,18 @@ def DeleteAllChats(request):
            return HttpResponse(json.dumps('Http 400 Bad Request, something went wrong'), status = 400)
     else:
         return HttpResponse(json.dumps('Http 400 Bad request, method must be DELETE'), status = 405)
+    
+@api_view(['GET'])
+def GetChats(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    
+    ret = list(chats.aggregate( [{"$match": {"user_id": valjwt[3]}},
+                                     {"$project": {"_id": 1, "name": 1, "date_created": 1}},
+                                     {"$sort": {"date_created": 1}}]) ) #sort by date created
+    for i in range(0, len(ret)):
+        ret[i]["date_created"] = ret[i]["date_created"].timestamp()
+        ret[i]["_id"] = str(ret[i]["_id"])
+    
+    return CreateResponseNewAccess(valjwt[1], ret, 200)

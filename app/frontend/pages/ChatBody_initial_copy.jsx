@@ -5,7 +5,7 @@ import { ModelSelectPopUp } from './ModelselectPopUp'
 import { useNavigate } from 'react-router-dom'
 
 
-export function ChatBody({ chatlist , setnewconv, isloadingState, isloadingsetState }){
+export function ChatBody({ chatlist , setnewconv }){
 
     const textareaRef = useRef()
     const [modelpopupState, modelpopupsetState] = useState(0)

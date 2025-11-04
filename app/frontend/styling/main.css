@@ -223,6 +223,9 @@ textarea:focus{
     --loading-edge-col: #eee;
     --loading-center-col: #f9f9f9;
 
+    --loading-edge-col-blue: #d4e0f0;
+    --loading-center-col-blue: #c8d9ef;
+
     --default-box-shadow: 0px 8px 20px 0px rgba(43, 50, 64, 0.12);
 
     --color-text-dark-header: #3d3d3d;
@@ -238,9 +241,6 @@ textarea:focus{
     --third-color-background: #eaecef;
 }
 
-.transition_add{
-    transition: 0.1s ease-out;
-}
 .color_blue_hover_evenmore{
     color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
 }
@@ -282,6 +282,12 @@ textarea:focus{
 
 .loading{
     background: linear-gradient(90deg, var(--loading-edge-col), var(--loading-center-col), var(--loading-edge-col));
+    background-size: 200%;
+    animation: skeleton 2s infinite reverse;
+}
+
+.loading_blue{
+    background: linear-gradient(90deg, var(--loading-edge-col-blue), var(--loading-center-col-blue), var(--loading-edge-col-blue));
     background-size: 200%;
     animation: skeleton 2s infinite reverse;
 }

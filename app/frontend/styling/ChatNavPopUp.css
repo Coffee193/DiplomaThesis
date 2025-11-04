@@ -8,7 +8,7 @@
     right: -15px;
     opacity: 0;
     pointer-events: none;
-    z-index: 1;
+    z-index: 8;
     transition: transform 0.1s ease-out;
     display: flex;
     flex-direction: column;
@@ -36,4 +36,14 @@
 .cnp > div:hover{
     background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
     color: #fff;
+}
+
+.cnp_bg{
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1;
 }

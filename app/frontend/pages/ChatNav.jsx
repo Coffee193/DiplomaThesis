@@ -3,18 +3,11 @@ import { ChatBubble, SearchIcon, XCloseIcon, DotsIcon, PencilIcon, TrashIcon } f
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { ChatNavPopUp } from './ChatNavPopUp'
+import { ChatNavSearch } from './ChatNavSearch'
 
 export function ChatNav({convState, convsetState, chatlist, newconv, isloadingState, isloadingsetState}){
 
-    const [searchState, searchsetState] = useState('')
-    const XCloseRef = useRef()
-    const SearchIconRef = useRef()
-    //const [chatoptionsstate, chatoptionssetState] = useState('0')
-    //const ChatOptionsRef = useRef()
-    const RemovePopUpRef = useRef()
     const navigate = useNavigate()
-    //const [chatoptionsnameState, chatoptionsnamesetState] = useState()
-    //const chatoptionsidRef = useRef()
     const chatlistidRef = useRef([null, null])
     const renameRef = useRef()
     const deleteRef = useRef()
@@ -22,26 +15,12 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
     const renameinputRef = useRef()
     const renameclickRef = useRef()
     const searchchatinputRef = useRef()
-    //const chatclickidRef = useRef(null)
     const linkparams = useParams()
     const [cnpState, cnpsetState] = useState({'visible': false})
     /* Must update entire Conversations Nav because if I try to do it with Ref and removing/adding classes then there will be
     problems on the screen (the color will be cut off in the middle etc) */
 
-    function SearchValueChange(value){
-        searchsetState(value)
-        if(value !== ''){
-            XCloseRef.current.style.opacity = '1'
-            XCloseRef.current.style.pointerEvents = 'all'
-        }
-        else{
-            XCloseRef.current.style.opacity = '0'
-            XCloseRef.current.style.pointerEvents = 'none'
-        }
-        SearchChat(value)
-    }
-
-    function ChatOptionsPopUp(element){
+    function ChatPopUp(element){
         if(chatlistidRef.current[0] === element.dataset.idval){
             cnpsetState({'visible': false})
             chatlistidRef.current = [null, null]
@@ -49,28 +28,16 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
         }
 
         let popupdim = parseInt(window.getComputedStyle(document.getElementsByClassName('cnp')[0]).getPropertyValue('--chatnav-dim-popup').slice(0, 2))
-        let element_position_top_float = element.getBoundingClientRect().top.toFixed(1) - 39
-        if(element_position_top_float + popupdim + document.getElementsByClassName('nav_all_holder')[0].offsetHeight >= window.innerHeight){
+        let navdim = parseInt(window.getComputedStyle(document.getElementsByClassName('nav_all_holder')[0]).getPropertyValue('--nav-height').slice(0, 2))
+        //let element_position_top_float = element.getBoundingClientRect().top.toFixed(1) - 39
+        let element_position_top_float = element.getBoundingClientRect().top.toFixed(1) - navdim - 185
+
+        /*if(element_position_top_float + popupdim + document.getElementsByClassName('nav_all_holder')[0].offsetHeight >= window.innerHeight){
             element_position_top_float = (element_position_top_float - popupdim - 39).toFixed(1)
-        }
+        }*/
 
         chatlistidRef.current = [element.dataset.idval, element.dataset.name]
         cnpsetState({'visible': true, 'top': String(element_position_top_float) + 'px', 'name': element.dataset.name})
-    }
-
-    function ChatPopUpAppearance(show){
-        if(show === false){
-            ChatOptionsRef.current.style.opacity = '0'
-            ChatOptionsRef.current.style.pointerEvents = 'none'
-            ChatOptionsRef.current.style.transform = 'scale(0.8, 0.8)'
-            RemovePopUpRef.current.style.pointerEvents = 'none'
-        }
-        else if(show === true){
-            ChatOptionsRef.current.style.opacity = '1'
-            ChatOptionsRef.current.style.pointerEvents = 'all'
-            ChatOptionsRef.current.style.transform = 'scale(1, 1)'
-            RemovePopUpRef.current.style.pointerEvents = 'all'
-        }
     }
 
     useEffect(() => {
@@ -127,17 +94,12 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
             }
             
             let isselected = arr[i]['_id'] === linkparams.id
-            /*if(arr[i]['_id'] === linkparams.id){
-                chatselectval = 'cn_info_chat_select'
-            }
-            else{
-                chatselectval = 'cn_info_chat_notselect'
-            }*/
+
             convfinalstate.push(
                 <div className='cn_info_chat_holder'>
                     <div className={'cn_info_chat ' + (isselected === true ? 'cn_info_chat_select' : 'cn_info_chat_notselect')} id={'cnav_chat_' + i}>
                         <div className='cn_info_chat_title' onClick={() => isselected === false ? ClickChat(arr[i]['_id']) : ''}>{arr[i]['name']}</div>
-                        <div className='cn_info_chat_options' onClick={(e) => ChatOptionsPopUp(e.target)} data-idval={arr[i]['_id']} data-name={arr[i]['name']} data-index={indexval}><DotsIcon/></div>
+                        <div className='cn_info_chat_options' onClick={(e) => ChatPopUp(e.target)} data-idval={arr[i]['_id']} data-name={arr[i]['name']} data-index={indexval}><DotsIcon/></div>
                     </div>
                 </div>)
         }
@@ -317,11 +279,7 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
                     </div>
                 </div>
                 <div>
-                    <div className='cn_util_search'>
-                        <div ref={SearchIconRef} style={{transition: '0.1s ease-out'}}><SearchIcon/></div>
-                        <input placeholder='Search Chat' onChange={(e) => {console.log('i was clicked'); SearchValueChange(e.target.value)}} onFocus={() => SearchIconRef.current.classList.add('color_blue_hover_evenmore')} onBlur={() => SearchIconRef.current.classList.remove('color_blue_hover_evenmore')} value={searchState} ref={searchchatinputRef} tabIndex="-1"/>
-                        <div className='cn_util_xclose' ref={XCloseRef} onClick={() => SearchValueChange('')}><XCloseIcon/></div>
-                    </div>
+                    <ChatNavSearch convsetState={convsetState} chatlist={chatlist} createConversations={createConversations}/>
                 </div>
                 </>
                 )

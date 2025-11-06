@@ -34,7 +34,7 @@ export function Settings({updatenavbarsetState}){
 
     async function GetUserInfo(){
         if(document.cookie.includes('userinfo=') === false){
-            navigate('/login', {state: '/settings'})
+            navigate('/login', {state: {to: '/settings'}})
         }
 
         let response_status = null
@@ -53,7 +53,7 @@ export function Settings({updatenavbarsetState}){
             SettingsBoxBuild(response)
         }
         else if(response_status === 401 || response_status === 403){
-            navigate('/login', {state: '/settings'})
+            navigate('/login', {state: {to: '/settings', expired: true}})
         }
     }
 
@@ -106,7 +106,7 @@ export function Settings({updatenavbarsetState}){
             window.location.reload()
         }
         else{
-            navigate('/login', {state: 'expired'})
+            navigate('/login', {state: {to: '/settings', expired: true}})
         }
     }
 

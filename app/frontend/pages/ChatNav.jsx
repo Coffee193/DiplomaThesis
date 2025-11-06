@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { ChatNavPopUp } from './ChatNavPopUp'
 import { ChatNavSearch } from './ChatNavSearch'
+import { ChatNavRenameDelete } from './ChatNavRenameDelete'
 
 export function ChatNav({convState, convsetState, chatlist, newconv, isloadingState, isloadingsetState}){
 
@@ -17,6 +18,7 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
     const searchchatinputRef = useRef()
     const linkparams = useParams()
     const [cnpState, cnpsetState] = useState({'visible': false})
+    const [cnrdState, cnrdsetState] = useState({'visible': false})
     /* Must update entire Conversations Nav because if I try to do it with Ref and removing/adding classes then there will be
     problems on the screen (the color will be cut off in the middle etc) */
 
@@ -27,14 +29,10 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
             return
         }
 
-        let popupdim = parseInt(window.getComputedStyle(document.getElementsByClassName('cnp')[0]).getPropertyValue('--chatnav-dim-popup').slice(0, 2))
+        //let popupdim = parseInt(window.getComputedStyle(document.getElementsByClassName('cnp')[0]).getPropertyValue('--chatnav-dim-popup').slice(0, 2))
         let navdim = parseInt(window.getComputedStyle(document.getElementsByClassName('nav_all_holder')[0]).getPropertyValue('--nav-height').slice(0, 2))
-        //let element_position_top_float = element.getBoundingClientRect().top.toFixed(1) - 39
+        
         let element_position_top_float = element.getBoundingClientRect().top.toFixed(1) - navdim - 185
-
-        /*if(element_position_top_float + popupdim + document.getElementsByClassName('nav_all_holder')[0].offsetHeight >= window.innerHeight){
-            element_position_top_float = (element_position_top_float - popupdim - 39).toFixed(1)
-        }*/
 
         chatlistidRef.current = [element.dataset.idval, element.dataset.name]
         cnpsetState({'visible': true, 'top': String(element_position_top_float) + 'px', 'name': element.dataset.name})
@@ -289,7 +287,6 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
                 <div className='cn_info_text'>
                     <div onClick={() => console.log(chatlist.current)}>Chats</div>
                 </div>
-                {/*{convState}*/}
                 <div className='cn_info_container'>
                     {isloadingState === true ? (
                         <>
@@ -302,6 +299,7 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
             </div>
         <ChatNavPopUp cnpState={cnpState} cnpsetState={cnpsetState}/>
         </div>
+        <ChatNavRenameDelete cnrdState={cnrdState} cnrdsetState={cnrdsetState}/>
         </>
     )
 }

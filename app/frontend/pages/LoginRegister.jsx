@@ -113,7 +113,7 @@ export function LoginRegister({ lrtype }){
             warningsubmitsetState(response)
         }
         else if(response_status === 200){
-            location.state !== null && location.state !== 'expired' ? (navigate(location.state)) : (navigate('/'))
+            location.state !== null && location.state['to'] !== null ? (navigate(location.state['to'])) : (navigate('/'))
         }
     }
 
@@ -142,7 +142,7 @@ export function LoginRegister({ lrtype }){
             warningsubmitsetState(response)
         }
         else if(response_status === 200){
-            location.state !== null && location.state !== 'expired' ? (navigate(location.state)) : (navigate('/'))
+            location.state !== null && location.state['to'] !== null ? (navigate(location.state['to'])) : (navigate('/'))
         }
     }
 
@@ -189,9 +189,9 @@ export function LoginRegister({ lrtype }){
 
     return(
         <div className='lr_holderall'>
-
+            
             <div className='lr_body'>
-                {location.state === 'expired' ? (
+                {location.state !== null && location.state['expired'] === true ? (
                 <div className='lr_expired' ref={expiredRef} onClick={() => expiredRef.current.style.display = 'none'}>
                     <span>Session Expired</span><div><XCloseIcon/></div>
                 </div>) : (<></>)}

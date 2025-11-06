@@ -1,0 +1,107 @@
+.cnrd_holder{
+    width: var(--chatnav-dim-main-popup-w);
+    height: var(--chatnav-dim-main-popup-h);
+    background-color: #fff;
+    border: 1px solid var(--chat-color-gray);
+    position: absolute;
+    top: calc((0px - var(--nav-height) + var(--chatnav-dim-main-popup-h))/2);
+    right: calc((100vw - var(--chatnav-dim-main-popup-w))/2);
+    z-index: 9;
+    padding: 25px 50px;
+    border-radius: 25px;
+    box-shadow: 0px 8px 20px 0px rgba(43,50,64,0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.1s ease-out;
+    opacity: 0;
+    pointer-events: none;
+    transform: sclae(0.8, 0.8);
+}
+
+.cnrd_header{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 20px;
+}
+
+.cnrd_xclose{
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+}
+.cnrd_xclose>*{
+    pointer-events: none;
+}
+
+.cnrd_body{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cnrd_text{
+    font-weight: 200;
+    color: var(--chat-color-gray-strong);
+}
+
+.cnrd_input{
+    position: relative;
+    width: 100%;
+    border: 2px solid var(--color-text-gray-root-light);
+    border-radius: 25px;
+    padding: 5px 25px;
+}
+.cnrd_input:focus{
+    border: 2px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.cnrd_utilholder{
+    position: relative;
+    width: 100%;
+    justify-content: end;
+    display: flex;
+    gap: 25px;
+}
+
+.cnrd_util{
+    padding: 7px 15px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: 300;
+}
+
+.cnrd_cancel:hover{
+    background-color: var(--chat-color-gray-light);
+}
+
+.cnrd_rename{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    color: #fff;
+}
+.cnrd_rename:hover{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter);
+}
+
+.cnrd_delete{
+    background-color: var(--chatnav-color-delete-light);
+    color: #fff;
+}
+.cnrd_delete:hover{
+    background-color: var(--chatnav-color-delete-strong);
+}
+
+.cnrd_bg{
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    z-index: 7;
+}

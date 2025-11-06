@@ -811,7 +811,7 @@ def CreateNewAccess(access, refresh, access_info = None):
     if(refresh == None):
         #if(access not in redis_client.lrange('ut_' + access_info['iss'], 0, -1)):
         if(redis_client.lrem('ut_' + access_info['iss'], 1, access) == 0):
-            return [False, 'Invalid Access Key', 400, '']
+            return [False, 'Invalid Access Key', 403, '']
         new_access = CreateJWTKey(int(access_info['iss']), keytype = "access", keycontent = "private")
         if(new_access[0] == False):
             return [False, 'Could not create new access key', 500]
@@ -871,5 +871,10 @@ def CreateResponseNewAccess(newaccess, response_msg = '', response_status = 200)
         response.set_cookie("access", newaccess, httponly = True, secure = True, max_age = None, samesite = "Lax")
     return response
 
-def ReturnHttpInvalidJWT(jwt):
-    return HttpResponse(json.dumps(jwt[1]), status = jwt[2])
+def ReturnHttpInvalidJWT(jwt, deletecookies = True):
+    response = HttpResponse(json.dumps(jwt[1]), status = jwt[2])
+    if(deletecookies == True):
+        response.delete_cookie('access')
+        response.delete_cookie('refresh')
+        response.delete_cookie('userinfo')
+    return response

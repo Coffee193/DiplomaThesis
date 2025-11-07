@@ -35,6 +35,7 @@ export function Settings({updatenavbarsetState}){
     async function GetUserInfo(){
         if(document.cookie.includes('userinfo=') === false){
             navigate('/login', {state: {to: '/settings'}})
+            return
         }
 
         let response_status = null

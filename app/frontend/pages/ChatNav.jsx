@@ -50,6 +50,11 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
     }, [newconv])*/
 
     async function getOrders(){
+        if(document.cookie.includes('userinfo=') === false){
+            navigate('/login', {state: {to: '/chat'}})
+            return
+        }
+
         let response_status = null
         let response = await fetch(import.meta.env.VITE_URL + 'chats/getchats/', {
             method: 'GET',
@@ -60,13 +65,12 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
             .catch(() => {})
 
         if(response_status === 200){
-            console.log(response)
             chatlist.current = response
             convsetState(createConversations(response))
             isloadingsetState(false)
         }
         else if(response_status === 401 || response_status === 403){
-            navigate('/login', {state: '/chat'})
+            navigate('/login', {state: {to: '/chat', expired: true}})
         }
     }
 
@@ -297,7 +301,7 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
                         ) : (convState) }
                 </div>
             </div>
-        <ChatNavPopUp cnpState={cnpState} cnpsetState={cnpsetState}/>
+        <ChatNavPopUp cnpState={cnpState} cnpsetState={cnpsetState} cnrdsetState={cnrdsetState}/>
         </div>
         <ChatNavRenameDelete cnrdState={cnrdState} cnrdsetState={cnrdsetState}/>
         </>

@@ -14,9 +14,9 @@
     flex-direction: column;
     justify-content: space-between;
     transition: 0.1s ease-out;
-    opacity: 0;
+    /*opacity: 0;
     pointer-events: none;
-    transform: sclae(0.8, 0.8);
+    transform: sclae(0.8, 0.8);*/
 }
 
 .cnrd_header{
@@ -32,9 +32,26 @@
     position: absolute;
     cursor: pointer;
     right: 0;
+    color: #fff;
 }
 .cnrd_xclose>*{
     pointer-events: none;
+}
+
+.cnrd_closeblue:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.cnrd_xclosered:hover{
+    color: var(--chatnav-color-delete-light);
+}
+
+.cnrd_titleblue{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+}
+
+.cnrd_titlered{
+    color: var(--chatnav-color-delete-light);
 }
 
 .cnrd_body{
@@ -82,7 +99,6 @@
 
 .cnrd_rename{
     background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
-    color: #fff;
 }
 .cnrd_rename:hover{
     background-color: var(--color-text-main-hover-blue-experimental-lighter);
@@ -90,7 +106,6 @@
 
 .cnrd_delete{
     background-color: var(--chatnav-color-delete-light);
-    color: #fff;
 }
 .cnrd_delete:hover{
     background-color: var(--chatnav-color-delete-strong);

@@ -31,7 +31,7 @@ export function LoginRegister({ lrtype }){
     const location = useLocation()
 
     async function LoginRegister_NextClick(){
-        console.log(valuesRef.current)
+        //console.log(valuesRef.current)
         if(valuesRef.current[3][0] !== null){
             warningsetState(valuesRef.current[3][0])
             return

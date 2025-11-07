@@ -4,7 +4,7 @@ import { XCloseIcon } from '../components/svgs/UtilIcons'
 export function ChatNavRenameDelete({ cnrdState, cnrdsetState }){
     return(
         <>
-        <div className='cnrd_holder'>
+        <div className='cnrd_holder' style={cnrdState['visible'] === false ? {opacity: '0', pointerEvents: 'none', transform: 'scale(0.8)'} : {opacity: '1',pointerEvents: 'all', transform: 'scale(1)'}}>
             <div className='cnrd_header'>
                 <div className={'cnrd_xclose ' + cnrdState['closeclass']}><XCloseIcon/></div>
                 <div className={cnrdState['titleclass']}>{cnrdState['title']}</div>

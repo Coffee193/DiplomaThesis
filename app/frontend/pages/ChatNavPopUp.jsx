@@ -5,10 +5,10 @@ export function ChatNavPopUp({ cnpState, cnpsetState, cnrdsetState, chatclickRef
 
     function OpenRenameDelete(type){
         if(type === 'delete'){
-            cnrdsetState({'visible': true, 'closeclass': 'cnrd_xclosered', 'titleclass': 'cnrd_titlered', 'title': 'Delete Chat', 'text': 'This will delete ', 'convname': cnpState['name'], 'buttonclass': 'cnrd_delete', 'buttontext': 'Delete', 'id': cnpState['id'], 'index': cnpState['index']})
+            cnrdsetState({'visible': true, 'closeclass': 'cnrd_xclosered', 'titleclass': 'cnrd_titlered', 'title': 'Delete Chat', 'text': 'This will delete ', 'convname': cnpState['name'], 'buttonclass': 'cnrd_delete', 'textbutton': 'Delete', 'id': cnpState['id'], 'index': cnpState['index'], 'extrainfo': 'delete'})
         }
         else if(type === 'rename'){
-            cnrdsetState({'visible': true, 'closeclass': 'cnrd_xcloseblue', 'titleclass': 'cnrd_titleblue', 'title': 'Rename Chat', 'text': 'This will rename ', 'convname': cnpState['name'], 'buttonclass': 'cnrd_rename', 'buttontext': 'Rename', 'id': cnpState['id'], 'index': cnpState['index']})
+            cnrdsetState({'visible': true, 'closeclass': 'cnrd_xcloseblue', 'titleclass': 'cnrd_titleblue', 'title': 'Rename Chat', 'text': 'This will rename ', 'convname': cnpState['name'], 'buttonclass': 'cnrd_rename', 'textbutton': 'Rename', 'id': cnpState['id'], 'index': cnpState['index'], 'extrainfo': 'rename'})
         }
         chatclickRef.current = null
         cnpsetState({'visible': false, 'id': null})

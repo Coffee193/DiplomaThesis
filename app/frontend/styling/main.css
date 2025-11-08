@@ -307,3 +307,8 @@ textarea:focus{
     height: 25px;
     border-radius: 25px;
 }
+
+/*.buttonactive{
+    pointer-events: all;
+    cursor: pointer;
+}*/

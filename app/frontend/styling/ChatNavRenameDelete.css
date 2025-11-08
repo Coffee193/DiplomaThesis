@@ -4,8 +4,10 @@
     background-color: #fff;
     border: 1px solid var(--chat-color-gray);
     position: absolute;
-    top: calc((0px - var(--nav-height) + var(--chatnav-dim-main-popup-h))/2);
-    right: calc((100vw - var(--chatnav-dim-main-popup-w))/2);
+    /*top: calc((0px - var(--nav-height) + var(--chatnav-dim-main-popup-h))/2);
+    right: calc((100vw - var(--chatnav-dim-main-popup-w))/2);*/
+    top: calc(0px + var(--chatnav-dim-main-popup-h)/2);
+    left: calc(0px + 50vw - var(--chatnav-dim-main-popup-w)/2);
     z-index: 9;
     padding: 25px 50px;
     border-radius: 25px;
@@ -14,9 +16,6 @@
     flex-direction: column;
     justify-content: space-between;
     transition: 0.1s ease-out;
-    /*opacity: 0;
-    pointer-events: none;
-    transform: sclae(0.8, 0.8);*/
 }
 
 .cnrd_header{
@@ -87,9 +86,14 @@
 
 .cnrd_util{
     padding: 7px 15px;
-    cursor: pointer;
     border-radius: 25px;
     font-weight: 300;
+    cursor: pointer;
+    width: 90px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cnrd_cancel:hover{
@@ -116,10 +120,12 @@
     opacity: 0;
     pointer-events: none;
     position: absolute;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.05);
     z-index: 7;
+    top: 0;
+    left: 0;
 }
 
 .cnrd_warning{

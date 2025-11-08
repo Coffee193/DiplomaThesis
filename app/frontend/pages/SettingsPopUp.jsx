@@ -4,12 +4,11 @@ import { UsernamePhoneInput } from './UsernamePhoneInput'
 import { PasswordInput } from './PasswordInput'
 import { SettingsNameInput } from './SettingsNameInput'
 import { SettingsImage } from './SettingsImage'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificationsetState, updatenavbarsetState}){
 
-    //const [spnotificationState, spnotificationsetState] = useState({'text': '', 'svg': null, 'visible': false, 'class': null})
     const sppasswordRef = useRef()
     const spemailRef = useRef()
     const sppasswordfirstRef = useRef()
@@ -17,6 +16,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
     const spphoneRef = useRef()
     const spbuttonRef = useRef()
     const navigate = useNavigate()
+    const canclickbuttonRef = useRef(true)
 
     function FocusElement(element){
         if(element === 'ps'){
@@ -37,6 +37,9 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
     }
 
     function ClickSubmitDelete(){
+        if(canclickbuttonRef.current === false){
+            return
+        }
         let ivalstart = popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? 1 : 0
         let ivalend = popupState['extrainfo'] === 'deleteaccount' || popupState['extrainfo'] === 'deletechats' ? 3 : 2
         for(let i=ivalstart; i<ivalend; i++){
@@ -125,16 +128,19 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
             updatenavbarsetState(prevState => ({...prevState, 'image': valuesRef.current[0]}))
             ClosePopUp(true)
         }
-        //valuesRef.current[1] = false
     }
 
     function ClickButton(active){
         if(active === false){
-            spbuttonRef.current.classList.remove('sp_buttonactive')
+            canclickbuttonRef.current = false
+            //spbuttonRef.current.classList.remove('buttonactive')
+            spbuttonRef.current.style.pointerEvents = 'none'
             popupsetState(prevState => ({...prevState, 'textbuttoninit': prevState['textbutton'], 'textbutton': <BlocksLoad/>}))
         }
         else{
-            spbuttonRef.current.classList.add('sp_buttonactive')
+            canclickbuttonRef.current = true
+            //spbuttonRef.current.classList.add('buttonactive')
+            spbuttonRef.current.style.pointerEvents = 'all'
             popupsetState(prevState => ({...prevState, 'textbutton': prevState['textbuttoninit']}))
         }
     }
@@ -249,7 +255,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
                     {popupState['inputtype'] === 'image' ? <div/> : ''}
                 </div>
                 <div className='sp_buttonholder'>
-                    <div className={'sp_button' + (popupState['visible'] === true ? ' sp_buttonactive ' : ' ') + popupState['classbutton']} ref={spbuttonRef} onClick={() => ClickSubmitDelete()}>{popupState['textbutton']}</div>
+                    <div className={'sp_button ' + popupState['classbutton']} style={popupState['visible'] === true ? {pointerEvents: 'all'} : {pointerEvents: 'none'}} ref={spbuttonRef} onClick={() => ClickSubmitDelete()}>{popupState['textbutton']}</div>
                 </div>
             </>)}
         </div>

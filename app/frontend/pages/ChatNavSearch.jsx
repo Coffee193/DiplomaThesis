@@ -2,10 +2,9 @@ import '../styling/ChatNavSearch.css'
 import { XCloseIcon, SearchIcon } from '../components/svgs/UtilIcons';
 import { useRef } from 'react';
 
-export function ChatNavSearch({ convsetState, chatlist, createConversations, searchchatinputRef }){
+export function ChatNavSearch({ searchchatinputRef , SearchChat}){
 
     const searchiconRef = useRef()
-    //const searchchatinputRef = useRef()
     const xcloseRef = useRef()
 
     function SearchValueChange(value){
@@ -18,23 +17,6 @@ export function ChatNavSearch({ convsetState, chatlist, createConversations, sea
             xcloseRef.current.style.pointerEvents = 'none'
         }
         SearchChat(value)
-    }
-
-    function SearchChat(value){
-        if(value.length !== 0){
-            let templist = []
-            let indexlist = []
-            for(let i=0; i<chatlist.current.length; i++){
-                if(chatlist.current[i]["name"].toLowerCase().includes(value.toLowerCase())){
-                    templist.push(chatlist.current[i])
-                    indexlist.push(i)
-                }
-            }
-            convsetState(createConversations(templist, false, indexlist))
-        }
-        else{
-            convsetState(createConversations(chatlist.current, false))
-        }
     }
 
     return(

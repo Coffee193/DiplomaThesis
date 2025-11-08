@@ -16,10 +16,8 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
     const chatoptionsbackRef = useRef()
     const renameinputRef = useRef()
     const renameclickRef = useRef()
-    const searchchatinputRef = useRef()
     const linkparams = useParams()
     const [cnpState, cnpsetState] = useState({'visible': false, 'id': null})
-    const [cnrdState, cnrdsetState] = useState({'visible': false})
     /* Must update entire Conversations Nav because if I try to do it with Ref and removing/adding classes then there will be
     problems on the screen (the color will be cut off in the middle etc) */
 
@@ -282,7 +280,7 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
                     </div>
                 </div>
                 <div>
-                    <ChatNavUtils/>
+                    <ChatNavUtils chatclickRef={chatclickRef} convsetState={convsetState} chatlist={chatlist} createConversations={createConversations} cnpState={cnpState} cnpsetState={cnpsetState}/>
                     {/*<ChatNavSearch convsetState={convsetState} chatlist={chatlist} createConversations={createConversations}/>*/}
                 </div>
                 </>

@@ -1,18 +1,49 @@
 import '../styling/ChatNavRenameDelete.css'
-import { XCloseIcon } from '../components/svgs/UtilIcons'
+import { XCloseIcon, BlocksLoad } from '../components/svgs/UtilIcons'
 import { pressKey } from './pressKeyFunc'
 import { useRef, useState } from 'react'
 
-export function ChatNavRenameDelete({ cnrdState, cnrdsetState }){
+export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, searchchatinputRef, SearchChat }){
 
     const cnrdinputRef = useRef()
     const [cnrdwarningState, cnrdwarningsetState] = useState()
+    const canclickbuttonRef = useRef()
+    const cnrdbuttonRef = useRef()
 
-    async function RenameChat(){
-        if(renameinputRef.current.value.length <= 5){
-            cnrdwarningsetState('Name must be at leat 5 characters long')
+    function ClickButton(active){
+        if(active === false){
+            canclickbuttonRef.current = false
+            cnrdbuttonRef.current.style.pointerEvents = 'none'
+            cnrdsetState(prevState => ({...prevState, 'textbuttoninit': prevState['textbutton'], 'textbutton': <BlocksLoad/>}))
+        }
+        else if(active === true){
+            canclickbuttonRef.current = true
+            cnrdbuttonRef.current.style.pointerEvents = 'all'
+            cnrdsetState(prevState => ({...prevState, 'textbutton': prevState['textbuttoninit']}))
+        }
+    }
+
+    function SubmitRequest(){
+        if(canclickbuttonRef.current === false){
             return
         }
+        if(cnrdState['extrainfo'] === 'rename'){
+            if(cnrdinputRef.current.value.length <= 5){
+                cnrdwarningsetState('Name must be at leat 5 characters long')
+                return
+            }
+        }
+
+        ClickButton(false)
+        if(cnrdState['extrainfo'] === 'delete'){
+            
+        }
+        else if(cnrdState['extrainfo'] === 'rename'){
+            //RenameChat()
+        }
+    }
+
+    async function RenameChat(){
         let request = {"id": cnrdState['id'], "v": cnrdinputRef.current.value}
 
         let response_status = null
@@ -26,13 +57,12 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState }){
         }).then(data => data)
         .catch(()=> cnrdwarningsetState('Could not connect to the server'))
 
+        ClickButton(true)
         if(response_status === 200){
-            ChatOptionAppearClose('rename', 'hide')
             cnrdsetState({'visible': false})
             chatlist.current[cnrdState['index']]["name"] = request["v"]
             if(searchchatinputRef.current.value.length === 0){
-                let convfinalstate = createConversations(chatlist.current, false)
-                convsetState(convfinalstate)
+                convsetState(createConversations(chatlist.current, false))
             }
             else{
                 SearchChat(searchchatinputRef.current.value)
@@ -44,11 +74,16 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState }){
 
     }
 
+    function ClosePopUp(){
+        cnrdsetState({'visible': false})
+        cnrdwarningsetState('')
+    }
+
     return(
         <>
         <div className='cnrd_holder' style={cnrdState['visible'] === false ? {opacity: '0', pointerEvents: 'none', transform: 'scale(0.8)'} : {opacity: '1',pointerEvents: 'all', transform: 'scale(1)'}}>
             <div className='cnrd_header'>
-                <div className={'cnrd_xclose ' + cnrdState['closeclass']} onClick={() => cnrdsetState({'visible': false})}><XCloseIcon/></div>
+                <div className={'cnrd_xclose ' + cnrdState['closeclass']} onClick={() => ClosePopUp()}><XCloseIcon/></div>
                 <div className={cnrdState['titleclass']}>{cnrdState['title']}</div>
             </div>
             <div className='cnrd_body'>
@@ -56,16 +91,16 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState }){
                     <span>{cnrdState['convname']}</span>
                 </div>
                 {cnrdState['visible'] === false ? ('') : (
-                    <input className='cnrd_input' maxLength='50' autoFocus={true} onKeyDown={(event) => pressKey(event, )} ref={cnrdinputRef}/>
+                    <input className='cnrd_input' maxLength='50' autoFocus={true} onKeyDown={(event) => pressKey(event, SubmitRequest, undefined, undefined, undefined)} ref={cnrdinputRef}/>
                 )}
-                <div className='cnrd_warning'>{cnrdwarningState}</div>
+                <div className='cnrd_warning' onClick={() => cnrdwarningsetState('')}>{cnrdwarningState}</div>
             </div>
             <div className='cnrd_utilholder'>
-                <div className='cnrd_util cnrd_cancel' onClick={() => cnrdsetState({'visible': false})}>Cancel</div>
-                <div className={'cnrd_util ' + cnrdState['buttonclass']}>{cnrdState['buttontext']}</div>
+                <div className='buttonactive cnrd_util cnrd_cancel' onClick={() => ClosePopUp()}>Cancel</div>
+                <div className={'cnrd_util ' + cnrdState['buttonclass']} onClick={() => SubmitRequest()} ref={cnrdbuttonRef}>{cnrdState['textbutton']}</div>
             </div>
         </div>
-        <div className='cnrd_bg' style={cnrdState['visible'] === false ? {opacity: '0', pointerEvents: 'none'} : {opacity: '1', pointerEvents: 'all'}} onClick={() => cnrdsetState({'visible': false})}/>
+        <div className='cnrd_bg' style={cnrdState['visible'] === false ? {opacity: '0', pointerEvents: 'none'} : {opacity: '1', pointerEvents: 'all'}} onClick={() => ClosePopUp()}/>
         </>
     )
 }

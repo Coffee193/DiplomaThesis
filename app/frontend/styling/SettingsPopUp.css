@@ -92,18 +92,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .sp_bgblue{
     background-color: var(--color-text-main-hover-blue-experimental-lighter);
-    &.sp_buttonactive:hover{
+    /*&.sp_buttonactive:hover{
+        background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
+    }*/
+    &:hover{
         background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
     }
 }
-.sp_buttonactive{
+/*.sp_buttonactive{
     cursor: pointer;
     pointer-events: all;
-}
+}*/
 
 .sp_darkbg{
     position: absolute;
@@ -117,7 +121,10 @@
 
 .sp_bgred{
     background-color: var(--chatnav-color-delete-strong);
-    &.sp_buttonactive:hover{
+    /*&.sp_buttonactive:hover{
+        background-color: var(--chatnav-color-delete-light);
+    }*/
+    &:hover{
         background-color: var(--chatnav-color-delete-light);
     }
 }

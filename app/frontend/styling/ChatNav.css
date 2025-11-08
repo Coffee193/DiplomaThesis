@@ -10,7 +10,7 @@
 .cn_utils{
     width: 100%;
     height: 100px;
-    position: relative;
+    /*position: relative;*/
     display: flex;
     flex-direction: column;
     justify-content: space-around;

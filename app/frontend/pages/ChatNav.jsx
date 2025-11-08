@@ -1,15 +1,16 @@
 import '../styling/ChatNav.css'
-import { ChatBubble, SearchIcon, XCloseIcon, DotsIcon, PencilIcon, TrashIcon } from '../components/svgs/UtilIcons'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { ChatBubble, DotsIcon } from '../components/svgs/UtilIcons'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { ChatNavPopUp } from './ChatNavPopUp'
 import { ChatNavSearch } from './ChatNavSearch'
 import { ChatNavRenameDelete } from './ChatNavRenameDelete'
+import { ChatNavUtils } from './ChatNavUtils'
 
 export function ChatNav({convState, convsetState, chatlist, newconv, isloadingState, isloadingsetState}){
 
     const navigate = useNavigate()
-    const chatlistidRef = useRef([null, null])
+    const chatclickRef = useRef(null) /* id of chat to be renamed/deleted */
     const renameRef = useRef()
     const deleteRef = useRef()
     const chatoptionsbackRef = useRef()
@@ -17,15 +18,15 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
     const renameclickRef = useRef()
     const searchchatinputRef = useRef()
     const linkparams = useParams()
-    const [cnpState, cnpsetState] = useState({'visible': false})
+    const [cnpState, cnpsetState] = useState({'visible': false, 'id': null})
     const [cnrdState, cnrdsetState] = useState({'visible': false})
     /* Must update entire Conversations Nav because if I try to do it with Ref and removing/adding classes then there will be
     problems on the screen (the color will be cut off in the middle etc) */
 
     function ChatPopUp(element){
-        if(chatlistidRef.current[0] === element.dataset.idval){
-            cnpsetState({'visible': false})
-            chatlistidRef.current = [null, null]
+        if(chatclickRef.current === element.dataset.idval){
+            cnpsetState({'visible': false, 'id': null})
+            chatclickRef.current = null
             return
         }
 
@@ -34,8 +35,8 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
         
         let element_position_top_float = element.getBoundingClientRect().top.toFixed(1) - navdim - 185
 
-        chatlistidRef.current = [element.dataset.idval, element.dataset.name]
-        cnpsetState({'visible': true, 'top': String(element_position_top_float) + 'px', 'name': element.dataset.name})
+        chatclickRef.current = element.dataset.idval
+        cnpsetState({'visible': true, 'top': String(element_position_top_float) + 'px', 'name': element.dataset.name, 'id': element.dataset.idval, 'index': element.dataset.index})
     }
 
     useEffect(() => {
@@ -281,7 +282,8 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
                     </div>
                 </div>
                 <div>
-                    <ChatNavSearch convsetState={convsetState} chatlist={chatlist} createConversations={createConversations}/>
+                    <ChatNavUtils/>
+                    {/*<ChatNavSearch convsetState={convsetState} chatlist={chatlist} createConversations={createConversations}/>*/}
                 </div>
                 </>
                 )
@@ -301,9 +303,9 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
                         ) : (convState) }
                 </div>
             </div>
-        <ChatNavPopUp cnpState={cnpState} cnpsetState={cnpsetState} cnrdsetState={cnrdsetState}/>
+        {/*<ChatNavPopUp cnpState={cnpState} cnpsetState={cnpsetState} cnrdsetState={cnrdsetState} chatclickRef={chatclickRef}/>*/}
         </div>
-        <ChatNavRenameDelete cnrdState={cnrdState} cnrdsetState={cnrdsetState}/>
+        {/*<ChatNavRenameDelete cnrdState={cnrdState} cnrdsetState={cnrdsetState}/>*/}
         </>
     )
 }

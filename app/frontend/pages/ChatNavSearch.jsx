@@ -2,10 +2,10 @@ import '../styling/ChatNavSearch.css'
 import { XCloseIcon, SearchIcon } from '../components/svgs/UtilIcons';
 import { useRef } from 'react';
 
-export function ChatNavSearch({ convsetState, chatlist, createConversations }){
+export function ChatNavSearch({ convsetState, chatlist, createConversations, searchchatinputRef }){
 
     const searchiconRef = useRef()
-    const searchchatinputRef = useRef()
+    //const searchchatinputRef = useRef()
     const xcloseRef = useRef()
 
     function SearchValueChange(value){

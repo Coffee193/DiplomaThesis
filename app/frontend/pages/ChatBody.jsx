@@ -1,16 +1,9 @@
 import '../styling/ChatBody.css'
-import { ArrowUpload, UploadFile, NeuralNetwork } from '../components/svgs/UtilIcons'
-import { useRef, useState } from 'react'
-import { ModelSelectPopUp } from './ModelselectPopUp'
 import { useNavigate } from 'react-router-dom'
+import { ChatBox } from './ChatBox'
 
+export function ChatBody({ chatlist , setnewconv, isloadingState}){
 
-export function ChatBody({ chatlist , setnewconv, isloadingState, isloadingsetState }){
-
-    const textareaRef = useRef()
-    const [modelpopupState, modelpopupsetState] = useState(0)
-    const [modelselectedState, modelselectedsetState] = useState('Llama 3.0')
-    const arrowuploadRef = useRef()
     const navigate = useNavigate()
 
     function CheckQuestion(){
@@ -54,31 +47,13 @@ export function ChatBody({ chatlist , setnewconv, isloadingState, isloadingsetSt
     }
 
     return(
-        <div className = 'cbody_holder'>
-            <ModelSelectPopUp BlurClassName={'cbody_inner'} modelpopupclicked={modelpopupState} changemodel={modelselectedsetState}/>
-            <div className='cbody_inner'>
-                <div className='cbody_upper'>
-                    <div className='cbody_image_holder'><img src='../components/images/MainLogo.png'/></div>
-                    <div className='cbody_image_text'>How can I assist you?</div>
+        <div className = 'cbd_holder'>
+            <div className='cbd_inner'>
+                <div className='cbd_upper'>
+                    <div className='cbd_image_holder'><img src='../components/images/MainLogo.png'/></div>
+                    <div className='cbd_image_text'>How can I assist you?</div>
                 </div>
-                <div className='cbody_lower'>
-                    <textarea className='cbody_textarea' placeholder='Ask Sapling' ref={textareaRef} onChange={() => CheckQuestion()}/>
-                    <div className='cbody_chat_info_holder'>
-                        <div className='cbody_chat_info_left'>
-                            <div onClick={() => modelpopupsetState((prevstate) => prevstate + 1)}>
-                                <NeuralNetwork/><span>{modelselectedState}</span>
-                            </div>
-                        </div>
-                        <div className='cbody_chat_info_right'>
-                            <div className='cbody_chat_uploadpdf cbody_chat_info_active'>
-                                <UploadFile/>
-                                <div className='cbody_chat_uploadpdf_text' style={{color:'#fff'}}>Upload PDF</div>
-                            </div>
-                            <div className='cbody_chat_arrowupload cbody_chat_info_deactive' ref={arrowuploadRef} onClick={() => AskQuestion()}><ArrowUpload/></div>
-                        </div>
-                    </div>
-                    <div className='cbody_lower_backclick' onClick={() => textareaRef.current.focus()}/>
-                </div>
+                <ChatBox isloadingState={isloadingState}/>
             </div>
         </div>
 )

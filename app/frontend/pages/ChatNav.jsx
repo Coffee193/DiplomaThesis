@@ -11,11 +11,6 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
 
     const navigate = useNavigate()
     const chatclickRef = useRef(null) /* id of chat to be renamed/deleted */
-    const renameRef = useRef()
-    const deleteRef = useRef()
-    const chatoptionsbackRef = useRef()
-    const renameinputRef = useRef()
-    const renameclickRef = useRef()
     const linkparams = useParams()
     const [cnpState, cnpsetState] = useState({'visible': false, 'id': null})
     /* Must update entire Conversations Nav because if I try to do it with Ref and removing/adding classes then there will be
@@ -28,7 +23,6 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
             return
         }
 
-        //let popupdim = parseInt(window.getComputedStyle(document.getElementsByClassName('cnp')[0]).getPropertyValue('--chatnav-dim-popup').slice(0, 2))
         let navdim = parseInt(window.getComputedStyle(document.getElementsByClassName('nav_all_holder')[0]).getPropertyValue('--nav-height').slice(0, 2))
         
         let element_position_top_float = element.getBoundingClientRect().top.toFixed(1) - navdim - 185
@@ -39,7 +33,7 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
 
     useEffect(() => {
         getOrders()
-    }, [])
+    }, [linkparams])
 
     /*useEffect(() => {
         if(newconv !== undefined){
@@ -77,7 +71,6 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
         let monthyear = []
         let convfinalstate = []
         let indexval = null
-
         for(let i=arr.length - 1; i>=0; i--){
             if(conv_to_date === true){
                 arr[i]['date_created'] = new Date(arr[i]['date_created'] * 1000)
@@ -116,151 +109,16 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
         }
         return response_date.getFullYear().toString() + append_val + response_date_month.toString()
     }
-    
-    function ChatOptionAppearClose(popup, value){
-        /* popup = 'rename' or 'delete' 
-           value = 'show' or 'hide'*/
-        if(popup === 'rename'){
-            if(value === 'show'){
-                renameRef.current.style.opacity = '1'
-                chatoptionsbackRef.current.style.opacity = '1'
-                renameRef.current.style.pointerEvents = 'all'
-                chatoptionsbackRef.current.style.pointerEvents = 'all'
-                renameRef.current.style.transform = 'scale(1, 1)'
-            }
-            else if(value === 'hide'){
-                renameRef.current.style.opacity = '0'
-                chatoptionsbackRef.current.style.opacity = '0'
-                renameRef.current.style.pointerEvents = 'none'
-                chatoptionsbackRef.current.style.pointerEvents = 'none'
-                renameRef.current.style.transform = 'scale(0.8, 0.8)'
-            }
-        }
-        else if(popup === 'delete'){
-            if(value === 'show'){
-                deleteRef.current.style.opacity = '1'
-                chatoptionsbackRef.current.style.opacity = '1'
-                deleteRef.current.style.pointerEvents = 'all'
-                chatoptionsbackRef.current.style.pointerEvents = 'all'
-                deleteRef.current.style.transform = 'scale(1, 1)'
-            }
-            else if(value === 'hide'){
-                deleteRef.current.style.opacity = '0'
-                chatoptionsbackRef.current.style.opacity = '0'
-                deleteRef.current.style.pointerEvents = 'none'
-                chatoptionsbackRef.current.style.pointerEvents = 'none'
-                deleteRef.current.style.transform = 'scale(0.8, 0.8)'
-            }
-        }
-    }
 
-    async function DeleteChat(){
-        let response_status = null
-        let request = {"_id": chatoptionsidRef.current[0]}
-        let response = await fetch('http://127.0.0.1:8000/chats/deletechats/', {
-            method: 'DELETE',
-            body: JSON.stringify(request),
-            credentials: 'include',
-        }).then(res => {
-            response_status = res.status
-            return res.json()
-        }).then(data => data)
-        .catch(() => {response_status = 'failed'})
-
-        if(response_status === 200){
-            ChatOptionAppearClose('delete', 'hide')
-            chatlist.current.splice(parseInt(chatoptionsidRef.current[1]), 1)
-            if(searchchatinputRef.current.value.length === 0){
-                let convfinalstate = createConversations(chatlist.current, false)
-                convsetState(convfinalstate)
-            }
-            else{
-                SearchChat(searchchatinputRef.current.value)
-            }
-        }
-        else if(response_status === 401 || response_status === 403){
-            navigate('/login')
-        }
-    }
-
-    async function RenameChat(){
-        if(renameinputRef.current.value.length <= 5){
-            return
-        }
-        let request = {"_id": chatoptionsidRef.current[0], "rename": renameinputRef.current.value}
-        console.timeLog(request)
-        let response_status = null
-        let response = await fetch('http://127.0.0.1:8000/chats/renamechats/', {
-            method: 'POST',
-            body: JSON.stringify(request),
-            credentials: 'include',
-        }).then(res => {
-            response_status = res.status
-            return res.json()
-        }).then(data => data)
-        .catch(()=> {response_status = 'failed'})
-
-        if(response_status === 200){
-            ChatOptionAppearClose('rename', 'hide')
-            renameinputRef.current.value = ''
-            chatlist.current[chatoptionsidRef.current[1]]["name"] = request["rename"]
-            if(searchchatinputRef.current.value.length === 0){
-                let convfinalstate = createConversations(chatlist.current, false)
-                convsetState(convfinalstate)
-            }
-            else{
-                SearchChat(searchchatinputRef.current.value)
-            }
-        }
-        else if(response_status === 401 || response_status === 403){
-            navigate('/login')
-        }
-
-    }
-
-    function ChangeRename(){
-        if(renameinputRef.current.value.length > 5){
-            renameclickRef.current.classList.remove('rename_block')
-        }
-        else{
-            renameclickRef.current.classList.add('rename_block')
-        }
-    }
-
-    function SearchChat(value){
-        if(value.length !== 0){
-            let templist = []
-            let indexlist = []
-            for(let i=0; i<chatlist.current.length; i++){
-                if(chatlist.current[i]["name"].toLowerCase().includes(value.toLowerCase())){
-                    templist.push(chatlist.current[i])
-                    indexlist.push(i)
-                }
-            }
-            let convfinalstate = createConversations(templist, false, indexlist)
-            convsetState(convfinalstate)
-        }
-        else{
-            let convfinalstate = createConversations(chatlist.current, false)
-            convsetState(convfinalstate)
-        }
-    }
 
     function ClickChat(idval){
-        if(chatclickidRef.current !== idval){
-            chatclickidRef.current = idval
-        }
-        else{
-            return
-        }
-        let convfinalstate = createConversations(chatlist.current, false)
-        convsetState(convfinalstate)
         if(idval !== null){
             navigate('/chat/' + idval + '/')
         }
         else{
             navigate('/chat')
         }
+        convsetState(createConversations(chatlist.current, false))
     }
 
     return(
@@ -274,14 +132,13 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
                     </>
                 ) : (
                 <>
-                <div onClick={()=>{console.log('i was clicked'); ClickChat(null)}}>
+                <div onClick={()=> ClickChat(null)}>
                     <div className='cn_util_item'>
                         <ChatBubble width={25} height={25} strokeWidth={0.5} viewBox={'-1 -1 18 18'}/><span>New Chat</span>
                     </div>
                 </div>
                 <div>
                     <ChatNavUtils chatclickRef={chatclickRef} convsetState={convsetState} chatlist={chatlist} createConversations={createConversations} cnpState={cnpState} cnpsetState={cnpsetState}/>
-                    {/*<ChatNavSearch convsetState={convsetState} chatlist={chatlist} createConversations={createConversations}/>*/}
                 </div>
                 </>
                 )
@@ -289,7 +146,7 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
             </div>
             <div className='cn_info'>
                 <div className='cn_info_text'>
-                    <div onClick={() => console.log(chatlist.current)}>Chats</div>
+                    <div>Chats</div>
                 </div>
                 <div className='cn_info_container'>
                     {isloadingState === true ? (
@@ -301,9 +158,7 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
                         ) : (convState) }
                 </div>
             </div>
-        {/*<ChatNavPopUp cnpState={cnpState} cnpsetState={cnpsetState} cnrdsetState={cnrdsetState} chatclickRef={chatclickRef}/>*/}
         </div>
-        {/*<ChatNavRenameDelete cnrdState={cnrdState} cnrdsetState={cnrdsetState}/>*/}
         </>
     )
 }

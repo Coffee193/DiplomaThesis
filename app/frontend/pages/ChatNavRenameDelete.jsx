@@ -3,7 +3,7 @@ import { XCloseIcon, BlocksLoad } from '../components/svgs/UtilIcons'
 import { pressKey } from './pressKeyFunc'
 import { useRef, useState } from 'react'
 
-export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, searchchatinputRef, SearchChat }){
+export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, searchchatinputRef, SearchChat, chatlist, createConversations }){
 
     const cnrdinputRef = useRef()
     const [cnrdwarningState, cnrdwarningsetState] = useState()
@@ -36,10 +36,10 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
 
         ClickButton(false)
         if(cnrdState['extrainfo'] === 'delete'){
-            
+            DeleteChat()
         }
         else if(cnrdState['extrainfo'] === 'rename'){
-            //RenameChat()
+            RenameChat()
         }
     }
 
@@ -47,7 +47,7 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
         let request = {"id": cnrdState['id'], "v": cnrdinputRef.current.value}
 
         let response_status = null
-        await fetch(import.meta.env.VITE_URL + 'chats/renamechats/', {
+        await fetch(import.meta.env.VITE_URL + 'chats/renamechat/', {
             method: 'POST',
             body: JSON.stringify(request),
             credentials: 'include',
@@ -59,7 +59,7 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
 
         ClickButton(true)
         if(response_status === 200){
-            cnrdsetState({'visible': false})
+            ClosePopUp()
             chatlist.current[cnrdState['index']]["name"] = request["v"]
             if(searchchatinputRef.current.value.length === 0){
                 convsetState(createConversations(chatlist.current, false))
@@ -72,6 +72,35 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
             navigate('/login', {state: {to: '/chat'}})
         }
 
+    }
+
+    async function DeleteChat(){
+        let response_status = null
+        let request = {"id": cnrdState['id']}
+        await fetch(import.meta.env.VITE_URL + 'chats/deletechat/', {
+            method: 'DELETE',
+            body: JSON.stringify(request),
+            credentials: 'include',
+        }).then(res => {
+            response_status = res.status
+            return res.json()
+        }).then(data => data)
+        .catch(() => cnrdwarningsetState('Could not connect to the server'))
+
+        ClickButton(true)
+        if(response_status === 200){
+            ClosePopUp()
+            chatlist.current.splice(parseInt(cnrdState['index']), 1)
+            if(searchchatinputRef.current.value.length === 0){
+                convsetState(createConversations(chatlist.current, false))
+            }
+            else{
+                SearchChat(searchchatinputRef.current.value)
+            }
+        }
+        else if(response_status === 401 || response_status === 403){
+            navigate('/login', {state: {to: '/chat'}})
+        }
     }
 
     function ClosePopUp(){
@@ -90,9 +119,9 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
                 <div className='cnrd_text'>{cnrdState['text']}
                     <span>{cnrdState['convname']}</span>
                 </div>
-                {cnrdState['visible'] === false ? ('') : (
+                {cnrdState['extrainfo'] === 'rename' ? (
                     <input className='cnrd_input' maxLength='50' autoFocus={true} onKeyDown={(event) => pressKey(event, SubmitRequest, undefined, undefined, undefined)} ref={cnrdinputRef}/>
-                )}
+                ): ('')}
                 <div className='cnrd_warning' onClick={() => cnrdwarningsetState('')}>{cnrdwarningState}</div>
             </div>
             <div className='cnrd_utilholder'>

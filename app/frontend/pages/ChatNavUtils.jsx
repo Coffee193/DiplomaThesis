@@ -29,7 +29,7 @@ export function ChatNavUtils({ chatclickRef, convsetState, chatlist, createConve
         <>
             <ChatNavSearch searchchatinputRef={searchchatinputRef} SearchChat={SearchChat}/>
             <ChatNavPopUp cnpState={cnpState} cnpsetState={cnpsetState} cnrdsetState={cnrdsetState} chatclickRef={chatclickRef}/>
-            <ChatNavRenameDelete cnrdState={cnrdState} cnrdsetState={cnrdsetState} convsetState={convsetState} searchchatinputRef={searchchatinputRef} SearchChat={SearchChat}/>
+            <ChatNavRenameDelete cnrdState={cnrdState} cnrdsetState={cnrdsetState} convsetState={convsetState} searchchatinputRef={searchchatinputRef} SearchChat={SearchChat} chatlist={chatlist} createConversations={createConversations}/>
         </>
     )
 }

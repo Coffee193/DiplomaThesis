@@ -94,7 +94,7 @@ def deleteChats(request):
         return HttpResponseBadRequest('Http 400 Bad request, method must be DELETE')
     
 @api_view(['POST'])
-def renameChats(request):
+def renameChats_old(request):
     if(request.method == 'POST'):
         try:
             ver_req_auth = VerifyAuthRequest(request)
@@ -213,3 +213,44 @@ def GetChats(request):
         ret[i]["_id"] = str(ret[i]["_id"])
     
     return CreateResponseNewAccess(valjwt[1], ret, 200)
+
+@api_view(['POST'])
+def RenameChat(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+
+    if('id' not in data or 'v' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    if(len(data['v']) < 5):
+        return HttpResponse(json.dumps('Conversation name must be more than 5 characters'), status = 400)
+    if(len(data['v']) > 50):
+        return HttpResponse(json.dumps('Conversation name must be less than 50 characters'), status = 400)
+    if(data['id'].isdigit() == False):
+        return HttpResponse(json.dumps('Invalid Conversation ID'), status = 400)
+
+    chat_ret = chats.update_one({"_id": int(data["id"]), "user_id": valjwt[3]},
+                                        {"$set": {"name": data["v"]}})
+    if(chat_ret.modified_count == 1):
+        return CreateResponseNewAccess(valjwt[1], 'Chat successfully renamed', 200)
+    else:
+        return HttpResponse(json.dumps('Conversation ID does not belong to User'), status = 400)
+    
+@api_view(['DELETE'])
+def DeleteChat(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+
+    if('id' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    if(data['id'].isdigit() == False):
+        return HttpResponse(json.dumps('Invalid Conversation ID'), status = 400)
+    
+    chat_del = chats.delete_one({"_id": int(data["id"]), "user_id": valjwt[3]})
+    if(chat_del.deleted_count == 1):
+        return CreateResponseNewAccess(valjwt[1], 'Chat successfully deleted', 200)
+    else:
+        return HttpResponse(json.dumps('Conversation ID does not belong to User'), status = 400)

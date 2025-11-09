@@ -1,4 +1,4 @@
-.chatmain_holder{
+.cm_holder{
     position: relative;
     width: calc(100% - var(--chatnav-width));
     background-color: #fff;
@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.chatmain_container{
+.cm_container{
     position: relative;
     /*width: 70%;*/
     /*padding: 0 calc(0.3 * var(--chatnav-width));
@@ -139,7 +139,7 @@
     color: #fff;
 }
 
-.chatmain_container_chat{
+.cm_chat{
     width: 100%;
     height: 100%;
     position: relative;

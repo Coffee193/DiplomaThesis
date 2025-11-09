@@ -24,7 +24,7 @@ export function ChatMain(){
     }
 
     useEffect(() => {
-        getChatConversations()
+        //getChatConversations()
     }, [conv_id.id])
 
     async function getChatConversations(){
@@ -105,9 +105,9 @@ export function ChatMain(){
     }
 
     return(
-        <div className='chatmain_holder'>
-            <div className='chatmain_container'>
-                <div className='chatmain_container_chat'>
+        <div className='cm_holder'>
+            <div className='cm_container'>
+                <div className='cm_chat'>
                     {convState}
                 </div>
                 <div className='chatmain_ask'>

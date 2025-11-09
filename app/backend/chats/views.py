@@ -35,7 +35,7 @@ def getChats(request):
         return HttpResponseBadRequest('Http 400 Bad request')
     
 @api_view(['POST'])
-def createChats(request):
+def createChats_Old(request):
     if(request.method == 'POST'):
         try:
             ver_req_auth = VerifyAuthRequest(request)
@@ -144,7 +144,7 @@ def getChatConv(request, conv_id):
         return HttpResponseBadRequest('Http 400 Bad Request, method must be GET')
     
 @api_view(['POST'])
-def answearQuestion(request):
+def answearQuestion_Old(request):
     if(request.method == 'POST'):
         try:
             ver_req_auth = VerifyAuthRequest(request)
@@ -254,3 +254,26 @@ def DeleteChat(request):
         return CreateResponseNewAccess(valjwt[1], 'Chat successfully deleted', 200)
     else:
         return HttpResponse(json.dumps('Conversation ID does not belong to User'), status = 400)
+    
+@api_view(['POST'])
+def CreateChat(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+
+    if('q' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    if(len(data['q']) == 0):
+        return HttpResponse(json.dumps('Question is empty'), status = 400)
+    
+    chat_id = GenerateSnowflake()
+    curr_time = datetime.datetime.now(datetime.timezone.utc)
+    chats.insert_one({"_id": chat_id,
+                        "name": "New Conversation",
+                        "date_created": curr_time,
+                        "user_id": valjwt[3],
+                        "chat": [{"q": data["q"], "t": curr_time, "a": "asiojdsi"}]
+                        })
+    
+    return CreateResponseNewAccess(valjwt[1], {"_id": str(chat_id), "name": "New Conversation", "date_created": curr_time.timestamp()}, 200)

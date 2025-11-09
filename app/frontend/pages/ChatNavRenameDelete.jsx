@@ -2,6 +2,7 @@ import '../styling/ChatNavRenameDelete.css'
 import { XCloseIcon, BlocksLoad } from '../components/svgs/UtilIcons'
 import { pressKey } from './pressKeyFunc'
 import { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, searchchatinputRef, SearchChat, chatlist, createConversations }){
 
@@ -9,6 +10,7 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
     const [cnrdwarningState, cnrdwarningsetState] = useState()
     const canclickbuttonRef = useRef()
     const cnrdbuttonRef = useRef()
+    const navigate = useNavigate()
 
     function ClickButton(active){
         if(active === false){
@@ -28,7 +30,7 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
             return
         }
         if(cnrdState['extrainfo'] === 'rename'){
-            if(cnrdinputRef.current.value.length <= 5){
+            if(cnrdinputRef.current.value.length < 5){
                 cnrdwarningsetState('Name must be at leat 5 characters long')
                 return
             }
@@ -97,6 +99,7 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
             else{
                 SearchChat(searchchatinputRef.current.value)
             }
+            navigate('/chat')
         }
         else if(response_status === 401 || response_status === 403){
             navigate('/login', {state: {to: '/chat'}})

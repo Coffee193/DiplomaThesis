@@ -2,12 +2,9 @@ import '../styling/ChatNav.css'
 import { ChatBubble, DotsIcon } from '../components/svgs/UtilIcons'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
-import { ChatNavPopUp } from './ChatNavPopUp'
-import { ChatNavSearch } from './ChatNavSearch'
-import { ChatNavRenameDelete } from './ChatNavRenameDelete'
 import { ChatNavUtils } from './ChatNavUtils'
 
-export function ChatNav({convState, convsetState, chatlist, newconv, isloadingState, isloadingsetState}){
+export function ChatNav({convState, convsetState, chatlist, isloadingState, isloadingsetState}){
 
     const navigate = useNavigate()
     const chatclickRef = useRef(null) /* id of chat to be renamed/deleted */
@@ -32,15 +29,13 @@ export function ChatNav({convState, convsetState, chatlist, newconv, isloadingSt
     }
 
     useEffect(() => {
-        getOrders()
-    }, [linkparams])
-
-    /*useEffect(() => {
-        if(newconv !== undefined){
-            let convfinalstate = createConversations(chatlist.current, false)
-            convsetState(convfinalstate)
+        if(chatlist.current === undefined){
+            getOrders()
         }
-    }, [newconv])*/
+        else{
+            convsetState(createConversations(chatlist.current, false))
+        }
+    }, [linkparams])
 
     async function getOrders(){
         if(document.cookie.includes('userinfo=') === false){

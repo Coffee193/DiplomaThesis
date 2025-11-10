@@ -72,25 +72,11 @@ export function ChatMain({ chatlist }){
                                 <div className='loading_box loading_blue' style={{width: '75%'}}/>
                                 <div className='loading_box loading_blue' style={{width: '90%'}}/>
                             </div>
-                            <div className='cm_loadinguser'>
-                                <div className='loading_box loading' style={{width: '75%'}}/>
-                            </div>
-                            <div className='cm_loading'>
-                                <div className='loading_box loading_blue' style={{width: '75%'}}/>
-                                <div className='loading_box loading_blue' style={{width: '90%'}}/>
-                            </div>
-                            <div className='cm_loadinguser'>
-                                <div className='loading_box loading' style={{width: '75%'}}/>
-                            </div>
-                            <div className='cm_loading'>
-                                <div className='loading_box loading_blue' style={{width: '75%'}}/>
-                                <div className='loading_box loading_blue' style={{width: '90%'}}/>
-                            </div>
                         </>
                     ) : (convState)
                     }
                 </div>
-                <ChatBox chatlist={chatlist} isloadingState={isloadingState}/>
+                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chattype='main' convsetState={convsetState}/>
                 <div className='cm_backwhite'/>
             </div>
         </div>

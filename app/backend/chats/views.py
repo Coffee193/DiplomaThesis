@@ -292,3 +292,25 @@ def GetConversation(request, conv_id):
             chat_ret['chat'][i]['t'] = chat_ret['chat'][i]['t'].timestamp()
         chat_ret = {'c': chat_ret['chat']}
         return CreateResponseNewAccess(valjwt[1], chat_ret, 200)
+
+@api_view(['POST'])
+def AskQuestion(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+
+    if('q' not in data or 'id' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    if(len(data["q"]) == 0):
+        return HttpResponse(json.dumps('Question is empty'), status = 400)
+    if(data['id'].isdigit() == False):
+        return HttpResponse(json.dumps('Invalid Id'), status = 400)
+    curr_time = datetime.datetime.now(datetime.timezone.utc)
+    answear = 'YOYOYO'
+    chat_ret = chats.update_one({"_id": int(data["id"]), "user_id": valjwt[3]},
+                        {"$push": {"chat": {"q": data["q"], "t": curr_time, "a": answear}}})
+    if(chat_ret.modified_count == 1):
+        return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
+    else:
+        return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)

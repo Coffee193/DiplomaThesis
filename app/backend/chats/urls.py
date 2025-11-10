@@ -7,6 +7,6 @@ urlpatterns = [
     path('deletechat/', views.DeleteChat, name = 'DeleteChat'),
     path('renamechat/', views.RenameChat, name = 'RenameChat'),
     path('getconversation/<int:conv_id>/', views.GetConversation, name = 'GetConversation'),
-    path('askquestion/', views.answearQuestion_Old, name='answearQuestion'),
+    path('askquestion/', views.AskQuestion, name='AskQuestion'),
     path('deleteallchats/', views.DeleteAllChats, name = 'DeleteAllChats'),
 ]

@@ -3,10 +3,9 @@ import { ChatNavPopUp } from "./ChatNavPopUp"
 import { ChatNavRenameDelete } from "./ChatNavRenameDelete"
 import { useState, useRef } from "react"
 
-export function ChatNavUtils({ chatclickRef, convsetState, chatlist, createConversations, cnpState, cnpsetState }){
+export function ChatNavUtils({ chatclickRef, convsetState, chatlist, createConversations, cnpState, cnpsetState, linkparams, searchchatinputRef }){
 
     const [cnrdState, cnrdsetState] = useState({'visible': false})
-    const searchchatinputRef = useRef()
 
     function SearchChat(value){
         if(value.length !== 0){
@@ -29,7 +28,7 @@ export function ChatNavUtils({ chatclickRef, convsetState, chatlist, createConve
         <>
             <ChatNavSearch searchchatinputRef={searchchatinputRef} SearchChat={SearchChat}/>
             <ChatNavPopUp cnpState={cnpState} cnpsetState={cnpsetState} cnrdsetState={cnrdsetState} chatclickRef={chatclickRef}/>
-            <ChatNavRenameDelete cnrdState={cnrdState} cnrdsetState={cnrdsetState} convsetState={convsetState} searchchatinputRef={searchchatinputRef} SearchChat={SearchChat} chatlist={chatlist} createConversations={createConversations}/>
+            <ChatNavRenameDelete cnrdState={cnrdState} cnrdsetState={cnrdsetState} convsetState={convsetState} searchchatinputRef={searchchatinputRef} SearchChat={SearchChat} chatlist={chatlist} createConversations={createConversations} linkparams={linkparams}/>
         </>
     )
 }

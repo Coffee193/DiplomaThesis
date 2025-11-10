@@ -1,14 +1,13 @@
 import '../styling/ChatBox.css'
 import { ArrowUpload } from '../components/svgs/UtilIcons'
 import { useRef } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-export function ChatBox({ isloadingState, chatlist, chattype, convsetState }){
+export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams }){
 
     const cbtextareaRef = useRef()
     const cbarrowRef = useRef()
     const navigate = useNavigate()
-    const linkparams = useParams()
 
     function CheckQuestion(){
         if(cbtextareaRef.current.value.length === 0){
@@ -59,7 +58,9 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState }){
     }
 
     function SubmitQuestion(){
-        if(linkparams.id === undefined){
+        console.log(linkparams)
+        console.log('********')
+        if(linkparams === undefined){
             CreateChat()
         }
         else{
@@ -70,12 +71,13 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState }){
     async function AskQuestion(){
         let response_status = null
         let request = {"q": cbtextareaRef.current.value, "id": linkparams.id}
-        convsetState(prevState => [prevState,
+        convsetState(prevState => [
             <div className='cm_chatuser'>
                 <div className='cm_chatbox cm_boxuser'>
                     {request['q']}
                 </div>
-            </div>
+            </div>,
+            prevState
         ])
         cbtextareaRef.current.value = ''
         let response = await fetch(import.meta.env.VITE_URL + 'chats/askquestion/', {
@@ -89,10 +91,11 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState }){
         .catch(() => {})
 
         if(response_status === 200){
-            convsetState(prevState => [prevState,
+            convsetState(prevState => [
                 <div className='cm_chatbox'>
                     {response['a']}
-                </div>
+                </div>,
+                prevState
             ])
         }
         else if(response_status === 401 || response_status === 403){

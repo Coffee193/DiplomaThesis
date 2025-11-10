@@ -1,14 +1,14 @@
 import '../styling/ChatNav.css'
 import { ChatBubble, DotsIcon } from '../components/svgs/UtilIcons'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { ChatNavUtils } from './ChatNavUtils'
 
-export function ChatNav({convState, convsetState, chatlist, isloadingState, isloadingsetState}){
+export function ChatNav({convState, convsetState, chatlist, isloadingState, isloadingsetState, linkparams}){
 
     const navigate = useNavigate()
     const chatclickRef = useRef(null) /* id of chat to be renamed/deleted */
-    const linkparams = useParams()
+    const searchchatinputRef = useRef()
     const [cnpState, cnpsetState] = useState({'visible': false, 'id': null})
     /* Must update entire Conversations Nav because if I try to do it with Ref and removing/adding classes then there will be
     problems on the screen (the color will be cut off in the middle etc) */
@@ -114,6 +114,7 @@ export function ChatNav({convState, convsetState, chatlist, isloadingState, islo
             navigate('/chat')
         }
         convsetState(createConversations(chatlist.current, false))
+        searchchatinputRef.current.value = ''
     }
 
     return(
@@ -133,7 +134,7 @@ export function ChatNav({convState, convsetState, chatlist, isloadingState, islo
                     </div>
                 </div>
                 <div>
-                    <ChatNavUtils chatclickRef={chatclickRef} convsetState={convsetState} chatlist={chatlist} createConversations={createConversations} cnpState={cnpState} cnpsetState={cnpsetState}/>
+                    <ChatNavUtils chatclickRef={chatclickRef} convsetState={convsetState} chatlist={chatlist} createConversations={createConversations} cnpState={cnpState} cnpsetState={cnpsetState} linkparams={linkparams} searchchatinputRef={searchchatinputRef}/>
                 </div>
                 </>
                 )

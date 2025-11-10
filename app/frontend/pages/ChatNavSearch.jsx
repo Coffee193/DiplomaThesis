@@ -8,6 +8,7 @@ export function ChatNavSearch({ searchchatinputRef , SearchChat}){
     const xcloseRef = useRef()
 
     function SearchValueChange(value){
+        console.log('aaa')
         if(value !== ''){
             xcloseRef.current.style.opacity = '1'
             xcloseRef.current.style.pointerEvents = 'all'

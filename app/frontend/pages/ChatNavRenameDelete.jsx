@@ -4,7 +4,7 @@ import { pressKey } from './pressKeyFunc'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, searchchatinputRef, SearchChat, chatlist, createConversations }){
+export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, searchchatinputRef, SearchChat, chatlist, createConversations, linkparams }){
 
     const cnrdinputRef = useRef()
     const [cnrdwarningState, cnrdwarningsetState] = useState()
@@ -99,7 +99,9 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
             else{
                 SearchChat(searchchatinputRef.current.value)
             }
-            navigate('/chat')
+            if(cnrdState['id'] === linkparams.id){
+                navigate('/chat')
+            }
         }
         else if(response_status === 401 || response_status === 403){
             navigate('/login', {state: {to: '/chat'}})

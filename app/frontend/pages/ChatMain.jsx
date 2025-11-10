@@ -1,18 +1,20 @@
 import '../styling/ChatMain.css'
 import { useRef, useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ChatBox } from './ChatBox'
 
-export function ChatMain({ chatlist }){
+export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
 
-    const linkparams = useParams()
     const navigate = useNavigate()
     const [isloadingState, isloadingsetState] = useState(true)
     const [convState, convsetState] = useState()
+    const cmchatRef = useRef()
 
     useEffect(() => {
-        GetConversation()
-    }, [linkparams.id])
+        if(chatnavloadingState === false){
+            GetConversation()
+        }
+    }, [linkparams.id, chatnavloadingState])
 
     async function GetConversation(){
         let response_status = null
@@ -27,25 +29,25 @@ export function ChatMain({ chatlist }){
 
         if(response_status === 200){
             let conv_vals = []
-            for(let i=0; i<response["c"].length; i++){
+            for(let i=response['c'].length - 1; i>=0; i--){
                 conv_vals.push(
-                <div className='cm_chatuser'>
-                    <div className='cm_chatbox cm_boxuser'>
-                        {response["c"][i]["q"]}
-                    </div>
-                </div>
-                )
-                conv_vals.push(
-                    <div className='cm_chatbox'>
-                        {response["c"][i]["a"]}
-                    </div>
+                    <>
+                        <div className='cm_chatbox'>
+                            {response["c"][i]["a"]}
+                        </div>
+                        <div className='cm_chatuser'>
+                            <div className='cm_chatbox cm_boxuser'>
+                                {response["c"][i]["q"]}
+                            </div>
+                        </div>
+                    </>
                 )
             }
             convsetState(conv_vals)
             isloadingsetState(false)
         }
         else if(response_status === 401 || response_status === 403){
-            navigate('/login', {state: {to: '/chat/' + linkparams.id, expired: true}})
+            navigate('/login', {state: {to: '/chat/' + linkparams.id + '/', expired: true}})
         }
 
     }
@@ -53,7 +55,7 @@ export function ChatMain({ chatlist }){
     return(
         <div className='cm_holder'>
             <div className='cm_container'>
-                <div className='cm_chat' style={isloadingState === false ? {paddingBottom: '200px'} : {paddingBottom: '0px'}}>
+                <div className='cm_chat' style={isloadingState === false ? {paddingBottom: '200px'} : {paddingBottom: '0px'}} ref={cmchatRef}>
                     {isloadingState === true ? (
                         <>
                             <div className='cm_loadinguser'>
@@ -76,7 +78,7 @@ export function ChatMain({ chatlist }){
                     ) : (convState)
                     }
                 </div>
-                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chattype='main' convsetState={convsetState}/>
+                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chattype='main' convsetState={convsetState} linkparams={linkparams}/>
                 <div className='cm_backwhite'/>
             </div>
         </div>

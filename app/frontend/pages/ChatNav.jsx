@@ -87,7 +87,8 @@ export function ChatNav({convState, convsetState, chatlist, isloadingState, islo
             convfinalstate.push(
                 <div className='cn_info_chat_holder'>
                     <div className={'cn_info_chat ' + (isselected === true ? 'cn_info_chat_select' : 'cn_info_chat_notselect')} id={'cnav_chat_' + i}>
-                        <div className='cn_info_chat_title' onClick={() => isselected === false ? ClickChat(arr[i]['_id']) : ''}>{arr[i]['name']}</div>
+                        <div className='cn_info_chat_bg' onClick={() => isselected === false ? ClickChat(arr[i]['_id']) : ''}/>
+                        <div className='cn_info_chat_title'>{arr[i]['name']}</div>
                         <div className='cn_info_chat_options' onClick={(e) => ChatPopUp(e.target)} data-idval={arr[i]['_id']} data-name={arr[i]['name']} data-index={indexval}><DotsIcon/></div>
                     </div>
                 </div>)

@@ -277,3 +277,18 @@ def CreateChat(request):
                         })
     
     return CreateResponseNewAccess(valjwt[1], {"_id": str(chat_id), "name": "New Conversation", "date_created": curr_time.timestamp()}, 200)
+
+@api_view(['GET'])
+def GetConversation(request, conv_id):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    
+    chat_ret = chats.find_one({"_id": conv_id, "user_id": valjwt[3]}, {"_id": 0, "chat": 1, "model": 1})
+    if(chat_ret == {}):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    else:
+        for i in range(0, len(chat_ret['chat'])):
+            chat_ret['chat'][i]['t'] = chat_ret['chat'][i]['t'].timestamp()
+        chat_ret = {'c': chat_ret['chat']}
+        return CreateResponseNewAccess(valjwt[1], chat_ret, 200)

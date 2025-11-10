@@ -3,7 +3,7 @@ import { ArrowUpload } from '../components/svgs/UtilIcons'
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export function ChatBox({ isloadingState, chatlist }){
+export function ChatBox({ isloadingState, chatlist, chattype }){
 
     const cbtextareaRef = useRef()
     const cbarrowRef = useRef()
@@ -60,7 +60,7 @@ export function ChatBox({ isloadingState, chatlist }){
     }
 
     return(
-        <div className='cb_holder'>
+        <div className={chattype === 'body' ? 'cb_holder' : 'cb_holder_bottom'}>
             { isloadingState === false ? (
             <>
                 <textarea className='cb_textarea' placeholder='Ask Sapling' onChange={() => CheckQuestion()} ref={cbtextareaRef} onKeyDown={(event) => PressEnter(event)}/>

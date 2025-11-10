@@ -129,7 +129,7 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
             </div>
             <div className='cnrd_utilholder'>
                 <div className='buttonactive cnrd_util cnrd_cancel' onClick={() => ClosePopUp()}>Cancel</div>
-                <div className={'cnrd_util ' + cnrdState['buttonclass']} onClick={() => SubmitRequest()} ref={cnrdbuttonRef}>{cnrdState['textbutton']}</div>
+                <div className={'cnrd_util ' + cnrdState['buttonclass']} onClick={() => SubmitRequest()} ref={cnrdbuttonRef} style={cnrdState['visible'] === false ? {pointerEvents: 'none'} : {pointerEvents: 'all'}}>{cnrdState['textbutton']}</div>
             </div>
         </div>
         <div className='cnrd_bg' style={cnrdState['visible'] === false ? {opacity: '0', pointerEvents: 'none'} : {opacity: '1', pointerEvents: 'all'}} onClick={() => ClosePopUp()}/>

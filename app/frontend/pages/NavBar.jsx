@@ -1,16 +1,18 @@
 import '../styling/NavBar.css'
-import { Link, useNavigate, Outlet } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate, Outlet, useLocation } from 'react-router-dom'
+import { useRef, useState } from 'react'
 import { SideBar, UserIcon, Logout, Settings, DiagonalArrow } from '../components/svgs/UtilIcons'
 
 export function NavBar({updatenavbarstate}){
 
     
     const navigate = useNavigate()
+    const location = useLocation()
     const loginRef = useRef()
     const userinfovals = GetUserInfoValues()
     const [namestate, namesetState] = useState(userinfovals[0] === 'None' ? ('Info') : ('Hello, ' + userinfovals[0]))
-    const [imgstate, imgsetState] = useState(userinfovals[1] !== '' ? (<div className='nav_user nav_imgexist'><img className='nav_img' src={import.meta.env.VITE_IMG_PATH + userinfovals[1] + '.JPEG'} onError={InitImgNotFound}/></div>) : (<UserIcon width={30} height={30} className='nav_user'/>))
+    //const [imgstate, imgsetState] = useState(userinfovals[1] !== '' ? (<div className='nav_user nav_imgexist'><img className='nav_img' src={import.meta.env.VITE_IMG_PATH + userinfovals[1] + '.JPEG'} onError={InitImgNotFound}/></div>) : (<UserIcon width={30} height={30} className='nav_user'/>))
+    const [imgState, imgsetState] = useState(<img src={import.meta.env.VITE_IMG_PATH + userinfovals[1] + '.JPEG'} onError={InitImgNotFound}/>)
 
     async function ClickLogout(){
         let response_status = null
@@ -43,7 +45,7 @@ export function NavBar({updatenavbarstate}){
     }
 
     function InitImgNotFound(){
-        imgsetState(<UserIcon width={30} height={30} className='nav_user'/>)
+        imgsetState(<UserIcon width={30} height={30}/>)
     }
 
     function GetUserInfoValues(){
@@ -58,19 +60,24 @@ export function NavBar({updatenavbarstate}){
 
     return(
         <>
-        <div className='nav_all_holder' onClick={() => {GetImg();console.log(imgstate)}}>
-            <Link to = '/' tabIndex="-1"><div className = 'nav_logo'>Sapling<img src = '../components/images/MainLogo.png'/></div></Link>
-            <div className='nav_info'>
+        <div className='n_allholder' /*onClick={() => {GetImg();console.log(imgstate)}}*/ style={location.pathname === '/' ? {position: 'absolute', backgroundColor: 'transparent'} : null}>
+            <Link to = '/' tabIndex="-1"><div className = 'n_logo'>Sapling<img src = '../components/images/MainLogo.png'/></div></Link>
+            <div className='n_info'>
                 {document.cookie.includes('userinfo=') === true ? (
-                    <div className='nav_logged'>
-                        <Link to = '/chat'><SideBar width={30} height={30} className='nav_linkchat'/></Link>
-                        <div className='nav_user_holder'>
+                    <div className='n_logged'>
+                        <Link to = '/chat'><SideBar width={30} height={30} className={'n_util ' + (location.pathname === '/' ? 'n_utilwhite' : 'n_utildefault')}/></Link>
+                        <div className='n_userholder'>
+                            {/*
                             {updatenavbarstate['image'] === '' ? imgstate : (
-                                updatenavbarstate['image'] === null ? (<UserIcon width={30} height={30} className='nav_user'/>) : (<div className='nav_user nav_imgexist'><img className='nav_img' src={updatenavbarstate['image']}/></div>)
-                            )}
+                                updatenavbarstate['image'] === null ? (<UserIcon width={30} height={30} className={'n_user n_util ' + (location.pathname === '/' ? 'n_userwhite' : 'n_userdefault')}/>) : (<div className='nav_user nav_imgexist'><img className='nav_img' src={updatenavbarstate['image']}/></div>)
+                            )}*/}
+                            <div className={'n_user n_util ' + (location.pathname === '/' ? 'n_userwhite' : 'n_userdefault')}>
+                                {updatenavbarstate['image'] === '' ? imgState : (
+                                    updatenavbarstate['image'] === null ? (<UserIcon width={30} height={30}/>) : (<img src={updatenavbarstate['image']}/>)
+                                )}
+                            </div>
                             <div className='nav_user_info'>
                                 <div className='nav_user_name'>
-                                    {/*{namestate}*/}
                                     {updatenavbarstate['name'] === '' ? namestate : (
                                         updatenavbarstate['name'] === null ? ('Info') : ('Hello, ' + updatenavbarstate['name'])
                                     )}
@@ -88,7 +95,7 @@ export function NavBar({updatenavbarstate}){
                         </div>    
                     </div>
                 ) : (
-                    <Link to='/login' ref={loginRef} tabIndex="-1"><div className='nav_loginbutton'>Log In</div></Link>
+                    <Link to='/login' ref={loginRef} tabIndex="-1"><div className='n_login'>Log In</div></Link>
                 )}
             </div>
         </div>

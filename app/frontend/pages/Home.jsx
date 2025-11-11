@@ -1,10 +1,10 @@
 import '../styling/Home.css'
 
-export function HomeMain(){
+export function Home(){
 
     return(
-        <div className = 'all_holder_home'>
-            
+        <div className='h_holder'>
+            <div className='h_imgholder'><img src='../components/images/SamplingLandingPage.jfif'/></div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-.nav_all_holder{
+.n_allholder{
     display: flex;
     justify-content: space-between;
     height: var(--nav-height);
@@ -9,7 +9,7 @@
     z-index: 15;
 }
 
-.nav_logo{
+.n_logo{
     width: 100%;
     height: 100%;
     display: flex;
@@ -21,14 +21,14 @@
     font-size: 25px;
     font-weight: 700;
 }
-.nav_logo > img{
+.n_logo > img{
     max-width: 100%;
     max-height: 100%;
     cursor: pointer;
     border-radius: 50%;
 }
 
-.nav_loginbutton{
+.n_login{
     padding: 7px 14px;
     border-radius: 500px;
     cursor: pointer;
@@ -41,12 +41,12 @@
     align-items: center;
     justify-content: center;
 }
-.nav_loginbutton:hover{
+.n_login:hover{
     background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
     color: var(--color-text-white);
 }
 
-.nav_info{
+.n_info{
     display: flex;
     align-items: center;
     height: 100%;
@@ -54,7 +54,7 @@
     width: max-content;
     padding: 0 25px;
 }
-.nav_logged{
+.n_logged{
     width: 90px;
     height: 100%;
     align-items: center;
@@ -63,26 +63,43 @@
     display: flex;
 }
 
-.nav_linkchat{
+.n_util{
     transition: 0.1s ease-out;
 }
-.nav_linkchat:hover{
+.n_utildefault:hover{
     color: var(--color-text-main-hover-blue-experimental-lighter);
 }
+.n_utilwhite:hover{
+    color: #fff;
+}
 
-.nav_user{
+.n_user{
     cursor: pointer;
     border-radius: 50%;
     border: solid #000 2px;
-    transition: 0.1s ease-out;
     position: relative;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
-.nav_user:hover{
+.n_user > img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+.n_userdefault:hover{
     color: var(--color-text-main-hover-blue-experimental-lighter);
     border: solid 2px var(--color-text-main-hover-blue-experimental-lighter);
 }
+.n_userwhite:hover{
+    color: #fff;
+    border: solid 2px #fff;
+}
 
-.nav_user_holder{
+.n_userholder{
     position: relative;
     width: 30px;
     height: 30px;
@@ -103,7 +120,7 @@
     padding: 25px 15px;
     background-color: #fff;
 }
-.nav_user_holder:hover > .nav_user_info{
+.n_userholder:hover > .nav_user_info{
     pointer-events: all;
     opacity: 1;
     transform: translateY(-20px);
@@ -168,7 +185,7 @@
     overflow: hidden;
     height: 30px;
 }
-.nav_img{
+.n_img{
     object-fit: contain;
     width: 100%;
     height: 100%;

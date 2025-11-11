@@ -1,4 +1,14 @@
-.all_holder_home{
+.h_holder{
     position: relative;
     width: 100%;
+}
+
+.h_imgholder{
+    position: relative;
+    width: 100%;
+}
+.h_imgholder > img{
+    width: 100%;
+    max-height: 650px;
+    object-fit: cover;
 }

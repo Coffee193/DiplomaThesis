@@ -20,7 +20,7 @@ export function ChatNav({convState, convsetState, chatlist, isloadingState, islo
             return
         }
 
-        let navdim = parseInt(window.getComputedStyle(document.getElementsByClassName('nav_all_holder')[0]).getPropertyValue('--nav-height').slice(0, 2))
+        let navdim = parseInt(window.getComputedStyle(document.getElementsByClassName('n_allholder')[0]).getPropertyValue('--nav-height').slice(0, 2))
         
         let element_position_top_float = element.getBoundingClientRect().top.toFixed(1) - navdim - 185
 

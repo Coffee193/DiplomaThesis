@@ -67,28 +67,26 @@ export function NavBar({updatenavbarstate}){
                     <div className='n_logged'>
                         <Link to = '/chat'><SideBar width={30} height={30} className={'n_util ' + (location.pathname === '/' ? 'n_utilwhite' : 'n_utildefault')}/></Link>
                         <div className='n_userholder'>
-                            {/*
-                            {updatenavbarstate['image'] === '' ? imgstate : (
-                                updatenavbarstate['image'] === null ? (<UserIcon width={30} height={30} className={'n_user n_util ' + (location.pathname === '/' ? 'n_userwhite' : 'n_userdefault')}/>) : (<div className='nav_user nav_imgexist'><img className='nav_img' src={updatenavbarstate['image']}/></div>)
-                            )}*/}
                             <div className={'n_user n_util ' + (location.pathname === '/' ? 'n_userwhite' : 'n_userdefault')}>
                                 {updatenavbarstate['image'] === '' ? imgState : (
                                     updatenavbarstate['image'] === null ? (<UserIcon width={30} height={30}/>) : (<img src={updatenavbarstate['image']}/>)
                                 )}
                             </div>
-                            <div className='nav_user_info'>
-                                <div className='nav_user_name'>
-                                    {updatenavbarstate['name'] === '' ? namestate : (
-                                        updatenavbarstate['name'] === null ? ('Info') : ('Hello, ' + updatenavbarstate['name'])
-                                    )}
-                                </div>
-                                <div className='nav_user_clicks'>
-                                    <ul>
-                                        <Link to='/settings'><Settings/>Settings</Link>
-                                        <Link to='/termspolicies'><DiagonalArrow style={{transform: 'rotate(180deg)'}}/>Terms& Policies</Link>
-                                    </ul>
-                                    <div className='nav_logout_line'>
-                                        <div className='nav_logout' onClick={() => ClickLogout()}><Logout width={25} height={25}/>Logout</div>
+                            <div className='n_userbox'>
+                                <div className='n_userinfo'>
+                                    <div className='n_username'>
+                                        {updatenavbarstate['name'] === '' ? namestate : (
+                                            updatenavbarstate['name'] === null ? ('Info') : ('Hello, ' + updatenavbarstate['name'])
+                                        )}
+                                    </div>
+                                    <div className='n_userutils'>
+                                        <ul>
+                                            <Link to='/settings'><Settings/>Settings</Link>
+                                            <Link to='/termspolicies'><DiagonalArrow style={{transform: 'rotate(180deg)'}}/>Terms& Policies</Link>
+                                        </ul>
+                                        <div className='n_logoutline'>
+                                            <div className='n_logout' onClick={() => ClickLogout()}><Logout width={25} height={25}/>Logout</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

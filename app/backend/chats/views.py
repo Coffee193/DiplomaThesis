@@ -7,7 +7,7 @@ import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime
 from loginregister.models import User
-from loginregister.views import PasswordCheck, CheckDataValue
+from loginregister.views import PasswordCheck, CheckDataValue, PasswordCompare
 import math
 
 # Create your views here.
@@ -169,7 +169,7 @@ def answearQuestion_Old(request):
         return HttpResponseBadRequest('Http 400 Bad Request, method must be POST')
     
 @api_view(['DELETE'])
-def DeleteAllChats(request):
+def DeleteAllChats_old(request):
     if(request.method == 'DELETE'):
         try:
             if('access' not in request.COOKIES or 'refresh' not in request.COOKIES):
@@ -314,3 +314,23 @@ def AskQuestion(request):
         return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
+    
+@api_view(['DELETE'])
+def DeleteAllChats(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+
+    if('v' not in data or 't' not in data or data['t'] != 'password'):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    
+    user_password = User.objects.filter(id = valjwt[3]).values('password')[0]
+    if(PasswordCompare(data['v'], user_password['password']) == False):
+        return CreateResponseNewAccess(valjwt[1], 'Password is incorrect', 409)
+    
+    chat_del = chats.delete_many({"user_id": valjwt[3]})
+    if(math.floor(chat_del.raw_result['ok']) == 1):
+        return CreateResponseNewAccess(valjwt[1], chat_del.raw_result['n'], 200)
+    else:
+        return HttpResponse(json.dumps('Could not delete the Chats'), status = 400)

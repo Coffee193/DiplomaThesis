@@ -1,13 +1,15 @@
 import '../styling/ChatBox.css'
-import { ArrowUpload } from '../components/svgs/UtilIcons'
-import { useRef } from 'react'
+import { ArrowUpload, UploadFile } from '../components/svgs/UtilIcons'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ChatBoxUpload } from './ChatBoxUpload'
 
 export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams }){
 
     const cbtextareaRef = useRef()
     const cbarrowRef = useRef()
     const navigate = useNavigate()
+    const [cbuState, cbusetState] = useState({'visible': false})
 
     function CheckQuestion(){
         if(cbtextareaRef.current.value.length === 0){
@@ -103,12 +105,23 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
     }
 
+    function UploadDocument(){
+        
+    }
+
     return(
         <div className={chattype === 'body' ? 'cb_holder' : 'cb_holder_bottom'} style={chattype === 'main' && isloadingState === true ? {justifyContent: 'end'} : {justifyContent: 'space-between'}}>
             { isloadingState === false ? (
             <>
-                <textarea className='cb_textarea' placeholder='Ask Sapling' onChange={() => CheckQuestion()} ref={cbtextareaRef} onKeyDown={(event) => PressEnter(event)} autoFocus={true}/>
+                <div>
+                    <ChatBoxUpload cbuState={cbuState} cbusetState={cbusetState}/>
+                    <textarea className='cb_textarea' placeholder='Ask Sapling' onChange={() => CheckQuestion()} ref={cbtextareaRef} onKeyDown={(event) => PressEnter(event)} autoFocus={true}/>
+                </div>
                 <div className='cb_infoholder'>
+                    <div className='cb_arrow cb_arrowactive cb_upload'>
+                        <UploadFile/>
+                        <div className={'cb_uploadtext ' + (chattype === 'main' ? 'cb_uploadmain' : 'cb_uploadbody')}>Upload File</div>
+                    </div>
                     <div className='cb_arrow cb_arrowdeactive' onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
                 </div>
                 <div className='cb_bg' onClick={() => cbtextareaRef.current.focus()}/>

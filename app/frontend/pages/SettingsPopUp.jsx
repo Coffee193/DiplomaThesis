@@ -173,8 +173,11 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
             return
         }
         else if(response_status === 200){
-            notificationsetState('All Chats Successfully Deleted! (' + response + ')')
+            notificationsetState({'text': 'All Chats Successfully Deleted! (' + response + ')', 'svg': <Tick/>, 'visible': true, 'class': 's_notificationgreen'})
             ClosePopUp(true)
+        }
+        else if(response_status === 409){
+            notificationsetState({'text': response, 'svg': <XCloseIcon/>, 'visible': true, 'class': 's_notificationred'})
         }
     }
 

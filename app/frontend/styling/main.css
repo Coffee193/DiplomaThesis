@@ -184,6 +184,7 @@ textarea:focus{
 
     --chat-color-gray: #c5c5c5;
     --chat-color-gray-strong: #8f8f8f;
+    --chat-color-gray-medium: #e7e7e7;
     --chat-color-gray-light: #efefef;
     --chat-color-gray-light-hover: #eaeaea;
     --chat-color-gray-strong-more: #555555;

@@ -48,7 +48,7 @@
     border-radius: 30px;
 }
 
-.cb_arrow{
+.cb_util{
     border-radius: 50%;
     padding: 7px;
     display: flex;
@@ -57,17 +57,17 @@
     transition: 0.1s ease-out;
     position: relative;
 }
-.cb_arrowactive{
+.cb_utilactive{
     cursor: pointer;
 }
-.cb_arrowactive:hover{
+.cb_utilactive:hover{
     background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
     color: #fff;
 }
-.cb_arrowdeactive{
+.cb_utildeactive{
     cursor: not-allowed;
 }
-.cb_arrowdeactive:hover{
+.cb_utildeactive:hover{
     background-color: var(--chat-color-gray);
     color: #fff;
 }
@@ -90,7 +90,7 @@
     justify-content: end;
 }
 
-.cb_arrowload{
+.cb_utilload{
     border-radius: 50%;
     width: 38px;
     height: 38px;
@@ -124,7 +124,7 @@
     bottom: -65px;
     transition: 0.1s ease-out;
     transform: translateY(20px);
-    background-color: var(--chat-color-gray-light);
+    background-color: var(--chat-color-gray-medium);
     color: #fff;
     z-index: 3;
 }
@@ -140,4 +140,10 @@
 .cb_upload:hover > .cb_uploadtext{
     opacity: 1;
     transform: translateY(0); 
+}
+
+.cb_input{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
 }

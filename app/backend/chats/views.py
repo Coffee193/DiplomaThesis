@@ -9,11 +9,13 @@ import datetime
 from loginregister.models import User
 from loginregister.views import PasswordCheck, CheckDataValue, PasswordCompare
 import math
+import base64
+import os
 
 # Create your views here.
 
 chats = mongo_db['Chats']
-data_models = ['Llama 3.0', 'ChatGPT 4.0', 'Llama 2.0']
+chatdocumentpath = os.environ.get('CHAT_DOCUMENT_PATH')
 
 @api_view(['GET'])
 def getChats(request):
@@ -295,6 +297,16 @@ def GetConversation(request, conv_id):
 
 @api_view(['POST'])
 def AskQuestion(request):
+    content_type = request.headers.get('content-type').split(';')[0]
+    if(content_type == 'text/plain'):
+        return AnswearQuestion(request)
+    elif(content_type == 'multipart/form-data'):
+        return AnswearQuestionWithDocument(request)
+    else:
+        return HttpResponse(json.dumps('Invalid Question Headers'), status = 400)
+
+
+def AnswearQuestion(request):
     valjwt = ValidateAndCreateJWT(request)
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
@@ -302,7 +314,7 @@ def AskQuestion(request):
 
     if('q' not in data or 'id' not in data):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
-    if(len(data["q"]) == 0):
+    if(len(data["q"].replace('\n', '')) == 0):
         return HttpResponse(json.dumps('Question is empty'), status = 400)
     if(data['id'].isdigit() == False):
         return HttpResponse(json.dumps('Invalid Id'), status = 400)
@@ -334,3 +346,37 @@ def DeleteAllChats(request):
         return CreateResponseNewAccess(valjwt[1], chat_del.raw_result['n'], 200)
     else:
         return HttpResponse(json.dumps('Could not delete the Chats'), status = 400)
+    
+def AnswearQuestionWithDocument(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    
+    request_dict = request.data.dict()
+    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'id' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document']):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    data = json.loads(request_dict['data'])
+    file = json.loads(request_dict['document'])
+    
+    if(data['id'].isdigit() == False):
+        return HttpResponse(json.dumps('Invalid Id'), status = 400)
+    if(len(file['data']) < 22 or file['data'][:21] != 'data:text/xml;base64,' or file['name'][-4:] != '.xml'):
+        return HttpResponse(json.dumps('Invalid XML file'), status = 400)
+    
+    file_write = base64.b64decode(file['data'][21:])
+    file_id = GenerateSnowflake()
+
+    curr_time = datetime.datetime.now(datetime.timezone.utc)
+    answear = 'YOYOYO'
+    chat_val = {"d": {"name": file['name'], "path": data['id'] + str(file_id) + '.xml', "size": str(round(len(file_write)/1024, 1))}, "t": curr_time, "a": answear}
+    if(len(data["q"].replace('\n', '')) != 0):
+        chat_val["q"] = data["q"]
+    chat_ret = chats.update_one({"_id": int(data["id"]), "user_id": valjwt[3]},
+                        {"$push": {"chat": chat_val}})
+    
+    if(chat_ret.modified_count == 1):
+        with open(chatdocumentpath + '/' + data['id'] + str(file_id) + '.xml', 'wb') as file:
+            file.write(file_write)
+        return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
+    else:
+        return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)

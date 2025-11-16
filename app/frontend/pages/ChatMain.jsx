@@ -2,6 +2,7 @@ import '../styling/ChatMain.css'
 import { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBox } from './ChatBox'
+import { ChatBoxUpload } from './ChatBoxUpload'
 
 export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
 
@@ -36,13 +37,28 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
                             {response["c"][i]["a"]}
                         </div>
                         <div className='cm_chatuser'>
+                            {response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"]}}/> : null}
+                            {response["c"][i]["q"] !== undefined ?
                             <div className='cm_chatbox cm_boxuser'>
                                 {response["c"][i]["q"]}
-                            </div>
+                            </div> : null
+                            }
                         </div>
                     </>
                 )
             }
+            // Remove this
+            /*conv_vals.push(
+            <>
+                <div className='cm_chatuser'>
+                        <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': 'Habibi', 'type': 'XML', 'size': 800}}/>
+                        <div className='cm_chatbox cm_boxuser'>
+                            uihuihuihiouhiohdiojijdiosajdiosajdiosjdiosajdiosajaiodjsaiodjsaioihuisahduisahduisahduisahduisahiudsah
+                        </div>
+                </div>
+            </>
+            )*/
+            //
             convsetState(conv_vals)
             isloadingsetState(false)
         }

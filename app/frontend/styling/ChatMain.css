@@ -174,7 +174,8 @@
 .cm_chatuser{
     width: 100%;
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+    align-items: end;
     position: relative;
 }
 .cm_boxuser{

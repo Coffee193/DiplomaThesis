@@ -16,6 +16,7 @@ import os
 
 chats = mongo_db['Chats']
 chatdocumentpath = os.environ.get('CHAT_DOCUMENT_PATH')
+development = os.environ.get('development')
 
 @api_view(['GET'])
 def getChats(request):
@@ -375,7 +376,8 @@ def AnswearQuestionWithDocument(request):
                         {"$push": {"chat": chat_val}})
     
     if(chat_ret.modified_count == 1):
-        with open(chatdocumentpath + '/' + data['id'] + str(file_id) + '.xml', 'wb') as file:
+        filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
+        with open(filepath + '/' + data['id'] + str(file_id) + '.xml', 'wb') as file:
             file.write(file_write)
         return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
     else:

@@ -37,7 +37,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
                             {response["c"][i]["a"]}
                         </div>
                         <div className='cm_chatuser'>
-                            {response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"]}}/> : null}
+                            {response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"], 'path': response["c"][i]["d"]["path"]}}/> : null}
                             {response["c"][i]["q"] !== undefined ?
                             <div className='cm_chatbox cm_boxuser'>
                                 {response["c"][i]["q"]}

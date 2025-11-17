@@ -71,11 +71,22 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         let response_status = null
         let request = {"q": cbtextareaRef.current.value, "id": linkparams.id}
         
+        let blob = null
+        let url = null
+        
         let body = null
         if(cbinputRef.current.value !== ''){
             body = new FormData()
             body.append('data', JSON.stringify(request))
             body.append('document', JSON.stringify({'data': cbuState['data'], 'name': cbuState['name']}))
+
+            blob = new Blob(
+                [atob(cbuState['data'].slice(21))],
+                {
+                    type: 'application/xml'
+                }
+            )
+            url = URL.createObjectURL(blob)
         }
         else{
             body = JSON.stringify(request)
@@ -83,7 +94,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
 
         convsetState(prevState => [
             <div className='cm_chatuser'>
-                {cbinputRef.current.value !== '' ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': 'Habibi', 'type': 'XML', 'size': 800}}/> : ''}
+                {cbinputRef.current.value !== '' ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': cbuState['name'], 'type': cbuState['type'], 'size': cbuState['size'], 'hardpath': url}}/> : ''}
                 {cbinputRef.current.value !== '' && cbtextareaRef.current.value.replace(/(\r\n|\n|\r)/gm, '').length === 0 ? '' :
                 <div className='cm_chatbox cm_boxuser'>
                     {request['q']}

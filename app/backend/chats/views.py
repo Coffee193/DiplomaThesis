@@ -252,8 +252,15 @@ def DeleteChat(request):
     if(data['id'].isdigit() == False):
         return HttpResponse(json.dumps('Invalid Conversation ID'), status = 400)
     
+    path_del = list(chats.find({"_id": int(data["id"]), "chat.d": {"$exists": "true"}}, {"paths": "$chat.d.path"}))
+    
     chat_del = chats.delete_one({"_id": int(data["id"]), "user_id": valjwt[3]})
     if(chat_del.deleted_count == 1):
+        filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
+        for i in path_del:
+            for x in i['paths']:
+                if(os.path.exists(filepath + '/' + x)):
+                    os.remove(filepath + '/' + x)
         return CreateResponseNewAccess(valjwt[1], 'Chat successfully deleted', 200)
     else:
         return HttpResponse(json.dumps('Conversation ID does not belong to User'), status = 400)
@@ -342,8 +349,15 @@ def DeleteAllChats(request):
     if(PasswordCompare(data['v'], user_password['password']) == False):
         return CreateResponseNewAccess(valjwt[1], 'Password is incorrect', 409)
     
+    path_del = list(chats.find({"user_id": valjwt[3], "chat.d": {"$exists": "true"}}, {"paths": "$chat.d.path"}))
+
     chat_del = chats.delete_many({"user_id": valjwt[3]})
     if(math.floor(chat_del.raw_result['ok']) == 1):
+        filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
+        for i in path_del:
+            for x in i['paths']:
+                if(os.path.exists(filepath + '/' + x)):
+                    os.remove(filepath + '/' + x)
         return CreateResponseNewAccess(valjwt[1], chat_del.raw_result['n'], 200)
     else:
         return HttpResponse(json.dumps('Could not delete the Chats'), status = 400)
@@ -382,3 +396,19 @@ def AnswearQuestionWithDocument(request):
         return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
+    
+@api_view(['GET'])
+def Test(request):
+    data = json.loads(request.body.decode('utf-8'))
+
+    #ret = list(chats.aggregate( [{"$match": {"user_id": data['id']}},
+    #                                 {"$project": {"_id": 1, "chat": 1}},
+    #                                 {"$sort": {"date_created": 1}}]) )
+    
+    ret = list(chats.find( {"user_id": 1, "chat.d": {"$exists": "true"}}, {"_id": 1, "paths": "$chat.d.path"} ))
+    filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
+    for i in ret:
+        for x in i['paths']:
+            print(filepath + '/' + x)
+            print(os.path.exists(filepath + '/' + x))
+    print(ret)

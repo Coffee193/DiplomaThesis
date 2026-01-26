@@ -1,0 +1,4 @@
+pg_dump -U postgres -d Sapling -f D:\Downloads\diplomat\actual_work\database_dumprestore\postgresdump.sql
+Password: POSTGrEpoulKaio21vS33
+
+mongodump -d Sapling --out D:\Downloads\diplomat\actual_work\database_dumprestore\mongodump

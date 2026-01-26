@@ -396,19 +396,3 @@ def AnswearQuestionWithDocument(request):
         return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
-    
-@api_view(['GET'])
-def Test(request):
-    data = json.loads(request.body.decode('utf-8'))
-
-    #ret = list(chats.aggregate( [{"$match": {"user_id": data['id']}},
-    #                                 {"$project": {"_id": 1, "chat": 1}},
-    #                                 {"$sort": {"date_created": 1}}]) )
-    
-    ret = list(chats.find( {"user_id": 1, "chat.d": {"$exists": "true"}}, {"_id": 1, "paths": "$chat.d.path"} ))
-    filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
-    for i in ret:
-        for x in i['paths']:
-            print(filepath + '/' + x)
-            print(os.path.exists(filepath + '/' + x))
-    print(ret)

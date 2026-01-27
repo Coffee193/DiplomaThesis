@@ -65,6 +65,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         else{
             AskQuestion()
         }
+        ArrowDeactive()
     }
 
     async function AskQuestion(){

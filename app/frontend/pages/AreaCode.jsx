@@ -36,7 +36,7 @@ export function AreaCode({ areacodesvgsetState, areacodeinputRef, areacodevisibl
     }
 
     function CalcNavBarOffset(){
-        return 'calc( (100vh - var(--ac-height))/2 + ' + (Math.max( parseInt(window.getComputedStyle(document.getElementsByClassName('nav_all_holder')[0]).getPropertyValue('--nav-height').slice(0, 2)) - document.body.scrollTop, 0 ) /2).toString() + 'px)'
+        return 'calc( (100vh - var(--ac-height))/2 + ' + (Math.max( parseInt(window.getComputedStyle(document.getElementsByClassName('n_allholder')[0]).getPropertyValue('--nav-height').slice(0, 2)) - document.body.scrollTop, 0 ) /2).toString() + 'px)'
     }
         
 

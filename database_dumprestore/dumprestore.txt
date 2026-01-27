@@ -1,4 +1,14 @@
+DUMP:
+
 pg_dump -U postgres -d Sapling -f D:\Downloads\diplomat\actual_work\database_dumprestore\postgresdump.sql
 Password: POSTGrEpoulKaio21vS33
 
 mongodump -d Sapling --out D:\Downloads\diplomat\actual_work\database_dumprestore\mongodump
+
+RESTORE:
+
+psql -U postgres -f C:\Users\Chris\Downloads\diplomat\database_dumprestore\postgresdump.sql -d Sapling
+Password: POSTGrEpoulKaio21vS33
+NOTE: You must create the Sapling Database first in the new PC
+
+mongorestore C:\Users\Chris\Downloads\diplomat\database_dumprestore\mongodump

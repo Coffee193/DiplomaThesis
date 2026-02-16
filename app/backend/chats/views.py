@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from django.http import HttpResponseBadRequest, HttpResponse
-from oauth import VerifyAuthRequest, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, VerifyJWT, ValidateAndCreateJWT, ReturnHttpInvalidJWT, CreateResponseNewAccess
+from oauth import VerifyAuthRequest, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, VerifyJWT, ValidateAndCreateJWT, ReturnHttpInvalidJWT, CreateResponseNewAccess, CreateStreamingResponseNewAccess
 from backend.mongo_db_connection import mongo_db
 import json
 from snowflake_id_gen import GenerateSnowflake
@@ -11,12 +11,17 @@ from loginregister.views import PasswordCheck, CheckDataValue, PasswordCompare
 import math
 import base64
 import os
+from ollama import chat
+
+### remove blow import
+import time
 
 # Create your views here.
 
 chats = mongo_db['Chats']
 chatdocumentpath = os.environ.get('CHAT_DOCUMENT_PATH')
 development = os.environ.get('development')
+llm_model = os.environ.get('LLM_MODEL')
 
 @api_view(['GET'])
 def getChats(request):
@@ -133,7 +138,7 @@ def getChatConv(request, conv_id):
             #chat_ret = chats.aggregate({"$match": {"_id": conv_id}},
             #                           {"$match": {"user_id": int(ver_req_auth[1]['iss'])}},
             #                           {"$project": {"chat": 1, "_id": 0}})
-            chat_ret = chats.find_one({"_id": conv_id, "user_id": int(ver_req_auth[1]['iss'])}, {"_id": 0, "chat": 1, "model": 1})
+            chat_ret = chats.find_one({"_id": conv_id, "user_id": int(ver_req_auth[1]['iss'])}, {"_id": 0, "chat": 1})
             if(chat_ret == {}):
                 return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
             else:
@@ -313,8 +318,49 @@ def AskQuestion(request):
     else:
         return HttpResponse(json.dumps('Invalid Question Headers'), status = 400)
 
-
 def AnswearQuestion(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+
+    if('q' not in data or 'id' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    if(len(data["q"].replace('\n', '')) == 0):
+        return HttpResponse(json.dumps('Question is empty'), status = 400)
+    if(data['id'].isdigit() == False):
+        return HttpResponse(json.dumps('Invalid Id'), status = 400)
+    
+    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1})
+    if(chat_ret == {}):
+        return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
+    else:
+        return CreateStreamingResponseNewAccess(valjwt[1], AnswearQuestionLLM, [chat_ret['chat'], data["q"], int(data["id"])], 200)
+        return StreamingHttpResponse(AnswearQuestionLLM(chat_ret['chat'], data["q"], int(data["id"])), status = 200)
+        print(chat_ret)
+        print('----------------------------------')
+        return CreateResponseNewAccess(valjwt[1], {"a": 'bububu'}, 200)
+
+def AnswearQuestionLLM(db_chat, user_question, chat_id):
+    llm_chat = []
+    total_answer = ''
+    for conv in db_chat:
+        llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
+    llm_chat.append({'role': 'user', 'content': user_question})
+
+    llm_answer = chat(llm_model, messages = llm_chat, stream = True)
+
+    for chunk in llm_answer:
+        yield chunk.message.content
+        total_answer += chunk.message.content
+        
+        print('talk talk...........')
+        if(chunk.done == True):
+            print('done streaming....................')
+            chats.update_one({"_id": chat_id},
+                             {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+
+def AnswearQuestion_NewOld_NoAI(request):
     valjwt = ValidateAndCreateJWT(request)
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
@@ -334,7 +380,7 @@ def AnswearQuestion(request):
         return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
-    
+
 @api_view(['DELETE'])
 def DeleteAllChats(request):
     valjwt = ValidateAndCreateJWT(request)
@@ -396,3 +442,11 @@ def AnswearQuestionWithDocument(request):
         return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
+    
+@api_view(['POST'])
+def Slow_Func_Test(request):
+    print('aaaa...')
+    for _ in range(0, 3):
+        time.sleep(3)
+        print('bububu')
+    return HttpResponse(json.dumps('lulaaaaaaa'), status = 200)

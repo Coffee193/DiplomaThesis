@@ -147,3 +147,8 @@
     z-index: -1;
     opacity: 0;
 }
+
+.cb_utilaskload{
+    display: none;
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+}

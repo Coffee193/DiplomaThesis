@@ -9,4 +9,6 @@ urlpatterns = [
     path('getconversation/<int:conv_id>/', views.GetConversation, name = 'GetConversation'),
     path('askquestion/', views.AskQuestion, name='AskQuestion'),
     path('deleteallchats/', views.DeleteAllChats, name = 'DeleteAllChats'),
+
+    path('slow/', views.Slow_Func_Test, name='Slow_Func_Test'),
 ]

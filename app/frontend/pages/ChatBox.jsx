@@ -1,5 +1,5 @@
 import '../styling/ChatBox.css'
-import { ArrowUpload, UploadFile } from '../components/svgs/UtilIcons'
+import { ArrowUpload, UploadFile, BlocksLoad } from '../components/svgs/UtilIcons'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBoxUpload } from './ChatBoxUpload'
@@ -12,6 +12,8 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
     const [cbuState, cbusetState] = useState({'visible': false, 'isloading': true})
     const cbinputRef = useRef()
     const cbuploadRef = useRef()
+    const cbloadRef = useRef()
+    const cbaskquestion = useRef(false)
 
     function CheckQuestion(){
         if(cbinputRef.current.value === ''){
@@ -50,7 +52,9 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         if(event.key === 'Enter'){
             if(event.shiftKey === false){
                 event.preventDefault()
-                SubmitQuestion()
+                if(cbaskquestion.current === false){
+                    SubmitQuestion()
+                }
             }
         }
     }
@@ -65,6 +69,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         else{
             AskQuestion()
         }
+        TextBoxDeactive()
         ArrowDeactive()
     }
 
@@ -94,6 +99,9 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
 
         convsetState(prevState => [
+            <div className='cm_chatbox'>
+                <BlocksLoad/>
+            </div>,
             <div className='cm_chatuser'>
                 {cbinputRef.current.value !== '' ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': cbuState['name'], 'type': cbuState['type'], 'size': cbuState['size'], 'hardpath': url}}/> : ''}
                 {cbinputRef.current.value !== '' && cbtextareaRef.current.value.replace(/(\r\n|\n|\r)/gm, '').length === 0 ? '' :
@@ -117,17 +125,31 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
             credentials: 'include',
         }).then(res => {
             response_status = res.status
-            return res.json()
-        }).then(data => data)
+            return res.body
+        }).then(body => {
+            return body.getReader()
+        })
         .catch(() => {})
 
         if(response_status === 200){
-            convsetState(prevState => [
+            let ai_answer = ''
+
+            await response.read().then(function readchunk({done, value}) {
+                //ai_answer += String.fromCharCode.apply(null, value)
+                ai_answer += decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value)))
+                convsetState(prevState => [
                 <div className='cm_chatbox'>
-                    {response['a']}
+                    {ai_answer}
                 </div>,
-                prevState
-            ])
+                prevState.slice(1)
+                ])
+
+                if(done){
+                    TextBoxActive()
+                    return
+                }
+                return response.read().then(readchunk)
+            })
         }
         else if(response_status === 401 || response_status === 403){
             navigate('/login', {state: {to: '/chat/' + linkparams.id, expired: true}})
@@ -166,6 +188,18 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         if(cbtextareaRef.current.value === ''){
             ArrowDeactive()
         }
+    }
+    function TextBoxDeactive(){
+        cbaskquestion.current = true
+        cbuploadRef.current.style.display = 'none'
+        cbarrowRef.current.style.display = 'none'
+        cbloadRef.current.style.display = 'flex'
+    }
+    function TextBoxActive(){
+        cbaskquestion.current = false
+        cbuploadRef.current.style.removeProperty('display')
+        cbarrowRef.current.style.removeProperty('display')
+        cbloadRef.current.style.removeProperty('display')
     }
 
     async function AskQuestionWithDocument(){
@@ -225,6 +259,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                         <input type='file' className='cb_input' ref={cbinputRef} accept='text/xml' onChange={() => UploadDocument()}/>
                     </div>
                     <div className='cb_util cb_utildeactive' onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
+                    <div className='cb_util cb_utilaskload' ref={cbloadRef}><BlocksLoad/></div>
                 </div>
                 <div className='cb_bg' onClick={() => cbtextareaRef.current.focus()}/>
                 </>

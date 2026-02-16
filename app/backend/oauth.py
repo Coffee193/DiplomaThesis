@@ -12,6 +12,7 @@ from django.core.cache import cache
 import string
 import os
 from backend.redis_connection import redis_client
+from django.http import StreamingHttpResponse
 
 secret_jwt_key = "DpfBxh575Q"
 secret_jwt_key_refresh = "Q71sIzsD0X"
@@ -877,4 +878,13 @@ def ReturnHttpInvalidJWT(jwt, deletecookies = True):
         response.delete_cookie('access')
         response.delete_cookie('refresh')
         response.delete_cookie('userinfo')
+    return response
+
+def CreateStreamingResponseNewAccess(newaccess, response_function, response_function_params, response_status = 200):
+    print(response_function_params)
+    print(*response_function_params)
+    print('***')
+    response = StreamingHttpResponse(response_function(*response_function_params), status = response_status)
+    if(newaccess != None):
+        response.set_cookie("access", newaccess, httponly = True, secure = True, max_age = None, samesite = "Lax")
     return response

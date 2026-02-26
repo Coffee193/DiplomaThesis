@@ -341,7 +341,32 @@ def AnswearQuestion(request):
         print('----------------------------------')
         return CreateResponseNewAccess(valjwt[1], {"a": 'bububu'}, 200)
 
-def AnswearQuestionLLM(db_chat, user_question, chat_id):
+
+
+def AnswearQuestion_Old_NoCelery(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+
+    if('q' not in data or 'id' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    if(len(data["q"].replace('\n', '')) == 0):
+        return HttpResponse(json.dumps('Question is empty'), status = 400)
+    if(data['id'].isdigit() == False):
+        return HttpResponse(json.dumps('Invalid Id'), status = 400)
+    
+    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1})
+    if(chat_ret == {}):
+        return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
+    else:
+        return CreateStreamingResponseNewAccess(valjwt[1], AnswearQuestionLLM, [chat_ret['chat'], data["q"], int(data["id"])], 200)
+        return StreamingHttpResponse(AnswearQuestionLLM(chat_ret['chat'], data["q"], int(data["id"])), status = 200)
+        print(chat_ret)
+        print('----------------------------------')
+        return CreateResponseNewAccess(valjwt[1], {"a": 'bububu'}, 200)
+
+def AnswearQuestionLLM_Old_NoCelery(db_chat, user_question, chat_id):
     llm_chat = []
     total_answer = ''
     for conv in db_chat:

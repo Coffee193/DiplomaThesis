@@ -13,7 +13,7 @@ def streamTOredis(chat):
             redis_client.rpush("chatid", chunk.message.content)
             if(chunk.done == True):
                 print('/n')
-                print('I SHIIIIIIIIIIIIIT')
+                print('FINNNNN')
                 print(chunk.dict)
                 print(chunk.copy)
     '''
@@ -23,7 +23,7 @@ def streamTOredis(chat):
                 redis_client.append("chatid", "=$*$=")
                 redis_client.expire("chatid", 2)
                 print('/n')
-                print('I SHIIIIIIIIIIIIIT')
+                print('FINNNNNNN')
                 print(chunk.dict)
                 print(chunk.copy)
 

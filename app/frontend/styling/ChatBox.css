@@ -139,7 +139,7 @@
 
 .cb_upload:hover > .cb_uploadtext{
     opacity: 1;
-    transform: translateY(0); 
+    transform: translateY(0);
 }
 
 .cb_input{
@@ -151,4 +151,14 @@
 .cb_utilaskload{
     display: none;
     color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+    animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate{
+    from{
+        transform: rotate(0deg)
+    }
+    to{
+        transform: rotate(360deg)
+    }
 }

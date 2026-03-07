@@ -1,5 +1,5 @@
 import '../styling/ChatBox.css'
-import { ArrowUpload, UploadFile, BlocksLoad } from '../components/svgs/UtilIcons'
+import { ArrowUpload, UploadFile, BlocksLoad, SpinnerLoad } from '../components/svgs/UtilIcons'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBoxUpload } from './ChatBoxUpload'
@@ -259,7 +259,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                         <input type='file' className='cb_input' ref={cbinputRef} accept='text/xml' onChange={() => UploadDocument()}/>
                     </div>
                     <div className='cb_util cb_utildeactive' onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
-                    <div className='cb_util cb_utilaskload' ref={cbloadRef}><BlocksLoad/></div>
+                    <div className='cb_util cb_utilaskload' ref={cbloadRef}><SpinnerLoad/></div>
                 </div>
                 <div className='cb_bg' onClick={() => cbtextareaRef.current.focus()}/>
                 </>

@@ -6,12 +6,26 @@ from backend.mongo_db_connection import mongo_db
 import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime
+
+###
+# For multiplrocessing to work (i.e. to spawn a process) you must run these two lines of code before importing any models.
+# When spawning a Process errors are raises that are due to importing models.
+# You must run these 2 lines before impoting a model, in the file that spawns a new Process
+import django
+django.setup()
+###
 from loginregister.models import User
+
 from loginregister.views import PasswordCheck, CheckDataValue, PasswordCompare
 import math
 import base64
 import os
 from ollama import chat
+from backend.redis_connection import redis_client
+#from backend.process_pool import process_pool
+
+import multiprocessing
+import concurrent
 
 ### remove blow import
 import time
@@ -312,7 +326,8 @@ def GetConversation(request, conv_id):
 def AskQuestion(request):
     content_type = request.headers.get('content-type').split(';')[0]
     if(content_type == 'text/plain'):
-        return AnswearQuestion(request)
+        #return AnswearQuestion(request)
+        return AnswerQuestion(request)
     elif(content_type == 'multipart/form-data'):
         return AnswearQuestionWithDocument(request)
     else:
@@ -335,14 +350,150 @@ def AnswearQuestion(request):
     if(chat_ret == {}):
         return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
     else:
+        redis_client.set("cg_" + data["id"], 1)
+        #*#
+        p = multiprocessing.Process(target = AnswerQuationLLM, args = [chat_ret['chat'], data["q"], data["id"]])
+        p.start()
+        #process_pool.submit(AnswerQuationLLM, chat_ret['chat'], data["q"], data["id"])
+        # redis_queue.enqueue(AnswerQuationLLM, chat_ret['chat'], data["q"], data["id"])
+        # vuvuvu = AnswerQuationLLM.delay(chat_ret['chat'], data["q"], data["id"])
+        # print(vuvuvu)
+        # print(type(vuvuvu))
+        # print('asked celery...')
+        return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [data["id"]], 200)
+        # return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [chat_ret["id"], 1, 10])
         return CreateStreamingResponseNewAccess(valjwt[1], AnswearQuestionLLM, [chat_ret['chat'], data["q"], int(data["id"])], 200)
         return StreamingHttpResponse(AnswearQuestionLLM(chat_ret['chat'], data["q"], int(data["id"])), status = 200)
         print(chat_ret)
         print('----------------------------------')
         return CreateResponseNewAccess(valjwt[1], {"a": 'bububu'}, 200)
 
+#@shared_task
+def AnswerQuationLLM_Old_HasListNotStream(db_chat, user_question, chat_id):
+    llm_chat = []
+    # total_answer = ''
+    for conv in db_chat:
+        llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
+    llm_chat.append({'role': 'user', 'content': user_question})
 
+    llm_answer = chat(llm_model, messages = llm_chat, stream = True)
 
+    for chunk in llm_answer:
+        redis_client.append("ci_" + chat_id, chunk.message.content)
+        # yield chunk.message.content
+        # total_answer += chunk.message.content
+        
+        print('talk talk...........')
+        if(chunk.done == True):
+            total_answer = redis_client.getrange("ci_" + chat_id, 0, -2)
+            redis_client.append("ci_" + chat_id, "=$*$=")
+            redis_client.expire("ci_" + chat_id, 2)
+            print('done streaming....................')
+            chats.update_one({"_id": chat_id},
+                             {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+
+#@shared_task
+def AnswerQuationLLM_Old_Celery(db_chat, user_question, chat_id):
+    llm_chat = []
+    total_answer = ''
+    for conv in db_chat:
+        llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
+    llm_chat.append({'role': 'user', 'content': user_question})
+
+    print('SUPAAAAAAA POWAAAAAAA ************')
+
+    try:
+        llm_answer = chat(llm_model, messages = llm_chat, stream = True)
+    except:
+        redis_client.delete("cg_" + chat_id)
+        return
+
+    # redis_client.set("cg_" + chat_id, 1) # cg_ -> chat generation
+
+    for chunk in llm_answer:
+        
+        if(chunk.done == True):
+            redis_client.delete("cg_" + chat_id)
+            redis_client.xadd("ci_" + chat_id, {"d": 1}) # d -> done # ci_ -> chat id
+            redis_client.expire("ci_" + chat_id, 3)
+            chats.update_one({"_id": int(chat_id)},
+                                        {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+            return
+
+        total_answer += chunk.message.content
+        redis_client.xadd("ci_" + chat_id, {"v": chunk.message.content})
+
+def AnswerQuationLLM(db_chat, user_question, chat_id):
+    llm_chat = []
+    total_answer = ''
+    for conv in db_chat:
+        llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
+    llm_chat.append({'role': 'user', 'content': user_question})
+
+    print('SUPAAAAAAA POWAAAAAAA ************')
+
+    try:
+        llm_answer = chat(llm_model, messages = llm_chat, stream = True)
+    except:
+        redis_client.delete("cg_" + chat_id)
+        return
+
+    for chunk in llm_answer:
+        
+        if(chunk.done == True):
+            redis_client.delete("cg_" + chat_id)
+            redis_client.xadd("ci_" + chat_id, {"d": 1}) # d -> done # ci_ -> chat id
+            redis_client.expire("ci_" + chat_id, 3)
+            chats.update_one({"_id": int(chat_id)},
+                                        {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+            return
+
+        total_answer += chunk.message.content
+        redis_client.xadd("ci_" + chat_id, {"v": chunk.message.content})
+
+def GetLLMAnswerStream_Old_HasListNotStream(chat_id, breakout_time = 1, max_retries = 10):
+    redis_chatid = "ci_" + chat_id
+    stream_start = 0
+
+    for i in range(0, max_retries):
+        if(redis_client.exists(redis_chatid) == True):
+            llm_chunk = redis_client.getrange(redis_chatid, stream_start, -1)
+            if(llm_chunk == "=$*$="):
+                return
+            yield llm_chunk
+            stream_start += len(llm_chunk)
+
+    return HttpResponse(json.dumps('Server stream timed out'), status = 504)
+
+def GetLLMAnswerStream(chat_id, block_time = 10000):
+    if(redis_client.exists("cg_" + chat_id) == True):
+        stream_id = "cs_" + chat_id
+        series_id = 0
+        while True:
+            x = redis_client.xread(streams = {stream_id: series_id}, count = None, block = block_time)
+            if(len(x) == 0):
+                print('***^^^&&&')
+                print(x)
+                print('Timed Out')
+                return 'Timed Out'
+            if("d" in x[0][1][-1][1]):
+                yield ''.join([y[1]['v'] for y in x[0][1][0:-1]])
+                print('Retrieval successfully finished!')
+                return
+            else:
+                yield ''.join([y[1]['v'] for y in x[0][1]])
+
+            series_id = x[0][1][-1][0]
+    else:
+        print('Something went wrong with the retrieval')
+        return 'Something went wrong with the retrieval'
+
+'''
+Old answerquestion. Works ok. Problem: if user closes the http connection (ie. Browser closes), then the Stream stops as well.
+To tackle this you'll need to launch a separate proccess, in which the LLM writes the answer to redis as RedisStream and does all the other stuff of the function (ex.
+Update Mongodb). You cannot start a new process using multiprocessing from within django. You must use Task Queue tools like Celery. All of these tools however, run only
+on Linux. So Docker is necessary.
+'''
 def AnswearQuestion_Old_NoCelery(request):
     valjwt = ValidateAndCreateJWT(request)
     if(valjwt[0] == False):
@@ -365,7 +516,38 @@ def AnswearQuestion_Old_NoCelery(request):
         print(chat_ret)
         print('----------------------------------')
         return CreateResponseNewAccess(valjwt[1], {"a": 'bububu'}, 200)
+'''
+The below function is an exact copy of the above. For the scope of the diploma thesis, it is considered too much to add all those stuff, as it would require to setup
+a docker enviroment and configure everything around it. Instead we'll keep it simpler and simply we will not change close the connection or change the conversation tab
+while the AI is generating a response
+'''
+def AnswerQuestion(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
 
+    if('q' not in data or 'id' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    if(len(data["q"].replace('\n', '')) == 0):
+        return HttpResponse(json.dumps('Question is empty'), status = 400)
+    if(data['id'].isdigit() == False):
+        return HttpResponse(json.dumps('Invalid Id'), status = 400)
+    
+    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1})
+    if(chat_ret == {}):
+        return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
+    else:
+        redis_client.set("cg_" + data["id"], data["q"])
+        #multiprocessing.set_start_method('fork')
+        p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"]])
+        p.start()
+        return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [data["id"]], 200)
+        #return CreateStreamingResponseNewAccess(valjwt[1], AnswerQuestionLLM, [chat_ret['chat'], data["q"], int(data["id"])], 200)
+
+'''
+old answerquestionllm. Works. It was the initial function called by AnswerQuestion. Since these 2 are packed together, they share the same issues
+'''
 def AnswearQuestionLLM_Old_NoCelery(db_chat, user_question, chat_id):
     llm_chat = []
     total_answer = ''
@@ -384,6 +566,80 @@ def AnswearQuestionLLM_Old_NoCelery(db_chat, user_question, chat_id):
             print('done streaming....................')
             chats.update_one({"_id": chat_id},
                              {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+'''
+The below function is an exact copy of the above.
+'''
+def AnswerQuestionLLM(db_chat, user_question, chat_id):
+    llm_chat = []
+    total_answer = ''
+    for conv in db_chat:
+        llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
+    llm_chat.append({'role': 'user', 'content': user_question})
+
+    print('SUPAAAAAAA POWAAAAAAA ************')
+
+    try:
+        llm_answer = chat(llm_model, messages = llm_chat, stream = True)
+    except:
+        redis_client.delete("cg_" + chat_id)
+        return
+
+    # redis_client.set("cg_" + chat_id, 1) # cg_ -> chat generation
+
+    for chunk in llm_answer:
+        
+        if(chunk.done == True):
+            redis_client.delete("cg_" + chat_id)
+            redis_client.xadd("cs_" + chat_id, {"d": 1}) # d -> done # cs_ -> chat stream
+            redis_client.expire("cs_" + chat_id, 3)
+            chats.update_one({"_id": int(chat_id)},
+                                        {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+            return
+
+        total_answer += chunk.message.content
+        redis_client.xadd("cs_" + chat_id, {"v": chunk.message.content})
+
+
+def AA(popo):
+    print(';;;;;;;;')
+    time.sleep(5)
+    print(popo)
+    return True
+
+def AnswerQuestionWithDocument(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    
+    request_dict = request.data.dict()
+    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'id' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document']):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    data = json.loads(request_dict['data'])
+    file = json.loads(request_dict['document'])
+    
+    if(data['id'].isdigit() == False):
+        return HttpResponse(json.dumps('Invalid Id'), status = 400)
+    if(len(file['data']) < 22 or file['data'][:21] != 'data:text/xml;base64,' or file['name'][-4:] != '.xml'):
+        return HttpResponse(json.dumps('Invalid XML file'), status = 400)
+    
+    file_write = base64.b64decode(file['data'][21:])
+    file_id = GenerateSnowflake()
+
+    curr_time = datetime.datetime.now(datetime.timezone.utc)
+    answear = 'YOYOYO'
+    chat_val = {"d": {"name": file['name'], "path": data['id'] + str(file_id) + '.xml', "size": str(round(len(file_write)/1024, 1))}, "t": curr_time, "a": answear}
+    if(len(data["q"].replace('\n', '')) != 0):
+        chat_val["q"] = data["q"]
+    chat_ret = chats.update_one({"_id": int(data["id"]), "user_id": valjwt[3]},
+                        {"$push": {"chat": chat_val}})
+    
+    if(chat_ret.modified_count == 1):
+        filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
+        with open(filepath + '/' + data['id'] + str(file_id) + '.xml', 'wb') as file:
+            file.write(file_write)
+        return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
+    else:
+        return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
 
 def AnswearQuestion_NewOld_NoAI(request):
     valjwt = ValidateAndCreateJWT(request)

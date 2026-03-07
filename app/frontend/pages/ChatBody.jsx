@@ -10,7 +10,7 @@ export function ChatBody({ chatlist , isloadingState}){
                     <div className='cbd_image_holder'><img src='../components/images/MainLogo.png'/></div>
                     <div className='cbd_image_text'>How can I assist you?</div>
                 </div>
-                <ChatBox isloadingState={isloadingState} chatlist={chatlist} chattype='body'/>
+                <ChatBox isloadingState={isloadingState} chatlist={chatlist} chattype='body' isgeneratingState={false}/>
             </div>
         </div>
 )

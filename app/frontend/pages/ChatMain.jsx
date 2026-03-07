@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBox } from './ChatBox'
 import { ChatBoxUpload } from './ChatBoxUpload'
+import { BlocksLoad } from '../components/svgs/UtilIcons'
 
 export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
 
@@ -10,6 +11,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
     const [isloadingState, isloadingsetState] = useState(true)
     const [convState, convsetState] = useState()
     const cmchatRef = useRef()
+    const [isgeneratingState, isgeneratingsetState] = useState(false)
 
     useEffect(() => {
         if(chatnavloadingState === false){
@@ -27,9 +29,27 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
             return res.json()
         }).then(data => data)
         .catch(() => {})
-
+        
         if(response_status === 200){
             let conv_vals = []
+
+            if('g' in response){
+                isgeneratingsetState(true)
+                conv_vals.push(
+                        <div className='cm_chatbox cb_answerload'>
+                            <BlocksLoad/>
+                        </div>,
+                        <div className='cm_chatuser'>
+                            {response["g"]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["g"]["d"]["n"], 'type': response["g"]["d"]["n"].split('.')[1].toUpperCase(), 'size': response["g"]["d"]["s"], 'path': response["g"]["d"]["p"]}}/> : null}
+                            {response["g"]["q"] !== undefined ?
+                            <div className='cm_chatbox cm_boxuser'>
+                                {response["g"]["q"]}
+                            </div> : null
+                            }
+                        </div>
+                )
+            }
+
             for(let i=response['c'].length - 1; i>=0; i--){
                 conv_vals.push(
                     <>
@@ -61,6 +81,48 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
             //
             convsetState(conv_vals)
             isloadingsetState(false)
+
+            if('g' in response){
+                ResumeAnswerStream(linkparams.id)
+            }
+        }
+        else if(response_status === 401 || response_status === 403){
+            navigate('/login', {state: {to: '/chat/' + linkparams.id + '/', expired: true}})
+        }
+
+    }
+
+    async function ResumeAnswerStream(){
+        let response_status = null
+        let response = await fetch(import.meta.env.VITE_URL + 'chats/resumestream/' + linkparams.id + '/', {
+            method: 'GET',
+            credentials: 'include',
+        }).then(res => {
+            response_status = res.status
+            return res.body
+        }).then(body => {
+            return body.getReader()
+        })
+        .catch(() => {})
+
+        if(response_status === 200){
+            let ai_answer = ''
+
+            await response.read().then(function readchunk({done, value}) {
+                ai_answer += decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value)))
+                convsetState(prevState => [
+                <div className='cm_chatbox'>
+                    {ai_answer}
+                </div>,
+                prevState.slice(1)
+                ])
+
+                if(done){
+                    isgeneratingsetState(false)
+                    return
+                }
+                return response.read().then(readchunk)
+            })
         }
         else if(response_status === 401 || response_status === 403){
             navigate('/login', {state: {to: '/chat/' + linkparams.id + '/', expired: true}})
@@ -94,7 +156,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
                     ) : (convState)
                     }
                 </div>
-                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chattype='main' convsetState={convsetState} linkparams={linkparams}/>
+                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chattype='main' convsetState={convsetState} linkparams={linkparams} isgeneratingState={isgeneratingState} isgeneratingsetState={isgeneratingsetState}/>
                 <div className='cm_backwhite'/>
             </div>
         </div>

@@ -320,6 +320,10 @@ def GetConversation(request, conv_id):
         for i in range(0, len(chat_ret['chat'])):
             chat_ret['chat'][i]['t'] = chat_ret['chat'][i]['t'].timestamp()
         chat_ret = {'c': chat_ret['chat']}
+
+        gen_chat = redis_client.get("cg_" + str(conv_id))
+        if(gen_chat != None):
+            chat_ret['g'] = json.loads(gen_chat) # g -> generation
         return CreateResponseNewAccess(valjwt[1], chat_ret, 200)
 
 @api_view(['POST'])
@@ -465,7 +469,7 @@ def GetLLMAnswerStream_Old_HasListNotStream(chat_id, breakout_time = 1, max_retr
 
     return HttpResponse(json.dumps('Server stream timed out'), status = 504)
 
-def GetLLMAnswerStream(chat_id, block_time = 10000):
+def GetLLMAnswerStream(chat_id, block_time = 20000):
     if(redis_client.exists("cg_" + chat_id) == True):
         stream_id = "cs_" + chat_id
         series_id = 0
@@ -485,7 +489,6 @@ def GetLLMAnswerStream(chat_id, block_time = 10000):
 
             series_id = x[0][1][-1][0]
     else:
-        print('Something went wrong with the retrieval')
         return 'Something went wrong with the retrieval'
 
 '''
@@ -534,11 +537,14 @@ def AnswerQuestion(request):
     if(data['id'].isdigit() == False):
         return HttpResponse(json.dumps('Invalid Id'), status = 400)
     
+    if(redis_client.exists("cg_" + data["id"])):
+        return HttpResponse(json.dumps('Cannot ask question. An answer for a previous question is being generated'), status = 409)
+
     chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1})
     if(chat_ret == {}):
         return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
     else:
-        redis_client.set("cg_" + data["id"], data["q"])
+        redis_client.set("cg_" + data["id"], json.dumps({"q": data["q"]})) # cg -> chat generation
         #multiprocessing.set_start_method('fork')
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"]])
         p.start()
@@ -599,6 +605,12 @@ def AnswerQuestionLLM(db_chat, user_question, chat_id):
         total_answer += chunk.message.content
         redis_client.xadd("cs_" + chat_id, {"v": chunk.message.content})
 
+@api_view(['GET'])
+def ResumeAnswerStream(request, conv_id):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [str(conv_id)], 200)
 
 def AA(popo):
     print(';;;;;;;;')

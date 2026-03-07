@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBoxUpload } from './ChatBoxUpload'
 
-export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams, isgeneratingState, isgeneratingsetState }){
+export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams }){
 
     const cbtextareaRef = useRef()
     const cbarrowRef = useRef()
@@ -69,8 +69,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         else{
             AskQuestion()
         }
-        //TextBoxDeactive()
-        isgeneratingsetState(true)
+        TextBoxDeactive()
         ArrowDeactive()
     }
 
@@ -146,8 +145,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                 ])
 
                 if(done){
-                    //TextBoxActive()
-                    isgeneratingsetState(false)
+                    TextBoxActive()
                     return
                 }
                 return response.read().then(readchunk)
@@ -255,19 +253,13 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                     <textarea className='cb_textarea' placeholder='Ask Sapling' onChange={() => CheckQuestion()} ref={cbtextareaRef} onKeyDown={(event) => PressEnter(event)} autoFocus={true}/>
                 </div>
                 <div className='cb_infoholder'>
-                    { isgeneratingState === false ? (
-                    <>
-                        <div className='cb_util cb_utilactive cb_upload' onClick={() => cbinputRef.current.value === '' ? cbinputRef.current.click() : null} ref={cbuploadRef}>
-                            <UploadFile/>
-                            <div className={'cb_uploadtext ' + (chattype === 'main' ? 'cb_uploadmain' : 'cb_uploadbody')}>Upload File</div>
-                            <input type='file' className='cb_input' ref={cbinputRef} accept='text/xml' onChange={() => UploadDocument()}/>
-                        </div>
-                        <div className='cb_util cb_utildeactive' onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
-                    </>
-                    ) : (
+                    <div className='cb_util cb_utilactive cb_upload' onClick={() => cbinputRef.current.value === '' ? cbinputRef.current.click() : null} ref={cbuploadRef}>
+                        <UploadFile/>
+                        <div className={'cb_uploadtext ' + (chattype === 'main' ? 'cb_uploadmain' : 'cb_uploadbody')}>Upload File</div>
+                        <input type='file' className='cb_input' ref={cbinputRef} accept='text/xml' onChange={() => UploadDocument()}/>
+                    </div>
+                    <div className='cb_util cb_utildeactive' onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
                     <div className='cb_util cb_utilaskload' ref={cbloadRef}><SpinnerLoad/></div>
-                    )
-                    }
                 </div>
                 <div className='cb_bg' onClick={() => cbtextareaRef.current.focus()}/>
                 </>

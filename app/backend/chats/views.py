@@ -271,6 +271,9 @@ def DeleteChat(request):
     if(data['id'].isdigit() == False):
         return HttpResponse(json.dumps('Invalid Conversation ID'), status = 400)
     
+    #if(redis_client.exists("cg_" + str(data["id"]))):
+    #    return HttpResponse(json.dumps('Cannot delete Chat while answer is generating'), status = 409)
+
     path_del = list(chats.find({"_id": int(data["id"]), "chat.d": {"$exists": "true"}}, {"paths": "$chat.d.path"}))
     
     chat_del = chats.delete_one({"_id": int(data["id"]), "user_id": valjwt[3]})
@@ -285,7 +288,7 @@ def DeleteChat(request):
         return HttpResponse(json.dumps('Conversation ID does not belong to User'), status = 400)
     
 @api_view(['POST'])
-def CreateChat(request):
+def CreateChat_Old_NoAI(request):
     valjwt = ValidateAndCreateJWT(request)
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
@@ -303,6 +306,34 @@ def CreateChat(request):
                         "date_created": curr_time,
                         "user_id": valjwt[3],
                         "chat": [{"q": data["q"], "t": curr_time, "a": "asiojdsi"}]
+                        })
+    
+    return CreateResponseNewAccess(valjwt[1], {"_id": str(chat_id), "name": "New Conversation", "date_created": curr_time.timestamp()}, 200)
+
+@api_view(['POST'])
+def CreateChat(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    data = json.loads(request.body.decode('utf-8'))
+
+    if('q' not in data):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    if(len(data['q']) == 0):
+        return HttpResponse(json.dumps('Question is empty'), status = 400)
+    
+    chat_id = GenerateSnowflake()
+    curr_time = datetime.datetime.now(datetime.timezone.utc)
+    ##>AA<
+    redis_client.set("cg_" + str(chat_id), json.dumps({"q": data["q"]}))
+    p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id)])
+    p.start()
+    chats.insert_one({"_id": chat_id,
+                        "name": "New Conversation",
+                        "date_created": curr_time,
+                        "user_id": valjwt[3],
+                        "chat": []
+                        #"chat": [{"q": data["q"], "t": curr_time, "a": "asiojdsi"}]
                         })
     
     return CreateResponseNewAccess(valjwt[1], {"_id": str(chat_id), "name": "New Conversation", "date_created": curr_time.timestamp()}, 200)
@@ -473,6 +504,7 @@ def GetLLMAnswerStream(chat_id, block_time = 20000):
     if(redis_client.exists("cg_" + chat_id) == True):
         stream_id = "cs_" + chat_id
         series_id = 0
+        yield ''
         while True:
             x = redis_client.xread(streams = {stream_id: series_id}, count = None, block = block_time)
             if(len(x) == 0):
@@ -544,6 +576,7 @@ def AnswerQuestion(request):
     if(chat_ret == {}):
         return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
     else:
+        ###>AA<
         redis_client.set("cg_" + data["id"], json.dumps({"q": data["q"]})) # cg -> chat generation
         #multiprocessing.set_start_method('fork')
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"]])
@@ -598,7 +631,7 @@ def AnswerQuestionLLM(db_chat, user_question, chat_id):
             redis_client.delete("cg_" + chat_id)
             redis_client.xadd("cs_" + chat_id, {"d": 1}) # d -> done # cs_ -> chat stream
             redis_client.expire("cs_" + chat_id, 3)
-            chats.update_one({"_id": int(chat_id)},
+            lololo = chats.update_one({"_id": int(chat_id)},
                                         {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
             return
 
@@ -735,6 +768,34 @@ def AnswearQuestionWithDocument(request):
         return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
+    
+def CreateChatTitle(conv_id, user_question):
+    ai_task = f"""Based on the following provided Question create a Very Short title that will be used as the name of the conversation with a Chat Model
+
+Question: {user_question}
+
+###
+Use the following examples as reference:
+
+Question: Write a 200 word essay about Steroid Abuse
+Output: Steroid Abuse Essay
+__________________________
+Question: What is the Root Locus?
+Output: Root Locus Basics
+___________________________
+Question: what is the pythagorean theorem?
+Output: Pythagorean Theorem Explained
+___________________________
+Question: Cost of having a car? per month
+Output: Monthly Car Cost Breakdown
+___________________________
+Question: Who is Pikachu?
+Output: Pikachu the Pokemon mascot
+___________________________
+Question: Who is Dwayne Johnson?
+Output: Dwayne Johnson Biography
+"""
+    ##>AA<
     
 @api_view(['POST'])
 def Slow_Func_Test(request):

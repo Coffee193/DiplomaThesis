@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { ChatBox } from './ChatBox'
 import { ChatBoxUpload } from './ChatBoxUpload'
 import { BlocksLoad } from '../components/svgs/UtilIcons'
+import { readAnswerStream } from './readAnswerStreamFunc'
 
 export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
 
@@ -85,6 +86,9 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
             if('g' in response){
                 ResumeAnswerStream(linkparams.id)
             }
+            else{
+                isgeneratingsetState(false)
+            }
         }
         else if(response_status === 401 || response_status === 403){
             navigate('/login', {state: {to: '/chat/' + linkparams.id + '/', expired: true}})
@@ -106,9 +110,14 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
         .catch(() => {})
 
         if(response_status === 200){
-            let ai_answer = ''
+            /*let ai_answer = ''
 
             await response.read().then(function readchunk({done, value}) {
+                if(window.location.pathname.split("/").at(-2) !== linkparams.id){
+                    console.log('ENDING stream')
+                    response.cancel()
+                }
+
                 ai_answer += decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value)))
                 convsetState(prevState => [
                 <div className='cm_chatbox'>
@@ -122,7 +131,8 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
                     return
                 }
                 return response.read().then(readchunk)
-            })
+            })*/
+           readAnswerStream(response, linkparams, convsetState, isgeneratingsetState)
         }
         else if(response_status === 401 || response_status === 403){
             navigate('/login', {state: {to: '/chat/' + linkparams.id + '/', expired: true}})

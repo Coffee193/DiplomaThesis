@@ -3,6 +3,7 @@ import { ArrowUpload, UploadFile, BlocksLoad, SpinnerLoad } from '../components/
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBoxUpload } from './ChatBoxUpload'
+import { readAnswerStream } from './readAnswerStreamFunc'
 
 export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams, isgeneratingState, isgeneratingsetState }){
 
@@ -133,6 +134,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         .catch(() => {})
 
         if(response_status === 200){
+            /*
             let ai_answer = ''
 
             await response.read().then(function readchunk({done, value}) {
@@ -151,7 +153,8 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                     return
                 }
                 return response.read().then(readchunk)
-            })
+            })*/
+           readAnswerStream(response, linkparams, convsetState, isgeneratingsetState)
         }
         else if(response_status === 401 || response_status === 403){
             navigate('/login', {state: {to: '/chat/' + linkparams.id, expired: true}})

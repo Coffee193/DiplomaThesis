@@ -9,20 +9,19 @@ export function ChatLobby(){
 
     const [conversationsState, conversationssetState] = useState()
     const chatslist = useRef()
-    const [newconvState, newconvsetState] = useState()
     const linkparams = useParams()
-
     const [isloadingState, isloadingsetState] = useState(true)
+    
 
     return(
         <div className='cl_holder'>
             <div className='cl_box'>
                 <div className='cl_main'>
-                    <ChatNav convState={conversationsState} convsetState={conversationssetState} chatlist={chatslist} newconv={newconvState} isloadingState={isloadingState} isloadingsetState={isloadingsetState} linkparams={linkparams}/>
+                    <ChatNav convState={conversationsState} convsetState={conversationssetState} chatlist={chatslist} isloadingState={isloadingState} isloadingsetState={isloadingsetState} linkparams={linkparams}/>
                     {linkparams.id === undefined ? (
-                        <ChatBody chatlist={chatslist} setnewconv={newconvsetState} isloadingState={isloadingState}/>
+                        <ChatBody chatlist={chatslist} isloadingState={isloadingState} chatnavsetState={conversationssetState}/>
                     ) : (
-                        <ChatMain isloadingState={isloadingState} isloadingsetState={isloadingsetState} chatnavloadingState={isloadingState} linkparams={linkparams}/>
+                        <ChatMain chatnavloadingState={isloadingState} linkparams={linkparams} chatnavsetState={conversationssetState} chatlist={chatslist}/>
                     )}
                 </div>
             </div>

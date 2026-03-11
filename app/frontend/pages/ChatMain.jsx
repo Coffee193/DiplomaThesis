@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom'
 import { ChatBox } from './ChatBox'
 import { ChatBoxUpload } from './ChatBoxUpload'
 import { BlocksLoad } from '../components/svgs/UtilIcons'
-import { readAnswerStream } from './readAnswerStreamFunc'
 
-export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
+export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavsetState }){
 
     const navigate = useNavigate()
     const [isloadingState, isloadingsetState] = useState(true)
     const [convState, convsetState] = useState()
     const cmchatRef = useRef()
     const [isgeneratingState, isgeneratingsetState] = useState(false)
+    const convstreamgeneratingRef = useRef(new Set([]))
 
     useEffect(() => {
         if(chatnavloadingState === false){
@@ -20,7 +20,9 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
         }
     }, [linkparams.id, chatnavloadingState])
 
+
     async function GetConversation(){
+        let generateTitle = null
         let response_status = null
         let response = await fetch(import.meta.env.VITE_URL + 'chats/getconversation/' + linkparams.id + '/', {
             method: 'GET',
@@ -31,6 +33,16 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
         }).then(data => data)
         .catch(() => {})
         
+        console.log(chatlist.current.map((e) => e['_id']).indexOf(linkparams.id))
+        console.log('jkjkjk')
+        console.log(response['c'].length)
+        if(response['c'].length === 0){
+            generateTitle = chatlist.current.map((e) => e["_id"]).indexOf(linkparams.id)
+            if(chatlist.current[generateTitle]["name"] !== "New Conversation"){
+                generateTitle = null
+            }
+        }
+
         if(response_status === 200){
             let conv_vals = []
 
@@ -68,23 +80,14 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
                     </>
                 )
             }
-            // Remove this
-            /*conv_vals.push(
-            <>
-                <div className='cm_chatuser'>
-                        <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': 'Habibi', 'type': 'XML', 'size': 800}}/>
-                        <div className='cm_chatbox cm_boxuser'>
-                            uihuihuihiouhiohdiojijdiosajdiosajdiosjdiosajdiosajaiodjsaiodjsaioihuisahduisahduisahduisahduisahiudsah
-                        </div>
-                </div>
-            </>
-            )*/
-            //
+            
             convsetState(conv_vals)
             isloadingsetState(false)
 
             if('g' in response){
-                ResumeAnswerStream(linkparams.id)
+                if(convstreamgeneratingRef.current.has(linkparams.id) === false){
+                    ResumeAnswerStream(generateTitle)
+                }
             }
             else{
                 isgeneratingsetState(false)
@@ -96,9 +99,10 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
 
     }
 
-    async function ResumeAnswerStream(){
+    async function ResumeAnswerStream(waitTitle = null){
         let response_status = null
-        let response = await fetch(import.meta.env.VITE_URL + 'chats/resumestream/' + linkparams.id + '/', {
+        let qs = ((waitTitle !== null) ? '?t=' : '')
+        let response = await fetch(import.meta.env.VITE_URL + 'chats/resumestream/' + linkparams.id + '/' + qs, {
             method: 'GET',
             credentials: 'include',
         }).then(res => {
@@ -110,34 +114,67 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
         .catch(() => {})
 
         if(response_status === 200){
-            /*let ai_answer = ''
+            convstreamgeneratingRef.current.add(linkparams.id)
+            ReadAnswerStream(response, linkparams, convsetState, isgeneratingsetState, convstreamgeneratingRef, waitTitle)
+        }
+        else if(response_status === 401 || response_status === 403){
+            navigate('/login', {state: {to: '/chat/' + linkparams.id + '/', expired: true}})
+        }
 
-            await response.read().then(function readchunk({done, value}) {
-                if(window.location.pathname.split("/").at(-2) !== linkparams.id){
-                    console.log('ENDING stream')
-                    response.cancel()
+    }
+
+    async function ReadAnswerStream(response, linkparams, convsetState, isgeneratingsetState, convstreamgeneratingRef, waitTitle){
+        let ai_answer = ''
+
+        await response.read().then(function readchunk({done, value}) {
+
+            // You need to put this here. Basically after the last part is received this function runs another time with value = undefined
+            // and done = True. passing undefined in String.fromChatCo.. gives '', which when passed on JSON.parse throws an error
+            if(done){
+                convstreamgeneratingRef.current.delete(linkparams.id)
+                if(window.location.pathname.split("/").at(-2) === linkparams.id){
+                    isgeneratingsetState(false)
                 }
+                return
+            }
+            // remove
+            //let vava = encodeURIComponent(String.fromCharCode.apply(null, value))
+            //console.log(vava)
+            //vava = decodeURIComponent(vava)
+            //console.log(vava)
+            //
+            let ret_stream = JSON.parse(decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value))))
 
-                ai_answer += decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value)))
+            // An initial value of {'v': ''} is returned from that function. This is so that the cookies are Instantly set, otherwise the
+            // cookies wont be set until a single answer token is produced
+            if(ai_answer === '' && ret_stream['v'] === ''){
+                return response.read().then(readchunk)
+            }
+            
+            if(waitTitle !== null && 't' in ret_stream){
+                console.log('TITLEEEEEEEEE')
+                chatlist.current[waitTitle]["name"] = ret_stream['t']
+                console.log(chatlist.current)
+                chatnavsetState([...chatlist.current])
+
+                if(!('v' in ret_stream)){
+                    return response.read().then(readchunk)
+                }
+            }
+
+            ai_answer += ret_stream['v']
+
+            if(window.location.pathname.split("/").at(-2) === linkparams.id){
                 convsetState(prevState => [
                 <div className='cm_chatbox'>
                     {ai_answer}
                 </div>,
                 prevState.slice(1)
                 ])
+            }
 
-                if(done){
-                    isgeneratingsetState(false)
-                    return
-                }
-                return response.read().then(readchunk)
-            })*/
-           readAnswerStream(response, linkparams, convsetState, isgeneratingsetState)
-        }
-        else if(response_status === 401 || response_status === 403){
-            navigate('/login', {state: {to: '/chat/' + linkparams.id + '/', expired: true}})
-        }
-
+            return response.read().then(readchunk)
+        })
     }
 
     return(
@@ -166,7 +203,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams }){
                     ) : (convState)
                     }
                 </div>
-                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chattype='main' convsetState={convsetState} linkparams={linkparams} isgeneratingState={isgeneratingState} isgeneratingsetState={isgeneratingsetState}/>
+                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chattype='main' convsetState={convsetState} linkparams={linkparams} isgeneratingState={isgeneratingState} isgeneratingsetState={isgeneratingsetState} convstreamgeneratingRef={convstreamgeneratingRef} ReadAnswerStream={ReadAnswerStream}/>
                 <div className='cm_backwhite'/>
             </div>
         </div>

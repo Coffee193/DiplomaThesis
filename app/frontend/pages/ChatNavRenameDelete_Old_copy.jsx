@@ -47,7 +47,7 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
 
     async function RenameChat(){
         let request = {"id": cnrdState['id'], "v": cnrdinputRef.current.value}
-        
+
         let response_status = null
         await fetch(import.meta.env.VITE_URL + 'chats/renamechat/', {
             method: 'POST',
@@ -64,7 +64,7 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
             ClosePopUp()
             chatlist.current[cnrdState['index']]["name"] = request["v"]
             if(searchchatinputRef.current.value.length === 0){
-                convsetState([...chatlist.current]) //https://stackoverflow.com/questions/71393068/react-state-is-not-updating-immediately-after-setstate-is-being-called
+                convsetState(createConversations(chatlist.current, false))
             }
             else{
                 SearchChat(searchchatinputRef.current.value)
@@ -94,7 +94,7 @@ export function ChatNavRenameDelete({ cnrdState, cnrdsetState, convsetState, sea
             ClosePopUp()
             chatlist.current.splice(parseInt(cnrdState['index']), 1)
             if(searchchatinputRef.current.value.length === 0){
-                convsetState([...chatlist.current])
+                convsetState(createConversations(chatlist.current, false))
             }
             else{
                 SearchChat(searchchatinputRef.current.value)

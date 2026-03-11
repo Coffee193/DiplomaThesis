@@ -327,14 +327,15 @@ def CreateChat(request):
     ##>AA<
     redis_client.set("cg_" + str(chat_id), json.dumps({"q": data["q"]}))
     p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id)])
+    t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"]])
     p.start()
     chats.insert_one({"_id": chat_id,
                         "name": "New Conversation",
                         "date_created": curr_time,
                         "user_id": valjwt[3],
                         "chat": []
-                        #"chat": [{"q": data["q"], "t": curr_time, "a": "asiojdsi"}]
                         })
+    t.start()
     
     return CreateResponseNewAccess(valjwt[1], {"_id": str(chat_id), "name": "New Conversation", "date_created": curr_time.timestamp()}, 200)
 
@@ -500,13 +501,15 @@ def GetLLMAnswerStream_Old_HasListNotStream(chat_id, breakout_time = 1, max_retr
 
     return HttpResponse(json.dumps('Server stream timed out'), status = 504)
 
-def GetLLMAnswerStream(chat_id, block_time = 20000):
+def GetLLMAnswerStream_Old_ReturnedAnswerAsString(chat_id, block_time = 20000):
     if(redis_client.exists("cg_" + chat_id) == True):
         stream_id = "cs_" + chat_id
         series_id = 0
         yield ''
         while True:
             x = redis_client.xread(streams = {stream_id: series_id}, count = None, block = block_time)
+            print(x[0][1])
+            print('<<<<<<<<<<<<')
             if(len(x) == 0):
                 print('***^^^&&&')
                 print(x)
@@ -518,6 +521,52 @@ def GetLLMAnswerStream(chat_id, block_time = 20000):
                 return
             else:
                 yield ''.join([y[1]['v'] for y in x[0][1]])
+
+            series_id = x[0][1][-1][0]
+    else:
+        return 'Something went wrong with the retrieval'
+
+def GetLLMAnswerStream(chat_id, block_time = 20000, with_title = False):
+    print(with_title)
+    print('>>START<<')
+    if(redis_client.exists("cg_" + chat_id) == True):
+        stream_id = "cs_" + chat_id
+        series_id = 0
+        title_generated = False
+        done = False
+        yield json.dumps({'v': ''}) # Must have this so that COOKIES are instanly returned to user
+        while True:
+            x = redis_client.xread(streams = {stream_id: series_id}, count = None, block = block_time)
+            print(x[0][1])
+            #print(''.join(y[1]['t'] for y in x[0][1] if 't' in y[1]))
+            print(any('t' in y[1] for y in x[0][1]))
+            print('<<<<<<<<<<<<')
+            if(len(x) == 0):
+                print('***^^^&&&')
+                print(x)
+                print('Timed Out')
+                return 'Timed Out'
+            if(with_title == True and title_generated == False):
+                if(any('t' in y[1] for y in x[0][1])):
+                    print('Title Generated')
+                    yield json.dumps({'t': ''.join(y[1]['t'] for y in x[0][1] if 't' in y[1])})
+                    title_generated = True
+                if(not any('v' in y[1] for y in x[0][1])):
+                    series_id = x[0][1][-1][0]
+                    continue
+                    
+            # case where t comes after d
+            if("d" in x[0][1][-1][1] or (len(x[0][1]) > 1 and "d" in x[0][1][-2][1]) ):
+                yield json.dumps({'v': ''.join(y[1]['v'] for y in x[0][1][0:-1] if 'v' in y[1])})
+                print('Is Done')
+                done = True
+            else:
+                yield json.dumps({'v': ''.join(y[1]['v'] for y in x[0][1] if 'v' in y[1])})
+            if(done == True):
+                if(with_title == True and title_generated == False):
+                    continue
+                print('Returning Done')
+                return
 
             series_id = x[0][1][-1][0]
     else:
@@ -643,7 +692,7 @@ def ResumeAnswerStream(request, conv_id):
     valjwt = ValidateAndCreateJWT(request)
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
-    return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [str(conv_id)], 200)
+    return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [str(conv_id), 20000, True if request.GET.get('t') == '' else False], 200)
 
 def AA(popo):
     print(';;;;;;;;')
@@ -769,8 +818,8 @@ def AnswearQuestionWithDocument(request):
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
     
-def CreateChatTitle(conv_id, user_question):
-    ai_task = f"""Based on the following provided Question create a Very Short title that will be used as the name of the conversation with a Chat Model
+def CreateChatTitle(chat_id, user_question):
+    ai_task = f"""Based on the following provided Question create a Very Short title that will be used as the name of the conversation with a Chat Model.The Output should contain the title only and nothing else
 
 Question: {user_question}
 
@@ -794,8 +843,21 @@ Output: Pikachu the Pokemon mascot
 ___________________________
 Question: Who is Dwayne Johnson?
 Output: Dwayne Johnson Biography
+___________________________
+Question: How old do cats grow in general?
+Output: Cats Lifespan
 """
-    ##>AA<
+    llm_chat = [{'role': 'user', 'content': ai_task}]
+    try:
+        llm_title = chat(llm_model, messages = llm_chat)
+    except:
+        return
+    
+    llm_title = llm_title.message.content
+    chats.update_one({"_id": int(chat_id)},
+                     {"$set": {"name": llm_title}})
+    
+    redis_client.xadd("cs_" + chat_id, {"t":llm_title})
     
 @api_view(['POST'])
 def Slow_Func_Test(request):

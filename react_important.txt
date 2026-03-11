@@ -1,0 +1,6 @@
+React Do not update object(list, array) state by index. It wont cause React to rerender. Instead create a copy of the entire object
+https://stackoverflow.com/questions/71393068/react-state-is-not-updating-immediately-after-setstate-is-being-called
+
+JavaScript passing objects by value vs reference.
+https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
+https://stackoverflow.com/questions/38416020/deep-copy-in-es6-using-the-spread-syntax/38417085#38417085

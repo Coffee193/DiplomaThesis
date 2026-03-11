@@ -17,10 +17,10 @@ export function ChatNavUtils({ chatclickRef, convsetState, chatlist, createConve
                     indexlist.push(i)
                 }
             }
-            convsetState(templist)
+            convsetState(createConversations(templist, false, indexlist))
         }
         else{
-            convsetState(chatlist.current)
+            convsetState(createConversations(chatlist.current, false))
         }
     }
 

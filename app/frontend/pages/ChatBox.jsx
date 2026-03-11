@@ -3,9 +3,9 @@ import { ArrowUpload, UploadFile, BlocksLoad, SpinnerLoad } from '../components/
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBoxUpload } from './ChatBoxUpload'
-import { readAnswerStream } from './readAnswerStreamFunc'
+//import { readAnswerStream } from './readAnswerStreamFunc'
 
-export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams, isgeneratingState, isgeneratingsetState }){
+export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams, isgeneratingState, isgeneratingsetState, convstreamgeneratingRef, ReadAnswerStream, chatnavsetState }){
 
     const cbtextareaRef = useRef()
     const cbarrowRef = useRef()
@@ -40,8 +40,9 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         .catch(() => {})
 
         if(response_status === 200){
-            response['date_created'] = new Date(response['date_created'] * 1000)
+            response['index'] = chatlist.current.length
             chatlist.current.push(response)
+            chatnavsetState(chatlist.current)
             navigate('/chat/' + response['_id'].toString() + '/')
         }
         else if(response_status === 401 || response_status === 403){
@@ -69,9 +70,9 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
         else{
             AskQuestion()
+            isgeneratingsetState(true)
         }
         //TextBoxDeactive()
-        isgeneratingsetState(true)
         ArrowDeactive()
     }
 
@@ -134,27 +135,8 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         .catch(() => {})
 
         if(response_status === 200){
-            /*
-            let ai_answer = ''
-
-            await response.read().then(function readchunk({done, value}) {
-                //ai_answer += String.fromCharCode.apply(null, value)
-                ai_answer += decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value)))
-                convsetState(prevState => [
-                <div className='cm_chatbox'>
-                    {ai_answer}
-                </div>,
-                prevState.slice(1)
-                ])
-
-                if(done){
-                    //TextBoxActive()
-                    isgeneratingsetState(false)
-                    return
-                }
-                return response.read().then(readchunk)
-            })*/
-           readAnswerStream(response, linkparams, convsetState, isgeneratingsetState)
+            convstreamgeneratingRef.current.add(linkparams.id)
+            ReadAnswerStream(response, linkparams, convsetState, isgeneratingsetState, convstreamgeneratingRef)
         }
         else if(response_status === 401 || response_status === 403){
             navigate('/login', {state: {to: '/chat/' + linkparams.id, expired: true}})

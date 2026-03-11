@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { ChatNavUtils } from './ChatNavUtils'
 
-export function ChatNav({convState, convsetState, isloadingState, isloadingsetState, linkparams, chatlist}){
+export function ChatNav({convState, convsetState, chatlist, isloadingState, isloadingsetState, linkparams, newconv}){
 
     const navigate = useNavigate()
     const chatclickRef = useRef(null) /* id of chat to be renamed/deleted */
@@ -29,8 +29,13 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
     }
 
     useEffect(() => {
-        getOrders()
-    }, [])
+        if(chatlist.current === undefined){
+            getOrders()
+        }
+        else{
+            convsetState(createConversations(chatlist.current, false))
+        }
+    }, [linkparams.id])
 
     async function getOrders(){
         if(document.cookie.includes('userinfo=') === false){
@@ -49,10 +54,7 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
 
         if(response_status === 200){
             chatlist.current = response
-            for(let i=0; i<chatlist.current.length; i++){
-                chatlist.current[i]['index'] = i
-            }
-            convsetState(response)
+            convsetState(createConversations(response))
             isloadingsetState(false)
         }
         else if(response_status === 401 || response_status === 403){
@@ -60,15 +62,24 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
         }
     }
 
-    function createConversations(arr){
-        console.log('triggered mmm')
+    function createConversations(arr, conv_to_date = true, indexset = null){
         let monthyear = []
         let convfinalstate = []
+        let indexval = null
         for(let i=arr.length - 1; i>=0; i--){
-            let monthyearstr = getMonthYearString(new Date(arr[i]['date_created'] * 1000))
+            if(conv_to_date === true){
+                arr[i]['date_created'] = new Date(arr[i]['date_created'] * 1000)
+            }
+            let monthyearstr = getMonthYearString(arr[i]['date_created'])
             if(monthyear.includes(monthyearstr) === false){
                 monthyear.push(monthyearstr)
                 convfinalstate.push(<div className='cn_info_date'>{monthyearstr}</div>)
+            }
+            if(indexset === null){
+                indexval = i
+            }
+            else{
+                indexval = indexset[i]
             }
             
             let isselected = arr[i]['_id'] === linkparams.id
@@ -78,7 +89,7 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
                     <div className={'cn_info_chat ' + (isselected === true ? 'cn_info_chat_select' : 'cn_info_chat_notselect')} id={'cnav_chat_' + i}>
                         <div className='cn_info_chat_bg' onClick={() => isselected === false ? ClickChat(arr[i]['_id']) : ''}/>
                         <div className='cn_info_chat_title'>{arr[i]['name']}</div>
-                        <div className='cn_info_chat_options' onClick={(e) => ChatPopUp(e.target)} data-idval={arr[i]['_id']} data-name={arr[i]['name']} data-index={arr[i]['index']}><DotsIcon/></div>
+                        <div className='cn_info_chat_options' onClick={(e) => ChatPopUp(e.target)} data-idval={arr[i]['_id']} data-name={arr[i]['name']} data-index={indexval}><DotsIcon/></div>
                     </div>
                 </div>)
         }
@@ -97,18 +108,15 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
 
 
     function ClickChat(idval){
-        console.log('*****')
-        console.log(chatlist.current)
-        if(linkparams.id !== idval){
-            if(idval !== undefined){
-                navigate('/chat/' + idval + '/')
-            }
-            else{
-                navigate('/chat')
-            }
-            convsetState(chatlist.current)
-            searchchatinputRef.current.value = ''
+        console.log(chatlist)
+        if(idval !== null){
+            navigate('/chat/' + idval + '/')
         }
+        else{
+            navigate('/chat')
+        }
+        convsetState(createConversations(chatlist.current, false))
+        searchchatinputRef.current.value = ''
     }
 
     return(
@@ -122,13 +130,13 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
                     </>
                 ) : (
                 <>
-                <div onClick={()=> ClickChat(undefined)}>
+                <div onClick={()=> ClickChat(null)}>
                     <div className='cn_util_item'>
                         <ChatBubble width={25} height={25} strokeWidth={0.5} viewBox={'-1 -1 18 18'}/><span>New Chat</span>
                     </div>
                 </div>
                 <div>
-                    <ChatNavUtils chatclickRef={chatclickRef} chatlist={chatlist} convsetState={convsetState} createConversations={createConversations} cnpState={cnpState} cnpsetState={cnpsetState} linkparams={linkparams} searchchatinputRef={searchchatinputRef}/>
+                    <ChatNavUtils chatclickRef={chatclickRef} convsetState={convsetState} chatlist={chatlist} createConversations={createConversations} cnpState={cnpState} cnpsetState={cnpsetState} linkparams={linkparams} searchchatinputRef={searchchatinputRef}/>
                 </div>
                 </>
                 )
@@ -145,7 +153,7 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
                             <div className='loading_box loading_blue'/>
                             <div className='loading_box loading_blue' style={{width: '80%'}}/>
                         </>
-                        ) : ( createConversations(convState)) }
+                        ) : (convState) }
                 </div>
             </div>
         </div>

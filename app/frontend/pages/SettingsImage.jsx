@@ -6,7 +6,7 @@ export function SettingsImage({ imageval, valuesRef, warningIndex, warningvalueI
 
     const [siboxState, siboxsetState] = useState(imageval === undefined ? false : true)
     const [siimageState, siimagesetState] = useState(imageval)
-    const imageprevvalRef = useRef([undefined, false])
+    const imageprevvalRef = useRef([undefined, false]) /*[previmgdata, if it was changed]*/
 
     const siinputRef = useRef()
     const [sipreviewState, sipreviewsetState] = useState({'visible': false})
@@ -16,6 +16,9 @@ export function SettingsImage({ imageval, valuesRef, warningIndex, warningvalueI
     }
 
     function ImagePreview(){
+        if(siinputRef.current.value === ''){
+            return
+        }
         sipreviewsetState({'visible': true})
         let imgreader = new FileReader();
         imgreader.readAsDataURL(siinputRef.current.files[0])
@@ -39,7 +42,7 @@ export function SettingsImage({ imageval, valuesRef, warningIndex, warningvalueI
 
     return(
         <>
-            <SettingsImagePreview previewState={sipreviewState} previewsetState={sipreviewsetState} imageinputRef={siinputRef} imageprevvalRef={imageprevvalRef} boxsetState={siboxsetState} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} imagesetState={siimagesetState} imageIndex={imageIndex}/>
+            <SettingsImagePreview previewState={sipreviewState} previewsetState={sipreviewsetState} imageinputRef={siinputRef} imageprevvalRef={imageprevvalRef} boxsetState={siboxsetState} valuesRef={valuesRef} warningIndex={warningIndex} warningvalueIndex={warningvalueIndex} imagesetState={siimagesetState} imageIndex={imageIndex} imageState={imageval}/>
             <div className='si_box'>
                 { siboxState === true ? (
                 <>
@@ -56,7 +59,7 @@ export function SettingsImage({ imageval, valuesRef, warningIndex, warningvalueI
                         <div className='si_util si_utilblue' onClick={() => SelectImage()}>UPLOAD IMAGE</div>
                     </div>
                 )}
-                <input type='file' className='si_input' accept='image/*' ref={siinputRef} onChange={() => ImagePreview()}/>
+                <input type='file' className='si_input' accept='image/*' ref={siinputRef} onChange={() => ImagePreview()} onClick={() => siinputRef.current.value = null}/>
             </div>
         </>
     )

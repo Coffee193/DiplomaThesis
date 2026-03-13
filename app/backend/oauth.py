@@ -888,3 +888,12 @@ def CreateStreamingResponseNewAccess(newaccess, response_function, response_func
     if(newaccess != None):
         response.set_cookie("access", newaccess, httponly = True, secure = True, max_age = None, samesite = "Lax")
     return response
+
+def CreateNewUserinfoCookie(request, response, username, userid):
+    cookies = request.COOKIES
+    cookiexp = None
+    if("refresh" in cookies):
+        print(cookies["refresh"])
+    
+    response.set_cookie("userinfo", username if username != None else 'None' + "$" + str(userid), httponly = False, secure = True, max_age = cookiexp, samesite = "Lax")
+    return response

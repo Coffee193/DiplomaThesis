@@ -13,7 +13,7 @@ import datetime
 import secrets
 import string
 from .models import User, Referal
-from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, CreateJWTKeyPair, CreateResponseWithCookies, ValidateAndCreateJWT, ValidateJWT, ReturnHttpInvalidJWT, CreateResponseNewAccess
+from oauth import CreateJWTPair, VerifyJWT, ReturnResponseWithNewAccessRefreshTockens, GetJWTExpTime, ReturnResponseWithNewAccessRefreshTockens_IfAccessExpired, CreateJWTKeyPair, CreateResponseWithCookies, ValidateAndCreateJWT, ValidateJWT, ReturnHttpInvalidJWT, CreateResponseNewAccess, CreateNewUserinfoCookie
 from snowflake_id_gen import GenerateSnowflake, CreateSnowflake
 from django.core.cache import cache
 from PIL import Image
@@ -27,6 +27,7 @@ pepper_key = str.encode(os.environ.get('pepper_key'))
 path_to_img = str.encode(os.environ.get('path_to_img'))
 # Remove this once in production
 development = str.encode(os.environ.get('development'))
+user_img_path = os.environ.get('USER_IMG_PATH')
 
 # Logs User in
 @api_view(['POST'])
@@ -700,13 +701,15 @@ def Register(request):
     
     userid = GenerateSnowflake()
 
+    curr_time = datetime.datetime.now(datetime.timezone.utc)
+
     if(data["t"] == 'email'):
-        User.objects.create(email = data["v"], password = PasswordSafe(data["p"]), date_created = datetime.datetime.now(datetime.timezone.utc), id = userid)
+        User.objects.create(email = data["v"], password = PasswordSafe(data["p"]), date_created = curr_time, id = userid)
     elif(data["t"] == 'phone'):
-        User.objects.create(phone = data["v"], password = PasswordSafe(data["p"]), date_created = datetime.datetime.now(datetime.timezone.utc), id = userid)
+        User.objects.create(phone = data["v"], password = PasswordSafe(data["p"]), date_created = curr_time, id = userid)
     else:
         return HttpResponse(json.dumps('Something went wrong with the server'), status = 500)
-    Referal.objects.filter(id = referal_find[1]).update(userid_redeem = userid)
+    Referal.objects.filter(id = referal_find[1]).update(userid_redeem = userid, date_redeem = curr_time)
 
     return CreateResponseWithCookies(userid, response_msg='User successfully created')
 
@@ -820,7 +823,11 @@ def UpdateValue(request):
 
     if(user_info != 1):
             return HttpResponse(json.dumps('Something went wrong'), status = 500)
-    return CreateResponseNewAccess(valjwt[1], data['t'][0].upper() + data['t'][1:] + ' successfully updated', 200)
+    response = CreateResponseNewAccess(valjwt[1], data['t'][0].upper() + data['t'][1:] + ' successfully updated', 200)
+    if(data['t'] == 'name'):
+        response = CreateNewUserinfoCookie(request, response, data['v'], str(valjwt[3]))
+    
+    return response
 
 @api_view(['DELETE'])
 def DeleteUser(request):
@@ -880,7 +887,8 @@ def UpdateImage(request, max_size_mb = 10):
     if(image == None):
         del_path = ''
         if(development.decode('utf-8') == 'true'):
-            del_path = 'D:/Downloads/diplomat/actual_work/app/frontend/components/dev_images/' + str(valjwt[3]) + '.JPEG'
+            del_path = user_img_path + '/' + str(valjwt[3]) + '.JPEG'
+            #del_path = 'D:/Downloads/diplomat/actual_work/app/frontend/components/dev_images/' + str(valjwt[3]) + '.JPEG'
         else:
             del_path = path_to_img.decode('utf-8') + '/' + str(valjwt[3]) + '.JPEG'
         if(os.path.exists(del_path) == False):
@@ -897,7 +905,7 @@ def UpdateImage(request, max_size_mb = 10):
             return CreateResponseNewAccess(valjwt[1], 'Image width or height exceed 10000 pixels', 413)
         
         if(development.decode('utf-8') == 'true'):
-            save_path = 'D:/Downloads/diplomat/actual_work/app/frontend/components/dev_images/' + str(valjwt[3]) + '.' + im.format
+            save_path = user_img_path + '/' + str(valjwt[3]) + '.' + im.format
         else:
             save_path = path_to_img.decode('utf-8') + '/' + str(valjwt[3]) + '.' + im.format
         if im.format == 'JPEG':

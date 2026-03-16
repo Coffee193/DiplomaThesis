@@ -27,12 +27,24 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
     }
 
+    /*>< */
     async function CreateChat(){
         let response_status = null
         let request = {"q": cbtextareaRef.current.value}
+        let body = null
+
+        if(cbinputRef.current.value !== ''){
+            body = new FormData()
+            body.append('data', JSON.stringify(request))
+            body.append('document', JSON.stringify({'data': cbuState['data'], 'name': cbuState['name']}))
+        }
+        else{
+            body = JSON.stringify(request)
+        }
+
         let response = await fetch(import.meta.env.VITE_URL + 'chats/createchat/', {
             method: 'POST',
-            body: JSON.stringify(request),
+            body: body,
             credentials: 'include',
         }).then(res => {
             response_status = res.status
@@ -76,6 +88,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         ArrowDeactive()
     }
 
+    /*>< */
     async function AskQuestion(){
         let response_status = null
         let request = {"q": cbtextareaRef.current.value, "id": linkparams.id}
@@ -247,7 +260,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                             <div className={'cb_uploadtext ' + (chattype === 'main' ? 'cb_uploadmain' : 'cb_uploadbody')}>Upload File</div>
                             <input type='file' className='cb_input' ref={cbinputRef} accept='text/xml' onChange={() => UploadDocument()}/>
                         </div>
-                        <div className='cb_util cb_utildeactive' onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
+                        <div className={'cb_util ' +  ( (cbtextareaRef.current === undefined || cbtextareaRef.current.value === '') ? 'cb_utildeactive' : 'cb_utilactive')} onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
                     </>
                     ) : (
                     <div className='cb_util cb_utilaskload' ref={cbloadRef}><SpinnerLoad/></div>

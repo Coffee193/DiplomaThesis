@@ -351,6 +351,8 @@ def GetConversation(request, conv_id):
     else:
         for i in range(0, len(chat_ret['chat'])):
             chat_ret['chat'][i]['t'] = chat_ret['chat'][i]['t'].timestamp()
+            if('d' in chat_ret['chat'][i]):
+                chat_ret['chat'][i]['d']['id'] = str(chat_ret['chat'][i]['d']['id'])
         chat_ret = {'c': chat_ret['chat']}
 
         gen_chat = redis_client.get("cg_" + str(conv_id))
@@ -365,7 +367,8 @@ def AskQuestion(request):
         #return AnswearQuestion(request)
         return AnswerQuestion(request)
     elif(content_type == 'multipart/form-data'):
-        return AnswearQuestionWithDocument(request)
+        print('^^^^^^^^^^^^')
+        return AnswerQuestionWithDocument(request)
     else:
         return HttpResponse(json.dumps('Invalid Question Headers'), status = 400)
 
@@ -535,6 +538,8 @@ def GetLLMAnswerStream(chat_id, block_time = 20000, with_title = False):
         title_generated = False
         done = False
         yield json.dumps({'v': ''}) # Must have this so that COOKIES are instanly returned to user
+        # t -> title, d -> done, v -> value, u -> uploaded document
+        # time.sleep(0.5)
         while True:
             x = redis_client.xread(streams = {stream_id: series_id}, count = None, block = block_time)
             print(x[0][1])
@@ -554,7 +559,17 @@ def GetLLMAnswerStream(chat_id, block_time = 20000, with_title = False):
                 if(not any('v' in y[1] for y in x[0][1])):
                     series_id = x[0][1][-1][0]
                     continue
-                    
+            
+            if(any('u' in y[1] for y in x[0][1])):
+                print('yeeeeeeeeeeeeeees')
+                val_ret = {"u": next(json.loads(y[1]['u']) for y in x[0][1] if 'u' in y[1])}
+                if(any('v' in y[1] for y in x[0][1])):
+                    val_ret['v'] = ''.join(y[1]['v'] for y in x[0][1] if 'v' in y[1])
+                print(val_ret)
+                yield json.dumps(val_ret)
+                series_id = x[0][1][-1][0]
+                continue
+
             # case where t comes after d
             if("d" in x[0][1][-1][1] or (len(x[0][1]) > 1 and "d" in x[0][1][-2][1]) ):
                 yield json.dumps({'v': ''.join(y[1]['v'] for y in x[0][1][0:-1] if 'v' in y[1])})
@@ -621,7 +636,10 @@ def AnswerQuestion(request):
     if(redis_client.exists("cg_" + data["id"])):
         return HttpResponse(json.dumps('Cannot ask question. An answer for a previous question is being generated'), status = 409)
 
-    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1})
+    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1, "chat.d": 1})
+    print(chat_ret)
+    print('*****')
+
     if(chat_ret == {}):
         return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
     else:
@@ -657,12 +675,54 @@ def AnswearQuestionLLM_Old_NoCelery(db_chat, user_question, chat_id):
 '''
 The below function is an exact copy of the above.
 '''
-def AnswerQuestionLLM(db_chat, user_question, chat_id):
+def AnswerQuestionLLM(db_chat, user_question, chat_id, document_dict = None):
     llm_chat = []
     total_answer = ''
+
     for conv in db_chat:
-        llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
-    llm_chat.append({'role': 'user', 'content': user_question})
+        if 'd' in conv:
+            if 'q' in conv:
+                user_prompt = f"""User uploaded a document, the data of whuch are the following:
+{conv['d']['data']}
+--------------------
+Then the User asked the following question based on the data provided previously: {conv['q']}
+"""
+            else:
+                user_prompt = f"""User uploaded a document, the data of which are the following:
+{conv['d']['data']}
+"""
+            llm_chat += [{'role': 'user', 'content': user_prompt}, {'role': 'assistant', 'content': conv['a']}] 
+
+        else:
+            llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
+    
+    if(document_dict == None):
+        llm_chat.append({'role': 'user', 'content': user_question})
+    else:
+        if(user_question == ''):
+            user_prompt = f"""The user uploaded a file, the data of which are the following:
+{document_dict['data']}
+
+----------------------------
+
+Read the data carefully and based on that data, state what type of file it is and what is it about. Then make a statement about offering your assistance with any task
+
+================
+
+Example:
+It seems you've uploaded a scheduling plan in XML format. I can help with various tasks related to this file. I'll do my best to assist you with extracting information or performing calculations on the data.
+"""
+        else:
+            user_prompt = f"""The user uploaded a file, the data of which are the following:
+{document_dict['data']}
+
+----------------------------
+
+Read the data carefully and based on that data, answer the following question:
+{user_question}
+"""
+        
+        llm_chat.append({'role': 'user', 'content': user_prompt})
 
     print('SUPAAAAAAA POWAAAAAAA ************')
 
@@ -680,8 +740,15 @@ def AnswerQuestionLLM(db_chat, user_question, chat_id):
             redis_client.delete("cg_" + chat_id)
             redis_client.xadd("cs_" + chat_id, {"d": 1}) # d -> done # cs_ -> chat stream
             redis_client.expire("cs_" + chat_id, 3)
-            lololo = chats.update_one({"_id": int(chat_id)},
-                                        {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+            if(document_dict == None):
+                lololo = chats.update_one({"_id": int(chat_id)},
+                                            {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+            else:
+                push_val = {"t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer, "d": document_dict}
+                if(user_question != ''):
+                    push_val['q'] = user_question
+                lololo = chats.update_one({"_id": int(chat_id)},
+                                          {"$push": {"chat": push_val}})
             return
 
         total_answer += chunk.message.content
@@ -716,12 +783,35 @@ def AnswerQuestionWithDocument(request):
     if(len(file['data']) < 22 or file['data'][:21] != 'data:text/xml;base64,' or file['name'][-4:] != '.xml'):
         return HttpResponse(json.dumps('Invalid XML file'), status = 400)
     
+    if(redis_client.exists("cg_" + data["id"])):
+        return HttpResponse(json.dumps('Cannot ask question. An answer for a previous question is being generated'), status = 409)
+    
+    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1, "chat.d": 1})
+
+    if(chat_ret == {}):
+        return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
+    else:
+        file_write = base64.b64decode(file['data'][21:])
+        file_id = GenerateSnowflake()
+
+        document_info = {"id": file_id, "name": file['name'], "size": str(round(len(file_write)/1024, 1)), "data": file_write.decode('utf-8')}
+        redis_client.set("cg_" + data["id"], json.dumps({"u": document_info, "q": data["q"]}))
+
+        WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , data['id'])
+        #d = multiprocessing.Process(target = WriteDocument, args=[file['data'], file_id, file["name"], data['id']])
+        p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"], document_info])
+        #d.start()
+        p.start()
+
+        return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [data["id"]], 200)
+    
+    
     file_write = base64.b64decode(file['data'][21:])
     file_id = GenerateSnowflake()
-
+    
     curr_time = datetime.datetime.now(datetime.timezone.utc)
     answear = 'YOYOYO'
-    chat_val = {"d": {"name": file['name'], "path": data['id'] + str(file_id) + '.xml', "size": str(round(len(file_write)/1024, 1))}, "t": curr_time, "a": answear}
+    chat_val = {"d": {"name": file['name'], "path": data['id'] + '_' + str(file_id) + '.xml', "size": str(round(len(file_write)/1024, 1))}, "t": curr_time, "a": answear}
     if(len(data["q"].replace('\n', '')) != 0):
         chat_val["q"] = data["q"]
     chat_ret = chats.update_one({"_id": int(data["id"]), "user_id": valjwt[3]},
@@ -729,11 +819,18 @@ def AnswerQuestionWithDocument(request):
     
     if(chat_ret.modified_count == 1):
         filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
-        with open(filepath + '/' + data['id'] + str(file_id) + '.xml', 'wb') as file:
+        with open(chatdocumentpath + '/' + data['id'] + '_' + str(file_id) + '.xml', 'wb') as file:
             file.write(file_write)
         return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
+
+def WriteDocument(file_data, document_info, conv_id):
+    file_type = document_info['name'].split(".")[-1]
+    with open(chatdocumentpath + '/' + conv_id + '_' + document_info['id'] + '.' + file_type, 'wb') as file:
+        file.write(file_data)
+
+    redis_client.xadd("cs_" + conv_id, {"u": json.dumps(document_info)})
 
 def AnswearQuestion_NewOld_NoAI(request):
     valjwt = ValidateAndCreateJWT(request)
@@ -804,22 +901,22 @@ def AnswearQuestionWithDocument(request):
 
     curr_time = datetime.datetime.now(datetime.timezone.utc)
     answear = 'YOYOYO'
-    chat_val = {"d": {"name": file['name'], "path": data['id'] + str(file_id) + '.xml', "size": str(round(len(file_write)/1024, 1))}, "t": curr_time, "a": answear}
+    chat_val = {"d": {"name": file['name'], "path": data['id'] + '_' + str(file_id) + '.xml', "size": str(round(len(file_write)/1024, 1))}, "t": curr_time, "a": answear}
     if(len(data["q"].replace('\n', '')) != 0):
         chat_val["q"] = data["q"]
     chat_ret = chats.update_one({"_id": int(data["id"]), "user_id": valjwt[3]},
                         {"$push": {"chat": chat_val}})
     
     if(chat_ret.modified_count == 1):
-        filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
-        with open(filepath + '/' + data['id'] + str(file_id) + '.xml', 'wb') as file:
+        #filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
+        with open(chatdocumentpath + '/' + data['id'] + '_' + str(file_id) + '.xml', 'wb') as file:
             file.write(file_write)
         return CreateResponseNewAccess(valjwt[1], {"a": answear}, 200)
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
     
 def CreateChatTitle(chat_id, user_question):
-    ai_task = f"""Based on the following provided Question create a Very Short title that will be used as the name of the conversation with a Chat Model.The Output should contain the title only and nothing else
+    ai_task_old = f"""Based on the following provided Question create a Very Short title that will be used as the name of the conversation with a Chat Model.The Output should contain the title only and nothing else
 
 Question: {user_question}
 
@@ -846,7 +943,19 @@ Output: Dwayne Johnson Biography
 ___________________________
 Question: How old do cats grow in general?
 Output: Cats Lifespan
+___________________________
+Question: yoyoyoyo
+Output: User Greetings
+___________________________
+Question: 
+Output: User Greetings
 """
+    
+    ai_task = f"""Based on the following provided Question create a Very Short title that will be used as the name of the conversation with a Chat Model.The Output should contain the title only and nothing else
+
+Question: {user_question}
+"""
+
     llm_chat = [{'role': 'user', 'content': ai_task}]
     try:
         llm_title = chat(llm_model, messages = llm_chat)

@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBox } from './ChatBox'
 import { ChatBoxUpload } from './ChatBoxUpload'
-import { BlocksLoad } from '../components/svgs/UtilIcons'
+import { BlocksLoad, DotIcon } from '../components/svgs/UtilIcons'
 
 export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavsetState }){
 
@@ -35,6 +35,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         
         console.log(chatlist.current.map((e) => e['_id']).indexOf(linkparams.id))
         console.log('jkjkjk')
+        console.log(response)
         console.log(response['c'].length)
         if(response['c'].length === 0){
             generateTitle = chatlist.current.map((e) => e["_id"]).indexOf(linkparams.id)
@@ -67,10 +68,10 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 conv_vals.push(
                     <>
                         <div className='cm_chatbox'>
-                            {response["c"][i]["a"]}
+                            {AddStreamBold(response["c"][i]["a"])}
                         </div>
                         <div className='cm_chatuser'>
-                            {response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"], 'path': response["c"][i]["d"]["path"]}}/> : null}
+                            {response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"], 'id': response["c"][i]["d"]["id"], 'link': linkparams.id}}/> : null}
                             {response["c"][i]["q"] !== undefined ?
                             <div className='cm_chatbox cm_boxuser'>
                                 {response["c"][i]["q"]}
@@ -143,11 +144,15 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             //vava = decodeURIComponent(vava)
             //console.log(vava)
             //
-            let ret_stream = JSON.parse(decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value))))
+            let ret_stream = decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value)))
+            if(ret_stream.split('}').length >= 4){
+                ret_stream = ret_stream.slice(9)
+            }
+            ret_stream = JSON.parse(ret_stream)
 
             // An initial value of {'v': ''} is returned from that function. This is so that the cookies are Instantly set, otherwise the
             // cookies wont be set until a single answer token is produced
-            if(ai_answer === '' && ret_stream['v'] === ''){
+            if(ai_answer === '' && (ret_stream['v'] === '' || ret_stream['v'] === undefined)){
                 return response.read().then(readchunk)
             }
             
@@ -175,6 +180,38 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
 
             return response.read().then(readchunk)
         })
+    }
+
+    function AddStreamBold(streamtext){
+        let bold_text_split = streamtext.split('**')
+        let bold_string = [bold_text_split[0]]
+        if(streamtext.length > 1){
+            for(let i=1; i<bold_text_split.length; i++){
+                if(i % 2 == 1){
+                    bold_string.push(<span className='cm_bold'>{bold_text_split[i]}</span>)
+                }
+                else{
+                    bold_string.push(bold_text_split[i])
+                }
+            }
+        }
+        console.log(bold_string)
+        console.log('&&&&&&&&&&&&&&')
+        /*let fin_string = []
+        for(let i=0; i<bold_string.length; i++){
+            console.log(i)
+            if(i % 2 === 0){
+                bold_string[i] = bold_string[i].split("\n* ")
+                if(bold_string[i].length > 1){
+                    for(let x=0; x<bold_string[i].length; x++){
+                        if(x%2 === 1){
+                            bold_string[i][x] = <><br/><span className='cm_dotholder'><DotIcon/> {bold_string[i][x]}</span></>
+                        }
+                    }
+                }
+            }
+        }*/
+        return bold_string
     }
 
     return(

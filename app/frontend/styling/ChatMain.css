@@ -183,3 +183,13 @@
     background-color: var(--chat-color-blue-light);
     max-width: 550px;
 }
+
+.cm_bold{
+    font-weight: 800;
+}
+.cm_dotholder{
+    height: 19px;
+    display: inline-flex;
+    align-items: end;
+    justify-content: end;
+}

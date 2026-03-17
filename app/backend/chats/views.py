@@ -312,6 +312,15 @@ def CreateChat_Old_NoAI(request):
 
 @api_view(['POST'])
 def CreateChat(request):
+    content_type = request.headers.get('content-type').split(';')[0]
+    if(content_type == 'text/plain'):
+        return CreateChatQuestion(request)
+    elif(content_type == 'multipart/form-data'):
+        return CreateChatDocument(request)
+    else:
+        return HttpResponse(json.dumps('Invalid Question Headers'), status = 400)
+
+def CreateChatQuestion(request):
     valjwt = ValidateAndCreateJWT(request)
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
@@ -337,6 +346,42 @@ def CreateChat(request):
                         })
     t.start()
     
+    return CreateResponseNewAccess(valjwt[1], {"_id": str(chat_id), "name": "New Conversation", "date_created": curr_time.timestamp()}, 200)
+
+def CreateChatDocument(request):
+    valjwt = ValidateAndCreateJWT(request)
+    if(valjwt[0] == False):
+        return ReturnHttpInvalidJWT(valjwt)
+    
+    request_dict = request.data.dict()
+    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document']):
+        return HttpResponse(json.dumps('Bad Request'), status = 400)
+    data = json.loads(request_dict['data'])
+    file = json.loads(request_dict['document'])
+    
+    if(len(file['data']) < 22 or file['data'][:21] != 'data:text/xml;base64,' or file['name'][-4:] != '.xml'):
+        return HttpResponse(json.dumps('Invalid XML file'), status = 400)
+
+    chat_id = GenerateSnowflake()
+
+    file_write = base64.b64decode(file['data'][21:])
+    file_id = GenerateSnowflake()
+
+    document_info = {"id": file_id, "name": file['name'], "size": str(round(len(file_write)/1024, 1)), "data": file_write.decode('utf-8')}
+    redis_client.set("cg_" + str(chat_id), json.dumps({"u": {"id": str(document_info["id"]), "name": document_info["name"], "size": document_info["size"]}, "q": data["q"]}))
+
+    curr_time = datetime.datetime.now(datetime.timezone.utc)
+    WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , str(chat_id))
+    p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info])
+    t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"]])
+    p.start()
+    chats.insert_one({"_id": chat_id,
+                      "name": "New Conversation",
+                      "date_created": curr_time,
+                      "user_id": valjwt[3],
+                      "chat": []})
+    t.start()
+
     return CreateResponseNewAccess(valjwt[1], {"_id": str(chat_id), "name": "New Conversation", "date_created": curr_time.timestamp()}, 200)
 
 @api_view(['GET'])
@@ -795,7 +840,7 @@ def AnswerQuestionWithDocument(request):
         file_id = GenerateSnowflake()
 
         document_info = {"id": file_id, "name": file['name'], "size": str(round(len(file_write)/1024, 1)), "data": file_write.decode('utf-8')}
-        redis_client.set("cg_" + data["id"], json.dumps({"u": document_info, "q": data["q"]}))
+        redis_client.set("cg_" + data["id"], json.dumps({"u": {"id": str(document_info["id"]), "name": document_info["name"], "size": document_info["size"]}, "q": data["q"]}))
 
         WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , data['id'])
         #d = multiprocessing.Process(target = WriteDocument, args=[file['data'], file_id, file["name"], data['id']])

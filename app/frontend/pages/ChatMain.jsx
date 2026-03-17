@@ -47,15 +47,22 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         if(response_status === 200){
             let conv_vals = []
 
+            console.log(response)
+            console.log('%%%%%%%%%%%%%%%')
+
             if('g' in response){
+                console.log(linkparams.id)
+                console.log(typeof linkparams.id)
+                console.log(response['g']['u']['id'])
+                console.log(typeof response['g']['u']['id'])
                 isgeneratingsetState(true)
                 conv_vals.push(
                         <div className='cm_chatbox cb_answerload'>
                             <BlocksLoad/>
                         </div>,
                         <div className='cm_chatuser'>
-                            {response["g"]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["g"]["d"]["n"], 'type': response["g"]["d"]["n"].split('.')[1].toUpperCase(), 'size': response["g"]["d"]["s"], 'path': response["g"]["d"]["p"]}}/> : null}
-                            {response["g"]["q"] !== undefined ?
+                            {response["g"]["u"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["g"]["u"]["name"], 'type': response["g"]["u"]["name"].split('.')[1].toUpperCase(), 'size': response["g"]["u"]["size"], 'link': linkparams.id, 'id': response["g"]["u"]["id"]}}/> : null}
+                            {response["g"]["q"] !== "" ?
                             <div className='cm_chatbox cm_boxuser'>
                                 {response["g"]["q"]}
                             </div> : null

@@ -1,8 +1,6 @@
 import '../styling/SettingsName.css'
 
 export function SettingsName({ value, popupvalue, popupsetState, valuesRef, typeIndex, warningIndex, warningvalueIndex }){
-    
-    //const [nameState, namesetState] = useState(SetName(value))
 
     function SetName(name){
         return name === null ? ('Welcome, Back!'): ('Welcome, ' + name)

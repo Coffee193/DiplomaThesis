@@ -7,7 +7,6 @@
 }
 
 ::-webkit-scrollbar-thumb{
-    /*background: #65a3eb;*/
     background: #3b3d41;
     border-radius: 1em;
 } 
@@ -27,8 +26,6 @@ html, body {
     width: 100%;
     position: relative;
     overflow-x: hidden;
-    /*overflow-y: hidden;*/
-    /*overflow-y: scroll;*/
 }
 
 div{
@@ -196,7 +193,6 @@ textarea:focus{
     --nav-height: 75px;
 
     --nav-color-bubble: rgb(162, 202, 248);
-    /*--nav-color-bubble-lighter: rgb(221, 232, 245);*/
     --nav-color-bubble-lighter: rgb(247, 250, 254);
 
     --chatnav-dim-popup: 175px;
@@ -310,8 +306,3 @@ textarea:focus{
     height: 25px;
     border-radius: 25px;
 }
-
-/*.buttonactive{
-    pointer-events: all;
-    cursor: pointer;
-}*/

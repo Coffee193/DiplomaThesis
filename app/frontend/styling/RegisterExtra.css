@@ -1,8 +1,6 @@
 .popUp_password_requirements{
     position: absolute;
     z-index: 1;
-    /*bottom:25px;
-    left:25px;*/
     bottom: -170px;
     left:25px;
     transition: var(--transition-0_2s);

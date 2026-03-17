@@ -6,7 +6,7 @@ export function SettingsImage({ imageval, valuesRef, warningIndex, warningvalueI
 
     const [siboxState, siboxsetState] = useState(imageval === undefined ? false : true)
     const [siimageState, siimagesetState] = useState(imageval)
-    const imageprevvalRef = useRef([undefined, false]) /*[previmgdata, if it was changed]*/
+    const imageprevvalRef = useRef([undefined, false])
 
     const siinputRef = useRef()
     const [sipreviewState, sipreviewsetState] = useState({'visible': false})

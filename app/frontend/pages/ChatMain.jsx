@@ -33,10 +33,6 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         }).then(data => data)
         .catch(() => {})
         
-        console.log(chatlist.current.map((e) => e['_id']).indexOf(linkparams.id))
-        console.log('jkjkjk')
-        console.log(response)
-        console.log(response['c'].length)
         if(response['c'].length === 0){
             generateTitle = chatlist.current.map((e) => e["_id"]).indexOf(linkparams.id)
             if(chatlist.current[generateTitle]["name"] !== "New Conversation"){
@@ -47,14 +43,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         if(response_status === 200){
             let conv_vals = []
 
-            console.log(response)
-            console.log('%%%%%%%%%%%%%%%')
-
             if('g' in response){
-                console.log(linkparams.id)
-                console.log(typeof linkparams.id)
-                console.log(response['g']['u']['id'])
-                console.log(typeof response['g']['u']['id'])
                 isgeneratingsetState(true)
                 conv_vals.push(
                         <div className='cm_chatbox cb_answerload'>
@@ -145,12 +134,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 }
                 return
             }
-            // remove
-            //let vava = encodeURIComponent(String.fromCharCode.apply(null, value))
-            //console.log(vava)
-            //vava = decodeURIComponent(vava)
-            //console.log(vava)
-            //
+
             let ret_stream = decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value)))
             if(ret_stream.split('}').length >= 4){
                 ret_stream = ret_stream.slice(9)
@@ -164,9 +148,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             }
             
             if(waitTitle !== null && 't' in ret_stream){
-                console.log('TITLEEEEEEEEE')
                 chatlist.current[waitTitle]["name"] = ret_stream['t']
-                console.log(chatlist.current)
                 chatnavsetState([...chatlist.current])
 
                 if(!('v' in ret_stream)){
@@ -202,8 +184,6 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 }
             }
         }
-        console.log(bold_string)
-        console.log('&&&&&&&&&&&&&&')
         /*let fin_string = []
         for(let i=0; i<bold_string.length; i++){
             console.log(i)

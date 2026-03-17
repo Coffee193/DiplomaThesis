@@ -3,7 +3,6 @@ import { ArrowUpload, UploadFile, BlocksLoad, SpinnerLoad } from '../components/
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBoxUpload } from './ChatBoxUpload'
-//import { readAnswerStream } from './readAnswerStreamFunc'
 
 export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams, isgeneratingState, isgeneratingsetState, convstreamgeneratingRef, ReadAnswerStream, chatnavsetState }){
 
@@ -27,7 +26,6 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
     }
 
-    /*>< */
     async function CreateChat(){
         let response_status = null
         let request = {"q": cbtextareaRef.current.value}
@@ -84,11 +82,9 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
             AskQuestion()
             isgeneratingsetState(true)
         }
-        //TextBoxDeactive()
         ArrowDeactive()
     }
 
-    /*>< */
     async function AskQuestion(){
         let response_status = null
         let request = {"q": cbtextareaRef.current.value, "id": linkparams.id}
@@ -187,60 +183,6 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
     function EmptyTextArrowDeactive(){
         if(cbtextareaRef.current.value === ''){
             ArrowDeactive()
-        }
-    }
-    function TextBoxDeactive(){
-        cbaskquestion.current = true
-        cbuploadRef.current.style.display = 'none'
-        cbarrowRef.current.style.display = 'none'
-        cbloadRef.current.style.display = 'flex'
-    }
-    function TextBoxActive(){
-        cbaskquestion.current = false
-        cbuploadRef.current.style.removeProperty('display')
-        cbarrowRef.current.style.removeProperty('display')
-        cbloadRef.current.style.removeProperty('display')
-    }
-
-    async function AskQuestionWithDocument(){
-        let response_status = null
-        let request = {"q": cbtextareaRef.current.value, "id": linkparams.id}
-        let formdata = new FormData()
-        formdata.append('data', JSON.stringify(request))
-        formdata.append('document', JSON.stringify(cbuState['data']))
-
-        convsetState(prevState => [
-             <div className='cm_chatuser'>
-                        <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': 'Habibi', 'type': 'XML', 'size': 800}}/>
-                        <div className='cm_chatbox cm_boxuser'>
-                            {request['q']}
-                        </div>
-                </div>,
-            prevState
-        ])
-        cbusetState({'visible': false})
-        cbtextareaRef.current.value = ''
-
-        let response = await fetch(import.meta.env.VITE_URL + 'chats/askquestion/', {
-            method: 'POST',
-            credentials: 'include',
-            body: formdata,
-        }).then(res => {
-            response_status = res.status
-            return res.json()
-        }).then(data => data)
-        .catch(() => {})
-
-        if(response_status === 401 || response_status === 403){
-            navigate('/login', {state: {to: '/chat/' + linkparams.id, expired: true}})
-        }
-        else if(response_status === 200){
-            convsetState(prevState => [
-                <div className='cm_chatbox'>
-                    {response['a']}
-                </div>,
-                prevState
-            ])
         }
     }
 

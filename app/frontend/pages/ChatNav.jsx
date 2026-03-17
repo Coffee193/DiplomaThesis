@@ -97,8 +97,6 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
 
 
     function ClickChat(idval){
-        console.log('*****')
-        console.log(chatlist.current)
         if(linkparams.id !== idval){
             if(idval !== undefined){
                 navigate('/chat/' + idval + '/')

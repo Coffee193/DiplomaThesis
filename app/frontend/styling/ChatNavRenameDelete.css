@@ -4,8 +4,6 @@
     background-color: #fff;
     border: 1px solid var(--chat-color-gray);
     position: absolute;
-    /*top: calc((0px - var(--nav-height) + var(--chatnav-dim-main-popup-h))/2);
-    right: calc((100vw - var(--chatnav-dim-main-popup-w))/2);*/
     top: calc(0px + var(--chatnav-dim-main-popup-h)/2);
     left: calc(0px + 50vw - var(--chatnav-dim-main-popup-w)/2);
     z-index: 9;

@@ -3,7 +3,7 @@ import '../styling/AreaCodePopUp.css'
 import { XCloseIcon } from "../components/svgs/UtilIcons"
 import { SearchIcon } from "../components/svgs/UtilIcons"
 
-import { /*country_list,*/ country_list_full } from "../components/CountriesList"
+import { country_list_full } from "../components/CountriesList"
 
 import { useState } from "react"
 

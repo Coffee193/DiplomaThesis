@@ -99,20 +99,16 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
 
         valuesRef.current[warningIndex][warningvalueIndex] = warning
         if(upi_valtype.current === 'email'){
-            //valuesRef.current[valueIndex] = upi_usernamephoneinputRef.current.value
             valuesRef.current[valueIndex] = checkval
             valuesRef.current[typeIndex] = 'email'
         }
         else if(upi_valtype.current === 'phone'){
-            //valuesRef.current[valueIndex] = '+' + upi_countrycodeinputRef.current.value + ' ' + upi_usernamephoneinputRef.current.value
             valuesRef.current[valueIndex] = checkval === null ? null : '+' + upi_countrycodeinputRef.current.value + ' ' + upi_usernamephoneinputRef.current.value
             valuesRef.current[typeIndex] = 'phone'
         }
     }
 
     function InitAreaCode(){
-        console.log('I was called')
-        console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
         let country = Intl.DateTimeFormat().resolvedOptions().timeZone;
         for(let i = 0; i < country_list_keys.length; i++){
             if(country_list_full[country_list_keys[i]]['tz'] === country){
@@ -126,10 +122,6 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
     }
 
     function ChangeAreaCodeCheckSvg(event){
-        /*if(reg_only_contains_numbers.test(event.target.value) === false && event.target.value !== ''){
-            upi_countrycodeinputRef.current.value = event.target.value.slice()
-            return
-        }*/
         let changesvgval = null
         for(let i=0; i < country_list_keys.length; i++){
             if(country_list_full[country_list_keys[i]]['ac'].slice(1) === event.target.value){

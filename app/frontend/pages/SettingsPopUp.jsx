@@ -133,13 +133,11 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
     function ClickButton(active){
         if(active === false){
             canclickbuttonRef.current = false
-            //spbuttonRef.current.classList.remove('buttonactive')
             spbuttonRef.current.style.pointerEvents = 'none'
             popupsetState(prevState => ({...prevState, 'textbuttoninit': prevState['textbutton'], 'textbutton': <BlocksLoad/>}))
         }
         else{
             canclickbuttonRef.current = true
-            //spbuttonRef.current.classList.add('buttonactive')
             spbuttonRef.current.style.pointerEvents = 'all'
             popupsetState(prevState => ({...prevState, 'textbutton': prevState['textbuttoninit']}))
         }
@@ -262,12 +260,6 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
                 </div>
             </>)}
         </div>
-        {/*<div className='sp_notificationholder' style={spnotificationState['visible'] === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.8)', pointerEvents: 'none'})}>
-            <div className='sp_notification'>
-                <div>{spnotificationState['text']}</div>
-                <div className={'sp_notificationsvg ' + spnotificationState['class']} onClick={() => spnotificationsetState(prevState => ({...prevState, 'visible': false}))}>{spnotificationState['svg']}</div>
-            </div>
-        </div>*/}
         <div className='sp_darkbg' style={popupState['visible'] === true ? ({ opacity: '1', pointerEvents: 'all' }) : ({ opacity: '0', pointerEvents: 'none' })} onClick={() => ClosePopUp()}/>
         </>
     )

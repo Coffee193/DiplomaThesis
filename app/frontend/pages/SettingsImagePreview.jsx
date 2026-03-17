@@ -45,7 +45,6 @@ export function SettingsImagePreview({ previewState, previewsetState, imageinput
             boxsetState(true)
             PreviewClose()
             valuesRef.current[imageIndex] = img
-            //valuesRef.current[1] = 'image'
         })
     }
 

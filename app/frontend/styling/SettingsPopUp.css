@@ -97,17 +97,10 @@
 
 .sp_bgblue{
     background-color: var(--color-text-main-hover-blue-experimental-lighter);
-    /*&.sp_buttonactive:hover{
-        background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
-    }*/
     &:hover{
         background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore);
     }
 }
-/*.sp_buttonactive{
-    cursor: pointer;
-    pointer-events: all;
-}*/
 
 .sp_darkbg{
     position: absolute;
@@ -121,9 +114,6 @@
 
 .sp_bgred{
     background-color: var(--chatnav-color-delete-strong);
-    /*&.sp_buttonactive:hover{
-        background-color: var(--chatnav-color-delete-light);
-    }*/
     &:hover{
         background-color: var(--chatnav-color-delete-light);
     }
@@ -148,46 +138,3 @@
 .sp_deleteadminaccount div{
     font-weight: 300;
 }
-
-/*.sp_notificationholder{
-    position: fixed;
-    bottom: 20px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 3;
-    opacity: 0;
-    transform: 'scale(0.8)';
-    pointer-events: none;
-    transition: 0.05s ease-out;
-}
-
-.sp_notification{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    padding: 7px 20px;
-    border-radius: 20px;
-    gap: 20px;
-    &>div{
-        font-weight: 200;
-    }
-    box-shadow: var(--default-box-shadow);
-}
-
-.sp_notificationsvg{
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 20px;
-    width: 20px;
-    color: var(--chat-color-gray);
-}
-
-.sp_notificationred:hover{
-    color: var(--chatnav-color-delete-light);
-}*/

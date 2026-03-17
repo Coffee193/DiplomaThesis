@@ -11,7 +11,6 @@ export function NavBar({updatenavbarstate}){
     const loginRef = useRef()
     const userinfovals = GetUserInfoValues()
     const [namestate, namesetState] = useState(userinfovals[0] === 'None' ? ('Info') : ('Hello, ' + userinfovals[0]))
-    //const [imgstate, imgsetState] = useState(userinfovals[1] !== '' ? (<div className='nav_user nav_imgexist'><img className='nav_img' src={import.meta.env.VITE_IMG_PATH + userinfovals[1] + '.JPEG'} onError={InitImgNotFound}/></div>) : (<UserIcon width={30} height={30} className='nav_user'/>))
     const [imgState, imgsetState] = useState(<img src={import.meta.env.VITE_IMG_PATH + userinfovals[1] + '.JPEG'} onError={InitImgNotFound}/>)
 
     async function ClickLogout(){

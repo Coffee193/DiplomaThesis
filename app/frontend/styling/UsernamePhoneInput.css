@@ -6,9 +6,6 @@
 .upi_usernamephone{
     position: relative;
     width: 135px;
-    /*border: 2px solid var(--color-text-faded-gray);
-    border-radius: 7px;*/
-    /*padding: 0px 10px;*/
     cursor: pointer;
     display: none;
     align-items: center;
@@ -43,14 +40,9 @@
 .upi_usernamephoneinput{
     flex: 1;
     position: relative;
-    /*height: 49px;
-    border: 2px solid var(--color-text-faded-gray);
-    border-radius: 7px;
-    padding: 0px 10px;*/
 }
 .upi_usernamephoneinput:focus{
     outline: none;
-    /*border: 2px solid var(--color-blue-aapl-stronger);*/
 }
 
 .upi_svgcountry{

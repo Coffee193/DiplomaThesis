@@ -20,7 +20,6 @@ export const SettingsNameInput = forwardRef(({ placeholder, autoFocus, onpressTa
         }
         valuesRef.current[nameIndex] = checkval
         valuesRef.current[warningIndex][warningvalueIndex] = warning
-        //valuesRef.current[typeIndex] = 'name'
     }
 
     return(

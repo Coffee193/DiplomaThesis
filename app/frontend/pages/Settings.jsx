@@ -47,9 +47,6 @@ export function Settings({updatenavbarsetState}){
             return res.json()
         }).then(data => data)
 
-        //response_status = 200
-        //let response = {"name": null, "img": null, "email": "t@t.t", "phone": null, "isadmin": true}
-
         if(response_status === 200){
             SettingsBoxBuild(response)
         }

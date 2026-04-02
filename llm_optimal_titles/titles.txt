@@ -1,0 +1,21 @@
+User: op[ow09809
+Output: Unclear Input Request || Random Characters Input
+------------------------------------
+User: Hi, how are you?
+Output: Greetings and Well-being || Greeting Exchange || Greeting and Assistance Offer
+------------------------------------
+User: vavavavavvavava
+Output: Test Message Inquiry
+------------------------------------
+User: sdfoijsdifjksdoifjksdifjkdijf
+Output: Unclear Input Response || Random string query
+------------------------------------
+User: Who is Mario
+Output: Who is Mario
+------------------------------------
+User: how was your day?
+Output: Small Talk
+------------------------------------
+User: how was your day?
+Output: Small Talk
+------------------------------------

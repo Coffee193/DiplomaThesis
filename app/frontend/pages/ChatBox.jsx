@@ -77,6 +77,9 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
         if(linkparams === undefined){
             CreateChat()
+            console.log('iiiiiiii')
+            isgeneratingsetState(true)
+            console.log('uuuuuuuuuuu')
         }
         else{
             AskQuestion()

@@ -1,0 +1,15 @@
+DEEPSEEK:
+When you click + to upload a file, it instantly send a request to the server to daownload that file. Before sending the file with a send request.
+The query endpoint is called 'upload_file' and the preview has the binary data of the file.
+When asking a question without text (and that question had that file), the request endpoint is 'completion' and it has the following preview:
+chat_session_id: "0bb8721e-de29-441b-b795-3d1851f6c6d6"
+parent_message_id:6
+preempt: false
+prompt: ""ref_file_ids:["file-45bb8d8f-fc44-472a-a4e2-78c3f61b406b"]
+  0:"file-45bb8d8f-fc44-472a-a4e2-78c3f61b406b"
+search_enabled:false
+thinking_enabled:false
+
+ChatGPT:
+When Uploading a file (again not sending it) it does the same, it send a request to an endpoint 'files'.
+Basically ALL in ALL ChatGPT does the same thing

@@ -72,6 +72,9 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
             }
             
             let isselected = arr[i]['_id'] === linkparams.id
+            if(arr[i]['name'].length > 45){
+                arr[i]['name'] = arr[i]['name'].slice(0, 42) + '...'
+            }
 
             convfinalstate.push(
                 <div className='cn_info_chat_holder'>

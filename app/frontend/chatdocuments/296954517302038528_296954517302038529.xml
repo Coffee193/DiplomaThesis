@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><PLANNING_OUTPUT id="planning output">
+    <ASSIGNMENTS>
+        <ASSIGNMENT>
+            <TASK id="__201"/>
+            <RESOURCE id="__1"/>
+            <TIME_OF_DISPATCH>
+                <DAY>1</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>8</HOUR>
+                <MINUTES>0</MINUTES>
+                <SECONDS>0</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>16333030</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__191"/>
+            <RESOURCE id="__1"/>
+            <TIME_OF_DISPATCH>
+                <DAY>1</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>12</HOUR>
+                <MINUTES>32</MINUTES>
+                <SECONDS>13</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>16333030</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__200"/>
+            <RESOURCE id="__2"/>
+            <TIME_OF_DISPATCH>
+                <DAY>1</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>12</HOUR>
+                <MINUTES>32</MINUTES>
+                <SECONDS>13</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>16333030</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__187"/>
+            <RESOURCE id="__1"/>
+            <TIME_OF_DISPATCH>
+                <DAY>1</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>17</HOUR>
+                <MINUTES>4</MINUTES>
+                <SECONDS>26</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>20416288</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__190"/>
+            <RESOURCE id="__2"/>
+            <TIME_OF_DISPATCH>
+                <DAY>1</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>17</HOUR>
+                <MINUTES>4</MINUTES>
+                <SECONDS>26</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>16333030</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__203"/>
+            <RESOURCE id="__1"/>
+            <TIME_OF_DISPATCH>
+                <DAY>1</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>22</HOUR>
+                <MINUTES>44</MINUTES>
+                <SECONDS>42</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>4083257</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__186"/>
+            <RESOURCE id="__2"/>
+            <TIME_OF_DISPATCH>
+                <DAY>1</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>22</HOUR>
+                <MINUTES>44</MINUTES>
+                <SECONDS>42</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>49276288</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__199"/>
+            <RESOURCE id="__1"/>
+            <TIME_OF_DISPATCH>
+                <DAY>1</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>23</HOUR>
+                <MINUTES>52</MINUTES>
+                <SECONDS>45</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>73775833</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__202"/>
+            <RESOURCE id="__2"/>
+            <TIME_OF_DISPATCH>
+                <DAY>2</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>12</HOUR>
+                <MINUTES>25</MINUTES>
+                <SECONDS>58</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>4083257</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__193"/>
+            <RESOURCE id="__1"/>
+            <TIME_OF_DISPATCH>
+                <DAY>2</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>20</HOUR>
+                <MINUTES>22</MINUTES>
+                <SECONDS>21</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>53359545</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__198"/>
+            <RESOURCE id="__2"/>
+            <TIME_OF_DISPATCH>
+                <DAY>2</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>20</HOUR>
+                <MINUTES>22</MINUTES>
+                <SECONDS>21</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>73775833</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__189"/>
+            <RESOURCE id="__1"/>
+            <TIME_OF_DISPATCH>
+                <DAY>3</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>11</HOUR>
+                <MINUTES>11</MINUTES>
+                <SECONDS>40</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>28582803</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__192"/>
+            <RESOURCE id="__2"/>
+            <TIME_OF_DISPATCH>
+                <DAY>3</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>16</HOUR>
+                <MINUTES>51</MINUTES>
+                <SECONDS>57</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>24499545</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__194"/>
+            <RESOURCE id="__1"/>
+            <TIME_OF_DISPATCH>
+                <DAY>3</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>19</HOUR>
+                <MINUTES>8</MINUTES>
+                <SECONDS>3</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>69692576</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__188"/>
+            <RESOURCE id="__2"/>
+            <TIME_OF_DISPATCH>
+                <DAY>3</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>23</HOUR>
+                <MINUTES>40</MINUTES>
+                <SECONDS>16</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>57442803</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__197"/>
+            <RESOURCE id="__1"/>
+            <TIME_OF_DISPATCH>
+                <DAY>4</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>14</HOUR>
+                <MINUTES>29</MINUTES>
+                <SECONDS>36</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>69692576</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__195"/>
+            <RESOURCE id="__2"/>
+            <TIME_OF_DISPATCH>
+                <DAY>4</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>15</HOUR>
+                <MINUTES>37</MINUTES>
+                <SECONDS>39</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>69692576</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+        <ASSIGNMENT>
+            <TASK id="__196"/>
+            <RESOURCE id="__2"/>
+            <TIME_OF_DISPATCH>
+                <DAY>5</DAY>
+                <MONTH>8</MONTH>
+                <YEAR>2025</YEAR>
+                <HOUR>10</HOUR>
+                <MINUTES>59</MINUTES>
+                <SECONDS>12</SECONDS>
+            </TIME_OF_DISPATCH>
+            <DURATION_IN_MILLISECONDS>40832576</DURATION_IN_MILLISECONDS>
+        </ASSIGNMENT>
+    </ASSIGNMENTS>
+</PLANNING_OUTPUT>

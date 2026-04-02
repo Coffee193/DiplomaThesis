@@ -1,0 +1,13 @@
+Generate me a prompt that I will pass to an LLM. Based on the question the user asks, I want the LLM to return a single word based on what the user is asking about. The LLM should return that word only and nothing else 
+-> "Workcenter"
+ If the user asks a question regarding the workcenter. -> "Resource" If the user asks a question regarding the resources 
+-> "Job"
+ If the user asks a question regarding the jobs. -> "Tasks" If the user asks a question regarding the tasks 
+-> "TaskSuitableResurce"
+ If the user asks a question regarding both tasks and resources OR the time a task might take OR where the task can be executed 
+-> "TaskPrecedenceConstraint"
+ If the user asks a question regarding the order in which tasks must be executed
+ -> "None"
+ If the user question is nothing from the above
+
+NOTE: There might be nesting between tasks and jobs. The question might include information between both tasks and jobs. In this case return "Job"

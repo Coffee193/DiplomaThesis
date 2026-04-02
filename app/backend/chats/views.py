@@ -23,6 +23,7 @@ import os
 from ollama import chat
 from backend.redis_connection import redis_client
 #from backend.process_pool import process_pool
+from transformers import AutoTokenizer
 
 import multiprocessing
 import concurrent
@@ -373,7 +374,11 @@ def CreateChatDocument(request):
     curr_time = datetime.datetime.now(datetime.timezone.utc)
     WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , str(chat_id))
     p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info])
-    t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"]])
+    if(data["q"] != ""):
+        t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
+    else:
+        t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
+
     p.start()
     chats.insert_one({"_id": chat_id,
                       "name": "New Conversation",
@@ -574,7 +579,7 @@ def GetLLMAnswerStream_Old_ReturnedAnswerAsString(chat_id, block_time = 20000):
     else:
         return 'Something went wrong with the retrieval'
 
-def GetLLMAnswerStream(chat_id, block_time = 20000, with_title = False):
+def GetLLMAnswerStream(chat_id, block_time = 60000, with_title = False):
     print(with_title)
     print('>>START<<')
     if(redis_client.exists("cg_" + chat_id) == True):
@@ -587,6 +592,7 @@ def GetLLMAnswerStream(chat_id, block_time = 20000, with_title = False):
         # time.sleep(0.5)
         while True:
             x = redis_client.xread(streams = {stream_id: series_id}, count = None, block = block_time)
+            print(x)
             print(x[0][1])
             #print(''.join(y[1]['t'] for y in x[0][1] if 't' in y[1]))
             print(any('t' in y[1] for y in x[0][1]))
@@ -960,48 +966,109 @@ def AnswearQuestionWithDocument(request):
     else:
         return HttpResponse(json.dumps('Conversation does not belong to User'), status = 400)
     
-def CreateChatTitle(chat_id, user_question):
-    ai_task_old = f"""Based on the following provided Question create a Very Short title that will be used as the name of the conversation with a Chat Model.The Output should contain the title only and nothing else
+def CreateChatTitle(chat_id, user_question = "", document_content = None, document_name = None, max_doc_token_len = 3000):
+    llm_classify = 2
+    if(document_content != None and user_question == ""):
+        llm_classify = 1
+    elif(document_content != None):
 
-Question: {user_question}
+        prompt_classify = f"""You are an AI assistant that generates titles for conversations involving uploaded files.
 
-###
-Use the following examples as reference:
+Your first task is to determine the type of user request.
 
-Question: Write a 200 word essay about Steroid Abuse
-Output: Steroid Abuse Essay
-__________________________
-Question: What is the Root Locus?
-Output: Root Locus Basics
-___________________________
-Question: what is the pythagorean theorem?
-Output: Pythagorean Theorem Explained
-___________________________
-Question: Cost of having a car? per month
-Output: Monthly Car Cost Breakdown
-___________________________
-Question: Who is Pikachu?
-Output: Pikachu the Pokemon mascot
-___________________________
-Question: Who is Dwayne Johnson?
-Output: Dwayne Johnson Biography
-___________________________
-Question: How old do cats grow in general?
-Output: Cats Lifespan
-___________________________
-Question: yoyoyoyo
-Output: User Greetings
-___________________________
-Question: 
-Output: User Greetings
+CLASSIFY THE REQUEST INTO ONE OF TWO CATEGORIES:
+
+1. GENERAL FILE REQUEST
+Use this when:
+- The user uploads a file and asks nothing
+- The user question makes no sense, is a random string
+- The user asks general questions such as:
+- "What is this file about?"
+- "What are the contents of this file?"
+- "Explain this file"
+- "Summarize this document"
+- "Describe this file"
+
+
+2. SPECIFIC FILE INFORMATION REQUEST
+
+Use this when the user asks about specific information inside the file, such as:
+- requesting data
+- asking questions about particular fields
+- requesting extraction or explanation of specific content
+- referring to specific sections, values, or records
+- The user input contains gibberish, random characters, meaningless text, or input that cannot be interpreted (e.g., "asdjkl123!@#", "??!!aa", random symbols, or nonsensical strings). These should default to this category.
+
+--------
+Return only the number 1 or 2 and nothing else
+
+User Question:
+{user_question}
 """
-    
-    ai_task = f"""Based on the following provided Question create a Very Short title that will be used as the name of the conversation with a Chat Model.The Output should contain the title only and nothing else
+        llm_chat = [{'role': 'user', 'content': prompt_classify}]
+        try:
+            llm_classify = int(chat(llm_model, messages = llm_chat).message.content)
+        except:
+            return
+        
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
+    tokens = tokenizer.tokenize(document_content)
+    if(len(tokens) > max_doc_token_len):
+        document_content = tokenizer.convert_tokens_to_string(tokens[0 : max_doc_token_len])
+    print('|||||||||||||||||||')
+    print(document_content)
 
-Question: {user_question}
+    if(llm_classify == 1):
+        title_prompt = f"""You are an AI assistant that analyzes uploaded files.
+Your task is to generate ONLY a short descriptive title for the file.
+
+Rules:
+1. Output ONLY the title.
+2. Do NOT include explanations, sentences, or bullet points.
+3. Do NOT include extra text before or after the title.
+4. Use simple, clear wording.
+5. Avoid complex or technical vocabulary.
+
+Examples of valid outputs:
+PDF File Analysis
+XML File Breakdown
+JSON File Overview
+CSV Data Summary
+Schedule Planning File Contents
+Text Document Overview
+
+The response must contain exactly one short title.
+{f"\nUser Question:\n{user_question}" if user_question != "" else ""}
+--- File: {document_name} ---
+{document_content}
+--- End of {document_name} ---"""
+    else:
+        title_prompt = f"""You are an AI assistant that creates concise, descriptive titles for chat conversations.
+
+Given the conversation below, generate a short title (max 5-7 words) that clearly captures the main topic or purpose of the discussion.
+
+Guidelines:
+- Be specific and informative, not vague
+- Avoid unnecessary filler words
+- Do not include punctuation like quotes or periods at the end
+- Use title case (capitalize major words)
+- Focus on the core intent of the conversation
+- If the input doesn't make sense, simply output one of the following: Unclear Input | Unclear Request | Incomplete Input
+- If the input is friendly and general, don't make the title too complicated
+- focus solely on the core intent of the conversation and avoid adding unnecessary, extra words. Do not be verbose
+- Avoid adding the words 'Needed' 'Description', especially at the end of the title
+- If asked about certain information, avoid assuming where that information comes from (Database, File, USB device) unless mentioned
+
+User Question:
+{user_question}
 """
+        if document_content != None:
+            title_prompt += f"""
+--- File: {document_name} ---
+{document_content}
+--- End of {document_name} ---"""
 
-    llm_chat = [{'role': 'user', 'content': ai_task}]
+    llm_chat = [{'role': 'user', 'content': title_prompt}]
     try:
         llm_title = chat(llm_model, messages = llm_chat)
     except:

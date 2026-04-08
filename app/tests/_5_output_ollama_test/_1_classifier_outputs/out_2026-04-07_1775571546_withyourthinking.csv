@@ -1,0 +1,11 @@
+User Question,LLM Output,Compute Time,Answer Correct Form,Original Answer,Valid Jason
+*****,"{  ""words"": [],  ""think"": ""I scanned the input text for patterns matching 'job', 'task', and 'resource'. No exact matches were found.""}",6.4599268436431885,True,,True
+*****,"{}""words"": [],""think"": ""The input does not contain any of the target words 'job', 'task', or 'resource'.""",5.705444574356079,True,,False
+*****,"{  ""words"": [],  ""think"": ""Scanned input for target words 'job', 'task', and 'resource'. No matches found.""}",5.540755033493042,True,,True
+*****,"{  ""words"": [],  ""think"": ""The input string contains no exact matches for any of the target words 'job', 'task', or 'resource'.""}",6.432037591934204,True,,True
+*****,"{  ""words"": [    ""resource"",    ""job"",    ""task""  ],  ""think"": ""The words were found based on exact string matches, ignoring case and punctuation. 'Resource' was matched as it appears exactly in the input. 'Job' and 'Task' were also found due to their presence in similar forms, with minor variations such as capitalization and spelling mistakes.""}",14.322516918182373,True,,True
+*****,"{  ""words"": [    ""resource"",    ""task""  ],  ""think"": ""The words 'resource' and 'task' were identified based on their exact string matches in the input. Both words appear in their original form without any modifications.""}",9.573768138885498,True,,True
+*****,"{  ""words"": [],  ""think"": ""Examined the input for patterns matching 'job', 'task', and 'resource'. Found no exact matches.""}",6.346796035766602,True,,True
+*****,"{  ""words"": [],  ""think"": ""The input was examined for exact string patterns matching 'job', 'task', or 'resource'. No matches were found.""}",5.089767932891846,True,,True
+*****,"{  ""words"": [],  ""think"": ""I searched for the target words 'job', 'task', and 'resource' in the input string. I did not find any exact matches.""}",5.214553594589233,True,,True
+*****,"{  ""words"": [],  ""think"": ""The input contains no recognizable patterns for 'job', 'task', or 'resource'. The text appears to be empty or unrelated to the target words.""}",5.269652605056763,True,,True

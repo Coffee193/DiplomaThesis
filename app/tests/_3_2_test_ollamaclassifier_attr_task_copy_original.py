@@ -133,8 +133,9 @@ Rules:
 1. If the user is searching for a specific task using an attribute and value (for example: id, name), extract:
 - the key (attribute name)
 - the value of that attribute
+- the field the user wants returned
 
-2. If the user does not specify a particular attribute of a task (for example: "Return all tasks"), then set:
+2. If the user does not specify a particular task (for example: "Return all tasks"), then set:
 {"attribute": false}
 
 3. The key must be one of the following:
@@ -142,21 +143,24 @@ Rules:
 - name
 - id
 
-4. Always return ONLY valid JSON with no explanation.
+4. The return field should indicate what information the user wants:
+   "*" → return all information about the task
+   "name", "id" etc. → return only that field
 
-5. If the user does NOT mention any of these keywords (id, name) do NOT make assumptions. If the key is NOT referenced do NOT assume anything. Do NOT confuse index with id, they are completely different things
+5. If the user identifies a task but does not specify which field to return, assume they want all information and set "return": "*".
 
-6. Find the key and values of attributes of the jobs he's searching for, NOT the key/values he wants returned
+6. Always return ONLY valid JSON with no explanation.
+
+7. If the user does NOT mention any of these keywords (id, name) do NOT make assumptions. If the key is NOT referenced do NOT assume anything.
+
 
 Output Format
 
-- If "attribute" is true, return:
-{"attribute": <boolean>,"key": <string>,"value": <string or integer>, "think": <Your thinking process>}
+{"attribute": <boolean>,"key": <string>,"value": <string or integer>,"return": <string>, "think": <Your thinking process>}
 
--If "attribute" is false, return:
+If "attribute" is false, return:
+
 {"attribute": false, "think": <Your thinking process>}
-
-NOTE: As you can see, if "attribute" is false ommit: "key" and "value"
 
 Examples
 
@@ -165,21 +169,21 @@ User question:
 Return the task with id 13
 
 Output:
-{"attribute": true,"key": "id","value": 13}
+{"attribute": true,"key": "id","value": 13,"return": "*"}
 -----
 
 User question:
 What is the name of the task with id 12?
 
 Output:
-{"attribute": true,"key": "id","value": 12}
+{"attribute": true,"key": "id","value": 12,"return": "name"}
 -----
 
 User question:
 What are the ids of MELTING?
 
 Output:
-{"attribute": true,"key": "name","value": "MELTING"}
+{"attribute": true,"key": "name","value": "MELTING","return": "id"}
 -----
 
 User question:
@@ -189,19 +193,12 @@ Output:
 {"attribute": false}
 -----
 
-User question:
-Return the name of every task
-
-Output:
-{"attribute": false}
------
-
 Remember:
 
 Only detect whether the question refers to a specific task by attribute.
-Extract the key, value field.
+Extract the key, value, and requested return field.
 Output strict JSON only.
-Although not mentioned in the examples, ALWAYS place your thinking process in the think key of the JSON string"""
+Although not mentioned in the examples, place your thinking process in the think key of the JSON string"""
    user_prompt+=f"""
 
 ____________________

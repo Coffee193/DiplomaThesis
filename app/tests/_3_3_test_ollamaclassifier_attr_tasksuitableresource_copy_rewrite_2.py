@@ -3,7 +3,7 @@ import ollama
 import json
 from transformers import AutoTokenizer
 
-# tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
 
 # user_question = 'Which tasks can be done in resource 901?' # {"attribute": true, "know": {"info": "resource", "key": "id", "value": 901}, "search": {"info": "task"}, "think": "identified a specific attribute (id) and extracted the reference point of the query as a resource with id 901"}
 # user_question = 'Where can task 57 be executed' #{"attribute": true, "know": {"info": "task", "key": "id", "value": 57}, "search": {"info": "resource"}, "think": "Looking for a resource where task 57 can be executed"}
@@ -19,8 +19,9 @@ from transformers import AutoTokenizer
 # user_question = 'Return the ids of all resources and tasks' # {"attribute": false, "think": "The user is asking for a general query about retrieving ids without specifying any attribute"}
 # user_question = 'Return all resources where task 77 can be executed' # {"attribute": true, "know": {"info": "task", "key": "id", "value": 77}, "search": {"info": "resource"}, "think": "The user is asking for a specific task and wants to find the resources where this task can be executed."}
 # user_question = 'Return the id of every resource where task 77 can be executed' # {"attribute": true, "know": {"info": "task", "key": "id", "value": 77}, "search": {"info": "resource"}, "think": "Identified a specific task ID and need to find resources that support it"}
+# user_question = 'What is the operation time for task 73' # {"attribute": true, "know": {"info": "task", "key": "id", "value": 73}, "search": {"info": "time"}, "think": "Extracted specific task id (73) and determined user wants to find operation time"}
+# user_question = 'What tasks need to operate for more than 30minutes?' # {"attribute": true, "know": {"info": "time", "key": "value", "value": 30}, "search": {"info": "task"}, "think": ["Identified specific attribute: time", "Extracted known attribute value: 30 minutes", "Determined user wants to find tasks"] }
 
-'''
 user_prompt = """You are an information extraction assistant.
 
 The user will provide a question about tasks and resources or task completion time.
@@ -99,7 +100,6 @@ print(len(tokenizer.tokenize(json.dumps(user_prompt))))
 aa = llm_answer.message.content
 print(aa)
 print(aa.replace('\n', ''))
-'''
 
 def getPrompt(user_question):
    user_prompt = """You are an information extraction assistant.

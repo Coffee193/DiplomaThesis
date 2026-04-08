@@ -1,0 +1,26 @@
+Question: Return the task of job 509
+Got misclassified - 2/5 - times as 4 -> correct 3
+
+Question: Return the tasks of all jobs with name ROLLING
+Got misclassified - 1/5 - times as 4 -> correct 3
+
+Question: Return 7 task
+Got misclassified - 2/5 - times as 7, 6 -> correct 4
+
+Question: How long does task 52 take?
+Got misclassified - 1/5 - times as 4 -> correct 5
+
+Question: Return all resources and tasks
+Got misclassified - 1/5 - times as 2 -> correct 5
+
+Question: Return all resources and their tasks
+Got misclassified - 4/5 - times as 2 -> correct 5
+
+Question: Return the ids of all resources and tasks
+Got misclassified - 4/5 - times as 2 -> correct 5
+
+Question: What is the operation time for task 73
+Got misclassified - 5/5 - times as 4 -> correct: 5
+
+Question: What tasks need to operate for more than 30minutes?
+Got misclassified - 4/5 - times as 4 -> correct: 5

@@ -1,0 +1,11 @@
+User Question,LLM Output,Compute Time,Answer Correct Form,Original Answer,Valid Jason
+*****,"{  ""words"": [],  ""think"": ""No input provided.""}",3.5265860557556152,True,,True
+*****,"{  ""words"": [],  ""think"": ""No input provided. Please enter your question.""}",3.6402595043182373,True,,True
+*****,"{  ""words"": [],  ""think"": ""No input provided, unable to detect any patterns.""}",4.859665155410767,True,,True
+*****,"{  ""words"": [""resource"", ""task""],  ""think"": ""Detected exact matches for 'resource' and 'task'.""}",5.097269058227539,True,,True
+*****,"{  ""words"": [],  ""think"": ""No input provided. Please enter your question.""}",2.973036766052246,True,,True
+*****,"{  ""words"": [],  ""think"": ""No input provided. Please enter your question.""}",2.7853002548217773,True,,True
+*****,"{  ""words"": [],  ""think"": ""No input provided. Please enter a question to analyze.""}",3.19240403175354,True,,True
+*****,"{  ""words"": [],  ""think"": ""No input provided. Please enter your question to analyze.""}",3.090641736984253,True,,True
+*****,"{  ""words"": [],  ""think"": ""No input provided, cannot detect any patterns.""}",2.8710906505584717,True,,True
+*****,"{  ""words"": [],  ""think"": ""No input provided. Please provide a question for analysis.""}",3.2763779163360596,True,,True

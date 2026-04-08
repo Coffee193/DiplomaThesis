@@ -111,7 +111,7 @@ Instruction:
 
 Important rules:
 
-- Always return a valid JSON object only and nothing else. DO not include explanations
+- Always return a valid JSON object only
 - Do not include any explanations or extra text
 - Use exactly the keys and structure specified
 - Be consistent with lowercase values: "id", "attribute"
@@ -122,28 +122,24 @@ Important rules:
     - "after", "following", "next" -> "after"
     - "independent", "standalone", "no dependencies" -> "both"
 - Only extract numeric IDs explicitly mentioned.
-- Although not mentioned in the examples, place your thinking process in the think key of the JSON string
 
 Examples:
 
 -----
 User question: "Is there a task to be executed before task 483?"
-Output: {"attribute": true, "id": 483, "order": "before", "think": <Your thinking process>}
+Output: {"attribute": true, "id": 483, "order": "before"}
 -----
 User question: "What task can I execute after completing task 13?"
-Output: {"attribute": true, "id": 13, "order": "after", "think": <Your thinking process>}
+Output: {"attribute": true, "id": 13, "order": "after"}
 -----
 User question: "Is task 11 independent of other tasks?"
-Output: {"attribute": true, "id": 11, "order": "both", "think": <Your thinking process>}
+Output: {"attribute": true, "id": 11, "order": "both"}
 -----
 User question: "Does task 53 require another task to be executed beforehand?"
-Output: {"attribute": true, "id": 53, "order": "before", "think": <Your thinking process>}
+Output: {"attribute": true, "id": 53, "order": "before"}
 -----
 User question: "List the order in which tasks need to be executed"
-Output: {"attribute": false, "think": <Your thinking process>}
------
-User question: "Return all task dependencies"
-Output: {"attribute": false, "think": <Your thinking process>}"""
+Output: {"attribute": false}"""
     user_prompt+=f"""
 
 ____________________

@@ -21,7 +21,8 @@ tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
 # user_question = "Return 4 jobs"
 # user_question = "Return me the FROM BILLET job" #<---understand theres name here
 
-user_prompt = """You are an information extraction assistant.
+def getPrompt(user_question):
+   user_prompt = """You are an information extraction assistant.
 
 The user will provide a question about the jobs.
 
@@ -41,9 +42,8 @@ Rules:
 1. If the user is searching for a specific job using an attribute and value (for example: id, name, workcenter, etc.), extract:
 - the key (attribute name)
 - the value of that attribute
-- the field the user wants returned
 
-2. If the user does not specify a particular job (for example: "Return all jobs"), then set:
+2. If the user does not specify a particular attribute of a job (for example: "Return all jobs"), then set:
 {"attribute": false}
 
 3. The key must be one of the following:
@@ -55,24 +55,22 @@ Rules:
 - workcenter
 - id
 
-4. The return field should indicate what information the user wants:
-   "*" → return all information about the job
-   "name", "task", "duedate", etc. → return only that field
+4. Always return ONLY valid JSON with no explanation.
 
-5. If the user identifies a job but does not specify which field to return, assume they want all information and set "return": "*".
+5. If the user does NOT mention any of these keywords (id, name, etc..) do NOT make assumptions. If the key is NOT referenced do NOT assume anything. Do NOT confuse index with id, they are completely different things
 
-6. Always return ONLY valid JSON with no explanation.
-
-7. If the user does NOT mention any of these keywords (id, name, etc..) do NOT make assumptions. If the key is NOT referenced do NOT assume anything.
+6. Find the key and values of attributes of the jobs he's searching for, NOT the key/values he wants returned
 
 
-Output Format
+Output Format:
 
-{"attribute": <boolean>,"key": <string>,"value": <string or integer>,"return": <string>, "think": <Your thinking process>}
+- If "attribute" is true, return:
+{"attribute": true,"key": <string>,"value": <string or integer>, "think": <Your thinking process>}
 
-If "attribute" is false, return:
-
+- If "attribute" is false, return:
 {"attribute": false, "think": <Your thinking process>}
+
+NOTE: As you can see, if "attribute" is false ommit: "key" and "value"
 
 Examples
 
@@ -81,21 +79,21 @@ User question:
 Return the job with id 63
 
 Output:
-{"attribute": true,"key": "id","value": 63,"return": "*"}
+{"attribute": true,"key": "id","value": 63}
 -----
 
 User question:
 What tasks can be executed in job 33?
 
 Output:
-{"attribute": true,"key": "id","value": 33,"return": "task"}
+{"attribute": true,"key": "id","value": 33}
 -----
 
 User question:
 What is the name of the job with id 12?
 
 Output:
-{"attribute": true,"key": "id","value": 12,"return": "name"}
+{"attribute": true,"key": "id","value": 12}
 -----
 
 User question:
@@ -105,25 +103,30 @@ Output:
 {"attribute": false}
 -----
 
+User question:
+Return the ids of every job
+
+Output:
+{"attribute": false}
+-----
+
+User question:
+Return all FROM BILLET jobs
+
+Output:
+{"attribute": true, "key": "name", "value": "FROM BILLET"}
+-----
+
 Remember:
 
 Only detect whether the question refers to a specific job by attribute.
-Extract the key, value, and requested return field.
+Extract the key, value field if possible (if they are mentioned).
 Output strict JSON only.
 Although not mentioned in the examples, place your thinking process in the think key of the JSON string"""
-user_prompt+=f"""
+   user_prompt+=f"""
 
 ____________________
 User Question:
 {user_question}"""
-
-print(user_prompt)
-print('==============')
-
-llm_answer = chat('llama3.1', messages = [{'role': 'user', 'content': user_prompt}])
-
-print('**********************')
-print(len(tokenizer.tokenize(json.dumps(user_prompt))))
-aa = llm_answer.message.content
-print(aa)
-print(aa.replace('\n', ''))
+   
+   return user_prompt

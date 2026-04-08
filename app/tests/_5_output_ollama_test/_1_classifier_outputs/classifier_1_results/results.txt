@@ -1,0 +1,92 @@
+Return all resource ids
+misclassified 1/5 times with words: "resource", "ids"
+---------------------------
+How many resources are there
+misclassified 2/5 times with words: "resource", "resources"
+---------------------------
+Return 1 resources
+misclassified 1/5 times with words: "resource", "resources"
+---------------------------
+Give me the jobs
+misclassified 1/5 times with words: "job", "jobs"
+---------------------------
+Return 4 jobs
+misclassified 1/5 times with words: "job", "jobs"
+---------------------------
+Return me the FROM BILLET job
+misclassified 1/5 times with words: "job", "resource"
+---------------------------
+Return the names of every job
+misclassified 1/5 times with words: "job", "jobs"
+---------------------------
+Return the id of all jobs with name ROLLING
+misclassified 1/5 times with words: "job", "jobs"
+---------------------------
+Return the tasks of all jobs with name ROLLING,
+misclassified 3/5 times with words: "job", "tasks"
+---------------------------
+Return all FROM BILLET jobs
+misclassified 1/5 times with words: "job", "jobs"
+---------------------------
+Return all jobs with name FROM BILLET,
+misclassified 2/5 times with words: "job", "jobs"
+---------------------------
+Return all ROLLING jobs
+misclassified 1/5 times with words: "job", "jobs"
+---------------------------
+Return first task with name Rolling,
+misclassified 1/5 times with words: "task", "name"
+---------------------------
+Return all ROLLING jobs
+misclassified 1/5 times with words: "job", "jobs"
+---------------------------
+Return all ROLLING tasks
+misclassified 2/5 times with words: "task", "job" and one time as "task", "tasks"
+---------------------------
+return 7 task,
+misclassified 3/5 times with words: "task", "job"
+---------------------------
+return 7 tasks,
+misclassified 3/5 times with words: "task", "job" and one time as "tasks"
+---------------------------
+Return the name of every task
+misclassified 1/5 times with words: "tasks"
+---------------------------
+Which tasks can be done in resource 901?
+misclassified 1/5 times with words: "tasks", "resource"
+---------------------------
+Return all resources and their tasks
+misclassified 3/5 times with words: "tasks", "resource" and one time as "tasks", "resource", "tasks", "resources"
+---------------------------
+Return the ids of all resources and tasks,
+misclassified 2/5 times with words: "tasks", "resource"
+---------------------------
+What tasks need to operate for more than 30minutes?
+misclassified 1/5 times with words: "tasks"
+---------------------------
+Is there a task to be executed before task with id 483?
+misclassified 5/5 times with words: "task", "task"
+---------------------------
+Is there a task to be executed before task 483?
+misclassified 5/5 times with words: "task", "task"
+---------------------------
+Which task should i execute before task 1?
+misclassified 2/5 times with words: "task", "task"
+---------------------------
+What task can i execute after completing task 13?
+misclassified 5/5 times with words: "task", "task"
+---------------------------
+Which task can i do after task 55?
+misclassified 5/5 times with words: "task", "task"
+---------------------------
+Does task 53 require another task to be executed beforehand?
+misclassified 3/5 times with words: "task", "task"
+---------------------------
+Return all task dependencies
+misclassified 2/5 times with words: "task", "dependencies"
+---------------------------
+Return the ids of all tasks that have to be executed before task 79
+misclassified 3/5 times with words: "task", "task" and one time as "task", "tasks"
+--------------------------
+Return the names of all tasks that have to be executed before task 85,
+misclassified 2/5 times with words: "tasks", "task" and one time as "tasks"

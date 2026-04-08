@@ -1,0 +1,10 @@
+User Question,LLM Output,Compute Time,Answer Correct Form,Original Answer,Valid Jason
+*****,"{  ""words"": [""resource"", ""job""],  ""think"": ""Target words were identified based on exact pattern matches. 'resource' and 'job' appear as whole tokens in the input.""}",14.483859300613403,True,,True
+*****,"{  ""words"": [    ""resource"",    ""job"",    ""task""  ],  ""think"": ""I matched 'resource', 'job' and 'task' because they appear as exact patterns in the input, regardless of capitalization or extra characters.""}",8.979422092437744,True,,True
+*****,"{  ""words"": [],  ""think"": ""I examined the input for exact matches of 'job', 'task', and 'resource' (case-insensitive). No patterns were found in the user-provided question.""}",7.386121988296509,True,,True
+Return all resources,"{  ""words"": [""resource""],  ""think"": ""The word 'resources' is present, so it was treated as a match for the target pattern 'resource'. No other matches were found.""}",5.4019551277160645,True,,True
+Return all resources,"{  ""words"": [""resource""],  ""think"": ""The word 'resources' was found to match the pattern for 'resource' due to its identical spelling, ignoring case.""}",4.62898325920105,True,,True
+Return all resources,"{  ""words"": [""resource""],  ""think"": ""I matched 'resources' because it contains the exact string pattern 'resource', ignoring any other characters.""}",4.15460205078125,True,,True
+Return all resource ids,"{  ""words"": [    ""resource""  ],  ""think"": ""I looked for the exact string patterns 'job', 'task', or 'resource' within the input. I found a clear match for 'resource'.""}",6.093296766281128,True,,True
+Return all resource ids,"{  ""words"": [""resource""],  ""think"": ""I identified 'resource' as a target word due to its exact match with the pattern. I did not consider other words, such as 'ids', because they do not match any of the target patterns.""}",6.585685729980469,True,,True
+Return all resource ids,"{  ""words"": [""resource""],  ""think"": ""I matched 'resource' because it appears as a clear, unaltered pattern in the input text.""}",4.678664684295654,True,,True

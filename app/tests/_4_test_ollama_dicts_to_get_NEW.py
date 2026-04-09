@@ -124,19 +124,6 @@ user_question = "List all jobs"
 #user_question = 'Return the names of all tasks that have to be executed before task 581' # [...] (len: 1), {'pick': 6}, {'attribute': True, 'id': 581, 'order': 'before', 'think': "Identified specific task id in question. Determined intent based on wording 'before'. Assuming user wants tasks preceding task 581"}
 
 
-
-### Resources ###
-# WORK ON CLASSIFIER !!!!!!
-#user_question = 'Return resouce 2' # <--- FIX CLASSIFIER
-## Resource ##
-# user_question = 'Return rolling mill resource'
-# user_question = 'Return resource 1'
-# user_question = 'Return resource with id 2'
-
-# user_question = 'Return me the operating time of task 584'
-
-### NOTE: A LOT OF TIMES THE CLASSIFIER THROWS ERRORS WITH TASKS -> pick 4
-
 def IntToStrWithSlabInfornt(val):
     if(type(val) != str):
         val = '_' + str(val)
@@ -308,7 +295,7 @@ else:
                 query = [q for q in query if q[retrieve_info['order']]['refid'] == IntToStrWithSlabInfornt(retrieve_info['id'])]
             else:
                 query = [q for q in query if q['preconditiontaskreference']['refid'] == IntToStrWithSlabInfornt(retrieve_info['id']) or q['postconditiontaskreference']['refid'] == IntToStrWithSlabInfornt(retrieve_info['id'])]
-    #print(prompt)
+
 ### End ###
 print('----- Query Retrieved -----')
 print(query)

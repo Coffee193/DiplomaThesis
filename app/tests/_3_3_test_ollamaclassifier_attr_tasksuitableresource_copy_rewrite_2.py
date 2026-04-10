@@ -21,6 +21,8 @@ tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
 # user_question = 'Return the id of every resource where task 77 can be executed' # {"attribute": true, "know": {"info": "task", "key": "id", "value": 77}, "search": {"info": "resource"}, "think": "Identified a specific task ID and need to find resources that support it"}
 # user_question = 'What is the operation time for task 73' # {"attribute": true, "know": {"info": "task", "key": "id", "value": 73}, "search": {"info": "time"}, "think": "Extracted specific task id (73) and determined user wants to find operation time"}
 # user_question = 'What tasks need to operate for more than 30minutes?' # {"attribute": true, "know": {"info": "time", "key": "value", "value": 30}, "search": {"info": "task"}, "think": ["Identified specific attribute: time", "Extracted known attribute value: 30 minutes", "Determined user wants to find tasks"] }
+user_question = 'Return the names of all resources and their tasks' # {"attribute": false}
+user_question = 'How long does each task take?' # {"attribute": false, "think": "The user is asking for information about task completion time in general, without specifying any specific attribute or reference point."}
 
 user_prompt = """You are an information extraction assistant.
 

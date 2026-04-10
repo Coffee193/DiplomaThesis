@@ -32,7 +32,7 @@ user_question = 'Is task 301 independent of other tasks?' # {"pick": 2, "think":
 user_question = "Return all task dependencies" # {"pick": 2,"think": "The question concerns the dependencies between tasks, which falls under rule 2."}
 user_question = 'Return the names of all tasks that have to be executed before task 85' # {"pick": 2, "think": "The question concerns dependencies between tasks and specifically which task must happen before another task."}
 
-prompt = """ou are a classifier. Your task is to analyze a user's question and pick EXACTLY ONE number from the predefined list below.
+prompt = """You are a classifier. Your task is to analyze a user's question and pick EXACTLY ONE number from the predefined list below.
 
 You must ALWAYS pick a number from the list below
 
@@ -43,7 +43,7 @@ Possible numbers:
 
 Classification rules:
 
-1. 5. Pick "1" if the question concerns one or more of the following:
+1. Pick "1" if the question concerns one or more of the following:
    - the location in which (where) a task can be executed
    - how long a task takes, the duration, operating time of a task
    - execution time or duration of a task

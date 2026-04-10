@@ -1,5 +1,5 @@
 def getPrompt(user_question):
-   prompt = """ou are a classifier. Your task is to analyze a user's question and pick EXACTLY ONE number from the predefined list below.
+   prompt = """You are a classifier. Your task is to analyze a user's question and pick EXACTLY ONE number from the predefined list below.
 
 You must ALWAYS pick a number from the list below
 
@@ -10,7 +10,7 @@ Possible numbers:
 
 Classification rules:
 
-1. 5. Pick "1" if the question concerns one or more of the following:
+1. Pick "1" if the question concerns one or more of the following:
    - the location in which (where) a task can be executed
    - how long a task takes, the duration, operating time of a task
    - execution time or duration of a task

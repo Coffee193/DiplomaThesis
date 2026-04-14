@@ -6,10 +6,24 @@ import _3_5_test_ollamaclassifier_attr_resource
 import _3_1_test_ollamaclassifier_attr_job
 import _3_2_test_ollamaclassifier_attr_task
 import _3_3_test_ollamaclassifier_attr_tasksuitableresource
-import _3_4_test_ollamaclassifier_attr_taskprepost
+#import _3_4_test_ollamaclassifier_attr_taskprepost
+import _3_4_0_test_ollamaclassifier_attr_taskprepost_orderdependence_asfunc
+import _3_4_1_test_ollamaclassifier_attr_taskprepost_copy_rewrite_NEW_order_asfunc
+import _3_4_2_test_ollamaclassifier_attr_taskprepost_dependence_asfunc
 import _x0_test_ollama_error_chain_1_prompt
 import _a0_test_ollama_str_to_date
 import _5_test_answer_question_job
+import _5_1_test_ollamaclassifier_return_attr_job_asfunc
+import _5_2_test_ollamaclassifier_return_attr_task_asfunc
+import _5_3_test_ollamaclassifier_return_attr_resource_asfunc
+import _5_4_1_test_ollamaclassifier_return_attr_taskresource_resource_asfunc
+import _5_4_2_test_ollamaclassifier_return_attr_taskresource_task_asfunc
+import _6_0_test_ollama_fin_answer_noresults_asfunc
+import _6_1_test_ollama_fin_answer_jobs_tasks_resources_matchesfound_asfunc
+import _6_2_x_NEW_classify_boolean_asfunc
+import _6_2_test_ollama_tasksuitableresources_asfunc
+import _6_3_test_ollma_tasksuitres_answer_what_task_asfunc
+import _6_4_test_ollama_taskprepost_dependence_asfunc
 
 from ollama import chat
 import ollama
@@ -29,12 +43,13 @@ user_question = 'Return the names of every job' # <--- he correctly finds this t
 # user_question = 'Return all tasks and resources' # tokens: 1315
 # user_question = 'Return all task time dependencies' # tokens: 397
 
+
 ## Jobs ##
-user_question = "List all jobs"
-#user_question = "Return the job with arrival date 31/3" # [] (len: 0), {'pick': 3}, {'attribute': True, 'key': 'arrivaldate', 'value': {'day': 31, 'month': 3}, 'think': "The user is searching for a specific job by its arrival date, which matches one of the allowed attributes. The value '31/3' could be interpreted as either a date or a string. I will assume it's a string to match the format specified in the job dictionary."}
+user_question = "List all jobs" # OK ENTIRE PIPELINE
+user_question = "Return the job with arrival date 31/3" # [] (len: 0), {'pick': 3}, {'attribute': True, 'key': 'arrivaldate', 'value': {'day': 31, 'month': 3}, 'think': "The user is searching for a specific job by its arrival date, which matches one of the allowed attributes. The value '31/3' could be interpreted as either a date or a string. I will assume it's a string to match the format specified in the job dictionary."} # OK
 #user_question = "List all jobs" # [...] (len: 9), {'pick': 3}, {'attribute': False, 'think': "The user did not specify any particular attribute or value, so it's likely they want to retrieve all jobs."}
 #user_question = "Give me the jobs" # [...] (len: 9), {'pick': 3}, {'attribute': False, 'think': 'The user is asking for a general list of jobs without specifying any attribute or value, so no specific job is being referenced.'}
-#user_question = "Return the job with id 8" # [] (len: 0), {'pick': 3}, {'attribute': True, 'key': 'id', 'value': 8, 'think': "The user is searching for a specific job using its id. The keyword 'id' was mentioned, and it matches one of the allowed attributes."}
+user_question = "Return the job with id 8" # [] (len: 0), {'pick': 3}, {'attribute': True, 'key': 'id', 'value': 8, 'think': "The user is searching for a specific job using its id. The keyword 'id' was mentioned, and it matches one of the allowed attributes."} # OK
 #user_question = "Return the job with id 300" # [...] (len: 1), {'pick': 3}, {'attribute': True, 'key': 'id', 'value': 300, 'think': "The user is asking for a specific job by its id. I found the word 'id' and the value associated to it."}
 #user_question = "Return the job with id _300" # [...] (len: 1), {'pick': 3}, {'attribute': True, 'key': 'id', 'value': '_300', 'think': "The user is searching for a specific job by its id, which was mentioned as '_300'."}
 #user_question = "Are there any jobs with arrival date 31 2" # [] (len: 0), {'pick': 3}, {'attribute': True, 'key': 'arrivaldate', 'value': {'day': 31, 'month': 2}, 'think': "The user is searching for a specific job based on its arrival date, which is mentioned as '31 2'"}
@@ -89,7 +104,7 @@ user_question = "List all jobs"
 
 ### TASKSUITABLERESOURCES ###
 #user_question = 'Which tasks can be done in resource 901?' # [] (len: 0), {'pick': 5}, {'attribute': True, 'know': {'info': 'resource', 'key': 'id', 'value': 901}, 'search': {'info': 'task'}, 'think': "The question is about a specific task completion time, the user has provided a resource id which is a numeric value, therefore the attribute is set to true and 'resource' info is extracted with key 'id' and value 901. The search info is for tasks."}
-user_question = 'Which tasks can be done in resource 2?' # [...] (len: 9), {'pick': 5}, {'attribute': True, 'know': {'info': 'resource', 'key': 'id', 'value': 2}, 'search': {'info': 'task'}, 'think': "Identified specific attribute 'resource id' and extracted reference point 'resource 2'. Now searching for tasks related to this resource."}
+#user_question = 'Which tasks can be done in resource 2?' # [...] (len: 9), {'pick': 5}, {'attribute': True, 'know': {'info': 'resource', 'key': 'id', 'value': 2}, 'search': {'info': 'task'}, 'think': "Identified specific attribute 'resource id' and extracted reference point 'resource 2'. Now searching for tasks related to this resource."}
 #user_question = 'Which tasks can be done in resource 1?' # [...] (len: 9), {'pick': 5}, {'attribute': True, 'know': {'info': 'resource', 'key': 'id', 'value': 1}, 'search': {'info': 'task'}, 'think': "The user is asking for tasks that can be done in a specific resource with id 1, which implies they already know the resource's id and are searching for related tasks."}
 #user_question = 'Where can task 57 be executed' # [] (len: 0), {'pick': 5}, {"attribute": true, "know": {"info": "task", "key": "id", "value": 57}, "search": {"info": "resource"}, "think": "The user is looking for the resource where a specific task (task id 57) can be executed."}
 #user_question = 'Where can task 584 be executed' # [...] (len: 1), {'pick': 5}, {'attribute': True, 'know': {'info': 'task', 'key': 'id', 'value': 584}, 'search': {'info': 'resource'}, 'think': 'Identified specific attribute (task id) and extracted reference point (task 584), now need to search for resources where this task can be executed'}
@@ -122,6 +137,7 @@ user_question = 'Which tasks can be done in resource 2?' # [...] (len: 9), {'pic
 #user_question = "Return all task dependencies" # [...] (len: 9), {'pick': 6}, {'attribute': False, 'think': ['No specific task id identified', 'returning general query response']}
 #user_question = 'Return the ids of all tasks that have to be executed before task 581' # [...] (len: 1), {'pick': 6}, {'attribute': True, 'id': 581, 'order': 'before', 'think': 'Identified specific task by id. The user is asking about tasks that must be executed before the given task.'}
 #user_question = 'Return the names of all tasks that have to be executed before task 581' # [...] (len: 1), {'pick': 6}, {'attribute': True, 'id': 581, 'order': 'before', 'think': "Identified specific task id in question. Determined intent based on wording 'before'. Assuming user wants tasks preceding task 581"}
+#user_question = 'Does task 584 need to be executed before 585?'
 
 
 def IntToStrWithSlabInfornt(val):
@@ -136,6 +152,14 @@ def LLMOutClean(answer):
         if(answer[:4] == 'json'):
             answer = answer[4:]
     return answer
+
+def QueryToInfoNaturalLanguage(query):
+    text = ''
+    for i in range (0, len(query)):
+        text += f'Execute task {query[i]['before']} before task {query[i]['after']}'
+        if( i + 1 != len(query)):
+            text += '\n'
+    return text
 
 
 numbertokeyword = {1: 'workcenter', 2: 'resource', 3: 'jobs', 4: 'tasks', 5: 'tasksuitableresources', 6: 'tasksprecedenceconstraints', 7: 'none'}
@@ -230,22 +254,28 @@ elif(search == 'tasksuitableresources'):
     # search -> info: resource, task, time
 elif(search == 'tasksprecedenceconstraints'):
     query = json_data["taskprecedenceconstraints"]["taskprecedenceconstraint"]
-    prompt = _3_4_test_ollamaclassifier_attr_taskprepost.getPrompt(user_question)
+    answer = chat('llama3.1', messages = [{'role': 'user', 'content': _3_4_0_test_ollamaclassifier_attr_taskprepost_orderdependence_asfunc.getPrompt(user_question)}]).message.content
+    answer = json.loads(LLMOutClean(answer))
+    if("order" in answer):
+        prompt = _3_4_1_test_ollamaclassifier_attr_taskprepost_copy_rewrite_NEW_order_asfunc.getPrompt(user_question)
+    elif("dependence" in answer):
+        prompt = _3_4_2_test_ollamaclassifier_attr_taskprepost_dependence_asfunc.getPrompt(user_question)
+    #prompt = _3_4_test_ollamaclassifier_attr_taskprepost.getPrompt(user_question)
     # {"attribute": <bool>, "id": <int>, "order": <str>, "think": <str>}
     # order: 'before', 'after', 'both'
 else:
     print(chat('llama3.1', messages = [{'role': 'user', 'content': _x0_test_ollama_error_chain_1_prompt.getPrompt(user_question)}]).message.content)
 
-answer = chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
-asnwer = LLMOutClean(answer)
+answer_fin = chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
+answer_fin = LLMOutClean(answer_fin)
 ### End ###
 
 print('----- Chain 2: Info Retrieve Classifier -----')
-print(answer)
+print(answer_fin)
 
 ### EXTRACTION PART ###
 try:
-    retrieve_info = json.loads(answer)
+    retrieve_info = json.loads(answer_fin)
 except:
     retrieve_info = None
 
@@ -290,12 +320,112 @@ else:
         elif(search == 'tasksprecedenceconstraints'):
             # {"attribute": <bool>,"id": <int>,"order": <str>,"think": <str>}
             # order: before, after, both
-            if(retrieve_info['order'] != 'both'):
-                retrieve_info['order'] = 'preconditiontaskreference' if retrieve_info['order'] == 'after' else 'postconditiontaskreference'
-                query = [q for q in query if q[retrieve_info['order']]['refid'] == IntToStrWithSlabInfornt(retrieve_info['id'])]
-            else:
-                query = [q for q in query if q['preconditiontaskreference']['refid'] == IntToStrWithSlabInfornt(retrieve_info['id']) or q['postconditiontaskreference']['refid'] == IntToStrWithSlabInfornt(retrieve_info['id'])]
+            if("before" in retrieve_info):
+                if(retrieve_info["before"] != "*"):
+                    query = [q for q in query if q['preconditiontaskreference']['refid'] == IntToStrWithSlabInfornt(retrieve_info["before"])]
+                if(retrieve_info["after"] != "*"):
+                    query = [q for q in query if q['postconditiontaskreference']['refid'] == IntToStrWithSlabInfornt(retrieve_info["after"])]
 
+            elif("reference" in retrieve_info):
+                if(retrieve_info['target'] == "*"):
+                    query = [q for q in query if IntToStrWithSlabInfornt(retrieve_info['reference']) in (q['preconditiontaskreference']['refid'], q['postconditiontaskreference']['refid'])]
+                else:
+                    query = [q for q in query if {q['preconditiontaskreference']['refid'], q['postconditiontaskreference']['refid']} == {IntToStrWithSlabInfornt(retrieve_info['reference']), IntToStrWithSlabInfornt(retrieve_info['target'])}]
+
+### Classifier 3: Return Wanted Attributes Only ###
+
+if(search == 'jobs'):
+    prompt = _5_1_test_ollamaclassifier_return_attr_job_asfunc.getPrompt(user_question)
+elif(search == 'tasks'):
+    prompt = _5_2_test_ollamaclassifier_return_attr_task_asfunc.getPrompt(user_question)
+elif(search == 'resources'):
+    prompt = _5_3_test_ollamaclassifier_return_attr_resource_asfunc.getPrompt(user_question)
+elif(search == 'tasksuitableresources'):
+    if(retrieve_info['search']['info'] == 'resource'):
+        prompt = _5_4_1_test_ollamaclassifier_return_attr_taskresource_resource_asfunc.getPrompt(user_question)
+    elif(retrieve_info['search']['info'] == 'task'):
+        prompt = _5_4_2_test_ollamaclassifier_return_attr_taskresource_task_asfunc.getPrompt(user_question)
+
+if(search != 'tasksprecedenceconstraints'):
+    answer = chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
+    asnwer = LLMOutClean(answer)
+
+    print('----- Chain 2: Return Wanted Attribute Classifier -----')
+    print(answer)
+    
+### End ###
+
+### Lists Final Clean Form ###
+if(search == 'jobs'):
+    query = [{'name': q['name'], 'arrivaldate': q['arrivaldate'], 'duedate': q['duedate'], 'task': [r['refid'] for r in q['jobtaskreference']], 'workcenter': q['jobworkcenterreference']['refid'], 'id': q['id']} for q in query]
+    ### ###
+elif(search == 'tasks'):
+    query = [{'name': q['name'], 'id': q['id']} for q in query]
+elif(search == 'resources'):
+    query = [{'name': q['name'], 'nonworkingperiods': [{'fromdate': r['fromdate'], 'todate': r['todate']} for r in q['resourceavailability']['nonworkingperiods']['period']], 'id': q['id']} for q in query]
+elif(search == 'tasksuitableresources'):
+    taskres_list = []
+    for i in range(0, len(query)):
+        if(len(taskres_list) == 0 or (not any(fl['resource']['id'] == query[i]['resourcereference']['refid'] for fl in taskres_list)) ):
+            taskres_list.append({'resource': {'id': query[i]['resourcereference']['refid'], 'name': [r['name'] for r in json_data['resources']['resource'] if r['id'] == query[i]['resourcereference']['refid']][0]}, 'tasks': [{'id': query[i]['taskreference']['refid'], 'operation_time': query[i]['operationtimeperbatchinseconds'], 'name': [t['name'] for t in json_data['tasks']['task'] if t['id'] == query[i]['taskreference']['refid']][0]}]})
+        else:
+            next(item for item in taskres_list if item['resource']['id'] == query[i]['resourcereference']['refid'])['tasks'].append({'id': query[i]['taskreference']['refid'], 'operation_time': query[i]['operationtimeperbatchinseconds'], 'name': [t['name'] for t in json_data['tasks']['task'] if t['id'] == query[i]['taskreference']['refid']][0]})
+elif(search == 'tasksprecedenceconstraints'):
+    query = [{'before': q['preconditiontaskreference']['refid'], 'next': q['postconditiontaskreference']['refid']} for q in query]
+### End ###
+
+
+### EXTRACTION PART for Chain 3 ###
+
+if(search != 'tasksprecedenceconstraints'):
+    try:
+        wanted_return = json.loads(answer)
+    except:
+        wanted_return = None
+
+    if wanted_return == None:
+        prompt = _x0_test_ollama_error_chain_1_prompt.getPrompt(user_question)
+        print(chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content)
+    else:
+        if(wanted_return['attribute'] == True):
+            if(search != 'tasksuitableresources'):
+                if(wanted_return['return'] == 'name'):
+                    query = [{'id': q['id'], 'name': q['name']} for q in query]
+                if(wanted_return['return'] == 'id'):
+                    query = [{'id': q['id']} for q in query]
+                elif(wanted_return['return'] == 'task'):
+                    query = [{'id': q['id'], 'task': q['task']} for q in query]
+                elif(wanted_return['return'] == 'arrivaldate'):
+                    query = [{'id': q['id'], 'arrivaldate': q['arrivaldate']} for q in query]
+                elif(wanted_return['return'] == 'duedate'):
+                    query = [{'id': q['id'], 'duedate': q['duedate']} for q in query]
+                elif(wanted_return['return'] == 'period'):
+                    query = [{'id': q['id'], 'nonworkingperiods': q['nonworkingperiods']} for q in query]
+
+            elif(search == 'tasksuitableresources'):
+                if(retrieve_info['search']['info'] == 'resource'):
+                    if 'value' not in wanted_return:
+                        if wanted_return['key'] == 'id':
+                            for item in taskres_list: item['resource'] = {'id': item['resource']['id']}
+                        elif wanted_return['key'] == 'period':
+                            for item in taskres_list: item['resource']['no_work_period'] = [rp['resourceavailability']['nonworkingperiods']['period'] for rp in json_data['resources']['resource'] if rp['id'] == item['resource']['id']][0]
+                    
+                    else:
+                        wanted_return['value'] = IntToStrWithSlabInfornt(wanted_return['value'])
+                        fin_list = [item for item in taskres_list if item['resource'][wanted_return['key']].upper() == wanted_return['value'].upper()]
+                elif(retrieve_info['search']['info'] == 'task'):
+                    if 'value' not in wanted_return:
+                        if wanted_return['key'] == 'id':
+                            for item in taskres_list: item['tasks'] = [{'id': t['id']} for t in item['tasks']]
+                        elif wanted_return['key'] == 'name':
+                            for item in taskres_list: item['tasks'] = [{'id': t['id'], 'name': t['name']} for t in item['tasks']]
+                        elif wanted_return['key'] == 'time':
+                            for item in taskres_list: item['tasks'] = [{'id': t['id'], 'operation_time': t['operation_time']} for t in item['tasks']]
+                    else:
+                        wanted_return['value'] = IntToStrWithSlabInfornt(wanted_return['value'])
+                        fin_list = [{'resource': item['resource'], 'tasks': [t for t in item['tasks'] if t[wanted_return['key']].upper() == wanted_return['value'].upper()]}  for item in taskres_list if any(t[wanted_return['key']].upper() == wanted_return['value'].upper() for t in item['tasks'])]
+    
+                
 ### End ###
 print('----- Query Retrieved -----')
 print(query)
@@ -305,11 +435,47 @@ print('----- Len Query Retrieved Tokenized -----')
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
 print(len(tokenizer.tokenize(str(query))))
 
+
+print('------------ TESTING INFO ------------')
+print(query)
+print('***************')
+print(retrieve_info)
+print('***************')
+print(answer_fin)
+print('***************')
+print('------------ TESTING INFO END ------------')
+
+if(search != 'tasksprecedenceconstraints'):
+    if(len(query) == 0):
+        prompt = _6_0_test_ollama_fin_answer_noresults_asfunc.getPrompt(user_question)
+    else:
+        prompt = _6_1_test_ollama_fin_answer_jobs_tasks_resources_matchesfound_asfunc.getPrompt(user_question, len(query))
+else:
+    if("dependence" in answer_fin):
+        if(len(query) == 0):
+            prompt = _6_4_test_ollama_taskprepost_dependence_asfunc.getPrompt(user_question, retrieve_info['target'])
+        else:
+            prompt = _6_3_test_ollma_tasksuitres_answer_what_task_asfunc.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
+    else:
+        if(len(query) == 0):
+            prompt = _6_0_test_ollama_fin_answer_noresults_asfunc.getPrompt(user_question)
+        else:
+            bool_classify = chat('llama3.1', messages = [{'role': 'user', 'content': _6_2_x_NEW_classify_boolean_asfunc.getPrompt(user_question)}]).message.content
+            bool_classify = LLMOutClean(bool_classify)
+            try:
+                bool_classify = json.loads(bool_classify)
+                if(bool_classify['attribute'] == True):
+                    prompt = _6_2_test_ollama_tasksuitableresources_asfunc.getPrompt(user_question, len(query))
+                else:
+                    prompt = _6_3_test_ollma_tasksuitres_answer_what_task_asfunc.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
+            except:
+                print('')
+            
+
 ### Classifier 3? - Final Generation ###
-fin_prompt = _5_test_answer_question_job.getPrompt(query, user_question)
-fin_prompt_len = len(tokenizer.tokenize(fin_prompt))
-if(search == 'jobs'):
-    fin_answer = chat('llama3.1', messages = [{'role': 'user', 'content': fin_prompt}])
+fin_prompt_len = len(tokenizer.tokenize(prompt))
+
+fin_answer = chat('llama3.1', messages = [{'role': 'user', 'content': prompt}])
 print('----- Chain 3: Final Answer -----')
 print(fin_answer.message.content)
 print('----- Original User Question -----')

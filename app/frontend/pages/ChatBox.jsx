@@ -104,7 +104,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
             blob = new Blob(
                 [atob(cbuState['data'].slice(21))],
                 {
-                    type: 'application/xml'
+                    type: 'application/JSON'
                 }
             )
             url = URL.createObjectURL(blob)
@@ -203,7 +203,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                         <div className='cb_util cb_utilactive cb_upload' onClick={() => cbinputRef.current.value === '' ? cbinputRef.current.click() : null} ref={cbuploadRef}>
                             <UploadFile/>
                             <div className={'cb_uploadtext ' + (chattype === 'main' ? 'cb_uploadmain' : 'cb_uploadbody')}>Upload File</div>
-                            <input type='file' className='cb_input' ref={cbinputRef} accept='text/xml' onChange={() => UploadDocument()}/>
+                            <input type='file' className='cb_input' ref={cbinputRef} accept='application/JSON' onChange={() => UploadDocument()}/>
                         </div>
                         <div className={'cb_util ' +  ( (cbtextareaRef.current === undefined || cbtextareaRef.current.value === '') ? 'cb_utildeactive' : 'cb_utilactive')} onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
                     </>

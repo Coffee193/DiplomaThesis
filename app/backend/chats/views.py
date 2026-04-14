@@ -360,12 +360,20 @@ def CreateChatDocument(request):
     data = json.loads(request_dict['data'])
     file = json.loads(request_dict['document'])
     
-    if(len(file['data']) < 22 or file['data'][:21] != 'data:text/xml;base64,' or file['name'][-4:] != '.xml'):
+    print('******')
+    print(file['data'][:29])
+    print('-----------')
+    print(file['name'][-5:])
+
+    #if(len(file['data']) < 22 or file['data'][:21] != 'data:text/xml;base64,' or file['name'][-4:] != '.xml'):
+    #    return HttpResponse(json.dumps('Invalid XML file'), status = 400)
+
+    if(len(file['data']) < 30 or file['data'][:29] != 'data:application/json;base64,' or file['name'][-5:] != '.json'):
         return HttpResponse(json.dumps('Invalid XML file'), status = 400)
 
     chat_id = GenerateSnowflake()
 
-    file_write = base64.b64decode(file['data'][21:])
+    file_write = base64.b64decode(file['data'][29:])
     file_id = GenerateSnowflake()
 
     document_info = {"id": file_id, "name": file['name'], "size": str(round(len(file_write)/1024, 1)), "data": file_write.decode('utf-8')}
@@ -831,7 +839,9 @@ def AnswerQuestionWithDocument(request):
     
     if(data['id'].isdigit() == False):
         return HttpResponse(json.dumps('Invalid Id'), status = 400)
-    if(len(file['data']) < 22 or file['data'][:21] != 'data:text/xml;base64,' or file['name'][-4:] != '.xml'):
+    #if(len(file['data']) < 22 or file['data'][:21] != 'data:text/xml;base64,' or file['name'][-4:] != '.xml'):
+    #    return HttpResponse(json.dumps('Invalid XML file'), status = 400)
+    if(len(file['data']) < 30 or file['data'][:29] != 'data:application/json;base64,' or file['name'][-5:] != '.json'):
         return HttpResponse(json.dumps('Invalid XML file'), status = 400)
     
     if(redis_client.exists("cg_" + data["id"])):
@@ -1087,3 +1097,5 @@ def Slow_Func_Test(request):
         time.sleep(3)
         print('bububu')
     return HttpResponse(json.dumps('lulaaaaaaa'), status = 200)
+
+def AskLLMThink(user_question, )

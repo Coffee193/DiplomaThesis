@@ -30,6 +30,7 @@ tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
 # user_question = 'Return all ROLLING jobs' # {"attribute": true,"key": "name","value": "ROLLING", "think": "The question asks for all ROLLING jobs, implying a search by job name."}
 user_question = 'Return all job ids'
 user_question = 'Return the job with id _90'
+user_question = 'How many tasks does job 90 require?'
 
 user_prompt = """You are an information extraction assistant.
 

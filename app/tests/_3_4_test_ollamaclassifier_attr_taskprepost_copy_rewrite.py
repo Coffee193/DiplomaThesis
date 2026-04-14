@@ -16,6 +16,7 @@ tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
 # user_question = "Return all task dependencies" # {"attribute": false, "think": "The user is asking for a general overview of task dependencies rather than a specific task id. Returning attribute as false."}
 # user_question = 'Return the ids of all tasks that have to be executed before task 79' # {  "attribute": true,  "id": 79,  "order": "before",  "think": "Identified a specific task id, '79', in the question. Analyzing the question wording, it indicates a dependency or requirement for tasks to be executed before this specific task."}
 # user_question = 'Return the names of all tasks that have to be executed before task 85' # {  "attribute": true,  "id": 85,  "order": "before",  "think": "user is asking for tasks that must be executed before task 85, will need to query database or task list for dependencies"}
+user_question = 'Does task 584 need to be executed before 585?'
 
 user_prompt = """You are an information extraction assistant.
 

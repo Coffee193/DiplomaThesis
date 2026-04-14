@@ -7,6 +7,10 @@ import _3_4_test_ollamaclassifier_attr_taskprepost
 import _x0_test_ollama_error_chain_1_prompt
 import _a0_test_ollama_str_to_date
 import _5_test_answer_question_job
+import _6_0_test_ollama_fin_answer_noresults_asfunc
+import _6_1_test_ollama_fin_answer_jobs_tasks_resources_matchesfound_asfunc
+
+import _6_4_test_ollama_taskprepost_dependence_asfunc
 
 from ollama import chat
 import ollama
@@ -314,8 +318,9 @@ print(len(query))
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
 print(len(tokenizer.tokenize(str(query))))
 
-fin_prompt = _5_test_answer_question_job.getPrompt(query, user_question)
-fin_prompt_len = len(tokenizer.tokenize(fin_prompt))
+
+
+
 fin_answer = chat('llama3.1', messages = [{'role': 'user', 'content': fin_prompt}])
 print('_________')
 print(fin_answer.message.content)

@@ -1,14 +1,10 @@
-def getPrompt(user_question, target):
-    if target == '*':
-        dependence_text = "Politely inform the user that the requested task is independent (its execution does NOT depend on other tasks)"
-    else:
-        dependence_text = "Politely inform the user that the requested task is independent of the other task and vice versa (its execution does NOT depende on the execution of the other task)"
+def getPrompt(user_question):
 
     prompt = f"""You are an AI assistant helping a user based on queried information.
 
-{dependence_text}
-
+Politely inform the user that no matches were found for their request.
 Answer to the user's question directly without being verbose while ensuring completeness.
+Mention how there were no (of what the user asks about) found with the filtering criteria he chose
 
 Additional rules:
 

@@ -1,10 +1,10 @@
 import '../styling/ChatBox.css'
-import { ArrowUpload, UploadFile, BlocksLoad, SpinnerLoad } from '../components/svgs/UtilIcons'
+import { ArrowUpload, UploadFile, BlocksLoad, SpinnerLoad, NeuralNetwork, SparklesIcon } from '../components/svgs/UtilIcons'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBoxUpload } from './ChatBoxUpload'
 
-export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams, isgeneratingState, isgeneratingsetState, convstreamgeneratingRef, ReadAnswerStream, chatnavsetState }){
+export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams, isgeneratingState, isgeneratingsetState, convstreamgeneratingRef, ReadAnswerStream, chatnavsetState, chatthinkState }){
 
     const cbtextareaRef = useRef()
     const cbarrowRef = useRef()
@@ -14,6 +14,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
     const cbuploadRef = useRef()
     const cbloadRef = useRef()
     const cbaskquestion = useRef(false)
+    const [cbthinkState, cbthinksetState] = useState(true)
 
     function CheckQuestion(){
         if(cbinputRef.current.value === ''){
@@ -26,9 +27,11 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
     }
 
+    console.log(chatthinkState)
+
     async function CreateChat(){
         let response_status = null
-        let request = {"q": cbtextareaRef.current.value}
+        let request = {"q": cbtextareaRef.current.value, "t": cbthinkState}
         let body = null
 
         if(cbinputRef.current.value !== ''){
@@ -197,15 +200,24 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                     <ChatBoxUpload cbuState={cbuState} cbusetState={cbusetState} cbinputRef={cbinputRef} UploadActive={UploadActive} EmptyTextArrowDeactive={EmptyTextArrowDeactive}/>
                     <textarea className='cb_textarea' placeholder='Ask Sapling' onChange={() => CheckQuestion()} ref={cbtextareaRef} onKeyDown={(event) => PressEnter(event)} autoFocus={true}/>
                 </div>
-                <div className='cb_infoholder'>
+                <div className='cb_infoholder' style={chattype === 'body' ? {justifyContent: 'space-between'} : {justifyContent: 'end'}}>
                     { isgeneratingState === false ? (
                     <>
-                        <div className='cb_util cb_utilactive cb_upload' onClick={() => cbinputRef.current.value === '' ? cbinputRef.current.click() : null} ref={cbuploadRef}>
-                            <UploadFile/>
-                            <div className={'cb_uploadtext ' + (chattype === 'main' ? 'cb_uploadmain' : 'cb_uploadbody')}>Upload File</div>
-                            <input type='file' className='cb_input' ref={cbinputRef} accept='application/JSON' onChange={() => UploadDocument()}/>
+                        { chattype === 'body' ? 
+                        (<div className={'cb_utilthink ' + (cbthinkState === true ? 'cb_utilthink_select' : 'cb_utilthink_unselect')} onClick={() => {cbthinkState === true ? cbthinksetState(false) : cbthinksetState(true)}}>
+                            <NeuralNetwork/>
+                            <span>Think</span>
+                        </div>) : <></>
+                        }
+                        <div className='cb_utilsholder'>
+                            {chatthinkState === true ? (<div className='cb_util'><SparklesIcon width={24} height={24}/></div>) : <></>}
+                            <div className='cb_util cb_utilactive cb_upload' onClick={() => cbinputRef.current.value === '' ? cbinputRef.current.click() : null} ref={cbuploadRef}>
+                                <UploadFile/>
+                                <div className={'cb_uploadtext ' + (chattype === 'main' ? 'cb_uploadmain' : 'cb_uploadbody')}>Upload File</div>
+                                <input type='file' className='cb_input' ref={cbinputRef} accept='application/JSON' onChange={() => UploadDocument()}/>
+                            </div>
+                            <div className={'cb_util ' +  ( (cbtextareaRef.current === undefined || cbtextareaRef.current.value === '') ? 'cb_utildeactive' : 'cb_utilactive')} onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
                         </div>
-                        <div className={'cb_util ' +  ( (cbtextareaRef.current === undefined || cbtextareaRef.current.value === '') ? 'cb_utildeactive' : 'cb_utilactive')} onClick={() => SubmitQuestion()} ref={cbarrowRef}><ArrowUpload/></div>
                     </>
                     ) : (
                     <div className='cb_util cb_utilaskload' ref={cbloadRef}><SpinnerLoad/></div>

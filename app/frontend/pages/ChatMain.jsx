@@ -13,6 +13,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
     const cmchatRef = useRef()
     const [isgeneratingState, isgeneratingsetState] = useState(false)
     const convstreamgeneratingRef = useRef(new Set([]))
+    const [thinkState, thinksetState] = useState(false)
 
     useEffect(() => {
         if(chatnavloadingState === false){
@@ -80,6 +81,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             
             convsetState(conv_vals)
             isloadingsetState(false)
+            thinksetState(response['t'])
 
             if('g' in response){
                 if(convstreamgeneratingRef.current.has(linkparams.id) === false){
@@ -227,7 +229,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     ) : (convState)
                     }
                 </div>
-                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chattype='main' convsetState={convsetState} linkparams={linkparams} isgeneratingState={isgeneratingState} isgeneratingsetState={isgeneratingsetState} convstreamgeneratingRef={convstreamgeneratingRef} ReadAnswerStream={ReadAnswerStream}/>
+                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chatthinkState={thinkState} chattype='main' convsetState={convsetState} linkparams={linkparams} isgeneratingState={isgeneratingState} isgeneratingsetState={isgeneratingsetState} convstreamgeneratingRef={convstreamgeneratingRef} ReadAnswerStream={ReadAnswerStream}/>
                 <div className='cm_backwhite'/>
             </div>
         </div>

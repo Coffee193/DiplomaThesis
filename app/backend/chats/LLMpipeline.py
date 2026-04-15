@@ -7,6 +7,8 @@ from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier
 from LLM_prompts.Chain3 import ResourceAttributeRetriever, JobAttributeRetriever, TaskAttributeRetriever, TasksuitableresourceAttributeRetriever, TaskprecedencecontraintOrderDependenceClassifier, TaskprecedenceconstraintDependenceAttributeRetriever, TaskprecedenceconstraintOrderAttributeRetriever
 from LLM_prompts import StringToDateMonthForm
 from LLM_prompts.Chain4 import JobAttributeReturnClassifier, TaskAttributeReturnClassifier, ResourceAttributeReturnClassifier, TasksuitableresourceAttributeReturnResourceClassifier, TasksuitableresourceAttributeReturnTaskClassifier
+from LLM_prompts.Chain5 import OutputNoResultsFound, OutputListResultsTaskJobResourceTasksuitableresource, OutputTaskprecedenceconstraintsTaskNoExist, OutputListResultsTaskprecedenceconstraints, OutputTaskprecedenceconstraintsTaskIsIndependent, OutputTaskprecedenceconstraintsClassifyQuestionBoolean, OutputTaskprecedenceconstraintsAnswerBooleanQuestion
+from LLM_prompts.FindJSONFile import InstructUploadJSON
 
 def IntToStrWithSlabInfornt(val):
     if(type(val) != str):
@@ -21,7 +23,15 @@ def LLMOutClean(answer):
             answer = answer[4:]
     return answer
 
-def PassLLMThink(user_question, json_path):
+def QueryToInfoNaturalLanguage(query):
+    text = ''
+    for i in range (0, len(query)):
+        text += f'Execute task {query[i]['before']} before task {query[i]['after']}'
+        if( i + 1 != len(query)):
+            text += '\n'
+    return text
+
+def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
 
     ### Chain 1: Gibberish Classifier ###
     ''' Classifies if Question is Gibberish or Not'''
@@ -45,6 +55,9 @@ def PassLLMThink(user_question, json_path):
         words = answer['words']
         if(len(words) == 0):
             return chat('llama3.1', messages = [{'role': 'user', 'content': user_question}]).message.content
+        elif(json_path == None):
+            ### <--------- NEED TO WORK ON THESE CASES HERE (User ASKS about a JSON file he uploaded previously)
+            saoidjasoidjioasd
         else:
             if('job' in words):
                 search = 'jobs'
@@ -94,9 +107,10 @@ def PassLLMThink(user_question, json_path):
         query = json_data["taskprecedenceconstraints"]["taskprecedenceconstraint"]
         answer = chat('llama3.1', messages = [{'role': 'user', 'content': TaskprecedencecontraintOrderDependenceClassifier.getPrompt(user_question)}]).message.content
         answer = json.loads(LLMOutClean(answer))
-        if("order" in answer):
+        taskprecedenceconstraints_pick = answer["pick"]
+        if(answer["pick"] == "order"):
             prompt = TaskprecedenceconstraintOrderAttributeRetriever.getPrompt(user_question)
-        elif("dependence" in answer):
+        elif(answer["pick"] == "dependence"):
             prompt = TaskprecedenceconstraintDependenceAttributeRetriever.getPrompt(user_question)
     else:
         return chat('llama3.1', messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}]).message.content
@@ -249,3 +263,37 @@ def PassLLMThink(user_question, json_path):
                                 wanted_return['value'] = IntToStrWithSlabInfornt(wanted_return['value'])
                                 fin_list = [{'resource': item['resource'], 'tasks': [t for t in item['tasks'] if t[wanted_return['key']].upper() == wanted_return['value'].upper()]}  for item in taskres_list if any(t[wanted_return['key']].upper() == wanted_return['value'].upper() for t in item['tasks'])]
     ### JSON Data Extraction End###
+
+
+    ### Chain 5: Final Answer ###
+    if(search != 'tasksprecedenceconstraints'):
+        if(len(query) == 0):
+            prompt = OutputNoResultsFound.getPrompt(user_question)
+        else:
+            prompt = OutputListResultsTaskJobResourceTasksuitableresource.getPrompt(user_question, len(query))
+    else:
+        if(taskprecedenceconstraints_pick == "dependence"):
+            if(len(query) == 0):
+                if(IntToStrWithSlabInfornt(retrieve_info['reference']) not in [q['id'] for q in json_data["tasks"]["task"]]):
+                    prompt = OutputTaskprecedenceconstraintsTaskNoExist.getPrompt(user_question)
+                else:
+                    prompt = OutputTaskprecedenceconstraintsTaskIsIndependent.getPrompt(user_question, retrieve_info['target'])
+            else:
+                prompt = OutputListResultsTaskprecedenceconstraints.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
+        elif(taskprecedenceconstraints_pick == "order"):
+            if(len(query) == 0):
+                prompt = OutputNoResultsFound.getPrompt(user_question)
+            else:
+                bool_classify = chat('llama3.1', messages = [{'role': 'user', 'content': OutputTaskprecedenceconstraintsClassifyQuestionBoolean.getPrompt(user_question)}]).message.content
+                bool_classify = LLMOutClean(bool_classify)
+                try:
+                    bool_classify = json.loads(bool_classify)
+                    if(bool_classify['attribute'] == True):
+                        prompt = OutputTaskprecedenceconstraintsAnswerBooleanQuestion.getPrompt(user_question, len(query))
+                    else:
+                        prompt = OutputListResultsTaskprecedenceconstraints.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
+                except:
+                    prompt = ExceptionHandler.getPrompt(user_question)
+    ### Chain 5 End ###
+
+    return chat(llm_model, messages = [{'role': 'user', 'content': prompt}])

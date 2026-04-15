@@ -6,6 +6,7 @@ from backend.mongo_db_connection import mongo_db
 import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime
+from .LLMpipeline import PassLLMThink
 
 ###
 # For multiplrocessing to work (i.e. to spawn a process) you must run these two lines of code before importing any models.
@@ -327,22 +328,26 @@ def CreateChatQuestion(request):
         return ReturnHttpInvalidJWT(valjwt)
     data = json.loads(request.body.decode('utf-8'))
 
-    if('q' not in data):
+    if('q' not in data or 't' not in data or type(data['t']) != bool):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
     if(len(data['q']) == 0):
         return HttpResponse(json.dumps('Question is empty'), status = 400)
-    
+
     chat_id = GenerateSnowflake()
     curr_time = datetime.datetime.now(datetime.timezone.utc)
-    ##>AA<
+
     redis_client.set("cg_" + str(chat_id), json.dumps({"q": data["q"]}))
-    p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id)])
+    if(data['t'] == False):
+        p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id)])
+    else:
+        p = p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id)])
     t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"]])
     p.start()
     chats.insert_one({"_id": chat_id,
                         "name": "New Conversation",
                         "date_created": curr_time,
                         "user_id": valjwt[3],
+                        "think": data['t'],
                         "chat": []
                         })
     t.start()
@@ -355,7 +360,7 @@ def CreateChatDocument(request):
         return ReturnHttpInvalidJWT(valjwt)
     
     request_dict = request.data.dict()
-    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document']):
+    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document'] or 't' not in request_dict['data'] or type(request_dict['data']) != bool):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
     data = json.loads(request_dict['data'])
     file = json.loads(request_dict['document'])
@@ -380,8 +385,11 @@ def CreateChatDocument(request):
     redis_client.set("cg_" + str(chat_id), json.dumps({"u": {"id": str(document_info["id"]), "name": document_info["name"], "size": document_info["size"]}, "q": data["q"]}))
 
     curr_time = datetime.datetime.now(datetime.timezone.utc)
-    WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , str(chat_id))
-    p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info])
+    file_path = WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , str(chat_id))
+    if(data['t'] == False):
+        p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info])
+    else:
+        p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id), {"id": document_info["id"], "name": document_info["name"], "size": document_info["size"], "path": file_path}])
     if(data["q"] != ""):
         t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
     else:
@@ -392,6 +400,7 @@ def CreateChatDocument(request):
                       "name": "New Conversation",
                       "date_created": curr_time,
                       "user_id": valjwt[3],
+                      "think": data['t'],
                       "chat": []})
     t.start()
 
@@ -403,7 +412,7 @@ def GetConversation(request, conv_id):
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
     
-    chat_ret = chats.find_one({"_id": conv_id, "user_id": valjwt[3]}, {"_id": 0, "chat": 1, "model": 1})
+    chat_ret = chats.find_one({"_id": conv_id, "user_id": valjwt[3]}, {"_id": 0, "chat": 1, "think": 1})
     if(chat_ret == {}):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
     else:
@@ -411,7 +420,7 @@ def GetConversation(request, conv_id):
             chat_ret['chat'][i]['t'] = chat_ret['chat'][i]['t'].timestamp()
             if('d' in chat_ret['chat'][i]):
                 chat_ret['chat'][i]['d']['id'] = str(chat_ret['chat'][i]['d']['id'])
-        chat_ret = {'c': chat_ret['chat']}
+        chat_ret = {'c': chat_ret['chat'], 't': chat_ret['think']}
 
         gen_chat = redis_client.get("cg_" + str(conv_id))
         if(gen_chat != None):
@@ -695,17 +704,19 @@ def AnswerQuestion(request):
     if(redis_client.exists("cg_" + data["id"])):
         return HttpResponse(json.dumps('Cannot ask question. An answer for a previous question is being generated'), status = 409)
 
-    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1, "chat.d": 1})
+    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1, "chat.d": 1, "think": 1})
     print(chat_ret)
     print('*****')
 
     if(chat_ret == {}):
         return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
     else:
-        ###>AA<
         redis_client.set("cg_" + data["id"], json.dumps({"q": data["q"]})) # cg -> chat generation
         #multiprocessing.set_start_method('fork')
-        p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"]])
+        if(chat_ret['think'] == False):
+            p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"]])
+        else:
+            p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[chat_ret['chat'], data["q"], data["id"]])
         p.start()
         return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [data["id"]], 200)
         #return CreateStreamingResponseNewAccess(valjwt[1], AnswerQuestionLLM, [chat_ret['chat'], data["q"], int(data["id"])], 200)
@@ -847,7 +858,7 @@ def AnswerQuestionWithDocument(request):
     if(redis_client.exists("cg_" + data["id"])):
         return HttpResponse(json.dumps('Cannot ask question. An answer for a previous question is being generated'), status = 409)
     
-    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1, "chat.d": 1})
+    chat_ret = chats.find_one({"_id": int(data["id"]), "user_id": valjwt[3]}, {"_id": 0, "chat.q": 1, "chat.a": 1, "chat.d": 1, "think": 1})
 
     if(chat_ret == {}):
         return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
@@ -858,9 +869,13 @@ def AnswerQuestionWithDocument(request):
         document_info = {"id": file_id, "name": file['name'], "size": str(round(len(file_write)/1024, 1)), "data": file_write.decode('utf-8')}
         redis_client.set("cg_" + data["id"], json.dumps({"u": {"id": str(document_info["id"]), "name": document_info["name"], "size": document_info["size"]}, "q": data["q"]}))
 
-        WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , data['id'])
+        file_path = WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , data['id'])
         #d = multiprocessing.Process(target = WriteDocument, args=[file['data'], file_id, file["name"], data['id']])
-        p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"], document_info])
+        if(chat_ret['think'] == False):
+            p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"], document_info])
+        else:
+            document_info = {"id": document_info["id"], "name": document_info["name"], "size": document_info["size"], "path": file_path}
+            p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[chat_ret['chat'], data["q"], data["id"], document_info])
         #d.start()
         p.start()
 
@@ -888,10 +903,12 @@ def AnswerQuestionWithDocument(request):
 
 def WriteDocument(file_data, document_info, conv_id):
     file_type = document_info['name'].split(".")[-1]
-    with open(chatdocumentpath + '/' + conv_id + '_' + document_info['id'] + '.' + file_type, 'wb') as file:
+    file_path = chatdocumentpath + '/' + conv_id + '_' + document_info['id'] + '.' + file_type
+    with open(file_path, 'wb') as file:
         file.write(file_data)
 
     redis_client.xadd("cs_" + conv_id, {"u": json.dumps(document_info)})
+    return file_path
 
 def AnswearQuestion_NewOld_NoAI(request):
     valjwt = ValidateAndCreateJWT(request)
@@ -1098,4 +1115,67 @@ def Slow_Func_Test(request):
         print('bububu')
     return HttpResponse(json.dumps('lulaaaaaaa'), status = 200)
 
-def AskLLMThink(user_question, )
+def AnswerQuestionLLMThink(db_chat, user_question, chat_id, document_dict = None):
+    llm_chat = []
+    total_answer = ''
+
+    for conv in db_chat:
+        if 'd' in conv:
+            if 'q' in conv:
+                prompt = f"""User Question:
+{conv['q']}
+
+-----------------------
+The user has also uploaded a file located at:
+{conv['d']['path']}"""
+            else:
+                prompt = f"""The user has uploaded a file located at:
+{conv['d']['path']}"""
+
+            llm_chat += [{'role': 'user', 'content': prompt}, {'role': 'assistant', 'content': conv['a']}] 
+        else:
+            llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
+
+    if document_dict == None:
+        llm_chat.append({'role': 'user', 'content': user_question})
+    else:
+        if(user_question == ''):
+            prompt = f"""You are interacting with a user who has uploaded a file in JSON format.
+
+Your task is simple:
+
+- Acknowledge that you can see the user has uploaded a JSON file named {document_dict['name']}.
+- Do not analyze or interpret the file yet.
+- Offer help by asking if the user would like you to analyze, explain, validate, or get the JSON data.
+
+Keep your response short, polite, and helpful. Avoid making assumptions about the contents of the file."""
+            llm_chat.append({'role': 'user', 'content': prompt})
+        else:
+            llm_chat.append({'role': 'user', 'content': user_question})
+
+    try:
+        llm_answer = PassLLMThink(llm_model, user_question, document_dict['path'] if document_dict != None else None)
+        #llm_answer = chat(llm_model, messages = llm_chat, stream = True)
+    except:
+        redis_client.delete("cg_" + chat_id)
+        return
+    
+    for chunk in llm_answer:
+        
+        if(chunk.done == True):
+            redis_client.delete("cg_" + chat_id)
+            redis_client.xadd("cs_" + chat_id, {"d": 1}) # d -> done # cs_ -> chat stream
+            redis_client.expire("cs_" + chat_id, 3)
+            if(document_dict == None):
+                chats.update_one({"_id": int(chat_id)},
+                                {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+            else:
+                push_val = {"t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer, "d": document_dict}
+                if(user_question != ''):
+                    push_val['q'] = user_question
+                chats.update_one({"_id": int(chat_id)},
+                                {"$push": {"chat": push_val}})
+            return
+
+        total_answer += chunk.message.content
+        redis_client.xadd("cs_" + chat_id, {"v": chunk.message.content})

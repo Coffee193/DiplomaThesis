@@ -8,6 +8,7 @@ import _6_2_x_NEW_classify_boolean_asfunc
 import _6_2_test_ollama_tasksuitableresources_asfunc
 import _6_4_test_ollama_taskprepost_dependence_asfunc
 import _6_3_test_ollma_tasksuitres_answer_what_task_asfunc
+import _6_0_0_task_not_exist_in_json_file_asfunc
 
 ### JOBS ###
 
@@ -329,7 +330,217 @@ query = [1]
 retrieve_info = []
 
 ### TASKPRECEDENCECONSTRAINTS ###
+user_question = "Is there a task to be executed before task with id 483?"
+'''Yes, I found that information. The relevant data will be listed below.
 
+(DATA)
+
+Would you like me to explain the context of this result or help you find more details about it?'''
+'''Yes, based on the information I have, it appears that there is indeed a task that needs to be executed before the task with id 483.
+
+I will list all the relevant tasks as follows:
+
+(DATA)
+
+Would you like me to explain more about these tasks or help with anything else?'''
+'''Yes, there is a task that needs to be executed before the task with ID 483.
+
+I will list all the relevant data for your reference:
+
+(DATA)
+
+Would you like me to explain any of these details or help you further with this information?'''
+'''Yes, that's correct. There is a task scheduled before the task with ID 483.
+
+I'll list all the relevant tasks for you:
+
+(DATA)
+
+Would you like me to help you understand any specific details about these tasks or assist with anything else?'''
+search = 'tasksprecedenceconstraints'
+query = [{'before': 227, 'after': 483}]
+taskprecedenceconstraints_pick = 'order'
+retrieve_info = []
+
+user_question = 'Which task should i execute before task 1?'
+'''I couldn't find any match for a task that needs to be executed before "task 1" in your uploaded JSON file. It seems there's no dependency or prerequisite task specified for task 1.
+
+If you'd like, I can help you review the tasks listed in your JSON file and identify any dependencies or sequences that might be relevant to your workflow. Would you like me to assist with anything else?'''
+search = 'tasksprecedenceconstraints'
+query = []
+taskprecedenceconstraints_pick = 'order'
+retrieve_info = []
+
+user_question = 'Which task should i execute before task 581?'
+'''Task 553.
+
+I will list the relevant data:
+(DATA)
+
+Would you like me to help you find any other tasks or provide more details on these specific tasks?'''
+'''Task 553 should be executed before task 581.
+
+I'll list all relevant tasks in order.
+(DATA)'''
+search = 'tasksprecedenceconstraints'
+query = [{'before': 553, 'after': 581}]
+taskprecedenceconstraints_pick = 'order'
+retrieve_info = []
+
+user_question = 'What task can i execute after completing task 591?' 
+'''You should execute task 597 after completing task 591.
+
+(DATA)
+
+Is there anything else I can help you with regarding your tasks or would you like to review the details of these tasks?'''
+'''Task 597.
+
+(DATA)'''
+'''You should execute task 597.
+
+I'll list all the relevant tasks: (DATA)
+
+Would you like me to explain how to navigate between tasks or do you need help with anything else?'''
+query = [{'before': 591, 'after': 597}]
+taskprecedenceconstraints_pick = 'order'
+retrieve_info = []
+
+user_question = 'Does task 590 require another task to be executed beforehand?'
+'''Yes, the task you're referring to does indeed require another task to be executed beforehand.
+
+(DATA)
+
+Would you like me to explain any of the details in (DATA) or do you need help with anything else?'''
+query = [{'before': 575, 'after': 590}]
+taskprecedenceconstraints_pick = 'order'
+retrieve_info = []
+
+user_question = 'Does task 2 require another task to be executed beforehand?'
+'''I've searched through the JSON file you provided, but unfortunately, I couldn't find any information on task dependencies for task 2. It seems that there are no prerequisites specified for task 2.
+
+If you need help with anything else or want more details about your uploaded data, feel free to ask! Would you like me to assist you with something specific now?'''
+query = []
+taskprecedenceconstraints_pick = 'order'
+retrieve_info = []
+
+user_question = 'Return the ids of all tasks that have to be executed before task 581'
+'''I can confirm that there is exactly one ID for the tasks that need to be executed before task 581.
+
+(DATA)
+
+Is there anything else I can help you with? Would you like me to provide more information about the specific task or its dependencies?'''
+query = [{'before': 775, 'after': 581}]
+taskprecedenceconstraints_pick = 'order'
+retrieve_info = []
+
+user_question = 'Does task 584 need to be executed before 585?'
+'''Based on the filtering criteria you chose, I did not find any information about the dependency of task 584 needing to be executed before task 585.
+
+However, if you'd like to check the order or dependencies between specific tasks, you can ask me to filter the JSON file by those tasks, and I'll do my best to provide more detailed information. Would you like to proceed with that?'''
+query = []
+taskprecedenceconstraints_pick = 'order'
+retrieve_info = []
+
+user_question = 'Is task 590 independent of other tasks?'
+'''Task 590 must be executed before task 991, so it has dependencies and is not entirely independent.
+
+I'll list all relevant data as follows:
+
+(DATA)
+
+Would you like to know more about the tasks' execution order or their individual details?'''
+query = [{'before': 590, 'after': 991}]
+taskprecedenceconstraints_pick = 'dependence'
+retrieve_info = []
+
+user_question = 'Does task 590 need to be executed before or after another task?'
+'''Task 590 needs to be executed before task 991.
+
+I'll list all the relevant information regarding these tasks:
+(DATA)
+
+Would you like me to explain how these two tasks are related in more detail, or is there anything else I can help you with?'''
+query = [{'before': 590, 'after': 991}]
+taskprecedenceconstraints_pick = 'dependence'
+retrieve_info = []
+
+user_question = "Return all task dependencies"
+'''Task 590 must be executed before task 991, task 592 must be executed before task 599, and task 322 must be executed before task 752.
+
+I will list all the task dependencies as follows:
+(DATA)
+
+Would you like me to help with anything else or provide more details about these task dependencies?'''
+query = [{'before': 590, 'after': 991}, {'before': 592, 'after': 599}, {'before': 322, 'after': 752}]
+taskprecedenceconstraints_pick = 'dependence'
+retrieve_info = []
+
+### PROBLEM -> says its independent of other tasks not that it does not exist
+user_question = 'Does task 2 depend on other tasks?'
+'''According to the information in the JSON file you provided, task 2 is independent. Its execution does not depend on any other tasks.
+
+Would you like me to help with anything else or would you like more details about how this was determined from the uploaded data?'''
+query = []
+taskprecedenceconstraints_pick = 'dependence'
+retrieve_info = {'reference': 2, 'target': '*'}
+
+user_question = 'Does task 590 depend on other tasks?'
+'''No, task 590 does not rely on any other tasks for its execution. The dependencies in this project are independent.
+
+Would you like to review the status of task 590 or view its associated information from the uploaded JSON file?'''
+'''No, task 590 is independent and does not rely on any other tasks. 
+
+Would you like me to check its configuration or help with anything else?'''
+query = []
+taskprecedenceconstraints_pick = 'dependence'
+retrieve_info = {'reference': 590, 'target': '*'}
+
+user_question = 'Does task 590 depend on task 735?'
+'''Based on the information in the JSON file you've shared with me, I can confirm that task 590 and task 735 are independent of each other. The execution of one does not depend on the completion or status of the other.
+
+Would you like to know if there's any specific dependency between these tasks or would you like help reviewing the overall task flow?'''
+query = []
+taskprecedenceconstraints_pick = 'dependence'
+retrieve_info = {'reference': 590, 'target': 735}
+
+user_question = 'Does task 2 depend on other tasks?'
+'''No matches were found for your request regarding dependencies between tasks.
+
+To confirm, I've reviewed the JSON file you provided and couldn't find any information about task 2 depending on other tasks. If you'd like to clarify or provide more context, please let me know!
+
+Would you like me to check for dependencies of a different task, or is there anything else I can help with?'''
+'''After reviewing the uploaded JSON file, I couldn't find any information indicating that task 2 depends on other tasks. With the filtering criteria you provided, there were no dependencies found for task 2.
+
+Would you like to review the task hierarchy or explore other features in the JSON file? Do you need help with anything else?'''
+query = []
+taskprecedenceconstraints_pick = 'dependence'
+retrieve_info = {'reference': 2, 'target': '*'}
+
+user_question = 'Does task 590 depend on other tasks?'
+'''No, task 590's execution does not depend on other tasks.
+
+Would you like to check if there are any conditions that need to be met before executing task 590? Or would you like me to help with something else?'''
+query = []
+taskprecedenceconstraints_pick = 'dependence'
+retrieve_info = {'reference': 590, 'target': '*'}
+
+user_question = 'Does task 2 depend on other tasks?'
+'''Unfortunately, I couldn't find any information about a task with ID "2" in the JSON file you provided. It seems that there is no record of a task with that specific identifier.
+
+If you'd like to check again or need help understanding how the data in the JSON file is structured, please let me know! Would you like some assistance reviewing the contents of the JSON file?'''
+query = []
+taskprecedenceconstraints_pick = 'dependence'
+retrieve_info = {'reference': 2, 'target': '*'}
+
+json_path = "C:/Users/Chris/Downloads/diplomat/json_examples/appropriate_from/InputJSON_3_shorter.json"
+with open(json_path, encoding = 'utf-8') as file:
+    json_data = file.read()
+    json_data = json.loads(json_data)
+
+def IntToStrWithSlabInfornt(val):
+    if(type(val) != str):
+        val = '_' + str(val)
+    return val
 
 def LLMOutClean(answer):
     answer = answer.replace('\n', '')
@@ -353,12 +564,18 @@ if(search != 'tasksprecedenceconstraints'):
     else:
         prompt = _6_1_test_ollama_fin_answer_jobs_tasks_resources_matchesfound_asfunc.getPrompt(user_question, len(query))
 else:
-    if("dependence" in retrieve_info):
+    if(taskprecedenceconstraints_pick == "dependence"):
         if(len(query) == 0):
-            prompt = _6_4_test_ollama_taskprepost_dependence_asfunc.getPrompt(user_question, retrieve_info['target'])
+            print([q['id'] for q in json_data["tasks"]["task"]])
+            if(IntToStrWithSlabInfornt(retrieve_info['reference']) not in [q['id'] for q in json_data["tasks"]["task"]]):
+                print('Not in')
+                prompt = _6_0_0_task_not_exist_in_json_file_asfunc.getPrompt(user_question)
+            else:
+                print('In')
+                prompt = _6_4_test_ollama_taskprepost_dependence_asfunc.getPrompt(user_question, retrieve_info['target'])
         else:
             prompt = _6_3_test_ollma_tasksuitres_answer_what_task_asfunc.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
-    else:
+    elif(taskprecedenceconstraints_pick == "order"):
         if(len(query) == 0):
             prompt = _6_0_test_ollama_fin_answer_noresults_asfunc.getPrompt(user_question)
         else:
@@ -366,6 +583,10 @@ else:
             bool_classify = LLMOutClean(bool_classify)
             try:
                 bool_classify = json.loads(bool_classify)
+                print('&&&')
+                print(bool_classify)
+                print(QueryToInfoNaturalLanguage(query))
+                print('&&&')
                 if(bool_classify['attribute'] == True):
                     prompt = _6_2_test_ollama_tasksuitableresources_asfunc.getPrompt(user_question, len(query))
                 else:
@@ -376,5 +597,4 @@ else:
 llm_answer = chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
 
 print('**********************')
-#print(len(tokenizer.tokenize(json.dumps(user_prompt))))
 print(llm_answer)

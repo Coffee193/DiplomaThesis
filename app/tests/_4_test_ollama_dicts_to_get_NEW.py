@@ -174,6 +174,7 @@ try:
     if(answer['gibberish'] == True):
         print(chat('llama3.1', messages = [{'role': 'user', 'content': _x0_test_ollama_error_chain_1_prompt.getPrompt(user_question)}]).message.content)
 except:
+    ## Return from pipeline ## --> Spawn process that writes to redis and then return
     print(chat('llama3.1', messages = [{'role': 'user', 'content': _x0_test_ollama_error_chain_1_prompt.getPrompt(user_question)}]).message.content)
 
 ### End ###
@@ -256,9 +257,10 @@ elif(search == 'tasksprecedenceconstraints'):
     query = json_data["taskprecedenceconstraints"]["taskprecedenceconstraint"]
     answer = chat('llama3.1', messages = [{'role': 'user', 'content': _3_4_0_test_ollamaclassifier_attr_taskprepost_orderdependence_asfunc.getPrompt(user_question)}]).message.content
     answer = json.loads(LLMOutClean(answer))
-    if("order" in answer):
+    taskprecedenceconstraints_pick = answer["pick"]
+    if(answer["pick"] == "order"):
         prompt = _3_4_1_test_ollamaclassifier_attr_taskprepost_copy_rewrite_NEW_order_asfunc.getPrompt(user_question)
-    elif("dependence" in answer):
+    elif(answer["pick"] == "dependence"):
         prompt = _3_4_2_test_ollamaclassifier_attr_taskprepost_dependence_asfunc.getPrompt(user_question)
     #prompt = _3_4_test_ollamaclassifier_attr_taskprepost.getPrompt(user_question)
     # {"attribute": <bool>, "id": <int>, "order": <str>, "think": <str>}
@@ -266,16 +268,16 @@ elif(search == 'tasksprecedenceconstraints'):
 else:
     print(chat('llama3.1', messages = [{'role': 'user', 'content': _x0_test_ollama_error_chain_1_prompt.getPrompt(user_question)}]).message.content)
 
-answer_fin = chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
-answer_fin = LLMOutClean(answer_fin)
+answer = chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
+answer = LLMOutClean(answer)
 ### End ###
 
 print('----- Chain 2: Info Retrieve Classifier -----')
-print(answer_fin)
+print(answer)
 
 ### EXTRACTION PART ###
 try:
-    retrieve_info = json.loads(answer_fin)
+    retrieve_info = json.loads(answer)
 except:
     retrieve_info = None
 
@@ -441,7 +443,7 @@ print(query)
 print('***************')
 print(retrieve_info)
 print('***************')
-print(answer_fin)
+print(answer)
 print('***************')
 print('------------ TESTING INFO END ------------')
 
@@ -451,12 +453,12 @@ if(search != 'tasksprecedenceconstraints'):
     else:
         prompt = _6_1_test_ollama_fin_answer_jobs_tasks_resources_matchesfound_asfunc.getPrompt(user_question, len(query))
 else:
-    if("dependence" in answer_fin):
+    if(taskprecedenceconstraints_pick == "dependence"):
         if(len(query) == 0):
             prompt = _6_4_test_ollama_taskprepost_dependence_asfunc.getPrompt(user_question, retrieve_info['target'])
         else:
             prompt = _6_3_test_ollma_tasksuitres_answer_what_task_asfunc.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
-    else:
+    elif(taskprecedenceconstraints_pick == "order"):
         if(len(query) == 0):
             prompt = _6_0_test_ollama_fin_answer_noresults_asfunc.getPrompt(user_question)
         else:
@@ -469,7 +471,7 @@ else:
                 else:
                     prompt = _6_3_test_ollma_tasksuitres_answer_what_task_asfunc.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
             except:
-                print('')
+                print(chat('llama3.1', messages = [{'role': 'user', 'content': _x0_test_ollama_error_chain_1_prompt.getPrompt(user_question)}]).message.content)
             
 
 ### Classifier 3? - Final Generation ###

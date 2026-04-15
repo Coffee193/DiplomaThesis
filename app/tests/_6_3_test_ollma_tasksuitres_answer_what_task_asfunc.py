@@ -9,7 +9,7 @@ Info:
 {info}
 
 - DO NOT mention that you were provided that information. NEVER NEVER mention the Info
-- Always answer directly without being verbose but ensure completeness mentioned the task ids
+- Always answer directly without being verbose but ensure completeness
 - That information is ALWAYS enough to anwer the user's question. Be straight to the point
 
 Then say how you'll list all the retrieved information WITHOUT saying anything else, and follow the below guidelines:

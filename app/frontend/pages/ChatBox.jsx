@@ -100,12 +100,16 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         
         let body = null
         if(cbinputRef.current.value !== ''){
+            console.log('******************')
+            console.log(cbinputRef.current.value)
+            console.log(cbuState)
+            console.log(cbuState['data'].slice(29))
             body = new FormData()
             body.append('data', JSON.stringify(request))
             body.append('document', JSON.stringify({'data': cbuState['data'], 'name': cbuState['name']}))
 
             blob = new Blob(
-                [atob(cbuState['data'].slice(21))],
+                [atob(cbuState['data'].slice(29))],
                 {
                     type: 'application/JSON'
                 }

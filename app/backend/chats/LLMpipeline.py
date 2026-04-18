@@ -9,6 +9,10 @@ from LLM_prompts import StringToDateMonthForm
 from LLM_prompts.Chain4 import JobAttributeReturnClassifier, TaskAttributeReturnClassifier, ResourceAttributeReturnClassifier, TasksuitableresourceAttributeReturnResourceClassifier, TasksuitableresourceAttributeReturnTaskClassifier
 from LLM_prompts.Chain5 import OutputNoResultsFound, OutputListResultsTaskJobResourceTasksuitableresource, OutputTaskprecedenceconstraintsTaskNoExist, OutputListResultsTaskprecedenceconstraints, OutputTaskprecedenceconstraintsTaskIsIndependent, OutputTaskprecedenceconstraintsClassifyQuestionBoolean, OutputTaskprecedenceconstraintsAnswerBooleanQuestion
 from LLM_prompts.FindJSONFile import InstructUploadJSON
+from LLM_prompts.UploadJSONFileNoQuestion import UserUploadJSONNoQuestion
+from LLM_prompts.UploadJSONFileIrrelevantQuestion import UserUploadJSONIrrelevantQuestion
+from LLM_prompts.TitleGeneration import TitleJSONUploadNoQuestion, TitleJSONUploadRelevantQuestion, TitleOnlyQuestionNoJSON, TitlteJSONUploadIrrelevantQuestion, TittleGibberishInput
+from LLM_prompts.JSONUploadNoQuestion import JSONUploadNoQuestion
 
 def IntToStrWithSlabInfornt(val):
     if(type(val) != str):
@@ -31,33 +35,70 @@ def QueryToInfoNaturalLanguage(query):
             text += '\n'
     return text
 
-def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
+def CreateChatConv(db_chat, user_question, file_name = None):
+
+    llm_chat = []
+
+    for conv in db_chat:
+        if 'd' in conv:
+            if 'q' in conv:
+                prompt = f"""User Question:
+{conv['q']}
+
+-----------------------
+The user has also uploaded a file located at:
+{conv['d']['path']}"""
+            else:
+                prompt = f"""The user has uploaded a file located at:
+{conv['d']['path']}"""
+
+            llm_chat += [{'role': 'user', 'content': prompt}, {'role': 'assistant', 'content': conv['a']}] 
+        else:
+            llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
+
+    if file_name == None:
+        llm_chat.append({'role': 'user', 'content': user_question})
+    else:
+        if(user_question == ''):
+            llm_chat.append({'role': 'user', 'content': UserUploadJSONNoQuestion.getPrompt(file_name)})
+        else:
+            llm_chat.append({'role': 'user', 'content': UserUploadJSONIrrelevantQuestion.getPrompt(file_name, user_question)})
+
+    return llm_chat
+
+def GetLastFilePathFromChat(db_chat):
+    return 'aaaaaaaaaaa'
+
+def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = None):
+
+    ### Recongise Upload ###
+    if(json_path != None and user_question == ''):
+        return chat(llm_model, messages = [{'role': 'user', 'content': JSONUploadNoQuestion.getPrompt(json_name)}], stream = True)
+    ### Recognise Upload End ###
 
     ### Chain 1: Gibberish Classifier ###
     ''' Classifies if Question is Gibberish or Not'''
-    answer = LLMOutClean(chat('llama3.1', messages = [{'role': 'user', 'content': GibberishClassifier.getPrompt(user_question)}]).message.content)
+    answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': GibberishClassifier.getPrompt(user_question)}]).message.content)
 
     try:
         answer = json.loads(answer)
         if(answer['gibberish'] == True):
-            return chat('llama3.1', messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}]).message.content
+            return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
     except:
-        return chat('llama3.1', messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}]).message.content
+        return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
     ### Chain 1 End ###
 
 
     ### Chain 2: High Level Classifier (Tasks, Jobs, Resources, TaskSuitableResources, TaskPrepost) ###
     ''' Classifies if user asks about: Jobs, Resources, Tasks, Tasksuitableresources, Taskprecedenceconstraints'''
-    answer = LLMOutClean(chat('llama3.1', messages = [{'role': 'user', 'content': HighLevelClassifier.getPrompt(user_question)}]).message.content) # Word-based search
+    answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': HighLevelClassifier.getPrompt(user_question)}]).message.content) # Word-based search
 
     try:
         answer = json.loads(answer)
         words = answer['words']
         if(len(words) == 0):
-            return chat('llama3.1', messages = [{'role': 'user', 'content': user_question}]).message.content
-        elif(json_path == None):
-            ### <--------- NEED TO WORK ON THESE CASES HERE (User ASKS about a JSON file he uploaded previously)
-            saoidjasoidjioasd
+            return chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_name if json_path != None else None), stream = True)
+            #return chat('llama3.1', messages = [{'role': 'user', 'content': user_question}], stream = True)
         else:
             if('job' in words):
                 search = 'jobs'
@@ -67,7 +108,7 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
                 if('resource' in words):
                     search = 'resources'
                 elif('task' in words):
-                    answer = chat('llama3.1', messages = [{'role': 'user', 'content': HighLevelTaskClassifier.getPrompt(user_question)}]).message.content # Meaning-search
+                    answer = chat(llm_model, messages = [{'role': 'user', 'content': HighLevelTaskClassifier.getPrompt(user_question)}]).message.content # Meaning-search
                     answer = json.loads(LLMOutClean(answer))
                     if(answer['pick'] == 1):
                         search = 'tasksuitableresources'
@@ -76,11 +117,18 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
                     elif(answer['pick'] == 3):
                         search = 'tasks'
                     else:
-                        return chat('llama3.1', messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}]).message.content
+                        return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
     except:
-        return chat('llama3.1', messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}]).message.content
+        return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
     ### Chain 2 End ###
 
+    ### Get File If None Provided ###
+    '''User asks file related question without providing a file. Searches chat for last provided file'''
+    if(json_path == None):
+
+        ### <--------- NEED TO WORK ON THESE CASES HERE (User ASKS about a JSON file he uploaded previously (basically len words !=0 AND json_path == None). Get the [-1] json_path from the chat. If none found then there is a New prompt that handles this)
+        saoidjasoidjioasd
+    ### Get File If None Provided End ###
 
     ### Get JSON Data ###
     ''' Retrieves the JSON data '''
@@ -105,17 +153,20 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
         prompt = TasksuitableresourceAttributeRetriever.getPrompt(user_question)
     elif(search == 'tasksprecedenceconstraints'):
         query = json_data["taskprecedenceconstraints"]["taskprecedenceconstraint"]
-        answer = chat('llama3.1', messages = [{'role': 'user', 'content': TaskprecedencecontraintOrderDependenceClassifier.getPrompt(user_question)}]).message.content
-        answer = json.loads(LLMOutClean(answer))
-        taskprecedenceconstraints_pick = answer["pick"]
-        if(answer["pick"] == "order"):
-            prompt = TaskprecedenceconstraintOrderAttributeRetriever.getPrompt(user_question)
-        elif(answer["pick"] == "dependence"):
-            prompt = TaskprecedenceconstraintDependenceAttributeRetriever.getPrompt(user_question)
+        answer = chat(llm_model, messages = [{'role': 'user', 'content': TaskprecedencecontraintOrderDependenceClassifier.getPrompt(user_question)}]).message.content
+        try:
+            answer = json.loads(LLMOutClean(answer))
+            taskprecedenceconstraints_pick = answer["pick"]
+            if(answer["pick"] == "order"):
+                prompt = TaskprecedenceconstraintOrderAttributeRetriever.getPrompt(user_question)
+            elif(answer["pick"] == "dependence"):
+                prompt = TaskprecedenceconstraintDependenceAttributeRetriever.getPrompt(user_question)
+        except:
+            return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
     else:
-        return chat('llama3.1', messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}]).message.content
+        return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}]).message.content
 
-    answer = chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
+    answer = chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
     asnwer = LLMOutClean(answer)
     ### Chain 3 End ###
 
@@ -129,7 +180,7 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
 
     if retrieve_info == None:
         prompt = ExceptionHandler.getPrompt(user_question)
-        return chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
+        return chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
     else:
         if(retrieve_info['attribute'] == True):
             
@@ -147,7 +198,7 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
                 elif(retrieve_info['key'] == 'task'):
                     query = [q for q in query if any(t.get('refid') == IntToStrWithSlabInfornt(retrieve_info['value']) for t in q.get('jobtaskreference', []))]
                 elif(retrieve_info['key'] == 'arrivaldate' or retrieve_info['key'] == 'duedate'):
-                    retrieve_info['value'] = json.loads(chat('llama3.1', messages = [{'role': 'user', 'content': StringToDateMonthForm.getPrompt(retrieve_info['value'])}]).message.content)
+                    retrieve_info['value'] = json.loads(chat(llm_model, messages = [{'role': 'user', 'content': StringToDateMonthForm.getPrompt(retrieve_info['value'])}]).message.content)
                     query = [q for q in query if ( q[retrieve_info['key']]['day'] == retrieve_info['value']['day'] and q[retrieve_info['key']]['month'] == retrieve_info['value']['month'])]
             
             elif(search == 'tasksuitableresources'):
@@ -189,7 +240,7 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
             prompt = TasksuitableresourceAttributeReturnTaskClassifier.getPrompt(user_question)
 
     if(search != 'tasksprecedenceconstraints'):
-        answer = chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
+        answer = chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
         asnwer = LLMOutClean(answer)
     ### Chain 4 End ###
 
@@ -197,7 +248,6 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
     ### Data Final Clean Form ###
     if(search == 'jobs'):
         query = [{'name': q['name'], 'arrivaldate': q['arrivaldate'], 'duedate': q['duedate'], 'task': [r['refid'] for r in q['jobtaskreference']], 'workcenter': q['jobworkcenterreference']['refid'], 'id': q['id']} for q in query]
-        ### ###
     elif(search == 'tasks'):
         query = [{'name': q['name'], 'id': q['id']} for q in query]
     elif(search == 'resources'):
@@ -223,7 +273,7 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
 
             if wanted_return == None:
                 prompt = ExceptionHandler.getPrompt(user_question)
-                return chat('llama3.1', messages = [{'role': 'user', 'content': prompt}]).message.content
+                return chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
             else:
                 if(wanted_return['attribute'] == True):
                     if(search != 'tasksuitableresources'):
@@ -284,7 +334,7 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
             if(len(query) == 0):
                 prompt = OutputNoResultsFound.getPrompt(user_question)
             else:
-                bool_classify = chat('llama3.1', messages = [{'role': 'user', 'content': OutputTaskprecedenceconstraintsClassifyQuestionBoolean.getPrompt(user_question)}]).message.content
+                bool_classify = chat(llm_model, messages = [{'role': 'user', 'content': OutputTaskprecedenceconstraintsClassifyQuestionBoolean.getPrompt(user_question)}]).message.content
                 bool_classify = LLMOutClean(bool_classify)
                 try:
                     bool_classify = json.loads(bool_classify)
@@ -296,4 +346,38 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = []):
                     prompt = ExceptionHandler.getPrompt(user_question)
     ### Chain 5 End ###
 
-    return chat(llm_model, messages = [{'role': 'user', 'content': prompt}])
+    return chat(llm_model, messages = [{'role': 'user', 'content': prompt}], stream = True)
+
+def CreateConversationTitleThink(llm_model, user_question = '', file_name = None):
+    
+    ### Chain 1: Gibberish Classifier ###
+    ''' Classifies if Question is Gibberish or Not'''
+    if(user_question != ''):
+        answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': GibberishClassifier.getPrompt(user_question)}]).message.content)
+
+        try:
+            answer = json.loads(answer)
+            if(answer['gibberish'] == True):
+                return chat(llm_model, messages = [{'role': 'user', 'content': TittleGibberishInput.getPrompt()}]).message.content
+        except:
+            return None
+    ### Chain 1 End ###
+
+    ### Chain 2: Title Generation ###
+    if(file_name != None):
+        if(user_question == ''):
+            return chat(llm_model, messages = [{'role': 'user', 'content': TitleJSONUploadNoQuestion.getPrompt()}]).message.content
+        else:
+            answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': HighLevelClassifier.getPrompt(user_question)}]).message.content)
+            try:
+                answer = json.loads(answer)
+                words = answer['words']
+                if(len(words) == 0):
+                    return chat(llm_model, messages = [{'role': 'user', 'content': TitlteJSONUploadIrrelevantQuestion.getPrompt(user_question, file_name)}]).message.content
+                else:
+                    return chat(llm_model, messages = [{'role': 'user', 'content': TitleJSONUploadRelevantQuestion.getPrompt(user_question)}]).message.content
+            except:
+                return None
+    else:
+        return chat(llm_model, messages = [{'role': 'user', 'content': TitleOnlyQuestionNoJSON.getPrompt(user_question)}]).message.content
+    ### Chain 2 End ###

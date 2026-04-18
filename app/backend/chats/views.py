@@ -6,7 +6,7 @@ from backend.mongo_db_connection import mongo_db
 import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime
-from .LLMpipeline import PassLLMThink
+from .LLMpipeline import PassLLMThink, CreateConversationTitleThink
 
 ###
 # For multiplrocessing to work (i.e. to spawn a process) you must run these two lines of code before importing any models.
@@ -339,9 +339,11 @@ def CreateChatQuestion(request):
     redis_client.set("cg_" + str(chat_id), json.dumps({"q": data["q"]}))
     if(data['t'] == False):
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id)])
+        t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"]])
     else:
-        p = p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id)])
-    t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"]])
+        p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id)])
+        t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"]])
+
     p.start()
     chats.insert_one({"_id": chat_id,
                         "name": "New Conversation",
@@ -388,12 +390,10 @@ def CreateChatDocument(request):
     file_path = WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , str(chat_id))
     if(data['t'] == False):
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info])
+        t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
     else:
         p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id), {"id": document_info["id"], "name": document_info["name"], "size": document_info["size"], "path": file_path}])
-    if(data["q"] != ""):
-        t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
-    else:
-        t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
+        t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"], document_info["name"]])
 
     p.start()
     chats.insert_one({"_id": chat_id,
@@ -596,7 +596,7 @@ def GetLLMAnswerStream_Old_ReturnedAnswerAsString(chat_id, block_time = 20000):
     else:
         return 'Something went wrong with the retrieval'
 
-def GetLLMAnswerStream(chat_id, block_time = 60000, with_title = False):
+def GetLLMAnswerStream(chat_id, block_time = 110000, with_title = False):
     print(with_title)
     print('>>START<<')
     if(redis_client.exists("cg_" + chat_id) == True):
@@ -863,7 +863,7 @@ def AnswerQuestionWithDocument(request):
     if(chat_ret == {}):
         return HttpResponseBadRequest('Http 400 Bad request, chat could not be found')
     else:
-        file_write = base64.b64decode(file['data'][21:])
+        file_write = base64.b64decode(file['data'][29:])
         file_id = GenerateSnowflake()
 
         document_info = {"id": file_id, "name": file['name'], "size": str(round(len(file_write)/1024, 1)), "data": file_write.decode('utf-8')}
@@ -1116,9 +1116,10 @@ def Slow_Func_Test(request):
     return HttpResponse(json.dumps('lulaaaaaaa'), status = 200)
 
 def AnswerQuestionLLMThink(db_chat, user_question, chat_id, document_dict = None):
-    llm_chat = []
+    #llm_chat = []
     total_answer = ''
 
+    '''
     for conv in db_chat:
         if 'd' in conv:
             if 'q' in conv:
@@ -1152,9 +1153,10 @@ Keep your response short, polite, and helpful. Avoid making assumptions about th
             llm_chat.append({'role': 'user', 'content': prompt})
         else:
             llm_chat.append({'role': 'user', 'content': user_question})
+    '''
 
     try:
-        llm_answer = PassLLMThink(llm_model, user_question, document_dict['path'] if document_dict != None else None)
+        llm_answer = PassLLMThink(llm_model, user_question, document_dict['path'] if document_dict != None else None, db_chat, document_dict["name"] if document_dict != None else None)
         #llm_answer = chat(llm_model, messages = llm_chat, stream = True)
     except:
         redis_client.delete("cg_" + chat_id)
@@ -1179,3 +1181,11 @@ Keep your response short, polite, and helpful. Avoid making assumptions about th
 
         total_answer += chunk.message.content
         redis_client.xadd("cs_" + chat_id, {"v": chunk.message.content})
+
+def CreateChatTitleThink(chat_id, user_question = '', file_name = None):
+    llm_title = CreateConversationTitleThink(llm_model, user_question, file_name)
+    if(llm_title != None):
+        chats.update_one({"_id": int(chat_id)},
+                     {"$set": {"name": llm_title}})
+    
+    redis_client.xadd("cs_" + chat_id, {"t":llm_title})

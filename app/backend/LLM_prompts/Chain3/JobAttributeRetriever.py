@@ -56,42 +56,42 @@ User question:
 Return the job with id 63
 
 Output:
-{"attribute": true,"key": "id","value": 63}
+{"attribute": true,"key": "id","value": 63, "think": "<Your thinking process>"}
 -----
 
 User question:
 What tasks can be executed in job 33?
 
 Output:
-{"attribute": true,"key": "id","value": 33}
+{"attribute": true,"key": "id","value": 33, "think": "<Your thinking process>"}
 -----
 
 User question:
 What is the name of the job with id 12?
 
 Output:
-{"attribute": true,"key": "id","value": 12}
+{"attribute": true,"key": "id","value": 12, "think": "<Your thinking process>"}
 -----
 
 User question:
 Return all jobs
 
 Output:
-{"attribute": false}
+{"attribute": false, "think": "<Your thinking process>"}
 -----
 
 User question:
 Return the ids of every job
 
 Output:
-{"attribute": false}
+{"attribute": false, "think": "<Your thinking process>"}
 -----
 
 User question:
 Return all FROM BILLET jobs
 
 Output:
-{"attribute": true, "key": "name", "value": "FROM BILLET"}
+{"attribute": true, "key": "name", "value": "FROM BILLET", "think": "<Your thinking process>"}
 -----
 
 Remember:

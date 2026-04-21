@@ -47,35 +47,35 @@ User question:
 Return the task with id 13
 
 Output:
-{"attribute": true,"key": "id","value": 13}
+{"attribute": true,"key": "id","value": 13, "think": "<Your thinking process>"}
 -----
 
 User question:
 What is the name of the task with id 12?
 
 Output:
-{"attribute": true,"key": "id","value": 12}
+{"attribute": true,"key": "id","value": 12, "think": "<Your thinking process>"}
 -----
 
 User question:
 What are the ids of MELTING?
 
 Output:
-{"attribute": true,"key": "name","value": "MELTING"}
+{"attribute": true,"key": "name","value": "MELTING", "think": "<Your thinking process>"}
 -----
 
 User question:
 Return all tasks
 
 Output:
-{"attribute": false}
+{"attribute": false, "think": "<Your thinking process>"}
 -----
 
 User question:
 Return the name of every task
 
 Output:
-{"attribute": false}
+{"attribute": false, "think": "<Your thinking process>"}
 -----
 
 Remember:

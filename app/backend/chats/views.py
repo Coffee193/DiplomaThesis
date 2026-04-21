@@ -387,12 +387,12 @@ def CreateChatDocument(request):
     redis_client.set("cg_" + str(chat_id), json.dumps({"u": {"id": str(document_info["id"]), "name": document_info["name"], "size": document_info["size"]}, "q": data["q"]}))
 
     curr_time = datetime.datetime.now(datetime.timezone.utc)
-    file_path = WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , str(chat_id))
+    WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , str(chat_id))
     if(data['t'] == False):
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info])
         t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
     else:
-        p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id), {"id": document_info["id"], "name": document_info["name"], "size": document_info["size"], "path": file_path}])
+        p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id), {"id": document_info["id"], "name": document_info["name"], "size": document_info["size"]}])
         t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"], document_info["name"]])
 
     p.start()
@@ -869,12 +869,12 @@ def AnswerQuestionWithDocument(request):
         document_info = {"id": file_id, "name": file['name'], "size": str(round(len(file_write)/1024, 1)), "data": file_write.decode('utf-8')}
         redis_client.set("cg_" + data["id"], json.dumps({"u": {"id": str(document_info["id"]), "name": document_info["name"], "size": document_info["size"]}, "q": data["q"]}))
 
-        file_path = WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , data['id'])
+        WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , data['id'])
         #d = multiprocessing.Process(target = WriteDocument, args=[file['data'], file_id, file["name"], data['id']])
         if(chat_ret['think'] == False):
             p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"], document_info])
         else:
-            document_info = {"id": document_info["id"], "name": document_info["name"], "size": document_info["size"], "path": file_path}
+            document_info = {"id": document_info["id"], "name": document_info["name"], "size": document_info["size"]}
             p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[chat_ret['chat'], data["q"], data["id"], document_info])
         #d.start()
         p.start()
@@ -908,7 +908,6 @@ def WriteDocument(file_data, document_info, conv_id):
         file.write(file_data)
 
     redis_client.xadd("cs_" + conv_id, {"u": json.dumps(document_info)})
-    return file_path
 
 def AnswearQuestion_NewOld_NoAI(request):
     valjwt = ValidateAndCreateJWT(request)
@@ -1116,7 +1115,7 @@ def Slow_Func_Test(request):
     return HttpResponse(json.dumps('lulaaaaaaa'), status = 200)
 
 def AnswerQuestionLLMThink(db_chat, user_question, chat_id, document_dict = None):
-    #llm_chat = []
+
     total_answer = ''
 
     '''
@@ -1156,12 +1155,14 @@ Keep your response short, polite, and helpful. Avoid making assumptions about th
     '''
 
     try:
-        llm_answer = PassLLMThink(llm_model, user_question, document_dict['path'] if document_dict != None else None, db_chat, document_dict["name"] if document_dict != None else None)
-        #llm_answer = chat(llm_model, messages = llm_chat, stream = True)
+        llm_answer, think_stages, fetched_items, search = PassLLMThink(llm_model, user_question, chat_id, db_chat, {'name': document_dict["name"], 'id': document_dict['id']} if document_dict != None else None)
     except:
         redis_client.delete("cg_" + chat_id)
         return
-    
+
+    if(fetched_items != None):
+        redis_client.xadd("cs_" + chat_id, {"i": json.dumps(fetched_items), "s": search}) # i -> items
+
     for chunk in llm_answer:
         
         if(chunk.done == True):
@@ -1169,12 +1170,19 @@ Keep your response short, polite, and helpful. Avoid making assumptions about th
             redis_client.xadd("cs_" + chat_id, {"d": 1}) # d -> done # cs_ -> chat stream
             redis_client.expire("cs_" + chat_id, 3)
             if(document_dict == None):
+                push_val = {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer, "think": think_stages}
+                if(fetched_items != None):
+                    push_val["i"] = fetched_items
+                    push_val["s"] = search
                 chats.update_one({"_id": int(chat_id)},
-                                {"$push": {"chat": {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}}})
+                                {"$push": {"chat": push_val}})
             else:
-                push_val = {"t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer, "d": document_dict}
+                push_val = {"t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer, "d": document_dict, "think": think_stages}
                 if(user_question != ''):
                     push_val['q'] = user_question
+                if(fetched_items != None):
+                    push_val['i'] = fetched_items
+                    push_val['s'] = search
                 chats.update_one({"_id": int(chat_id)},
                                 {"$push": {"chat": push_val}})
             return

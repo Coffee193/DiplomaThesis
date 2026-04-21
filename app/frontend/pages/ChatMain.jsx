@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBox } from './ChatBox'
 import { ChatBoxUpload } from './ChatBoxUpload'
-import { BlocksLoad, DotIcon } from '../components/svgs/UtilIcons'
+import { BlocksLoad, DotIcon, ArrowDownIcon, DotsIcon } from '../components/svgs/UtilIcons'
 
 export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavsetState }){
 
@@ -62,10 +62,13 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             }
 
             for(let i=response['c'].length - 1; i>=0; i--){
+                console.log('****************')
+                console.log(response["c"][i]["a"])
+                console.log(response["c"][i]["i"])
                 conv_vals.push(
                     <>
                         <div className='cm_chatbox'>
-                            {AddStreamBold(response["c"][i]["a"])}
+                            {CreateInfoBlock(AddStreamBold(response["c"][i]["a"]), response["c"][i]["i"], response["c"][i]["s"])}
                         </div>
                         <div className='cm_chatuser'>
                             {response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"], 'id': response["c"][i]["d"]["id"], 'link': linkparams.id}}/> : null}
@@ -96,6 +99,211 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             navigate('/login', {state: {to: '/chat/' + linkparams.id + '/', expired: true}})
         }
 
+    }
+
+    function CreateInfoBlock(data, info, search){
+        if(info !== undefined){
+            if(data.length === 1){
+                data = data[0].split(/(\(DATA\))/)
+            }
+            for(let i=1; i<data.length; i++){
+                if(data[i] === "(DATA)"){
+                    data[i] =
+                    <div className='cm_infoboxholder'>
+                        <div className = {Object.keys(info[0]).length > 2 && (search === 'jobs' || search === 'tasksuitableresources') ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
+                            {CreateBlock(info, search)}
+                        </div>
+                    </div> 
+                }
+            }
+        }
+        return data
+    }
+
+    function CreateBlock(info, search){
+        if(search == 'jobs'){
+            return CreateJobBlock(info)
+        }
+        else if(search === 'tasks'){
+            return CreateTasksBlock(info)
+        }
+        else if(search === 'tasksuitableresources'){
+            return CreateTasksuitableresourceBlock(info)
+        }
+        else if(search === 'tasksprecedenceconstraints'){
+            return CreateTaskprecedenceconstraintBlock(info)
+        }
+        else if(search === 'resources'){
+            return CreateResourceBlock(info)
+        }
+    }
+
+    function CreateTasksBlock(info){
+        let list_out = []
+        for(let i=0; i<info.length; i++){
+            if(info[i]['name'] === undefined){
+                list_out.push(
+                <div className='cm_infoblock'>
+                    <div className = 'cm_infotask'>ID: {info[i]['id']}</div>
+                </div>)
+            }
+            else{
+                list_out.push(
+                <div className='cm_infoblock'>
+                    <div className = 'cm_infoflex'>
+                        <DotIcon/> ID: {info[i]['id']}
+                        <div className='cm_infobg'>
+                            ({info[i]['name']})
+                        </div>
+                    </div>
+                </div>)
+            }
+        }
+        return list_out
+    }
+
+    function NumberToShortMonthName(num){
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        return months[num - 1]; // because arrays are 0-based
+
+    }
+
+    function BlockDateToStr(date, withtime = false){
+        if(withtime === false){
+            return date['day'] + '  ' + NumberToShortMonthName(date['month']) + '  ' + date['year']
+        }
+        else{
+            return date['day'] + '  ' + NumberToShortMonthName(date['month']) + '  ' + date['year'] + '  ' + String(date['hour']).padStart(2, '0') + ':' + String(date['minute']).padStart(2, '0')
+        }
+    }
+
+    function CreateJobBlock(info){
+        let list_out = []
+        for(let i=0; i<info.length; i++){
+            let extra_info = []
+            /*["name", "arrivaldate", "duedate", "task"].forEach((key) => {
+                if(key in info){
+
+                }
+            })*/
+            if("name" in info[i]){
+                extra_info.push(
+                    <div className = 'cm_infoleft cm_infoflex'>
+                        <DotIcon/> <div className='cm_infopush'>Name:</div> <div className='cm_infoweak'>{info[i]['name']}</div>
+                    </div>
+                )
+            }
+            if("arrivaldate" in info[i]){
+                extra_info.push(
+                    <div className = 'cm_infoleft cm_infoflex'>
+                        <DotIcon/> <div className='cm_infopush'>Arrival Date:</div> <div className='cm_infoweak'>{BlockDateToStr(info[i]['arrivaldate'])}</div>
+                    </div>
+                )
+            }
+            if("duedate" in info[i]){
+                extra_info.push(
+                    <div className = 'cm_infoleft cm_infoflex'>
+                        <DotIcon/> <div className='cm_infopush'>Due Date:</div> <div className='cm_infoweak'>{BlockDateToStr(info[i]['duedate'])}</div>
+                    </div>
+                )
+            }
+            if("task" in info[i]){
+                extra_info.push(
+                    <div className = 'cm_infoleft'>
+                        <div className = 'cm_infoflex'>
+                            <DotIcon/> <div className='cm_infopush'>Task IDs:</div>
+                        </div>
+                        <div>
+                            {info[i]["task"].map((id, index) => (
+                                <div className='cm_infoweak cm_infoleftbig'>{id}</div>
+                            ))}
+                        </div>
+                    </div>
+                )
+            }
+            list_out.push(
+                <div className='cm_infoblock'>
+                    <div className = 'cm_infoflex'>
+                        <ArrowDownIcon width={16} height={16} style={{transform: 'rotate(-90deg)'}}/> Job ID: 
+                        <div className='cm_infobg'>
+                            {info[i]['id']}
+                        </div>
+                    </div>
+                    {extra_info}
+                </div>
+            )
+        }
+        return list_out
+    }
+
+    function CreateTasksuitableresourceBlock(info){
+        let list_out = []
+        for(let i=0; i<info.length; i++){
+            list_out.push(
+                <div className='cm_infoblock'>
+                    <div className = 'cm_infoflex'>
+                        <ArrowDownIcon width={16} height={16} style={{transform: 'rotate(-90deg)'}}/> Resource ID: {info[i]['resource']['id']}
+                        {"name" in info[i]['resource'] ? (<div className='cm_infobg'>
+                            {info[i]['resource']['name']}
+                        </div>) : (<></>)}
+                    </div>
+                    {info[i]["tasks"].map((x, index) => (
+                    <div className='cm_infoblock'>
+                        <div className = 'cm_infoleft cm_infoflex'>
+                            <DotIcon/> Task ID: {x.id} {'name' in x ? <div className='cm_infobg'>{x.name}</div> : <></>}
+                        </div>
+                        {'operation_time' in x ? <div className='cm_infoleftmid cm_infoflex'>Operation Time: <div className='cm_infoweak cm_infoblockmid'>{x.operation_time}</div></div> : <></>}
+                    </div>
+                    ))}
+                </div>
+            )
+        }
+        return list_out
+    }
+
+    function CreateTaskprecedenceconstraintBlock(info){
+        let list_out = []
+        for(let i=0; i<info.length; i++){
+            list_out.push(
+                <div className='cm_infoblock cm_infoflex'>
+                    <DotIcon/> <div>{info[i]['before']} → {info[i]['next']}</div>
+                </div>
+            )
+        }
+        return list_out
+    }
+     
+    function CreateResourceBlock(info){
+        let list_out = []
+        for(let i=0; i<info.length; i++){
+            list_out.push(
+                <div className='cm_infoblock'>
+                    <div className='cm_infoflex'>
+                        <DotIcon/> Resource ID: {info[i]['id']}
+                            {"name" in info[i] ? (<div className='cm_infobg'>
+                                {info[i]['name']}
+                            </div>) : (<></>)}
+                    </div>
+                    {"nonworkingperiods" in info[i] ? (
+                        <>
+                            <div className='cm_infoleftmid'>
+                                Non Working Periods:
+                            </div>
+                            <div className='cm_infoperiodsholder'>
+                                <div className='cm_infoperiods'>
+                                    {info[i]["nonworkingperiods"].map((x, index) => (
+                                        <div className='cm_infoflex'><DotIcon/> {BlockDateToStr(x.fromdate, true)} → {BlockDateToStr(x.todate, true)}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        </>
+                    ) : (<></>)}
+                </div>
+            )
+        }
+        return list_out
     }
 
     async function ResumeAnswerStream(waitTitle = null){

@@ -45,22 +45,22 @@ Examples:
 
 -----
 User question: "Which tasks can be done in resource 13?"
-Output: {"attribute": true, "know": {"info": "resource", "key": "id", "value": 13}, "search": {"info": "task"}, "think": <Your thinking process>}
+Output: {"attribute": true, "know": {"info": "resource", "key": "id", "value": 13}, "search": {"info": "task"}, "think": "<Your thinking process>"}
 -----
 User question: "Where can task 57 be executed?"
-Output: {"attribute": true, "know": {"info": "task", "key": "id", "value": 57}, "search": {"info": "resource"}, "think": <Your thinking process>}
+Output: {"attribute": true, "know": {"info": "task", "key": "id", "value": 57}, "search": {"info": "resource"}, "think": "<Your thinking process>"}
 -----
 User question: "How long does task 90 take?"
-Output: {"attribute": true, "know": {"info": "task", "key": "id", "value": 90}, "search": {"info": "time"}, "think": <Your thinking process>}
+Output: {"attribute": true, "know": {"info": "task", "key": "id", "value": 90}, "search": {"info": "time"}, "think": "<Your thinking process>"}
 -----
 User question: "What resource can execute each task?"
-Output: {"attribute": false, "think": <Your thinking process>}
+Output: {"attribute": false, "think": "<Your thinking process>"}
 -----
 User question: "What tasks can be executed in the MELTSHOP?"
-Output: {"attribute": true, "know": {"info": "resource", "key": "name", "value": "MELTSHOP"}, "search": {"info": "task"}, "think": <Your thinking process>}
+Output: {"attribute": true, "know": {"info": "resource", "key": "name", "value": "MELTSHOP"}, "search": {"info": "task"}, "think": "<Your thinking process>"}
 -----
 User question: "What resource can execute each task?"
-Output: {"attribute": false, "think": <Your thinking process>}"""
+Output: {"attribute": false, "think": "<Your thinking process>"}"""
    prompt += f"""
 
 ____________________

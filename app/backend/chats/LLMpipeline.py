@@ -1,5 +1,6 @@
 from ollama import chat
 import json
+import os
 
 from LLM_prompts.Chain1 import GibberishClassifier
 from LLM_prompts.UnexpectedException import ExceptionHandler
@@ -13,6 +14,9 @@ from LLM_prompts.UploadJSONFileNoQuestion import UserUploadJSONNoQuestion
 from LLM_prompts.UploadJSONFileIrrelevantQuestion import UserUploadJSONIrrelevantQuestion
 from LLM_prompts.TitleGeneration import TitleJSONUploadNoQuestion, TitleJSONUploadRelevantQuestion, TitleOnlyQuestionNoJSON, TitlteJSONUploadIrrelevantQuestion, TittleGibberishInput
 from LLM_prompts.JSONUploadNoQuestion import JSONUploadNoQuestion
+from LLM_prompts.JSONQuestionNoPath import JSONQuestionNoPath
+
+chatdocumentpath = os.environ.get('CHAT_DOCUMENT_PATH')
 
 def IntToStrWithSlabInfornt(val):
     if(type(val) != str):
@@ -66,14 +70,25 @@ The user has also uploaded a file located at:
 
     return llm_chat
 
-def GetLastFilePathFromChat(db_chat):
-    return 'aaaaaaaaaaa'
+def GetLastFileFromChat(db_chat, conv_id):
+    print('*** Called ***')
+    print(db_chat)
+    print('*** ***')
+    for i in range(len(db_chat) - 1, -1, -1):
+        if 'd' in db_chat[i]:
+            return {'id': db_chat[i]['d']['id'], 'name': db_chat[i]['d']['name']}
+    return None
+            #found_doc_id = str(db_chat[i]['d']['id']) + '.' + db_chat[i]['d']['name'].split('.')[-1]
+            #break
+    #return chatdocumentpath + '/' + conv_id + '_' + found_doc_id if found_doc_id != None else None
 
-def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = None):
+def PassLLMThink(llm_model, user_question, conv_id, db_chat = [], json_document = None):
+
+    think_list = []
 
     ### Recongise Upload ###
-    if(json_path != None and user_question == ''):
-        return chat(llm_model, messages = [{'role': 'user', 'content': JSONUploadNoQuestion.getPrompt(json_name)}], stream = True)
+    if(json_document != None and user_question == ''):
+        return [chat(llm_model, messages = [{'role': 'user', 'content': JSONUploadNoQuestion.getPrompt(json_document['name'])}], stream = True), think_list, None, None]
     ### Recognise Upload End ###
 
     ### Chain 1: Gibberish Classifier ###
@@ -82,22 +97,24 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
 
     try:
         answer = json.loads(answer)
+        think_list.append({'chain': '1', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
         if(answer['gibberish'] == True):
-            return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
+            return [chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), think_list, None, None]
+            #return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
     except:
-        return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
+        return [chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), think_list, None, None]
     ### Chain 1 End ###
-
-
+    print('Chain 1 Finished')
     ### Chain 2: High Level Classifier (Tasks, Jobs, Resources, TaskSuitableResources, TaskPrepost) ###
     ''' Classifies if user asks about: Jobs, Resources, Tasks, Tasksuitableresources, Taskprecedenceconstraints'''
     answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': HighLevelClassifier.getPrompt(user_question)}]).message.content) # Word-based search
 
     try:
         answer = json.loads(answer)
+        think_list.append({'chain': '2', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
         words = answer['words']
         if(len(words) == 0):
-            return chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_name if json_path != None else None), stream = True)
+            return [chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document['name'] if json_document != None else None), stream = True), think_list, None, None]
             #return chat('llama3.1', messages = [{'role': 'user', 'content': user_question}], stream = True)
         else:
             if('job' in words):
@@ -110,6 +127,7 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
                 elif('task' in words):
                     answer = chat(llm_model, messages = [{'role': 'user', 'content': HighLevelTaskClassifier.getPrompt(user_question)}]).message.content # Meaning-search
                     answer = json.loads(LLMOutClean(answer))
+                    think_list.append({'chain': '2_task', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
                     if(answer['pick'] == 1):
                         search = 'tasksuitableresources'
                     elif(answer['pick'] == 2):
@@ -117,26 +135,27 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
                     elif(answer['pick'] == 3):
                         search = 'tasks'
                     else:
-                        return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
+                        return [chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), think_list, None, None]
     except:
-        return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
+        return [chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), think_list, None, None]
     ### Chain 2 End ###
-
+    print('Chain 2 Finished')
     ### Get File If None Provided ###
     '''User asks file related question without providing a file. Searches chat for last provided file'''
-    if(json_path == None):
-
-        ### <--------- NEED TO WORK ON THESE CASES HERE (User ASKS about a JSON file he uploaded previously (basically len words !=0 AND json_path == None). Get the [-1] json_path from the chat. If none found then there is a New prompt that handles this)
-        saoidjasoidjioasd
+    if(json_document == None):
+        json_document = GetLastFileFromChat(db_chat, conv_id)
+        if(json_document == None):
+            return [chat(llm_model, messages = [{'role': 'user', 'content': JSONQuestionNoPath.getPrompt(user_question)}], stream = True), think_list, None, search]
+        print('Got JSON file: ' + str(json_document))
     ### Get File If None Provided End ###
 
     ### Get JSON Data ###
     ''' Retrieves the JSON data '''
-    with open(json_path, encoding = 'utf-8') as file:
+    with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(json_document['id']) + '.' + json_document['name'].split('.')[-1], encoding = 'utf-8') as file:
         json_data = file.read()
         json_data = json.loads(json_data)
     ### Get JSON Data End ###
-
+    
     ### Chain 3: Retrieval Classifier ###
     ''' Classifies if user filters based on some specific attribute. Example: 'Get all tasks with id _578' -> finds 'id' and _578'''
     if(search == 'resources'):
@@ -157,30 +176,35 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
         try:
             answer = json.loads(LLMOutClean(answer))
             taskprecedenceconstraints_pick = answer["pick"]
+            think_list.append({'chain': '3_taskprecon_orderdepend', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
             if(answer["pick"] == "order"):
                 prompt = TaskprecedenceconstraintOrderAttributeRetriever.getPrompt(user_question)
             elif(answer["pick"] == "dependence"):
                 prompt = TaskprecedenceconstraintDependenceAttributeRetriever.getPrompt(user_question)
         except:
-            return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True)
+            return [chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), think_list, None, search]
     else:
-        return chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}]).message.content
+        return [chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}]).message.content, think_list, None, search]
 
     answer = chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
-    asnwer = LLMOutClean(answer)
+    answer = LLMOutClean(answer)
     ### Chain 3 End ###
-
-
+    print('Chain 3 Finished')
+    print(answer)
+    print('&&&&&&&&&&&&&&&&')
     ### JSON Data Extraction based on Chain 3 ###
     ''' Keeps only the relevant JSON Data based on what was decided from Chain 3 '''
     try:
         retrieve_info = json.loads(answer)
+        think_list.append({'chain': '3', 'think': retrieve_info['think'] if 'think' in retrieve_info else 'Exception No Thinking Return from LLM'})
     except:
         retrieve_info = None
+    print('Retrieve info based on chain 3')
+    print(retrieve_info)
 
     if retrieve_info == None:
         prompt = ExceptionHandler.getPrompt(user_question)
-        return chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
+        return [chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content, think_list, None, search]
     else:
         if(retrieve_info['attribute'] == True):
             
@@ -224,7 +248,8 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
                         query = [q for q in query if {q['preconditiontaskreference']['refid'], q['postconditiontaskreference']['refid']} == {IntToStrWithSlabInfornt(retrieve_info['reference']), IntToStrWithSlabInfornt(retrieve_info['target'])}]
 
     ### JSON Data Extraction End ####
-
+    print('Entering Chain 4')
+    print(search)
     ### Chain 4: Wanted Returned Value Classifier ###
     ''' Classifies what value the user wants returned. Example: 'Return the ids of all tasks named ROLLING' -> finds ids'''
     if(search == 'jobs'):
@@ -234,16 +259,17 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
     elif(search == 'resources'):
         prompt = ResourceAttributeReturnClassifier.getPrompt(user_question)
     elif(search == 'tasksuitableresources'):
-        if(retrieve_info['search']['info'] == 'resource'):
-            prompt = TasksuitableresourceAttributeReturnResourceClassifier.getPrompt(user_question)
-        elif(retrieve_info['search']['info'] == 'task'):
-            prompt = TasksuitableresourceAttributeReturnTaskClassifier.getPrompt(user_question)
+        if(retrieve_info['attribute'] == True):
+            if(retrieve_info['search']['info'] == 'resource'):
+                prompt = TasksuitableresourceAttributeReturnResourceClassifier.getPrompt(user_question)
+            elif(retrieve_info['search']['info'] == 'task'):
+                prompt = TasksuitableresourceAttributeReturnTaskClassifier.getPrompt(user_question)
 
     if(search != 'tasksprecedenceconstraints'):
         answer = chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
         asnwer = LLMOutClean(answer)
     ### Chain 4 End ###
-
+    print('Chain 4 Finished')
 
     ### Data Final Clean Form ###
     if(search == 'jobs'):
@@ -259,61 +285,64 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
                 taskres_list.append({'resource': {'id': query[i]['resourcereference']['refid'], 'name': [r['name'] for r in json_data['resources']['resource'] if r['id'] == query[i]['resourcereference']['refid']][0]}, 'tasks': [{'id': query[i]['taskreference']['refid'], 'operation_time': query[i]['operationtimeperbatchinseconds'], 'name': [t['name'] for t in json_data['tasks']['task'] if t['id'] == query[i]['taskreference']['refid']][0]}]})
             else:
                 next(item for item in taskres_list if item['resource']['id'] == query[i]['resourcereference']['refid'])['tasks'].append({'id': query[i]['taskreference']['refid'], 'operation_time': query[i]['operationtimeperbatchinseconds'], 'name': [t['name'] for t in json_data['tasks']['task'] if t['id'] == query[i]['taskreference']['refid']][0]})
+        query = taskres_list
     elif(search == 'tasksprecedenceconstraints'):
         query = [{'before': q['preconditiontaskreference']['refid'], 'next': q['postconditiontaskreference']['refid']} for q in query]
     ### End ###
-
+    print('Data Cleaned')
 
     ### JSON Data Extraction based on Chain 4 ###
-        if(search != 'tasksprecedenceconstraints'):
-            try:
-                wanted_return = json.loads(answer)
-            except:
-                wanted_return = None
+    if(search != 'tasksprecedenceconstraints'):
+        try:
+            wanted_return = json.loads(answer)
+            think_list.append({'chain': '4', 'think': wanted_return['think'] if 'think' in wanted_return else 'Exception No Thinking Return from LLM'})
+        except:
+            wanted_return = None
 
-            if wanted_return == None:
-                prompt = ExceptionHandler.getPrompt(user_question)
-                return chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
-            else:
-                if(wanted_return['attribute'] == True):
-                    if(search != 'tasksuitableresources'):
-                        if(wanted_return['return'] == 'name'):
-                            query = [{'id': q['id'], 'name': q['name']} for q in query]
-                        if(wanted_return['return'] == 'id'):
-                            query = [{'id': q['id']} for q in query]
-                        elif(wanted_return['return'] == 'task'):
-                            query = [{'id': q['id'], 'task': q['task']} for q in query]
-                        elif(wanted_return['return'] == 'arrivaldate'):
-                            query = [{'id': q['id'], 'arrivaldate': q['arrivaldate']} for q in query]
-                        elif(wanted_return['return'] == 'duedate'):
-                            query = [{'id': q['id'], 'duedate': q['duedate']} for q in query]
-                        elif(wanted_return['return'] == 'period'):
-                            query = [{'id': q['id'], 'nonworkingperiods': q['nonworkingperiods']} for q in query]
+        if wanted_return == None:
+            prompt = ExceptionHandler.getPrompt(user_question)
+            return [chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content, think_list, None, search]
+        else:
+            if(wanted_return['attribute'] == True):
+                if(search != 'tasksuitableresources'):
+                    if(wanted_return['return'] == 'name'):
+                        query = [{'id': q['id'], 'name': q['name']} for q in query]
+                    if(wanted_return['return'] == 'id'):
+                        query = [{'id': q['id']} for q in query]
+                    elif(wanted_return['return'] == 'task'):
+                        query = [{'id': q['id'], 'task': q['task']} for q in query]
+                    elif(wanted_return['return'] == 'arrivaldate'):
+                        query = [{'id': q['id'], 'arrivaldate': q['arrivaldate']} for q in query]
+                    elif(wanted_return['return'] == 'duedate'):
+                        query = [{'id': q['id'], 'duedate': q['duedate']} for q in query]
+                    elif(wanted_return['return'] == 'period'):
+                        query = [{'id': q['id'], 'nonworkingperiods': q['nonworkingperiods']} for q in query]
 
-                    elif(search == 'tasksuitableresources'):
-                        if(retrieve_info['search']['info'] == 'resource'):
-                            if 'value' not in wanted_return:
-                                if wanted_return['key'] == 'id':
-                                    for item in taskres_list: item['resource'] = {'id': item['resource']['id']}
-                                elif wanted_return['key'] == 'period':
-                                    for item in taskres_list: item['resource']['no_work_period'] = [rp['resourceavailability']['nonworkingperiods']['period'] for rp in json_data['resources']['resource'] if rp['id'] == item['resource']['id']][0]
-                            
-                            else:
-                                wanted_return['value'] = IntToStrWithSlabInfornt(wanted_return['value'])
-                                fin_list = [item for item in taskres_list if item['resource'][wanted_return['key']].upper() == wanted_return['value'].upper()]
-                        elif(retrieve_info['search']['info'] == 'task'):
-                            if 'value' not in wanted_return:
-                                if wanted_return['key'] == 'id':
-                                    for item in taskres_list: item['tasks'] = [{'id': t['id']} for t in item['tasks']]
-                                elif wanted_return['key'] == 'name':
-                                    for item in taskres_list: item['tasks'] = [{'id': t['id'], 'name': t['name']} for t in item['tasks']]
-                                elif wanted_return['key'] == 'time':
-                                    for item in taskres_list: item['tasks'] = [{'id': t['id'], 'operation_time': t['operation_time']} for t in item['tasks']]
-                            else:
-                                wanted_return['value'] = IntToStrWithSlabInfornt(wanted_return['value'])
-                                fin_list = [{'resource': item['resource'], 'tasks': [t for t in item['tasks'] if t[wanted_return['key']].upper() == wanted_return['value'].upper()]}  for item in taskres_list if any(t[wanted_return['key']].upper() == wanted_return['value'].upper() for t in item['tasks'])]
+                elif(search == 'tasksuitableresources'):
+                    if(retrieve_info['search']['info'] == 'resource'):
+                        if 'value' not in wanted_return:
+                            if wanted_return['key'] == 'id':
+                                for item in taskres_list: item['resource'] = {'id': item['resource']['id']}
+                            elif wanted_return['key'] == 'period':
+                                for item in taskres_list: item['resource']['no_work_period'] = [rp['resourceavailability']['nonworkingperiods']['period'] for rp in json_data['resources']['resource'] if rp['id'] == item['resource']['id']][0]
+                            query = taskres_list
+                        else:
+                            wanted_return['value'] = IntToStrWithSlabInfornt(wanted_return['value'])
+                            query = [item for item in taskres_list if item['resource'][wanted_return['key']].upper() == wanted_return['value'].upper()]
+                    elif(retrieve_info['search']['info'] == 'task'):
+                        if 'value' not in wanted_return:
+                            if wanted_return['key'] == 'id':
+                                for item in taskres_list: item['tasks'] = [{'id': t['id']} for t in item['tasks']]
+                            elif wanted_return['key'] == 'name':
+                                for item in taskres_list: item['tasks'] = [{'id': t['id'], 'name': t['name']} for t in item['tasks']]
+                            elif wanted_return['key'] == 'time':
+                                for item in taskres_list: item['tasks'] = [{'id': t['id'], 'operation_time': t['operation_time']} for t in item['tasks']]
+                            query = taskres_list
+                        else:
+                            wanted_return['value'] = IntToStrWithSlabInfornt(wanted_return['value'])
+                            query = [{'resource': item['resource'], 'tasks': [t for t in item['tasks'] if t[wanted_return['key']].upper() == wanted_return['value'].upper()]}  for item in taskres_list if any(t[wanted_return['key']].upper() == wanted_return['value'].upper() for t in item['tasks'])]
     ### JSON Data Extraction End###
-
+    print('Data Extraction End')
 
     ### Chain 5: Final Answer ###
     if(search != 'tasksprecedenceconstraints'):
@@ -322,6 +351,10 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
         else:
             prompt = OutputListResultsTaskJobResourceTasksuitableresource.getPrompt(user_question, len(query))
     else:
+        print('bubububububuub')
+        print(taskprecedenceconstraints_pick)
+        print(query)
+        print(retrieve_info)
         if(taskprecedenceconstraints_pick == "dependence"):
             if(len(query) == 0):
                 if(IntToStrWithSlabInfornt(retrieve_info['reference']) not in [q['id'] for q in json_data["tasks"]["task"]]):
@@ -329,7 +362,10 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
                 else:
                     prompt = OutputTaskprecedenceconstraintsTaskIsIndependent.getPrompt(user_question, retrieve_info['target'])
             else:
-                prompt = OutputListResultsTaskprecedenceconstraints.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
+                if(len(query) == 1):
+                    prompt = OutputListResultsTaskprecedenceconstraints.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
+                else:
+                    prompt = OutputListResultsTaskJobResourceTasksuitableresource.getPrompt(user_question, len(query))
         elif(taskprecedenceconstraints_pick == "order"):
             if(len(query) == 0):
                 prompt = OutputNoResultsFound.getPrompt(user_question)
@@ -338,6 +374,7 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
                 bool_classify = LLMOutClean(bool_classify)
                 try:
                     bool_classify = json.loads(bool_classify)
+                    think_list.append({'chain': '5_taskprecon_boolquestion', 'think': bool_classify['think'] if 'think' in bool_classify else 'Exception No Thinking Return from LLM'})
                     if(bool_classify['attribute'] == True):
                         prompt = OutputTaskprecedenceconstraintsAnswerBooleanQuestion.getPrompt(user_question, len(query))
                     else:
@@ -345,8 +382,11 @@ def PassLLMThink(llm_model, user_question, json_path, db_chat = [], json_name = 
                 except:
                     prompt = ExceptionHandler.getPrompt(user_question)
     ### Chain 5 End ###
+    print('Chain 5 Finished')
+    print('Thinking List: ' + str(think_list))
+    print('Query: ' + str(query))
 
-    return chat(llm_model, messages = [{'role': 'user', 'content': prompt}], stream = True)
+    return [chat(llm_model, messages = [{'role': 'user', 'content': prompt}], stream = True), think_list, query, search]
 
 def CreateConversationTitleThink(llm_model, user_question = '', file_name = None):
     

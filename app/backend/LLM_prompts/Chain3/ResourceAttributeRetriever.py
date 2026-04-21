@@ -47,35 +47,35 @@ User question:
 Return resource with id 7
 
 Output:
-{"attribute": true,"key": "id","value": 7}
+{"attribute": true,"key": "id","value": 7, "think": "<Your thinking process>"}
 -----
 
 User question:
 Return resource ROLLING MILL
 
 Output:
-{"attribute": true,"key": "name","value": "ROLLING MILL"}
+{"attribute": true,"key": "name","value": "ROLLING MILL", "think": "<Your thinking process>"}
 -----
 
 User question:
 What is the name of the resource with id 3
 
 Output:
-{"attribute": true,"key": "id","value": 3}
+{"attribute": true,"key": "id","value": 3, "think": "<Your thinking process>"}
 -----
 
 User question:
 Return all resources
 
 Output:
-{"attribute": false}
+{"attribute": false, "think": "<Your thinking process>"}
 -----
 
 User question:
 Return resource 1
 
 Output:
-{"attribute": true,"key": "id","value": 1}
+{"attribute": true,"key": "id","value": 1, "think": "<Your thinking process>"}
 -----
 
 Remember:

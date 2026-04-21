@@ -67,7 +67,13 @@ User: "Return the tasks of jobs with name ROLLING"
 Output:{"attribute": true, "return": "task", "think": "<Your thinking process>"}
 ------------------------------------------------
 User: "Return the FROM BILLET job"
-Output:{"attribute": false, "think": "<Your thinking process>"}"""
+Output:{"attribute": false, "think": "<Your thinking process>"}
+------------------------------------------------
+User: "Return all job ids"
+Output: {"attribute": true, "return": "id" , "think": "<Your thinking process>"}
+------------------------------------------------
+User: "Return the ids of all jobs"
+Output: {"attribute": true, "return": "id" , "think": "<Your thinking process>"}"""
 
     prompt += f"""
 

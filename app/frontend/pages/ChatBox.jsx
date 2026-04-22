@@ -28,6 +28,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
     }
 
     console.log(chatthinkState)
+    console.log('popopopopo')
 
     async function CreateChat(){
         let response_status = null
@@ -80,9 +81,9 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
         if(linkparams === undefined){
             CreateChat()
-            console.log('iiiiiiii')
-            isgeneratingsetState(true)
-            console.log('uuuuuuuuuuu')
+            if(isgeneratingsetState !== undefined){
+                isgeneratingsetState(true)
+            }
         }
         else{
             AskQuestion()

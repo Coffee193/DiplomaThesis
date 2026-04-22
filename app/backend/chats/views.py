@@ -7,6 +7,7 @@ import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime
 from .LLMpipeline import PassLLMThink, CreateConversationTitleThink
+import time
 
 ###
 # For multiplrocessing to work (i.e. to spawn a process) you must run these two lines of code before importing any models.
@@ -315,6 +316,8 @@ def CreateChat_Old_NoAI(request):
 @api_view(['POST'])
 def CreateChat(request):
     content_type = request.headers.get('content-type').split(';')[0]
+    print(content_type)
+    print('***')
     if(content_type == 'text/plain'):
         return CreateChatQuestion(request)
     elif(content_type == 'multipart/form-data'):
@@ -360,9 +363,11 @@ def CreateChatDocument(request):
     valjwt = ValidateAndCreateJWT(request)
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
-    
+    print(';;;')
+    print(request)
     request_dict = request.data.dict()
-    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document'] or 't' not in request_dict['data'] or type(request_dict['data']) != bool):
+    print(request_dict)
+    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document'] or 't' not in request_dict['data']):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
     data = json.loads(request_dict['data'])
     file = json.loads(request_dict['document'])
@@ -597,8 +602,47 @@ def GetLLMAnswerStream_Old_ReturnedAnswerAsString(chat_id, block_time = 20000):
         return 'Something went wrong with the retrieval'
 
 def GetLLMAnswerStream(chat_id, block_time = 110000, with_title = False):
-    print(with_title)
-    print('>>START<<')
+    if(redis_client.exists("cg_" + chat_id) == True):
+        stream_id = "cs_" + chat_id
+        last_id  = '0-0'
+        title_generated = False
+        done_generated = False
+        yield json.dumps({'v': ''}) + "\n" # Must have this so that COOKIES are instanly returned to user
+
+        # t -> title, d -> done, v -> value, u -> uploaded document, i -> info (q -> query, s -> search), e -> error
+        while True:
+            x = redis_client.xread(streams = {stream_id: last_id }, count = None, block = block_time)
+
+            if(len(x) == 0):
+                yield json.dumps({'e': 'Timed Out'}) + "\n"
+                return
+            
+            for stream_key, messages in x:
+                for message_id, message_data in messages:
+                    parsed_vals = {}
+                    last_id = message_id
+                    
+                    (key, value), = message_data.items()
+                    
+                    try:
+                        parsed_vals[key] = json.loads(value) # If value if JSON string
+                    except:
+                        parsed_vals[key] = value # If value is string example: 'Hi'
+
+                    if 'd' in parsed_vals:
+                        done_generated = True
+                    elif 't' in parsed_vals:
+                        title_generated = True
+                        yield json.dumps({'t': parsed_vals['t']}) + "\n"
+                    elif 'v' in parsed_vals:
+                        yield json.dumps({'v': parsed_vals['v']}) + "\n"
+                    elif 'i' in parsed_vals:
+                        yield json.dumps({'i': parsed_vals['i']}) + "\n"
+
+                    if done_generated and (not with_title or title_generated):
+                        return
+
+def GetLLMAnswerStream_workedbutcomplex(chat_id, block_time = 110000, with_title = False):
     if(redis_client.exists("cg_" + chat_id) == True):
         stream_id = "cs_" + chat_id
         series_id = 0
@@ -609,11 +653,8 @@ def GetLLMAnswerStream(chat_id, block_time = 110000, with_title = False):
         # time.sleep(0.5)
         while True:
             x = redis_client.xread(streams = {stream_id: series_id}, count = None, block = block_time)
-            print(x)
             print(x[0][1])
-            #print(''.join(y[1]['t'] for y in x[0][1] if 't' in y[1]))
-            print(any('t' in y[1] for y in x[0][1]))
-            print('<<<<<<<<<<<<')
+            print('---')
             if(len(x) == 0):
                 print('***^^^&&&')
                 print(x)
@@ -652,6 +693,7 @@ def GetLLMAnswerStream(chat_id, block_time = 110000, with_title = False):
                 return
 
             series_id = x[0][1][-1][0]
+            # d -> done, u -> upload (document), t -> title
     else:
         return 'Something went wrong with the retrieval'
 
@@ -829,7 +871,7 @@ def ResumeAnswerStream(request, conv_id):
     valjwt = ValidateAndCreateJWT(request)
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
-    return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [str(conv_id), 20000, True if request.GET.get('t') == '' else False], 200)
+    return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [str(conv_id), 110000, True if request.GET.get('t') == '' else False], 200)
 
 def AA(popo):
     print(';;;;;;;;')
@@ -1161,7 +1203,7 @@ Keep your response short, polite, and helpful. Avoid making assumptions about th
         return
 
     if(fetched_items != None):
-        redis_client.xadd("cs_" + chat_id, {"i": json.dumps(fetched_items), "s": search}) # i -> items
+        redis_client.xadd("cs_" + chat_id, {"i": json.dumps({"q": fetched_items, "s": search})}) # i -> items
 
     for chunk in llm_answer:
         

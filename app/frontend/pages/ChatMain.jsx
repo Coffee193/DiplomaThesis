@@ -36,9 +36,9 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         
         if(response['c'].length === 0){
             generateTitle = chatlist.current.map((e) => e["_id"]).indexOf(linkparams.id)
-            if(chatlist.current[generateTitle]["name"] !== "New Conversation"){
+            /*if(chatlist.current[generateTitle]["name"] !== "New Conversation"){
                 generateTitle = null
-            }
+            }*/
         }
 
         if(response_status === 200){
@@ -60,11 +60,8 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                         </div>
                 )
             }
-
+            {/*AA */}
             for(let i=response['c'].length - 1; i>=0; i--){
-                console.log('****************')
-                console.log(response["c"][i]["a"])
-                console.log(response["c"][i]["i"])
                 conv_vals.push(
                     <>
                         <div className='cm_chatbox'>
@@ -87,6 +84,8 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             thinksetState(response['t'])
 
             if('g' in response){
+                console.log('eyyeyeyeye')
+                console.log(generateTitle)
                 if(convstreamgeneratingRef.current.has(linkparams.id) === false){
                     ResumeAnswerStream(generateTitle)
                 }
@@ -102,6 +101,9 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
     }
 
     function CreateInfoBlock(data, info, search){
+        console.log(data)
+        console.log(data.length)
+        console.log('>>>>>>>>>>>>>>>>>>>>>??')
         if(info !== undefined){
             if(data.length === 1){
                 data = data[0].split(/(\(DATA\))/)
@@ -332,6 +334,67 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
 
     async function ReadAnswerStream(response, linkparams, convsetState, isgeneratingsetState, convstreamgeneratingRef, waitTitle){
         let ai_answer = ''
+        let buffer_answer = ''
+        let info_block = null
+        let search_block = null
+        let errorquit = false
+        const decoder = new TextDecoder();
+
+        while(true){
+            const { done, value } = await response.read();
+
+            if(done){
+                convstreamgeneratingRef.current.delete(linkparams.id)
+                if(window.location.pathname.split("/").at(-2) === linkparams.id){
+                    isgeneratingsetState(false)
+                }
+                return
+            }
+
+            ai_answer += decoder.decode(value, { stream: true });
+            let lines = ai_answer.split("\n");
+            ai_answer = lines.pop()
+            
+            for (const line of lines) {
+                if (!line.trim()) continue
+                const msg = JSON.parse(line)
+                
+                if(msg.t !== undefined){
+                    console.log(chatlist.current)
+                    console.log(waitTitle)
+                    console.log('lololololo')
+                    chatlist.current[waitTitle]["name"] = msg.t
+                    chatnavsetState([...chatlist.current])
+                }
+                else if(msg.v !== undefined){
+                    buffer_answer += msg.v
+                }
+                else if(msg.i !== undefined){
+                    info_block = msg.i.q
+                    search_block = msg.i.s
+                }
+                else if(msg.e !== undefined){
+                    buffer_answer = msg.e
+                    errorquit = true
+                }
+            }
+
+            if(buffer_answer === '') continue
+            if(window.location.pathname.split("/").at(-2) === linkparams.id){
+                convsetState(prevState => [
+                <div className='cm_chatbox'>
+                    {CreateInfoBlock([buffer_answer], info_block, search_block)}
+                </div>,
+                prevState.slice(1)
+                ])
+            }
+            if(errorquit === true) return
+
+        }
+    }
+
+    async function ReadAnswerStream_OldUsesRecallNotWhileTrue(response, linkparams, convsetState, isgeneratingsetState, convstreamgeneratingRef, waitTitle){
+        let ai_answer = ''
 
         await response.read().then(function readchunk({done, value}) {
 
@@ -346,9 +409,10 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             }
 
             let ret_stream = decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value)))
-            if(ret_stream.split('}').length >= 4){
-                ret_stream = ret_stream.slice(9)
-            }
+            console.log(ret_stream)
+            console.log('***')
+            console.log(typeof ret_stream)
+            
             ret_stream = JSON.parse(ret_stream)
 
             // An initial value of {'v': ''} is returned from that function. This is so that the cookies are Instantly set, otherwise the
@@ -368,6 +432,8 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
 
             ai_answer += ret_stream['v']
 
+            /*AA*/
+            /* This is the updating window function */
             if(window.location.pathname.split("/").at(-2) === linkparams.id){
                 convsetState(prevState => [
                 <div className='cm_chatbox'>
@@ -394,20 +460,6 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 }
             }
         }
-        /*let fin_string = []
-        for(let i=0; i<bold_string.length; i++){
-            console.log(i)
-            if(i % 2 === 0){
-                bold_string[i] = bold_string[i].split("\n* ")
-                if(bold_string[i].length > 1){
-                    for(let x=0; x<bold_string[i].length; x++){
-                        if(x%2 === 1){
-                            bold_string[i][x] = <><br/><span className='cm_dotholder'><DotIcon/> {bold_string[i][x]}</span></>
-                        }
-                    }
-                }
-            }
-        }*/
         return bold_string
     }
 

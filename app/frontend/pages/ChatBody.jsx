@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import '../styling/ChatBody.css'
 import { ChatBox } from './ChatBox'
 

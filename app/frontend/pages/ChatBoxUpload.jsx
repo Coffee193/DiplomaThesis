@@ -31,5 +31,3 @@ export function ChatBoxUpload({ cbuState, cbusetState, cbinputRef, UploadActive,
         </div>
     )
 }
-
-/* change line 16 div with a. and pass attribute download. Also use the env variable VITE_CHAT_DOCUMENT_PATH */

@@ -7,7 +7,6 @@ import { country_list_full } from '../components/CountriesList'
 
 export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex, warningIndex, warningvalueIndex, alwaysEmail, alwaysPhone, autoFocus, onpressEnter, onpressEnterValue, onpressTab, onpressTabValue, tabIndex, classtype, placeholder, existnavbar, allowEmpty}, usernamephoneinputRef) => {
     
-    console.log('i got rerendered')
     const country_list_keys = Object.keys(country_list_full)
 
     const [upi_areacodesvgState, upi_areacodesvgsetState] = useState(() => InitAreaCode()[0])
@@ -173,7 +172,7 @@ export const UsernamePhoneInput = forwardRef(({ valuesRef, valueIndex, typeIndex
         <div className='upi_allholder'>
             <div className={'upi_usernamephone ' + ClassType()[0] + ' ' + ClassType()[2]} ref={upi_usernamephoneRef} style={alwaysPhone === true ? ({display: 'flex'}) : ({display: 'none'})}>
                 <div className='upi_svgcountry'>{upi_areacodesvgState}</div>
-                <div className='upi_numberareacode'><div>+</div><input className='upi_numberinput' ref={upi_countrycodeinputRef} placeholder='' defaultValue={upi_areacodenumberState} onChange={(event) => {CheckOnlyNumbers(event, upi_countrycodeinputRef) === true ? (ChangeAreaCodeCheckSvg(event), CheckValues()) : ''/*ChangeAreaCodeCheckSvg(event); (reg_only_contains_numbers.test(event.target.value) === true || event.target.value === '') ? (CheckValues()) : ('')*/}} onKeyDown={(event) => pressKey(event, PressEnterOnAreaCodeInput, undefined, FocusUsernamePhoneInput, undefined)} onFocus={() => Upi_ArrowEnterLeave('enter')} onBlur={() => Upi_ArrowEnterLeave('leave')} tabIndex={tabIndex} maxLength="5"/></div>
+                <div className='upi_numberareacode'><div>+</div><input className='upi_numberinput' ref={upi_countrycodeinputRef} placeholder='' defaultValue={upi_areacodenumberState} onChange={(event) => {CheckOnlyNumbers(event, upi_countrycodeinputRef) === true ? (ChangeAreaCodeCheckSvg(event), CheckValues()) : ''}} onKeyDown={(event) => pressKey(event, PressEnterOnAreaCodeInput, undefined, FocusUsernamePhoneInput, undefined)} onFocus={() => Upi_ArrowEnterLeave('enter')} onBlur={() => Upi_ArrowEnterLeave('leave')} tabIndex={tabIndex} maxLength="5"/></div>
                 <div className='upi_arrow' onMouseEnter={() => Upi_ArrowEnterLeave('enter')} onMouseLeave={() => Upi_ArrowEnterLeave('leave')} onClick={() => areacodevisiblesetState(true)}><ArrowDownIcon width={15} height={15}/></div>
             </div>
             <input className={'upi_usernamephoneinput ' + ClassType()[0] + ' ' + ClassType()[1] + ' ' + ClassType()[2]} autoComplete='off' autoCapitalize='off' spellCheck='false' placeholder={placeholder}

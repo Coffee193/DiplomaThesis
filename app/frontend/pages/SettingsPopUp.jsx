@@ -210,7 +210,7 @@ export function SettingsPopUp({ popupState, popupsetState, valuesRef, notificati
         <>
         <div className='sp' style={popupState['visible'] === true ? ({opacity: '1', transform: 'none', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.8)', pointerEvents: 'none'})}>
             <div className='sp_header'>
-                <div className={popupState['headerred'] === true ? ('sp_red') : ('')} onClick={() => console.log(valuesRef.current)}>{popupState['header']}</div>
+                <div className={popupState['headerred'] === true ? ('sp_red') : ('')}>{popupState['header']}</div>
                 <XCloseIcon className={'sp_close ' + popupState['classclose']} onClick={() => ClosePopUp()}/>
             </div>
 

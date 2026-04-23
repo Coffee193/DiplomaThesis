@@ -7,11 +7,9 @@ import { ChatNavUtils } from './ChatNavUtils'
 export function ChatNav({convState, convsetState, isloadingState, isloadingsetState, linkparams, chatlist}){
 
     const navigate = useNavigate()
-    const chatclickRef = useRef(null) /* id of chat to be renamed/deleted */
+    const chatclickRef = useRef(null)
     const searchchatinputRef = useRef()
     const [cnpState, cnpsetState] = useState({'visible': false, 'id': null})
-    /* Must update entire Conversations Nav because if I try to do it with Ref and removing/adding classes then there will be
-    problems on the screen (the color will be cut off in the middle etc) */
 
     function ChatPopUp(element){
         if(chatclickRef.current === element.dataset.idval){
@@ -61,7 +59,6 @@ export function ChatNav({convState, convsetState, isloadingState, isloadingsetSt
     }
 
     function createConversations(arr){
-        console.log('triggered mmm')
         let monthyear = []
         let convfinalstate = []
         for(let i=arr.length - 1; i>=0; i--){

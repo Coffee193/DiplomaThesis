@@ -42,7 +42,6 @@ export function AreaCode({ areacodesvgsetState, areacodeinputRef, areacodevisibl
 
     return(
         <>
-        {/*<div className='ac_allholder' style={areacodevisibleState === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.75)', pointerEvents: 'none'})}>*/}
             <div className='ac_allholder' style={{...areacodevisibleState === true ? ({opacity: '1', transform: 'scale(1)', pointerEvents: 'all'}) : ({opacity: '0', transform: 'scale(0.75)', pointerEvents: 'none'}), ...existnavbar === true ? ({top: CalcNavBarOffset()}) : ({}) }}>
             <div className='ac_header'>
                 <div className='ac_header_text'>Select Area Code</div>

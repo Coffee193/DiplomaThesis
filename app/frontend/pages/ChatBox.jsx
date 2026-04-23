@@ -27,9 +27,6 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
     }
 
-    console.log(chatthinkState)
-    console.log('popopopopo')
-
     async function CreateChat(){
         let response_status = null
         let request = {"q": cbtextareaRef.current.value, "t": cbthinkState}
@@ -101,10 +98,6 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         
         let body = null
         if(cbinputRef.current.value !== ''){
-            console.log('******************')
-            console.log(cbinputRef.current.value)
-            console.log(cbuState)
-            console.log(cbuState['data'].slice(29))
             body = new FormData()
             body.append('data', JSON.stringify(request))
             body.append('document', JSON.stringify({'data': cbuState['data'], 'name': cbuState['name']}))
@@ -168,7 +161,6 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         let filereader = new FileReader();
         filereader.readAsDataURL(cbinputRef.current.files[0])
         filereader.onloadend = () => {
-            console.log(filereader.result)
             cbusetState(prevState => ({...prevState, 'isloading': false, 'data': filereader.result}))
             UploadDeactive()
             ArrowActive()

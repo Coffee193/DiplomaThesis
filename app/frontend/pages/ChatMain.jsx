@@ -36,9 +36,6 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         
         if(response['c'].length === 0){
             generateTitle = chatlist.current.map((e) => e["_id"]).indexOf(linkparams.id)
-            /*if(chatlist.current[generateTitle]["name"] !== "New Conversation"){
-                generateTitle = null
-            }*/
         }
 
         if(response_status === 200){
@@ -60,7 +57,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                         </div>
                 )
             }
-            {/*AA */}
+
             for(let i=response['c'].length - 1; i>=0; i--){
                 conv_vals.push(
                     <>
@@ -84,8 +81,6 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             thinksetState(response['t'])
 
             if('g' in response){
-                console.log('eyyeyeyeye')
-                console.log(generateTitle)
                 if(convstreamgeneratingRef.current.has(linkparams.id) === false){
                     ResumeAnswerStream(generateTitle)
                 }
@@ -101,9 +96,6 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
     }
 
     function CreateInfoBlock(data, info, search){
-        console.log(data)
-        console.log(data.length)
-        console.log('>>>>>>>>>>>>>>>>>>>>>??')
         if(info !== undefined){
             if(data.length === 1){
                 data = data[0].split(/(\(DATA\))/)
@@ -185,11 +177,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         let list_out = []
         for(let i=0; i<info.length; i++){
             let extra_info = []
-            /*["name", "arrivaldate", "duedate", "task"].forEach((key) => {
-                if(key in info){
-
-                }
-            })*/
+            
             if("name" in info[i]){
                 extra_info.push(
                     <div className = 'cm_infoleft cm_infoflex'>
@@ -360,9 +348,6 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 const msg = JSON.parse(line)
                 
                 if(msg.t !== undefined){
-                    console.log(chatlist.current)
-                    console.log(waitTitle)
-                    console.log('lololololo')
                     chatlist.current[waitTitle]["name"] = msg.t
                     chatnavsetState([...chatlist.current])
                 }
@@ -391,60 +376,6 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             if(errorquit === true) return
 
         }
-    }
-
-    async function ReadAnswerStream_OldUsesRecallNotWhileTrue(response, linkparams, convsetState, isgeneratingsetState, convstreamgeneratingRef, waitTitle){
-        let ai_answer = ''
-
-        await response.read().then(function readchunk({done, value}) {
-
-            // You need to put this here. Basically after the last part is received this function runs another time with value = undefined
-            // and done = True. passing undefined in String.fromChatCo.. gives '', which when passed on JSON.parse throws an error
-            if(done){
-                convstreamgeneratingRef.current.delete(linkparams.id)
-                if(window.location.pathname.split("/").at(-2) === linkparams.id){
-                    isgeneratingsetState(false)
-                }
-                return
-            }
-
-            let ret_stream = decodeURIComponent(encodeURIComponent(String.fromCharCode.apply(null, value)))
-            console.log(ret_stream)
-            console.log('***')
-            console.log(typeof ret_stream)
-            
-            ret_stream = JSON.parse(ret_stream)
-
-            // An initial value of {'v': ''} is returned from that function. This is so that the cookies are Instantly set, otherwise the
-            // cookies wont be set until a single answer token is produced
-            if(ai_answer === '' && (ret_stream['v'] === '' || ret_stream['v'] === undefined)){
-                return response.read().then(readchunk)
-            }
-            
-            if(waitTitle !== null && 't' in ret_stream){
-                chatlist.current[waitTitle]["name"] = ret_stream['t']
-                chatnavsetState([...chatlist.current])
-
-                if(!('v' in ret_stream)){
-                    return response.read().then(readchunk)
-                }
-            }
-
-            ai_answer += ret_stream['v']
-
-            /*AA*/
-            /* This is the updating window function */
-            if(window.location.pathname.split("/").at(-2) === linkparams.id){
-                convsetState(prevState => [
-                <div className='cm_chatbox'>
-                    {ai_answer}
-                </div>,
-                prevState.slice(1)
-                ])
-            }
-
-            return response.read().then(readchunk)
-        })
     }
 
     function AddStreamBold(streamtext){

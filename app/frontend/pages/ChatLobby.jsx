@@ -1,7 +1,7 @@
 import '../styling/ChatLobby.css'
 import { ChatNav } from './ChatNav'
 import { ChatBody } from './ChatBody'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { ChatMain } from './ChatMain'
 

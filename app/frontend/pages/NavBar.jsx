@@ -31,7 +31,6 @@ export function NavBar({updatenavbarstate}){
         }
     }
 
-
     function GetImg(){
         let cookievar = document.cookie.split('; ')
         for(let i = 0; i < cookievar.length; i++){
@@ -59,7 +58,7 @@ export function NavBar({updatenavbarstate}){
 
     return(
         <>
-        <div className='n_allholder' /*onClick={() => {GetImg();console.log(imgstate)}}*/ style={location.pathname === '/' ? {position: 'absolute', backgroundColor: 'transparent'} : null}>
+        <div className='n_allholder' style={location.pathname === '/' ? {position: 'absolute', backgroundColor: 'transparent'} : null}>
             <Link to = '/' tabIndex="-1"><div className = 'n_logo'>Sapling<img src = '../components/images/MainLogo.png'/></div></Link>
             <div className='n_info'>
                 {document.cookie.includes('userinfo=') === true ? (

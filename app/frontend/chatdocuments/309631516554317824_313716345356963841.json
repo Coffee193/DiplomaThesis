@@ -1,0 +1,4895 @@
+{
+  "workcenters" : {
+    "workcenter" : [ {
+      "name" : "Generic Workcenter",
+      "description" : "Generic Workcenter",
+      "algorithm" : "MULTICRITERIA",
+      "workcenterresourcereference" : [ {
+        "refid" : "_1"
+      }, {
+        "refid" : "_2"
+      } ],
+      "toolrepository" : null,
+      "dockingstations" : null,
+      "id" : "WC"
+    } ]
+  },
+  "resources" : {
+    "resource" : [ {
+      "name" : "MELTSHOP",
+      "description" : null,
+      "setupmatrixreference" : {
+        "refid" : "1"
+      },
+      "resourceavailability" : {
+        "nonworkingperiods" : {
+          "period" : [ {
+            "fromdate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 0,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 10,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 10,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 11,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 11,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 12,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 12,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 13,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 13,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 16,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 16,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 17,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 17,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 18,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 18,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 19,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 19,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 20,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 20,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 23,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 23,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 24,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 24,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 25,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 25,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 26,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 26,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 27,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 27,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 2,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 2,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 3,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 3,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 4,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 4,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 5,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 5,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 6,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 6,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 9,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 9,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 10,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 10,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 11,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 11,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 12,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 12,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 13,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 13,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 16,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 16,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 17,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 17,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 18,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 18,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 19,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 19,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 20,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 20,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 23,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 23,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 24,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 24,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 25,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 25,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 26,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 26,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 27,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 27,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 30,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 30,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 31,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 31,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 31,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 23,
+              "minute" : 59,
+              "second" : 59
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          } ]
+        },
+        "forcedworkingperiods" : null
+      },
+      "properties" : null,
+      "endeffectors" : null,
+      "id" : "_1"
+    }, {
+      "name" : "ROLLING MILL",
+      "description" : null,
+      "setupmatrixreference" : {
+        "refid" : "1"
+      },
+      "resourceavailability" : {
+        "nonworkingperiods" : {
+          "period" : [ {
+            "fromdate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 0,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 10,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 10,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 11,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 11,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 12,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 12,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 13,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 13,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 16,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 16,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 17,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 17,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 18,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 18,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 19,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 19,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 20,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 20,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 23,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 23,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 24,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 24,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 25,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 25,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 26,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 26,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 27,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 27,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 2,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 2,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 3,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 3,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 4,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 4,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 5,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 5,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 6,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 6,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 9,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 9,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 10,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 10,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 11,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 11,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 12,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 12,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 13,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 13,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 16,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 16,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 17,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 17,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 18,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 18,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 19,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 19,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 20,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 20,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 23,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 23,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 24,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 24,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 25,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 25,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 26,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 26,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 27,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 27,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 30,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 30,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 31,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 31,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 31,
+              "month" : 3,
+              "year" : 2026,
+              "hour" : 23,
+              "minute" : 59,
+              "second" : 59
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          } ]
+        },
+        "forcedworkingperiods" : null
+      },
+      "properties" : null,
+      "endeffectors" : null,
+      "id" : "_2"
+    } ]
+  },
+  "jobs" : {
+    "job" : [ {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 9,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 31,
+        "month" : 3,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_584"
+      }, {
+        "refid" : "_585"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_299"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 9,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 31,
+        "month" : 3,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_574"
+      }, {
+        "refid" : "_575"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_294"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 9,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 31,
+        "month" : 3,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_578"
+      }, {
+        "refid" : "_579"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_296"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 9,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 31,
+        "month" : 3,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_587"
+      }, {
+        "refid" : "_586"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_300"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 9,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 31,
+        "month" : 3,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_583"
+      }, {
+        "refid" : "_582"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_298"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 9,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 31,
+        "month" : 3,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_577"
+      }, {
+        "refid" : "_576"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_295"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 9,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 31,
+        "month" : 3,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_590"
+      }, {
+        "refid" : "_591"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_302"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 9,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 31,
+        "month" : 3,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_580"
+      }, {
+        "refid" : "_581"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_297"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 9,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 31,
+        "month" : 3,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_588"
+      }, {
+        "refid" : "_589"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_301"
+    } ]
+  },
+  "tasks" : {
+    "task" : [ {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_584"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_585"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_574"
+    }, {
+      "name" : "Rolling ",
+      "description" : null,
+      "properties" : null,
+      "id" : "_575"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_578"
+    }, {
+      "name" : "Melting ",
+      "description" : null,
+      "properties" : null,
+      "id" : "_579"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_587"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_586"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_583"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_582"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_577"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_576"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_590"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_591"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_580"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_581"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_588"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_589"
+    } ]
+  },
+  "tasksuitableresources" : {
+    "tasksuitableresource" : [ {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_584"
+      },
+      "operationtimeperbatchinseconds" : 4083.0,
+      "setupcode" : "Φ11.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_585"
+      },
+      "operationtimeperbatchinseconds" : 4083.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_574"
+      },
+      "operationtimeperbatchinseconds" : 44915.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_575"
+      },
+      "operationtimeperbatchinseconds" : 44915.0,
+      "setupcode" : "Φ6.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_578"
+      },
+      "operationtimeperbatchinseconds" : 16333.0,
+      "setupcode" : "Φ9.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_579"
+      },
+      "operationtimeperbatchinseconds" : 16333.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_587"
+      },
+      "operationtimeperbatchinseconds" : 28582.0,
+      "setupcode" : "Φ9.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_586"
+      },
+      "operationtimeperbatchinseconds" : 28582.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_583"
+      },
+      "operationtimeperbatchinseconds" : 40832.0,
+      "setupcode" : "Φ11.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_582"
+      },
+      "operationtimeperbatchinseconds" : 40832.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_577"
+      },
+      "operationtimeperbatchinseconds" : 20416.0,
+      "setupcode" : "Φ7.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_576"
+      },
+      "operationtimeperbatchinseconds" : 20416.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_590"
+      },
+      "operationtimeperbatchinseconds" : 24499.0,
+      "setupcode" : "Φ7.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_591"
+      },
+      "operationtimeperbatchinseconds" : 24499.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_580"
+      },
+      "operationtimeperbatchinseconds" : 16333.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_581"
+      },
+      "operationtimeperbatchinseconds" : 16333.0,
+      "setupcode" : "Φ6.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_588"
+      },
+      "operationtimeperbatchinseconds" : 40832.0,
+      "setupcode" : "Φ6.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_589"
+      },
+      "operationtimeperbatchinseconds" : 40832.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    } ]
+  },
+  "taskprecedenceconstraints" : {
+    "taskprecedenceconstraint" : [ {
+      "preconditiontaskreference" : {
+        "refid" : "_585"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_584"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_574"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_575"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_579"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_578"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_586"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_587"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_582"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_583"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_576"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_577"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_591"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_590"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_580"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_581"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_589"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_588"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    } ]
+  },
+  "setupmatrices" : {
+    "setupmatrix" : [ {
+      "setup" : [ {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ11",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ9",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ7",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ11",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ6",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ9",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 2400
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 2400
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ9",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ7",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ11",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ11",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ12",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ10",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 2220
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ10",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ7",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ6",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ12",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ12",
+        "timeinseconds" : 1800
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ10",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      } ],
+      "id" : "SM1"
+    } ]
+  },
+  "tooltypes" : null,
+  "tools" : null,
+  "mobileresourcetypes" : null,
+  "mobileresources" : null,
+  "continueAssignmentsAfterPlanEndDate" : "false",
+  "id" : "54 - Tuesday, Mar 17, 2026 03:59:08 PM",
+  "planEndDateDay" : "31",
+  "planEndDateMonth" : "3",
+  "planEndDateYear" : "2026",
+  "planStartDateDay" : "9",
+  "planStartDateMonth" : "2",
+  "planStartDateYear" : "2026"
+}

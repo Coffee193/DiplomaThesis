@@ -13,7 +13,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
     const cmchatRef = useRef()
     const [isgeneratingState, isgeneratingsetState] = useState(false)
     const convstreamgeneratingRef = useRef(new Set([]))
-    const [thinkState, thinksetState] = useState(false)
+    const [modelState, modelsetState] = useState('')
 
     useEffect(() => {
         if(chatnavloadingState === false){
@@ -43,12 +43,14 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
 
             if('g' in response){
                 isgeneratingsetState(true)
+                console.log('*********************')
+                console.log(response["g"]["u"])
                 conv_vals.push(
                         <div className='cm_chatbox cb_answerload'>
                             <BlocksLoad/>
                         </div>,
                         <div className='cm_chatuser'>
-                            {response["g"]["u"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["g"]["u"]["name"], 'type': response["g"]["u"]["name"].split('.')[1].toUpperCase(), 'size': response["g"]["u"]["size"], 'link': linkparams.id, 'id': response["g"]["u"]["id"]}}/> : null}
+                            {response["g"]["u"] !== undefined && <ChatBoxUpload cbuState={{'inchat': true, 'documents': response["g"]["u"].map( doc => ({name: doc.name, type: doc.name.split('.')[1].toUpperCase(), size: doc.size, link: linkparams.id, id: doc.id, isloading: false}) )}}/>}
                             {response["g"]["q"] !== "" ?
                             <div className='cm_chatbox cm_boxuser'>
                                 {response["g"]["q"]}
@@ -65,7 +67,8 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                             {CreateInfoBlock(AddStreamBold(response["c"][i]["a"]), response["c"][i]["i"], response["c"][i]["s"])}
                         </div>
                         <div className='cm_chatuser'>
-                            {response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"], 'id': response["c"][i]["d"]["id"], 'link': linkparams.id}}/> : null}
+                            {/*response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"], 'id': response["c"][i]["d"]["id"], 'link': linkparams.id}}/> : null*/}
+                            {response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'inchat': true, 'documents': response["c"][i]["d"].map( doc => ({name: doc.name, type: doc.name.split('.')[1].toUpperCase(), size: doc.size, id: doc.id, link: linkparams.id, isloading: false}) )}}/> : null}
                             {response["c"][i]["q"] !== undefined ?
                             <div className='cm_chatbox cm_boxuser'>
                                 {response["c"][i]["q"]}
@@ -78,7 +81,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             
             convsetState(conv_vals)
             isloadingsetState(false)
-            thinksetState(response['t'])
+            modelsetState(response['m'])
 
             if('g' in response){
                 if(convstreamgeneratingRef.current.has(linkparams.id) === false){
@@ -420,7 +423,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     ) : (convState)
                     }
                 </div>
-                <ChatBox chatlist={chatlist} isloadingState={isloadingState} chatthinkState={thinkState} chattype='main' convsetState={convsetState} linkparams={linkparams} isgeneratingState={isgeneratingState} isgeneratingsetState={isgeneratingsetState} convstreamgeneratingRef={convstreamgeneratingRef} ReadAnswerStream={ReadAnswerStream}/>
+                <ChatBox chatlist={chatlist} isloadingState={isloadingState} modelState={modelState} chattype='main' convsetState={convsetState} linkparams={linkparams} isgeneratingState={isgeneratingState} isgeneratingsetState={isgeneratingsetState} convstreamgeneratingRef={convstreamgeneratingRef} ReadAnswerStream={ReadAnswerStream}/>
                 <div className='cm_backwhite'/>
             </div>
         </div>

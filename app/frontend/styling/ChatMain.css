@@ -173,6 +173,7 @@
     flex-direction: column;
     align-items: end;
     position: relative;
+    padding: 0 5px;
 }
 .cm_boxuser{
     background-color: var(--chat-color-blue-light);

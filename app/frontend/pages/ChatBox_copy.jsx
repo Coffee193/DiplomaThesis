@@ -3,22 +3,18 @@ import { ArrowUpload, UploadFile, BlocksLoad, SpinnerLoad, NeuralNetwork, Sparkl
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBoxUpload } from './ChatBoxUpload'
-import { ChatBoxModelPopUp } from './ChatBoxModelPopUp'
-import { model_list } from './modelList'
 
-export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams, isgeneratingState, isgeneratingsetState, convstreamgeneratingRef, ReadAnswerStream, chatnavsetState, modelState }){
+export function ChatBox({ isloadingState, chatlist, chattype, convsetState, linkparams, isgeneratingState, isgeneratingsetState, convstreamgeneratingRef, ReadAnswerStream, chatnavsetState, chatthinkState }){
 
     const cbtextareaRef = useRef()
     const cbarrowRef = useRef()
     const navigate = useNavigate()
-    //const [cbuState, cbusetState] = useState({'visible': false, 'isloading': true})
-    const [cbuState, cbusetState] = useState({'documents': []})
+    const [cbuState, cbusetState] = useState({'visible': false, 'isloading': true})
     const cbinputRef = useRef()
     const cbuploadRef = useRef()
     const cbloadRef = useRef()
     const cbaskquestion = useRef(false)
-    const [cbmodelState, cbmodelsetState] = useState({'name': 'Llama3.1:7B - Agent', 'type': 'local', 'agent': 'json-agent', 'id': 1})
-    const [cbmodelpopupactiveState, cbmodelpopupactivesetState] = useState(false)
+    const [cbthinkState, cbthinksetState] = useState(true)
 
     function CheckQuestion(){
         if(cbinputRef.current.value === ''){
@@ -33,7 +29,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
 
     async function CreateChat(){
         let response_status = null
-        let request = {"q": cbtextareaRef.current.value, "m": cbmodelState['id']}
+        let request = {"q": cbtextareaRef.current.value, "t": cbthinkState}
         let body = null
 
         if(cbinputRef.current.value !== ''){
@@ -77,7 +73,7 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
     }
 
     function SubmitQuestion(){
-        if(cbuState['documents'].length === 0 && cbtextareaRef.current.value.replace(/(\r\n|\n|\r)/gm, '').length === 0){
+        if(cbinputRef.current.value === '' && cbtextareaRef.current.value.replace(/(\r\n|\n|\r)/gm, '').length === 0){
             return
         }
         if(linkparams === undefined){
@@ -101,27 +97,18 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         let url = null
         
         let body = null
-        let askdoclist = []
-
-        if(cbuState['documents'].length !== 0){
+        if(cbinputRef.current.value !== ''){
             body = new FormData()
             body.append('data', JSON.stringify(request))
-            //body.append('document', JSON.stringify({'data': cbuState['data'], 'name': cbuState['name']}))
-            body.append('document', JSON.stringify( cbuState['documents'].map(({name, data}) => ({name, data})) ))
-            /*
+            body.append('document', JSON.stringify({'data': cbuState['data'], 'name': cbuState['name']}))
+
             blob = new Blob(
                 [atob(cbuState['data'].slice(29))],
                 {
                     type: 'application/JSON'
                 }
             )
-            url = URL.createObjectURL(blob)*/
-
-            askdoclist = cbuState['documents'].map(doc => {
-                const blob = new Blob([atob(doc['data'].slice(29))], { type: 'application/JSON'})
-                const url = URL.createObjectURL(blob)
-                return {name: doc.name, type: doc.type, 'size': doc.size, 'hardpath': url, 'isloading': false}
-            })
+            url = URL.createObjectURL(blob)
         }
         else{
             body = JSON.stringify(request)
@@ -132,18 +119,16 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                 <BlocksLoad/>
             </div>,
             <div className='cm_chatuser'>
-                {/*cbinputRef.current.value !== '' ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': cbuState['name'], 'type': cbuState['type'], 'size': cbuState['size'], 'hardpath': url}}/> : ''*/}
-                {cbuState['documents'].length !== 0 && <ChatBoxUpload cbuState={{'inchat': true, 'documents': askdoclist}}/>}
-                {cbuState['documents'].length !== 0 && cbtextareaRef.current.value.replace(/(\r\n|\n|\r)/gm, '').length !== 0 && 
+                {cbinputRef.current.value !== '' ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': cbuState['name'], 'type': cbuState['type'], 'size': cbuState['size'], 'hardpath': url}}/> : ''}
+                {cbinputRef.current.value !== '' && cbtextareaRef.current.value.replace(/(\r\n|\n|\r)/gm, '').length === 0 ? '' :
                 <div className='cm_chatbox cm_boxuser'>
                     {request['q']}
                 </div>}
             </div>,
             prevState
         ])
-        if(cbuState['documents'].length !== 0){
-            //cbusetState({'visible': false, 'isloading': true})
-            cbusetState({'documents': []})
+        if(cbinputRef.current.value !== ''){
+            cbusetState({'visible': false, 'isloading': true})
             UploadActive()
             ArrowDeactive()
             cbinputRef.current.value = ''
@@ -172,17 +157,13 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
     }
 
     function UploadDocument(){
-        //cbusetState({'visible': true, 'name': cbinputRef.current.files[0]['name'], 'size': (cbinputRef.current.files[0]['size']/1024).toFixed(1), 'type': cbinputRef.current.files[0]['type'].split('/')[1].toUpperCase()})
-        let doc_id = Date.now()
-        cbusetState(prevState => ({documents: [...prevState.documents, {'name': cbinputRef.current.files[0]['name'], 'size': (cbinputRef.current.files[0]['size']/1024).toFixed(1), 'type': cbinputRef.current.files[0]['type'].split('/')[1].toUpperCase(), 'isloading': true, 'id': doc_id}]}))
+        cbusetState({'visible': true, 'name': cbinputRef.current.files[0]['name'], 'size': (cbinputRef.current.files[0]['size']/1024).toFixed(1), 'type': cbinputRef.current.files[0]['type'].split('/')[1].toUpperCase()})
         let filereader = new FileReader();
         filereader.readAsDataURL(cbinputRef.current.files[0])
         filereader.onloadend = () => {
-            //cbusetState(prevState => ({...prevState, 'isloading': false, 'data': filereader.result}))
-            cbusetState(prevState => ({...prevState, documents: prevState.documents.map(doc => doc.id === doc_id ? {...doc, isloading: false, data: filereader.result} : doc)}))
-            //UploadDeactive()
+            cbusetState(prevState => ({...prevState, 'isloading': false, 'data': filereader.result}))
+            UploadDeactive()
             ArrowActive()
-            cbinputRef.current.value = ''
         }
     }
 
@@ -208,11 +189,6 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         }
     }
 
-    function GetModelName(id_val){
-        const item = model_list.find(obj => obj.id === id_val)
-        return item ? item.name : null
-    }
-
     return(
         <div className={chattype === 'body' ? 'cb_holder' : 'cb_holder_bottom'} style={chattype === 'main' && isloadingState === true ? {justifyContent: 'end'} : {justifyContent: 'space-between'}}>
             { isloadingState === false ? (
@@ -225,19 +201,14 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                     { isgeneratingState === false ? (
                     <>
                         { chattype === 'body' ? 
-                        (
-                        <>
-                        <div className=/*'cb_utilthink '*/'cb_model' onClick={() => {cbmodelpopupactiveState === true ? cbmodelpopupactivesetState(false) : cbmodelpopupactivesetState(true)}}>
+                        (<div className={'cb_utilthink ' + (cbthinkState === true ? 'cb_utilthink_select' : 'cb_utilthink_unselect')} onClick={() => {cbthinkState === true ? cbthinksetState(false) : cbthinksetState(true)}}>
                             <NeuralNetwork/>
-                            <span>{cbmodelState['name']}</span>
-                        </div>
-                        <ChatBoxModelPopUp current_model={cbmodelState} isactiveState={cbmodelpopupactiveState} isactivesetState={cbmodelpopupactivesetState} changemodelState={cbmodelsetState}/>
-                        </>
-                        ) : <></>
+                            <span>Think</span>
+                        </div>) : <></>
                         }
                         <div className='cb_utilsholder'>
-                            <div className='cb_util'>{GetModelName(modelState)}</div>
-                            <div className='cb_util cb_utilactive cb_upload' onClick={() => cbinputRef.current.click()} ref={cbuploadRef}>
+                            {chatthinkState === true ? (<div className='cb_util'><SparklesIcon width={24} height={24}/></div>) : <></>}
+                            <div className='cb_util cb_utilactive cb_upload' onClick={() => cbinputRef.current.value === '' ? cbinputRef.current.click() : null} ref={cbuploadRef}>
                                 <UploadFile/>
                                 <div className={'cb_uploadtext ' + (chattype === 'main' ? 'cb_uploadmain' : 'cb_uploadbody')}>Upload File</div>
                                 <input type='file' className='cb_input' ref={cbinputRef} accept='application/JSON' onChange={() => UploadDocument()}/>

@@ -41,7 +41,7 @@
     display: flex;
     gap: 15px;
 }
-
+/*
 .cb_utilthink{
     display: flex;
     align-items: center;
@@ -67,6 +67,20 @@
 .cb_utilthink_select:hover{
     color: var(--color-text-main-hover-blue-experimental-lighter);
     border: 2px solid var(--color-text-main-hover-blue-experimental-lighter);
+}*/
+.cb_model{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 5px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+    border: 2px solid #fff;
+}
+.cb_model:hover{
+    border: 2px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
 }
 
 .cbody_lower_backclick{

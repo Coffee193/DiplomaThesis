@@ -1,0 +1,12 @@
+--- 28/4/2026 ---
+
+TODOs:
+
+1) Change Ollama3.1:7B to a newer model, one from 2024 onwards.
+
+2) Use Cloud model (example: Deepseek) and compare it with local model.
+
+3) Update UI so that it can accept multiple uploads (Input/ Output files).
+Think of 'clever' question to ask it that concern both files/some relationship between those files
+
+-> Consider cases like 1 Input File, 3 Output Files and 'clever' question about some relationship between them.

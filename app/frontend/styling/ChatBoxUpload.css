@@ -1,11 +1,21 @@
 .cbu_holder{
     position: relative;
-    width: 100%;
+    width: max-content;
     height: 60px;
     display: flex;
     justify-content: start;
     align-items: center;
     margin-bottom: 10px;
+    gap: 10px;
+    overflow-x: scroll;
+    padding-bottom: 5px;
+    max-width: 100%;
+}
+.cbu_holder::-webkit-scrollbar{
+    height: 3px;
+}
+.cbu_holder::-webkit-scrollbar-thumb{
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
 }
 
 .cbu{
@@ -18,6 +28,7 @@
     align-items: center;
     position: relative;
     background-color: #fff;
+    flex-shrink: 0;
 }
 
 .cbu_document{

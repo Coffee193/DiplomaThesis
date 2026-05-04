@@ -34,7 +34,7 @@ def LLMOutClean(answer):
 def QueryToInfoNaturalLanguage(query):
     text = ''
     for i in range (0, len(query)):
-        text += f'Execute task {query[i]['before']} before task {query[i]['after']}'
+        text += f'Execute task {query[i]['before']} before task {query[i]['next']}'
         if( i + 1 != len(query)):
             text += '\n'
     return text
@@ -180,7 +180,9 @@ def PassLLMThink(llm_model, user_question, conv_id, db_chat = [], json_document 
     answer = chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
     answer = LLMOutClean(answer)
     ### Chain 3 End ###
-
+    print('Chain 3 Finished')
+    print(answer)
+    print(search)
     ### JSON Data Extraction based on Chain 3 ###
     ''' Keeps only the relevant JSON Data based on what was decided from Chain 3 '''
     try:
@@ -235,7 +237,7 @@ def PassLLMThink(llm_model, user_question, conv_id, db_chat = [], json_document 
                         query = [q for q in query if {q['preconditiontaskreference']['refid'], q['postconditiontaskreference']['refid']} == {IntToStrWithSlabInfornt(retrieve_info['reference']), IntToStrWithSlabInfornt(retrieve_info['target'])}]
 
     ### JSON Data Extraction End ####
-
+    print(query)
     ### Chain 4: Wanted Returned Value Classifier ###
     ''' Classifies what value the user wants returned. Example: 'Return the ids of all tasks named ROLLING' -> finds ids'''
     if(search == 'jobs'):
@@ -255,7 +257,8 @@ def PassLLMThink(llm_model, user_question, conv_id, db_chat = [], json_document 
         answer = chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content
         asnwer = LLMOutClean(answer)
     ### Chain 4 End ###
-
+    print('Chain 4 Finished')
+    print(answer)
     ### Data Final Clean Form ###
     if(search == 'jobs'):
         query = [{'name': q['name'], 'arrivaldate': q['arrivaldate'], 'duedate': q['duedate'], 'task': [r['refid'] for r in q['jobtaskreference']], 'workcenter': q['jobworkcenterreference']['refid'], 'id': q['id']} for q in query]
@@ -274,7 +277,8 @@ def PassLLMThink(llm_model, user_question, conv_id, db_chat = [], json_document 
     elif(search == 'tasksprecedenceconstraints'):
         query = [{'before': q['preconditiontaskreference']['refid'], 'next': q['postconditiontaskreference']['refid']} for q in query]
     ### End ###
-
+    print('Cleaned data')
+    print(query)
     ### JSON Data Extraction based on Chain 4 ###
     if(search != 'tasksprecedenceconstraints'):
         try:
@@ -326,7 +330,8 @@ def PassLLMThink(llm_model, user_question, conv_id, db_chat = [], json_document 
                             wanted_return['value'] = IntToStrWithSlabInfornt(wanted_return['value'])
                             query = [{'resource': item['resource'], 'tasks': [t for t in item['tasks'] if t[wanted_return['key']].upper() == wanted_return['value'].upper()]}  for item in taskres_list if any(t[wanted_return['key']].upper() == wanted_return['value'].upper() for t in item['tasks'])]
     ### JSON Data Extraction End###
-
+    print('Chain 4 Finished')
+    print(query)
     ### Chain 5: Final Answer ###
     if(search != 'tasksprecedenceconstraints'):
         if(len(query) == 0):
@@ -334,6 +339,10 @@ def PassLLMThink(llm_model, user_question, conv_id, db_chat = [], json_document 
         else:
             prompt = OutputListResultsTaskJobResourceTasksuitableresource.getPrompt(user_question, len(query))
     else:
+        print('Chain5 aa')
+        print(taskprecedenceconstraints_pick)
+        print(retrieve_info)
+        print(QueryToInfoNaturalLanguage(query))
         if(taskprecedenceconstraints_pick == "dependence"):
             if(len(query) == 0):
                 if(IntToStrWithSlabInfornt(retrieve_info['reference']) not in [q['id'] for q in json_data["tasks"]["task"]]):
@@ -361,6 +370,8 @@ def PassLLMThink(llm_model, user_question, conv_id, db_chat = [], json_document 
                 except:
                     prompt = ExceptionHandler.getPrompt(user_question)
     ### Chain 5 End ###
+    print('Chain 5 Finished')
+    print(prompt)
 
     return [chat(llm_model, messages = [{'role': 'user', 'content': prompt}], stream = True), think_list, query, search]
 

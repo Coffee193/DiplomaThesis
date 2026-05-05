@@ -196,11 +196,13 @@ def GetConversation(request, conv_id):
     else:
         print('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM')
         print(chat_ret)
-        for i in range(0, len(chat_ret['chat'])):
-            chat_ret['chat'][i]['t'] = chat_ret['chat'][i]['t'].timestamp()
-            [d.update({'id': str(d['id'])}) for d in chat_ret['chat'][i]['d'] if 'd' in chat_ret['chat'][i]]
-            #if('d' in chat_ret['chat'][i]):
-            #    chat_ret['chat'][i]['d']['id'] = str(chat_ret['chat'][i]['d']['id'])
+
+        for chat in chat_ret['chat']:
+            chat['t'] = chat['t'].timestamp()
+            if 'd' in chat:
+                for d in chat['d']:
+                    d['id'] = str(d['id'])
+
         chat_ret = {'c': chat_ret['chat'], 'm': chat_ret['model_id']}
 
         gen_chat = redis_client.get("cg_" + str(conv_id))
@@ -421,17 +423,17 @@ def AnswerQuestionWithDocument(request):
         return ReturnHttpInvalidJWT(valjwt)
     
     request_dict = request.data.dict()
-    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'id' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document']):
+    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'id' not in request_dict['data']):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
     data = json.loads(request_dict['data'])
     file = json.loads(request_dict['document'])
     print('*********')
     print(data)
     print(file)
-    if(data['id'].isdigit() == False or type(data['q']) != str):
+    if(data['id'].isdigit() == False or type(data['q']) != str or type(file) != list):
         return HttpResponse(json.dumps('Invalid Id'), status = 400)
     for f in file:
-        if(len(f['data']) < 30 or f['data'][:29] != 'data:application/json;base64,' or f['name'][-5:] != '.json'):
+        if('name' not in f or 'data' not in f or type(f['name']) != str or type(f['data']) != str or len(f['data']) < 30 or f['data'][:29] != 'data:application/json;base64,' or f['name'][-5:] != '.json'):
             return HttpResponse(json.dumps('Invalid XML file'), status = 400)
     
     if(redis_client.exists("cg_" + data["id"])):

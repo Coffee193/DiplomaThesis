@@ -85,16 +85,20 @@ def GetLastFileFromChat(db_chat):
 
 def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
     think_list = []
-
+    print('subemela')
     ### Chain 0: Recongise Upload ###
     if(json_document != None and user_question == ''):
-        return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': JSONUploadNoQuestion.getPrompt(json_document['name'])}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
+        if(len(json_document) == 1):
+            return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': JSONUploadNoQuestion.getPrompt(json_document[0]['name'])}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
+        else:
+            asokdasoi
     ### Recognise Upload End ###
 
     ### Chain 1: Gibberish Classifier ###
     ''' Classifies if Question is Gibberish or Not'''
     answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': GibberishClassifier.getPrompt(user_question)}]).message.content)
-
+    print('--Chain 1--')
+    print(answer)
     try:
         answer = json.loads(answer)
         think_list.append({'chain': '1', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
@@ -107,14 +111,18 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
     ### Chain 2: High Level Classifier (Tasks, Jobs, Resources, TaskSuitableResources, TaskPrepost) ###
     ''' Classifies if user asks about: Jobs, Resources, Tasks, Tasksuitableresources, Taskprecedenceconstraints'''
     answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': HighLevelClassifier.getPrompt(user_question)}]).message.content) # Word-based search
-
+    print('--Chain 2--')
+    print(answer)
     try:
         answer = json.loads(answer)
         think_list.append({'chain': '2', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
         words = answer['words']
         if(len(words) == 0):
             # NOT asking about Jobs, Tasks, etc.. So a general, non-json question
-            return {'response_msg': chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document['name'] if json_document != None else None), stream = True), 'think': think_list, 'end': 'success_unfinished'}
+            if(json_document == None or len(json_document) == 1):
+                return {'response_msg': chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document[0]['name'] if json_document != None else None), stream = True), 'think': think_list, 'end': 'success_unfinished'}
+            else:
+                saopdksaoop
         else:
             if('job' in words):
                 search = 'jobs'
@@ -140,7 +148,9 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
     except:
         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
     ### Chain 2 End ###
-
+    print('--Chain 2 End--')
+    print(answer)
+    print(search)
     ### Get File If None Provided ###
     '''User asks file related question without providing a file. Searches chat for last provided file'''
     if(json_document == None):
@@ -148,7 +158,8 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
         if(json_document == None):
             return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': JSONQuestionNoPath.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'success_unfinished', 'search': search}
     ### Get File If None Provided End ###
-
+    print('--Get File If None--')
+    print(json_document)
     ### Chain 3: Retrieval Classifier ###
     ''' Classifies if user filters based on some specific attribute. Example: 'Get all tasks with id _578' -> finds 'id' and _578'''
     if(search == 'resources'):
@@ -187,7 +198,9 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error', 'search': search}
     # End JSON Retrieve Information #
     ### Chain 3 End ###
-
+    print('--Chain 3--')
+    print(answer)
+    print(retrieve_info)
     ### Chain 4: Wanted Returned Value Classifier ###
     ''' Classifies what value the user wants returned. Example: 'Return the ids of all tasks named ROLLING' -> finds ids'''
     if(search == 'jobs'):
@@ -202,7 +215,7 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
                 prompt = TasksuitableresourceAttributeReturnResourceClassifier.getPrompt(user_question)
             elif(retrieve_info['search']['info'] == 'task'):
                 prompt = TasksuitableresourceAttributeReturnTaskClassifier.getPrompt(user_question)
-
+    wanted_return = None
     if(search != 'tasksprecedenceconstraints'):
         answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content)
 
@@ -223,7 +236,8 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
 def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, wanted_return):
 
     fetched_results = []
-
+    print(json_documents)
+    print('*********')
     for doc in json_documents:
         ### Get JSON Data ###
         ''' Retrieves the JSON data '''
@@ -245,7 +259,8 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
         elif(search == 'tasksprecedenceconstraints'):
             query = json_data["taskprecedenceconstraints"]["taskprecedenceconstraint"]
         ### End Chain 2 Query ###
-
+        print('==Chain 2==')
+        print(query)
         ### Query Form Based on Chain 3 ###
         ''' Classifies if user filters based on some specific attribute. Example: 'Get all tasks with id _578' -> finds 'id' and _578'''
         if(retrieve_info['attribute'] == True):
@@ -354,39 +369,50 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
 
         fetched_results.append({"query": query, "json_data": json_data, "doc": doc})
     
+    print('fetched res >>>')
+    print(fetched_results)
     return fetched_results
 
 def PassLLMFinalAnswer(json_document, search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick):
+    print('Fin AA**')
+    print(json_document)
     if(len(json_document) == 1):
-        PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick)
+        return PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick)
     else:
         afasddsad
 
 def PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick):
+    print('Single___')
+    print(taskprecedenceconstraints_pick)
+    print(retrieve_info)
+    print(query)
+    print('ppppppppppppp')
     ### Chain 5: Final Answer ###
     if(search != 'tasksprecedenceconstraints'):
-        if(len(query) == 0):
+        if(len(query[0]) == 0):
             prompt = OutputNoResultsFound.getPrompt(user_question)
         else:
-            prompt = OutputListResultsTaskJobResourceTasksuitableresource.getPrompt(user_question, len(query))
+            prompt = OutputListResultsTaskJobResourceTasksuitableresource.getPrompt(user_question, len(query[0]))
     else:
         print('Chain5 aa')
         print(taskprecedenceconstraints_pick)
         print(retrieve_info)
-        print(QueryToInfoNaturalLanguage(query))
+        print(query)
         if(taskprecedenceconstraints_pick == "dependence"):
-            if(len(query) == 0):
+            if(len(query[0]) == 0):
                 if(IntToStrWithSlabInfornt(retrieve_info['reference']) not in [q['id'] for q in json_data["tasks"]["task"]]):
                     prompt = OutputTaskprecedenceconstraintsTaskNoExist.getPrompt(user_question)
                 else:
                     prompt = OutputTaskprecedenceconstraintsTaskIsIndependent.getPrompt(user_question, retrieve_info['target'])
             else:
-                if(len(query) == 1):
-                    prompt = OutputListResultsTaskprecedenceconstraints.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
+                if(len(query[0]) == 1):
+                    print(QueryToInfoNaturalLanguage(query[0]))
+                    print('ooooooooooooo')
+                    prompt = OutputListResultsTaskprecedenceconstraints.getPrompt(user_question, QueryToInfoNaturalLanguage(query[0]))
                 else:
-                    prompt = OutputListResultsTaskJobResourceTasksuitableresource.getPrompt(user_question, len(query))
+                    prompt = OutputListResultsTaskJobResourceTasksuitableresource.getPrompt(user_question, len(query[0]))
         elif(taskprecedenceconstraints_pick == "order"):
-            if(len(query) == 0):
+            if(len(query[0]) == 0):
                 prompt = OutputNoResultsFound.getPrompt(user_question)
             else:
                 bool_classify = chat(llm_model, messages = [{'role': 'user', 'content': OutputTaskprecedenceconstraintsClassifyQuestionBoolean.getPrompt(user_question)}]).message.content
@@ -395,23 +421,32 @@ def PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info
                     bool_classify = json.loads(bool_classify)
                     think_list.append({'chain': '5_taskprecon_boolquestion', 'think': bool_classify['think'] if 'think' in bool_classify else 'Exception No Thinking Return from LLM'})
                     if(bool_classify['attribute'] == True):
-                        prompt = OutputTaskprecedenceconstraintsAnswerBooleanQuestion.getPrompt(user_question, len(query))
+                        prompt = OutputTaskprecedenceconstraintsAnswerBooleanQuestion.getPrompt(user_question, len(query[0]))
                     else:
-                        prompt = OutputListResultsTaskprecedenceconstraints.getPrompt(user_question, QueryToInfoNaturalLanguage(query))
+                        print(QueryToInfoNaturalLanguage(query[0]))
+                        print('oooooooooooooooo')
+                        prompt = OutputListResultsTaskprecedenceconstraints.getPrompt(user_question, QueryToInfoNaturalLanguage(query[0]))
                 except:
                     prompt = ExceptionHandler.getPrompt(user_question)
     ### Chain 5 End ###
     print('Chain 5 Finished')
     print(prompt)
+    print(';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;')
+    print(query)
+    print(search)
+    print(think_list)
 
     return [chat(llm_model, messages = [{'role': 'user', 'content': prompt}], stream = True), think_list, query, search]
 
 def PassLLMThinkCompletePipeline(llm_model, user_question, conv_id, db_chat = [], json_document = None):
+    print('sk')
     llm_res = PassLLMThink(llm_model, user_question, db_chat, json_document)
+    print(llm_res)
+    print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
     if(llm_res['end'] != 'success_complete'):
         return [llm_res['response_msg'], llm_res['think'], None, None if 'search' not in llm_res else llm_res['search']]
     else:
-        fetched_results = LLMGetFinalQuery(conv_id, llm_res['search'], llm_res['json_documents'], llm_res['retrieve_info'], llm_res['llm_model'], llm_res['wanted_return'])
+        fetched_results = LLMGetFinalQuery(conv_id, llm_res['search'], llm_res['json_documents'], llm_res['retrieve_info'], llm_model, llm_res['wanted_return'])
     return PassLLMFinalAnswer(llm_res['json_documents'], llm_res['search'], user_question, [fr["query"] for fr in fetched_results], llm_res['retrieve_info'], [fr["json_data"] for fr in fetched_results], llm_model, llm_res['think'], llm_res['taskprecedenceconstraints_pick'])
 
 ''' #!!!###
@@ -422,6 +457,8 @@ LLMGetFinalQuery
 PassLLMFinalAnswer
 PassLLMFinalAnswerSingleDocument
 PassLLMThinkCompletePipeline
+
+ERROR in LLMGetFinalQuery:: ---> CREATES THIS: [[...]] AND I WANT IT TO CREATE THIS: [...]
 
 CHANGE AnswerQuestionLLMThink of views, so that it uploads list to mongodb. Also it uploads appropriate fetched items
 '''

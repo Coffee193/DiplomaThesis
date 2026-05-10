@@ -134,10 +134,13 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
             <div className='cm_chatuser'>
                 {/*cbinputRef.current.value !== '' ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': cbuState['name'], 'type': cbuState['type'], 'size': cbuState['size'], 'hardpath': url}}/> : ''*/}
                 {cbuState['documents'].length !== 0 && <ChatBoxUpload cbuState={{'inchat': true, 'documents': askdoclist}}/>}
-                {cbuState['documents'].length !== 0 && cbtextareaRef.current.value.replace(/(\r\n|\n|\r)/gm, '').length !== 0 && 
-                <div className='cm_chatbox cm_boxuser'>
-                    {request['q']}
-                </div>}
+                {console.log(cbtextareaRef.current.value)}
+                {console.log(cbtextareaRef.current.value.replace(/(\r\n|\n|\r)/gm, '').length !== 0)}
+                {console.log(request)}
+                {console.log(request['q'])}
+                {console.log(request['q'].replace(/(\r\n|\n|\r)/gm, '').length !== 0)}
+                {console.log('bbbbbbbbbbbbbb')}
+                {request['q'].replace(/(\r\n|\n|\r)/gm, '').length !== 0 && <div className='cm_chatbox cm_boxuser'> {request['q']} </div>}
             </div>,
             prevState
         ])

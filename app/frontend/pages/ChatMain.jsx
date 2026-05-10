@@ -107,14 +107,18 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 if(data[i] === "(DATA)"){
                     data[i] =
                     <div className='cm_infoboxholder'>
-                        <div className = {Object.keys(info[0]).length > 2 && (search === 'jobs' || search === 'tasksuitableresources') ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
-                            {CreateBlock(info, search)}
+                        <div className = {Object.keys(info[0][0]).length > 2 && (search === 'jobs' || search === 'tasksuitableresources') ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
+                            {info.length === 1 ? CreateBlock(info[0], search) : CreateMultiBlock(info, search)}
                         </div>
                     </div> 
                 }
             }
         }
         return data
+    }
+
+    function CreateMultiBlock(info, search){
+
     }
 
     function CreateBlock(info, search){

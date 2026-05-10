@@ -850,6 +850,8 @@ def ValidateAndCreateJWT(request, newifexpired = True):
     cookies = request.COOKIES
     if("access" not in cookies):
         return [False, "Access Key Not Sent", 401, '']
+    print(cookies)
+    print('--COOKIE--')
     access_info = jwt.decode(cookies["access"], options={"verify_signature":False})
     if('alg' not in access_info):
         return [False, 'Invalid JWT', 400, '']

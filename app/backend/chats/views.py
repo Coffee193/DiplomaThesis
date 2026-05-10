@@ -6,7 +6,7 @@ from backend.mongo_db_connection import mongo_db
 import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime
-from .LLMpipeline import PassLLMThink, CreateConversationTitleThink
+from .LLMpipeline import PassLLMThink, CreateConversationTitleThink, PassLLMThinkCompletePipeline
 
 ###
 # For multiplrocessing to work (i.e. to spawn a process) you must run these two lines of code before importing any models.
@@ -620,13 +620,15 @@ User Question:
 def AnswerQuestionLLMThink(db_chat, user_question, chat_id, document_dict = None):
 
     total_answer = ''
-
-    try:
-        llm_answer, think_stages, fetched_items, search = PassLLMThink(llm_model, user_question, chat_id, db_chat, {'name': document_dict["name"], 'id': document_dict['id']} if document_dict != None else None)
-    except:
-        redis_client.delete("cg_" + chat_id)
-        return
-
+    print('vrum vrum')
+    print(document_dict)
+    #try:
+    llm_answer, think_stages, fetched_items, search = PassLLMThinkCompletePipeline(llm_model, user_question, chat_id, db_chat, document_dict)
+    #except:
+    #    print('opopop')
+    #    redis_client.delete("cg_" + chat_id)
+    #    return
+    print('SKAAAAAAA')
     if(fetched_items != None):
         redis_client.xadd("cs_" + chat_id, {"i": json.dumps({"q": fetched_items, "s": search})}) # i -> items
 

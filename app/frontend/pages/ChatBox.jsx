@@ -36,10 +36,15 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         let request = {"q": cbtextareaRef.current.value, "m": cbmodelState['id']}
         let body = null
 
-        if(cbinputRef.current.value !== ''){
+        //if(cbinputRef.current.value !== ''){
+        console.log(cbuState['documents'].length)
+        console.log(cbuState['documents'])
+        if(cbuState['documents'].length !== 0){
             body = new FormData()
             body.append('data', JSON.stringify(request))
-            body.append('document', JSON.stringify({'data': cbuState['data'], 'name': cbuState['name']}))
+            //body.append('document', JSON.stringify({'data': cbuState['data'], 'name': cbuState['name']}))
+            //body.append('document', JSON.stringify({'data': cbuState['documents']['data'], 'name': cbuState['documents']['name']}))
+            body.append('document', JSON.stringify(cbuState['documents'].map( ({data, name}) => ({data, name}) )))
         }
         else{
             body = JSON.stringify(request)
@@ -134,12 +139,6 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
             <div className='cm_chatuser'>
                 {/*cbinputRef.current.value !== '' ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': cbuState['name'], 'type': cbuState['type'], 'size': cbuState['size'], 'hardpath': url}}/> : ''*/}
                 {cbuState['documents'].length !== 0 && <ChatBoxUpload cbuState={{'inchat': true, 'documents': askdoclist}}/>}
-                {console.log(cbtextareaRef.current.value)}
-                {console.log(cbtextareaRef.current.value.replace(/(\r\n|\n|\r)/gm, '').length !== 0)}
-                {console.log(request)}
-                {console.log(request['q'])}
-                {console.log(request['q'].replace(/(\r\n|\n|\r)/gm, '').length !== 0)}
-                {console.log('bbbbbbbbbbbbbb')}
                 {request['q'].replace(/(\r\n|\n|\r)/gm, '').length !== 0 && <div className='cm_chatbox cm_boxuser'> {request['q']} </div>}
             </div>,
             prevState

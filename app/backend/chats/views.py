@@ -101,6 +101,8 @@ def DeleteChat(request):
 @api_view(['POST'])
 def CreateChat(request):
     content_type = request.headers.get('content-type').split(';')[0]
+    print(content_type)
+    print('^^^^^^^^^^^^^^^^^^^^')
     if(content_type == 'text/plain'):
         return CreateChatQuestion(request)
     elif(content_type == 'multipart/form-data'):
@@ -147,17 +149,25 @@ def CreateChatDocument(request):
     if(valjwt[0] == False):
         return ReturnHttpInvalidJWT(valjwt)
 
+    #request_dict = request.data.dict()
+    print(request.data.dict())
+    print('***')
     request_dict = request.data.dict()
-    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document'] or 'm' not in request_dict['data'] or (request_dict['data']['m'] != 1 and request_dict['data']['m'] != 2 and request_dict['data']['m'] != 3)):
+    request_dict['data'] = json.loads(request_dict['data'])
+    request_dict['document'] = json.loads(request_dict['document'])
+    print(request_dict)
+    #if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document'] or 'm' not in request_dict['data'] or (request_dict['data']['m'] != 1 and request_dict['data']['m'] != 2 and request_dict['data']['m'] != 3)):
+    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'm' not in request_dict['data'] or (request_dict['data']['m'] != 1 and request_dict['data']['m'] != 2 and request_dict['data']['m'] != 3) or (not all('data' in doc and 'name' in doc for doc in request_dict['document']))):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
-    data = json.loads(request_dict['data'])
-    file = json.loads(request_dict['document'])
+    print('popopo')
+    data = request_dict['data']
+    file = request_dict['document']
 
-    if(len(file['data']) < 30 or file['data'][:29] != 'data:application/json;base64,' or file['name'][-5:] != '.json'):
+    if(any(len(f['data']) < 30 or f['data'][:29] != 'data:application/json;base64,' or f['name'][-5:] != '.json' for f in file)):
         return HttpResponse(json.dumps('Invalid XML file'), status = 400)
 
     chat_id = GenerateSnowflake()
-
+    ############ <____________________________HERE !!!!!!!!!!!!!!!!!!!
     file_write = base64.b64decode(file['data'][29:])
     file_id = GenerateSnowflake()
 

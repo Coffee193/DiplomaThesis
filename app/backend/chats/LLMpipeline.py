@@ -86,6 +86,7 @@ def GetLastFileFromChat(db_chat):
 def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
     think_list = []
     print('subemela')
+    print(json_document)
     ### Chain 0: Recongise Upload ###
     if(json_document != None and user_question == ''):
         if(len(json_document) == 1):

@@ -168,20 +168,23 @@ def CreateChatDocument(request):
 
     chat_id = GenerateSnowflake()
     ############ <____________________________HERE !!!!!!!!!!!!!!!!!!!
-    file_write = base64.b64decode(file['data'][29:])
+    file_write = [base64.b64decode(f['data'][29:]) for f in file]
     file_id = GenerateSnowflake()
 
-    document_info = {"id": file_id, "name": file['name'], "size": str(round(len(file_write)/1024, 1)), "data": file_write.decode('utf-8')}
-    redis_client.set("cg_" + str(chat_id), json.dumps({"u": {"id": str(document_info["id"]), "name": document_info["name"], "size": document_info["size"]}, "q": data["q"]}))
+    document_info = [{"id": file_id + incr, "name": f['name'], "size": str(round(len(f_w)/1024, 1))} for incr, (f, f_w) in enumerate(zip(file, file_write))]
+    redis_client.set("cg_" + str(chat_id), json.dumps({"u": [{"id": str(d["id"]), "name": d["name"], "size": d["size"]} for d in document_info], "q": data["q"]}))
+
+    WriteDocument(file_write, document_info, str(chat_id))
 
     curr_time = datetime.datetime.now(datetime.timezone.utc)
-    WriteDocument(file_write, {"id": str(document_info['id']), "name": document_info['name'], "size": document_info['size']} , str(chat_id))
+
     if(data['m'] == 2 or data['m'] == 3):
+        ## <----------- NEED TO CHECK THESE 2 -----------
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info])
         t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
     else:
-        p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id), {"id": document_info["id"], "name": document_info["name"], "size": document_info["size"]}])
-        t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"], document_info["name"]])
+        p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id), document_info])
+        t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"], [d["name"] for d in document_info]])
 
     p.start()
     chats.insert_one({"_id": chat_id,
@@ -440,6 +443,7 @@ def AnswerQuestionWithDocument(request):
     print('*********')
     print(data)
     print(file)
+    ###<______HERE !!!
     if(data['id'].isdigit() == False or type(data['q']) != str or type(file) != list):
         return HttpResponse(json.dumps('Invalid Id'), status = 400)
     for f in file:

@@ -789,7 +789,8 @@ def CreateConversationTitleThink(llm_model, user_question = '', file_name = None
                 answer = json.loads(answer)
                 words = answer['words']
                 if(len(words) == 0):
-                    return chat(llm_model, messages = [{'role': 'user', 'content': TitlteJSONUploadIrrelevantQuestion.getPrompt(user_question, file_name)}]).message.content
+                    #return chat(llm_model, messages = [{'role': 'user', 'content': TitlteJSONUploadIrrelevantQuestion.getPrompt(user_question, file_name)}]).message.content
+                    return chat(llm_model, messages = [{'role': 'user', 'content': TitleOnlyQuestionNoJSON.getPrompt(user_question)}]).message.content
                 else:
                     return chat(llm_model, messages = [{'role': 'user', 'content': TitleJSONUploadRelevantQuestion.getPrompt(user_question)}]).message.content
             except:

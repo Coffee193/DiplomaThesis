@@ -2,3 +2,33 @@ Set the following environment variables:
 [[System Properties > Environment Variables > New]]
 OLLAMA_NUM_PARALLEL=2
 OLLAMA_MAX_LOADED_MODELS=2
+
+
+================================================
+----- NOTE (About smthing else) ------
+When you upload a file to ollama, it does the following:
+It passes to the LLM the following:
+
+
+<user question>
+
+--- File: OutputXML.xml ---
+<File contents ...>
+--- End of OutputXML.xml ---
+================================================
+You can view what you send to Ollama = at:
+C:\Users\Chris\AppData\Local\Ollama -> server.txt
+
+================================================
+When you upload multiple files:
+The prompt simply becomes:
+
+
+<user question>
+
+--- File: OutputXML.xml---
+<File contents ...>
+--- End of OutputXML.xml ---
+--- File: InputXML.xml ---
+<File contents ...>
+--- End of InputXML.xml ---

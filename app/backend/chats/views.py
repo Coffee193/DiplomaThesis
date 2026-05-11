@@ -7,6 +7,7 @@ import json
 from snowflake_id_gen import GenerateSnowflake
 import datetime
 from .LLMpipeline import PassLLMThink, CreateConversationTitleThink, PassLLMThinkCompletePipeline
+from LLM_prompts.NoAgent import NoAgentJSONUpload
 
 ###
 # For multiplrocessing to work (i.e. to spawn a process) you must run these two lines of code before importing any models.
@@ -127,10 +128,11 @@ def CreateChatQuestion(request):
     redis_client.set("cg_" + str(chat_id), json.dumps({"q": data["q"]}))
     if(data['m'] == 2 or data['m'] == 3):
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id)])
-        t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"]])
+        #t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"]])
     else:
         p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id)])
-        t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"]])
+        #t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"]])
+    t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"]])
 
     p.start()
     chats.insert_one({"_id": chat_id,
@@ -174,17 +176,21 @@ def CreateChatDocument(request):
     document_info = [{"id": file_id + incr, "name": f['name'], "size": str(round(len(f_w)/1024, 1))} for incr, (f, f_w) in enumerate(zip(file, file_write))]
     redis_client.set("cg_" + str(chat_id), json.dumps({"u": [{"id": str(d["id"]), "name": d["name"], "size": d["size"]} for d in document_info], "q": data["q"]}))
 
+    print(file_write)
+    print('LLLLLLLLLLLLLLLLLLLLLLLLLLL')
+
     WriteDocument(file_write, document_info, str(chat_id))
 
     curr_time = datetime.datetime.now(datetime.timezone.utc)
 
     if(data['m'] == 2 or data['m'] == 3):
         ## <----------- NEED TO CHECK THESE 2 -----------
-        p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info])
-        t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
+        p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info, [f.decode() for f in file_write]])
+        #t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
     else:
         p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[[], data["q"], str(chat_id), document_info])
-        t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"], [d["name"] for d in document_info]])
+        #t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"], [d["name"] for d in document_info]])
+    t = multiprocessing.Process(target = CreateChatTitleThink, args = [str(chat_id), data["q"], [d["name"] for d in document_info]])
 
     p.start()
     chats.insert_one({"_id": chat_id,
@@ -303,23 +309,21 @@ def AnswerQuestion(request):
         p.start()
         return CreateStreamingResponseNewAccess(valjwt[1], GetLLMAnswerStream, [data["id"]], 200)
 
-def AnswerQuestionLLM(db_chat, user_question, chat_id, document_dict = None):
+def AnswerQuestionLLM(db_chat, user_question, chat_id, document_dict = None, document_data = None):
     llm_chat = []
     total_answer = ''
 
+    print(document_data)
+    print('???????????????????????')
+
     for conv in db_chat:
         if 'd' in conv:
-            if 'q' in conv:
-                user_prompt = f"""User uploaded a document, the data of whuch are the following:
-{conv['d']['data']}
---------------------
-Then the User asked the following question based on the data provided previously: {conv['q']}
-"""
-            else:
-                user_prompt = f"""User uploaded a document, the data of which are the following:
-{conv['d']['data']}
-"""
-            llm_chat += [{'role': 'user', 'content': user_prompt}, {'role': 'assistant', 'content': conv['a']}] 
+            data_temp = []
+            for doc in conv['d']:
+                with open(chatdocumentpath + '/' + chat_id + '_' + str(doc['id']) + '.' + doc['name'].split('.')[-1], encoding = 'utf-8') as file:
+                    file_data = file.read()
+                    data_temp.append(file_data)
+            llm_chat += [{'role': 'user', 'content': NoAgentJSONUpload.getPrompt(conv['q'] if 'q' in conv else '', [{'name': d['name'], 'data': data} for d, data in  zip(conv['d'], data_temp)])}, {'role': 'assistant', 'content': conv['a']}] 
 
         else:
             llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
@@ -327,30 +331,10 @@ Then the User asked the following question based on the data provided previously
     if(document_dict == None):
         llm_chat.append({'role': 'user', 'content': user_question})
     else:
-        if(user_question == ''):
-            user_prompt = f"""The user uploaded a file, the data of which are the following:
-{document_dict['data']}
+        llm_chat.append({'role': 'user', 'content': NoAgentJSONUpload.getPrompt(user_question, [{'name': d['name'], 'data': data} for d, data in  zip(document_dict, document_data)])})
 
-----------------------------
-
-Read the data carefully and based on that data, state what type of file it is and what is it about. Then make a statement about offering your assistance with any task
-
-================
-
-Example:
-It seems you've uploaded a scheduling plan in XML format. I can help with various tasks related to this file. I'll do my best to assist you with extracting information or performing calculations on the data.
-"""
-        else:
-            user_prompt = f"""The user uploaded a file, the data of which are the following:
-{document_dict['data']}
-
-----------------------------
-
-Read the data carefully and based on that data, answer the following question:
-{user_question}
-"""
-        
-        llm_chat.append({'role': 'user', 'content': user_prompt})
+    print(llm_chat)
+    print('>!<')
 
     try:
         llm_answer = chat(llm_model, messages = llm_chat, stream = True)
@@ -371,8 +355,8 @@ Read the data carefully and based on that data, answer the following question:
                 push_val = {"t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer, "d": document_dict}
                 if(user_question != ''):
                     push_val['q'] = user_question
-                lololo = chats.update_one({"_id": int(chat_id)},
-                                          {"$push": {"chat": push_val}})
+                chats.update_one({"_id": int(chat_id)},
+                                {"$push": {"chat": push_val}})
             return
 
         total_answer += chunk.message.content
@@ -467,7 +451,7 @@ def AnswerQuestionWithDocument(request):
         WriteDocument(file_write, document_info, data['id'])
 
         if(chat_ret['model_id'] == 2 or chat_ret['model_id'] == 3):
-            p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"], document_info])
+            p = multiprocessing.Process(target = AnswerQuestionLLM, args=[chat_ret['chat'], data["q"], data["id"], document_info, [f.decode() for f in file_write]])
         else:
             p = multiprocessing.Process(target = AnswerQuestionLLMThink, args=[chat_ret['chat'], data["q"], data["id"], document_info])
 
@@ -519,6 +503,7 @@ def DeleteAllChats(request):
     else:
         return HttpResponse(json.dumps('Could not delete the Chats'), status = 400)
     
+## CreateChatTitle is Deprecated. Only CreateChatTitlteThink will now be used. Regardless of whether agent is ON or OFF
 def CreateChatTitle(chat_id, user_question = "", document_content = None, document_name = None, max_doc_token_len = 3000):
     llm_classify = 2
     if(document_content != None and user_question == ""):

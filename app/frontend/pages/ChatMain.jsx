@@ -370,6 +370,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         let search_block = null
         let errorquit = false
         const decoder = new TextDecoder();
+        let document_info = null
 
         while(true){
             const { done, value } = await response.read();
@@ -405,13 +406,16 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     buffer_answer = msg.e
                     errorquit = true
                 }
+                else if(msg.u !== undefined){
+                    document_info = msg.u
+                }
             }
 
             if(buffer_answer === '') continue
             if(window.location.pathname.split("/").at(-2) === linkparams.id){
                 convsetState(prevState => [
                 <div className='cm_chatbox'>
-                    {CreateInfoBlock([buffer_answer], info_block, search_block)}
+                    {CreateInfoBlock([buffer_answer], info_block, search_block, document_info)}
                 </div>,
                 prevState.slice(1)
                 ])

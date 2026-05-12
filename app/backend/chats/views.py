@@ -276,6 +276,10 @@ def GetLLMAnswerStream(chat_id, block_time = 110000, with_title = False):
                         yield json.dumps({'v': parsed_vals['v']}) + "\n"
                     elif 'i' in parsed_vals:
                         yield json.dumps({'i': parsed_vals['i']}) + "\n"
+                    elif 'u' in parsed_vals:
+                        print(json.dumps({'u': parsed_vals['u']}))
+                        print('bmb')
+                        yield json.dumps({'u': parsed_vals['u']}) + "\n"
                     ### <----- HERE NEED TO ADD FOR CASE OF U (UPLOAD)
                     if done_generated and (not with_title or title_generated):
                         return

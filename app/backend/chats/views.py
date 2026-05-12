@@ -276,7 +276,7 @@ def GetLLMAnswerStream(chat_id, block_time = 110000, with_title = False):
                         yield json.dumps({'v': parsed_vals['v']}) + "\n"
                     elif 'i' in parsed_vals:
                         yield json.dumps({'i': parsed_vals['i']}) + "\n"
-
+                    ### <----- HERE NEED TO ADD FOR CASE OF U (UPLOAD)
                     if done_generated and (not with_title or title_generated):
                         return
 
@@ -473,7 +473,7 @@ def WriteDocument(file_data, document_info, conv_id):
         file_path = chatdocumentpath + '/' + conv_id + '_' + str(document_info[i]['id']) + '.' + document_info[i]['name'].split(".")[-1]
         with open(file_path, 'wb') as file:
             file.write(file_data[i])
-
+    print({"u": json.dumps([{k: v for k, v in d.items() if k != "data"} for d in document_info])})
     redis_client.xadd("cs_" + conv_id, {"u": json.dumps([{k: v for k, v in d.items() if k != "data"} for d in document_info])})
 
 @api_view(['DELETE'])

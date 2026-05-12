@@ -1,6 +1,6 @@
 import '../styling/ChatMain.css'
 import { useRef, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { data, useNavigate } from 'react-router-dom'
 import { ChatBox } from './ChatBox'
 import { ChatBoxUpload } from './ChatBoxUpload'
 import { BlocksLoad, DotIcon, ArrowDownIcon, DotsIcon } from '../components/svgs/UtilIcons'
@@ -64,7 +64,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 conv_vals.push(
                     <>
                         <div className='cm_chatbox'>
-                            {CreateInfoBlock(AddStreamBold(response["c"][i]["a"]), response["c"][i]["i"], response["c"][i]["s"])}
+                            {CreateInfoBlock(AddStreamBold(response["c"][i]["a"]), response["c"][i]["i"], response["c"][i]["s"], response["c"][i]["d"])}
                         </div>
                         <div className='cm_chatuser'>
                             {/*response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"], 'id': response["c"][i]["d"]["id"], 'link': linkparams.id}}/> : null*/}
@@ -98,7 +98,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
 
     }
 
-    function CreateInfoBlock(data, info, search){
+    function CreateInfoBlock(data, info, search, documents){
         if(info !== undefined){
             if(data.length === 1){
                 data = data[0].split(/(\(DATA\))/)
@@ -108,7 +108,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     data[i] =
                     <div className='cm_infoboxholder'>
                         <div className = {Object.keys(info[0][0]).length > 2 && (search === 'jobs' || search === 'tasksuitableresources') ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
-                            {info.length === 1 ? CreateBlock(info[0], search) : CreateMultiBlock(info, search)}
+                            {info.length === 1 ? CreateBlock(info[0], search) : CreateMultiBlock(info, search, documents)}
                         </div>
                     </div> 
                 }
@@ -117,8 +117,44 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         return data
     }
 
-    function CreateMultiBlock(info, search){
+    function CreateDocumentNameBlock(name, found_count, margin_remove, search){
+        let style = {}
+        if (search === 'jobs'){
+            style.margin = 0
+        }
+        else if (margin_remove === true){
+            style.marginTop = 0
+        }
 
+        return (
+            <div className='cm_infodocumentname' style={style}>
+                <div>{DocumentNameBlockTruncate(name)}</div>
+                <div className='cm_infodocumentcount'>({found_count})</div>
+            </div>
+        )
+    }
+
+    function DocumentNameBlockTruncate(name){
+        if(name.length > 25){
+            return name.slice(0, 22) + '...'
+        }
+        else{
+            return name
+        }
+    }
+
+    function CreateMultiBlock(info, search, documents){
+        let out_block = []
+        for (let i=0; i<info.length; i++){
+            console.log('vvvvvvvvvvvvvvvv')
+            console.log(i)
+            console.log(info)
+            console.log(search)
+            console.log(documents)
+            out_block.push(CreateDocumentNameBlock(documents[i]['name'], info[i].length, i === 0 ? true : false, search))
+            out_block.push(CreateBlock(info[i], search))
+        }
+        return out_block
     }
 
     function CreateBlock(info, search){

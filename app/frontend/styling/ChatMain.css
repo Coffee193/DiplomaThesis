@@ -288,3 +288,24 @@
     border-radius: 15px;
     margin: 5px 0;
 }
+
+.cm_infodocumentname{
+    display: flex;
+    width: 100%;
+    background-color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+    padding: 5px 7px;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin: 25px 0;
+    position: relative;
+}
+.cm_infodocumentname > div{
+    font-weight: 300;
+}
+
+.cm_infodocumentcount{
+    position: absolute;
+    right: 30px;
+}

@@ -1,0 +1,5444 @@
+{
+    "workcenters": {
+      "workcenter": [
+        {
+          "name": "Generic Workcenter",
+          "description": "Generic Workcenter",
+          "algorithm": "MULTICRITERIA",
+          "workcenterresourcereference": [
+            {
+              "refid": "_1"
+            },
+            {
+              "refid": "_2"
+            }
+          ],
+          "toolrepository": null,
+          "dockingstations": null,
+          "id": "WC"
+        }
+      ]
+    },
+    "resources": {
+      "resource": [
+        {
+          "name": "MELTSHOP",
+          "description": null,
+          "setupmatrixreference": {
+            "refid": "1"
+          },
+          "resourceavailability": {
+            "nonworkingperiods": {
+              "period": [
+                {
+                  "fromdate": {
+                    "day": 19,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 22,
+                    "second": 34
+                  },
+                  "todate": {
+                    "day": 20,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 25,
+                    "second": 2
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 20,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 26,
+                    "second": 20
+                  },
+                  "todate": {
+                    "day": 21,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 45,
+                    "second": 42
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 21,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 28,
+                    "second": 20
+                  },
+                  "todate": {
+                    "day": 22,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 39,
+                    "second": 24
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 22,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 14,
+                    "minute": 37,
+                    "second": 33
+                  },
+                  "todate": {
+                    "day": 22,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 18,
+                    "minute": 37,
+                    "second": 33
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 22,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 14,
+                    "second": 4
+                  },
+                  "todate": {
+                    "day": 23,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 31,
+                    "second": 36
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 23,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 46,
+                    "second": 35
+                  },
+                  "todate": {
+                    "day": 24,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 39,
+                    "second": 36
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 24,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 59,
+                    "second": 36
+                  },
+                  "todate": {
+                    "day": 25,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 31,
+                    "second": 37
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 25,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 40,
+                    "second": 25
+                  },
+                  "todate": {
+                    "day": 26,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 15,
+                    "second": 50
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 26,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 51,
+                    "second": 15
+                  },
+                  "todate": {
+                    "day": 27,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 32,
+                    "second": 30
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 27,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 45,
+                    "second": 9
+                  },
+                  "todate": {
+                    "day": 28,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 40,
+                    "second": 0
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 28,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 1,
+                    "second": 31
+                  },
+                  "todate": {
+                    "day": 29,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 10,
+                    "second": 17
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 29,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 55,
+                    "second": 53
+                  },
+                  "todate": {
+                    "day": 30,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 40,
+                    "second": 14
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 30,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 45,
+                    "second": 55
+                  },
+                  "todate": {
+                    "day": 1,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 40,
+                    "second": 39
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 1,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 49,
+                    "second": 38
+                  },
+                  "todate": {
+                    "day": 2,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 0,
+                    "second": 17
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 2,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 43,
+                    "second": 32
+                  },
+                  "todate": {
+                    "day": 3,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 28,
+                    "second": 18
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 3,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 23,
+                    "second": 58
+                  },
+                  "todate": {
+                    "day": 4,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 47,
+                    "second": 42
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 4,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 45,
+                    "second": 56
+                  },
+                  "todate": {
+                    "day": 5,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 26,
+                    "second": 6
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 5,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 53,
+                    "second": 34
+                  },
+                  "todate": {
+                    "day": 6,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 56,
+                    "second": 57
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 6,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 14,
+                    "second": 27
+                  },
+                  "todate": {
+                    "day": 7,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 16,
+                    "second": 37
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 7,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 54,
+                    "second": 47
+                  },
+                  "todate": {
+                    "day": 8,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 24,
+                    "second": 4
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 8,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 52,
+                    "second": 34
+                  },
+                  "todate": {
+                    "day": 9,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 44,
+                    "second": 26
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 9,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 57,
+                    "second": 28
+                  },
+                  "todate": {
+                    "day": 10,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 52,
+                    "second": 54
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 10,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 42,
+                    "second": 39
+                  },
+                  "todate": {
+                    "day": 11,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 50,
+                    "second": 7
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 11,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 32,
+                    "second": 48
+                  },
+                  "todate": {
+                    "day": 12,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 58,
+                    "second": 50
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 12,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 26,
+                    "second": 20
+                  },
+                  "todate": {
+                    "day": 13,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 23,
+                    "second": 33
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 13,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 25,
+                    "second": 30
+                  },
+                  "todate": {
+                    "day": 14,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 6,
+                    "second": 10
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 14,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 11,
+                    "second": 2
+                  },
+                  "todate": {
+                    "day": 15,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 48,
+                    "second": 16
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 15,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 37,
+                    "second": 1
+                  },
+                  "todate": {
+                    "day": 16,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 13,
+                    "second": 3
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 16,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 39,
+                    "second": 9
+                  },
+                  "todate": {
+                    "day": 17,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 45,
+                    "second": 18
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 17,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 0,
+                    "second": 27
+                  },
+                  "todate": {
+                    "day": 18,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 21,
+                    "second": 15
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 18,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 58,
+                    "second": 40
+                  },
+                  "todate": {
+                    "day": 19,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 34,
+                    "second": 4
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 19,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 36,
+                    "second": 42
+                  },
+                  "todate": {
+                    "day": 20,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 5,
+                    "second": 38
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 20,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 29,
+                    "second": 23
+                  },
+                  "todate": {
+                    "day": 21,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 44,
+                    "second": 28
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 21,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 48,
+                    "second": 49
+                  },
+                  "todate": {
+                    "day": 22,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 20,
+                    "second": 35
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                }
+              ]
+            },
+            "forcedworkingperiods": null
+          },
+          "properties": null,
+          "endeffectors": null,
+          "id": "_1"
+        },
+        {
+          "name": "ROLLING MILL",
+          "description": null,
+          "setupmatrixreference": {
+            "refid": "1"
+          },
+          "resourceavailability": {
+            "nonworkingperiods": {
+              "period": [
+                {
+                  "fromdate": {
+                    "day": 19,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 9,
+                    "second": 23
+                  },
+                  "todate": {
+                    "day": 20,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 29,
+                    "second": 7
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 20,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 24,
+                    "second": 12
+                  },
+                  "todate": {
+                    "day": 21,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 42,
+                    "second": 16
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 21,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 1,
+                    "second": 10
+                  },
+                  "todate": {
+                    "day": 22,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 9,
+                    "second": 56
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 22,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 4,
+                    "second": 30
+                  },
+                  "todate": {
+                    "day": 23,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 44,
+                    "second": 45
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 23,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 8,
+                    "second": 54
+                  },
+                  "todate": {
+                    "day": 24,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 34,
+                    "second": 13
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 24,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 14,
+                    "minute": 3,
+                    "second": 51
+                  },
+                  "todate": {
+                    "day": 24,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 16,
+                    "minute": 3,
+                    "second": 51
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 24,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 28,
+                    "second": 2
+                  },
+                  "todate": {
+                    "day": 25,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 4,
+                    "second": 30
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 25,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 35,
+                    "second": 44
+                  },
+                  "todate": {
+                    "day": 26,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 23,
+                    "second": 39
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 26,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 11,
+                    "second": 26
+                  },
+                  "todate": {
+                    "day": 27,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 32,
+                    "second": 48
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 27,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 56,
+                    "second": 0
+                  },
+                  "todate": {
+                    "day": 28,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 33,
+                    "second": 8
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 28,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 49,
+                    "second": 30
+                  },
+                  "todate": {
+                    "day": 29,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 16,
+                    "second": 12
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 29,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 4,
+                    "second": 10
+                  },
+                  "todate": {
+                    "day": 30,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 51,
+                    "second": 46
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 30,
+                    "month": 11,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 25,
+                    "second": 18
+                  },
+                  "todate": {
+                    "day": 1,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 19,
+                    "second": 41
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 1,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 39,
+                    "second": 52
+                  },
+                  "todate": {
+                    "day": 2,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 0,
+                    "second": 43
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 2,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 15,
+                    "second": 54
+                  },
+                  "todate": {
+                    "day": 3,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 8,
+                    "second": 45
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 3,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 19,
+                    "second": 29
+                  },
+                  "todate": {
+                    "day": 4,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 55,
+                    "second": 51
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 4,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 36,
+                    "second": 59
+                  },
+                  "todate": {
+                    "day": 5,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 36,
+                    "second": 23
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 5,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 4,
+                    "second": 50
+                  },
+                  "todate": {
+                    "day": 6,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 12,
+                    "second": 28
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 6,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 42,
+                    "second": 15
+                  },
+                  "todate": {
+                    "day": 7,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 4,
+                    "second": 53
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 7,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 35,
+                    "second": 36
+                  },
+                  "todate": {
+                    "day": 8,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 57,
+                    "second": 24
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 8,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 31,
+                    "second": 50
+                  },
+                  "todate": {
+                    "day": 9,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 31,
+                    "second": 0
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 9,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 7,
+                    "second": 44
+                  },
+                  "todate": {
+                    "day": 10,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 47,
+                    "second": 12
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 10,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 12,
+                    "minute": 43,
+                    "second": 0
+                  },
+                  "todate": {
+                    "day": 10,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 15,
+                    "minute": 43,
+                    "second": 0
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 10,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 11,
+                    "second": 56
+                  },
+                  "todate": {
+                    "day": 11,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 16,
+                    "second": 18
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 11,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 4,
+                    "second": 41
+                  },
+                  "todate": {
+                    "day": 12,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 56,
+                    "second": 32
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 12,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 33,
+                    "second": 19
+                  },
+                  "todate": {
+                    "day": 13,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 58,
+                    "second": 16
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 13,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 55,
+                    "second": 53
+                  },
+                  "todate": {
+                    "day": 14,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 3,
+                    "second": 33
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 14,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 35,
+                    "second": 4
+                  },
+                  "todate": {
+                    "day": 15,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 28,
+                    "second": 31
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 15,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 41,
+                    "second": 0
+                  },
+                  "todate": {
+                    "day": 16,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 25,
+                    "second": 30
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 16,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 3,
+                    "second": 6
+                  },
+                  "todate": {
+                    "day": 17,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 19,
+                    "second": 4
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 17,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 38,
+                    "second": 32
+                  },
+                  "todate": {
+                    "day": 18,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 8,
+                    "minute": 5,
+                    "second": 2
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 18,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 45,
+                    "second": 8
+                  },
+                  "todate": {
+                    "day": 19,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 39,
+                    "second": 1
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 19,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 7,
+                    "second": 10
+                  },
+                  "todate": {
+                    "day": 20,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 7,
+                    "minute": 19,
+                    "second": 39
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 20,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 22,
+                    "minute": 58,
+                    "second": 59
+                  },
+                  "todate": {
+                    "day": 21,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 6,
+                    "minute": 10,
+                    "second": 35
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                },
+                {
+                  "fromdate": {
+                    "day": 21,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 23,
+                    "minute": 2,
+                    "second": 12
+                  },
+                  "todate": {
+                    "day": 22,
+                    "month": 12,
+                    "year": 2027,
+                    "hour": 9,
+                    "minute": 23,
+                    "second": 45
+                  },
+                  "reoccurance": {
+                    "years": null,
+                    "months": null,
+                    "weeks": null,
+                    "days": 0,
+                    "hours": null,
+                    "minutes": null,
+                    "seconds": null
+                  }
+                }
+              ]
+            },
+            "forcedworkingperiods": null
+          },
+          "properties": null,
+          "endeffectors": null,
+          "id": "_2"
+        }
+      ]
+    },
+    "jobs": {
+      "job": [
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_193"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_98"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_192"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_98"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_195"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_99"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_194"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_99"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_200"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_102"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_201"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_102"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_188"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_96"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_189"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_96"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_196"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_100"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_197"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_100"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_203"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_103"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_202"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_103"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_191"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_97"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_190"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_97"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_198"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_101"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_199"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_101"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_186"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_95"
+        },
+        {
+          "name": "FROM BILLET",
+          "description": null,
+          "arrivaldate": {
+            "day": 1,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "duedate": {
+            "day": 30,
+            "month": 9,
+            "year": 2025,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "jobtaskreference": [
+            {
+              "refid": "_187"
+            }
+          ],
+          "jobworkcenterreference": {
+            "refid": "WC"
+          },
+          "id": "_95"
+        }
+      ]
+    },
+    "tasks": {
+      "task": [
+        {
+          "name": "Melting",
+          "description": null,
+          "properties": null,
+          "id": "_193"
+        },
+        {
+          "name": "Rolling",
+          "description": null,
+          "properties": null,
+          "id": "_192"
+        },
+        {
+          "name": "Rolling",
+          "description": null,
+          "properties": null,
+          "id": "_195"
+        },
+        {
+          "name": "Melting",
+          "description": null,
+          "properties": null,
+          "id": "_194"
+        },
+        {
+          "name": "Rolling",
+          "description": null,
+          "properties": null,
+          "id": "_200"
+        },
+        {
+          "name": "Melting ",
+          "description": null,
+          "properties": null,
+          "id": "_201"
+        },
+        {
+          "name": "Rolling",
+          "description": null,
+          "properties": null,
+          "id": "_188"
+        },
+        {
+          "name": "Melting",
+          "description": null,
+          "properties": null,
+          "id": "_189"
+        },
+        {
+          "name": "Rolling",
+          "description": null,
+          "properties": null,
+          "id": "_196"
+        },
+        {
+          "name": "Melting",
+          "description": null,
+          "properties": null,
+          "id": "_197"
+        },
+        {
+          "name": "Melting",
+          "description": null,
+          "properties": null,
+          "id": "_203"
+        },
+        {
+          "name": "Rolling",
+          "description": null,
+          "properties": null,
+          "id": "_202"
+        },
+        {
+          "name": "Melting",
+          "description": null,
+          "properties": null,
+          "id": "_191"
+        },
+        {
+          "name": "Rolling",
+          "description": null,
+          "properties": null,
+          "id": "_190"
+        },
+        {
+          "name": "Rolling ",
+          "description": null,
+          "properties": null,
+          "id": "_198"
+        },
+        {
+          "name": "Melting",
+          "description": null,
+          "properties": null,
+          "id": "_199"
+        },
+        {
+          "name": "Rolling",
+          "description": null,
+          "properties": null,
+          "id": "_186"
+        },
+        {
+          "name": "Melting",
+          "description": null,
+          "properties": null,
+          "id": "_187"
+        }
+      ]
+    },
+    "tasksuitableresources": {
+      "tasksuitableresource": [
+        {
+          "resourcereference": {
+            "refid": "_1"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_193"
+          },
+          "operationtimeperbatchinseconds": 26358.05,
+          "setupcode": "",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_2"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_192"
+          },
+          "operationtimeperbatchinseconds": 27470.44,
+          "setupcode": "Phi7.0",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_2"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_195"
+          },
+          "operationtimeperbatchinseconds": 40336.34,
+          "setupcode": "Phi11.0",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_1"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_194"
+          },
+          "operationtimeperbatchinseconds": 37682.17,
+          "setupcode": "",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_2"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_200"
+          },
+          "operationtimeperbatchinseconds": 14975.03,
+          "setupcode": "Phi9.0",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_1"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_201"
+          },
+          "operationtimeperbatchinseconds": 18077.66,
+          "setupcode": "",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_2"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_188"
+          },
+          "operationtimeperbatchinseconds": 27622.88,
+          "setupcode": "Phi9.0",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_1"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_189"
+          },
+          "operationtimeperbatchinseconds": 34143.27,
+          "setupcode": "",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_2"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_196"
+          },
+          "operationtimeperbatchinseconds": 43006.68,
+          "setupcode": "Phi6.0",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_1"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_197"
+          },
+          "operationtimeperbatchinseconds": 35356.39,
+          "setupcode": "",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_1"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_203"
+          },
+          "operationtimeperbatchinseconds": 3847.83,
+          "setupcode": "",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_2"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_202"
+          },
+          "operationtimeperbatchinseconds": 4708.89,
+          "setupcode": "Phi11.0",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_1"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_191"
+          },
+          "operationtimeperbatchinseconds": 16187.1,
+          "setupcode": "",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_2"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_190"
+          },
+          "operationtimeperbatchinseconds": 14793.55,
+          "setupcode": "Phi6.0",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_2"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_198"
+          },
+          "operationtimeperbatchinseconds": 53044.15,
+          "setupcode": "Phi6.0",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_1"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_199"
+          },
+          "operationtimeperbatchinseconds": 53508.31,
+          "setupcode": "",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_2"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_186"
+          },
+          "operationtimeperbatchinseconds": 22190.21,
+          "setupcode": "Phi7.0",
+          "properties": null
+        },
+        {
+          "resourcereference": {
+            "refid": "_1"
+          },
+          "toolreference": null,
+          "mobileresourcereference": null,
+          "taskreference": {
+            "refid": "_187"
+          },
+          "operationtimeperbatchinseconds": 20211.43,
+          "setupcode": "",
+          "properties": null
+        }
+      ]
+    },
+    "taskprecedenceconstraints": {
+      "taskprecedenceconstraint": [
+        {
+          "preconditiontaskreference": {
+            "refid": "_193"
+          },
+          "postconditiontaskreference": {
+            "refid": "_192"
+          },
+          "nexttaskinchain": null,
+          "resourceunavailableuntilnexttask": null
+        },
+        {
+          "preconditiontaskreference": {
+            "refid": "_194"
+          },
+          "postconditiontaskreference": {
+            "refid": "_195"
+          },
+          "nexttaskinchain": null,
+          "resourceunavailableuntilnexttask": null
+        },
+        {
+          "preconditiontaskreference": {
+            "refid": "_201"
+          },
+          "postconditiontaskreference": {
+            "refid": "_200"
+          },
+          "nexttaskinchain": null,
+          "resourceunavailableuntilnexttask": null
+        },
+        {
+          "preconditiontaskreference": {
+            "refid": "_189"
+          },
+          "postconditiontaskreference": {
+            "refid": "_188"
+          },
+          "nexttaskinchain": null,
+          "resourceunavailableuntilnexttask": null
+        },
+        {
+          "preconditiontaskreference": {
+            "refid": "_197"
+          },
+          "postconditiontaskreference": {
+            "refid": "_196"
+          },
+          "nexttaskinchain": null,
+          "resourceunavailableuntilnexttask": null
+        },
+        {
+          "preconditiontaskreference": {
+            "refid": "_203"
+          },
+          "postconditiontaskreference": {
+            "refid": "_202"
+          },
+          "nexttaskinchain": null,
+          "resourceunavailableuntilnexttask": null
+        },
+        {
+          "preconditiontaskreference": {
+            "refid": "_191"
+          },
+          "postconditiontaskreference": {
+            "refid": "_190"
+          },
+          "nexttaskinchain": null,
+          "resourceunavailableuntilnexttask": null
+        },
+        {
+          "preconditiontaskreference": {
+            "refid": "_199"
+          },
+          "postconditiontaskreference": {
+            "refid": "_198"
+          },
+          "nexttaskinchain": null,
+          "resourceunavailableuntilnexttask": null
+        },
+        {
+          "preconditiontaskreference": {
+            "refid": "_187"
+          },
+          "postconditiontaskreference": {
+            "refid": "_186"
+          },
+          "nexttaskinchain": null,
+          "resourceunavailableuntilnexttask": null
+        }
+      ]
+    },
+    "setupmatrices": {
+      "setupmatrix": [
+        {
+          "setup": [
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi5,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi10",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi6,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi10,4",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi12,8",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi12,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi6,3",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi6,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi5,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi7",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi10,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi6,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi8,3",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi12,5",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi12,8",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi10,4",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi9,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi10",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi10",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi10,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi8,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi10,4",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi10,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi6,3",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi9,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi10,8",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi10,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi6,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi9",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi8,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi9",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi12,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi8,2",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi8,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi8",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi6,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi6,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi8,2",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi11",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi5,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi8,3",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi9,6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi10,4",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi5,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi9,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi6,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi6",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi5,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi8,2",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi11",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi8",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi8,2",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi10,4",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi10,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi12",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi7",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi8,2",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi8,3",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi10,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi10,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi5,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi8,3",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi12,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi6,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi12",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi7",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi12,8",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi6,3",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi8",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi9,6",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi12,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi9",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi10,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi12,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi10,8",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi6,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi6,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi12,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi10",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi9,6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi7",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi10",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi7",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi9",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi7",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi11",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi8,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi10,4",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi7",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi8,3",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi10,4",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi11,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi12,8",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi6,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi9,6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi8,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi12",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi5,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi8,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi9,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi12",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi6,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi8,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi9",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi12",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi8",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi10",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi8,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi8,5",
+              "timeinseconds": 2220
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi12,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi8,2",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi8,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi11,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi5,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi6,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi8",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi8,2",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi6,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi6,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi10,4",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi7",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi10,4",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi10,4",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi7",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi9",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi7,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi8,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi5,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi10,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi8,2",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi12,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi12,8",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi8,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi9",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi9,6",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi7",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi6,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi8,3",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi8,2",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi8,2",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi12,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi8,2",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi12,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi8,2",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi8,5",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi12,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi9,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi8",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi10",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi7",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi6,5",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi9",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi12",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi11,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi10",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi9",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi9,6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi10,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi12,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi10",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi6,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi9",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi6,3",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi12,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi9,5",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi6,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi9",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi6",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi5,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi6,3",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi12,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi8",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi5,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi8,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi10,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi8,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi6,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi7",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi9",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi12,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi12,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi11,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi6,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi10",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi6,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi10,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi10,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi5,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi11",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi12,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi12,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi6,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi9,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi12",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi7",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi12,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi7,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi10,4",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi9,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi7",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi7",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi7",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi5,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi10",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi12,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi7,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi10",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi9,6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi12,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi10,4",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi10",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi12",
+              "timeinseconds": 1800
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi9",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi7",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi12,8",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi5,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi12,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi6,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi5,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi7",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi9",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi6,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi11,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi10",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi12,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi7",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi10,4",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi12,8",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi5,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi5,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi10,4",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi10,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi12,8",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi8,2",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi10,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi6,3",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi7",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi10",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi10,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi8",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi11,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi12",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi8,2",
+              "timeinseconds": 2400
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi11",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi7,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi7",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi7,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi9,6",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi10,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi9,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi10",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi8,3",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi10",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi6,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi12",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi9",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi8,2",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi8,2",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi6,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi8,3",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi8,2",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi11",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi9,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi6,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi8,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi11,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi7,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi8,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi12,8",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi9",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi10",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi9",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi6,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi6,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi10,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi9",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi6,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi6,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi6,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi5,5",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi12",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi6,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi10,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi10,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi10",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi12,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi9,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi12,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi11,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi7,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi10,4",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi11",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi12,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi10",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi7,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi12,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi10,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi8,2",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi8,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi8,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi11",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi7,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi12,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi9",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi10,4",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi10,4",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi7,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi11,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi12,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi10",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi10",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi5,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi10,8",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi8",
+              "tocode": "Phi6,3",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi11,5",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi5,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi12,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,3",
+              "tocode": "Phi12,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi10,4",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi10,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi10,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi11,5",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi9",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi12,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi12,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi9,6",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi8,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi9",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi12",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi12,8",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi12",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi7",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi8,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi8,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi9,6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi10,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi10,8",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi9,6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi8,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi9,6",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi10,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11,5",
+              "tocode": "Phi11",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi10,4",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi10,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi11",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi8,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi6,3",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi10,4",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi8,2",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi8,3",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,2",
+              "tocode": "Phi10,8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi8,2",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi11",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi9",
+              "tocode": "Phi10,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi10,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi10,4",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,6",
+              "tocode": "Phi7,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi10,4",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi12,5",
+              "tocode": "Phi10,5",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi14",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi11,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi9,5",
+              "tocode": "Phi8,2",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi11",
+              "tocode": "Phi8",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,8",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi12,8",
+              "tocode": "Phi6,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi7,5",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi6,3",
+              "timeinseconds": 1500
+            },
+            {
+              "fromcode": "Phi6,5",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7",
+              "tocode": "Phi9,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10",
+              "tocode": "Phi5,5",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi7,5",
+              "tocode": "Phi11",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi5,5",
+              "timeinseconds": 5100
+            },
+            {
+              "fromcode": "Phi8,5",
+              "tocode": "Phi8,2",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi5,5",
+              "tocode": "Phi9",
+              "timeinseconds": 2400
+            },
+            {
+              "fromcode": "Phi10,4",
+              "tocode": "Phi11",
+              "timeinseconds": 3000
+            },
+            {
+              "fromcode": "Phi14",
+              "tocode": "Phi10,5",
+              "timeinseconds": 0
+            },
+            {
+              "fromcode": "Phi10,5",
+              "tocode": "Phi6",
+              "timeinseconds": 6600
+            },
+            {
+              "fromcode": "Phi8,3",
+              "tocode": "Phi8,5",
+              "timeinseconds": 3000
+            }
+          ],
+          "id": "SM1"
+        }
+      ]
+    },
+    "tooltypes": null,
+    "tools": null,
+    "mobileresourcetypes": null,
+    "mobileresources": null,
+    "continueAssignmentsAfterPlanEndDate": "false",
+    "id": "SYNTH_20251209_130408_918308",
+    "planEndDateDay": "20",
+    "planEndDateMonth": "12",
+    "planEndDateYear": "2027",
+    "planStartDateDay": "20",
+    "planStartDateMonth": "11",
+    "planStartDateYear": "2027"
+}

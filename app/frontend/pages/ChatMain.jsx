@@ -108,7 +108,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     data[i] =
                     <div className='cm_infoboxholder'>
                         <div className = {Object.keys(info[0][0]).length > 2 && (search === 'jobs' || search === 'tasksuitableresources') ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
-                            {info.length === 1 ? CreateBlock(info[0], search) : CreateMultiBlock(info, search, documents)}
+                            {info.length === 1 ? CreateBlock(info[0], search, documents[0]['name']) : CreateMultiBlock(info, search, documents)}
                         </div>
                     </div> 
                 }
@@ -152,12 +152,33 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             console.log(search)
             console.log(documents)
             out_block.push(CreateDocumentNameBlock(documents[i]['name'], info[i].length, i === 0 ? true : false, search))
-            out_block.push(CreateBlock(info[i], search))
+            out_block.push(CreateBlock(info[i], search, documents[i]['name']))
         }
         return out_block
     }
 
-    function CreateBlock(info, search){
+    function CreateBlock(info, search, document_name){
+        const name = document_name.toLowerCase()
+
+        const hasInput = name.includes('input')
+        const hasOutput = name.includes('output')
+
+        if(hasInput && !hasOutput){
+            return CreateInputBlock(info, search)
+        }
+        else if(hasOutput && !hasInput){
+            return CreateOutputBlock(info, search)
+        }
+        else{
+            return 'aaaaaaaaaaaaaa'
+        }
+    }
+
+    function CreateOutputBlock(info, search){
+        return CreateOutputDataBlock(info)
+    }
+
+    function CreateInputBlock(info, search){
         if(search == 'jobs'){
             return CreateJobBlock(info)
         }
@@ -207,13 +228,51 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
 
     }
 
-    function BlockDateToStr(date, withtime = false){
+    function BlockDateToStr(date, withtime = false, withsecond = false){
         if(withtime === false){
             return date['day'] + '  ' + NumberToShortMonthName(date['month']) + '  ' + date['year']
         }
         else{
-            return date['day'] + '  ' + NumberToShortMonthName(date['month']) + '  ' + date['year'] + '  ' + String(date['hour']).padStart(2, '0') + ':' + String(date['minute']).padStart(2, '0')
+            if(withsecond === false){
+                return date['day'] + '  ' + NumberToShortMonthName(date['month']) + '  ' + date['year'] + '  ' + String(date['hour']).padStart(2, '0') + ':' + String(date['minute']).padStart(2, '0')
+            }
+            else{
+                return date['day'] + '  ' + NumberToShortMonthName(date['month']) + '  ' + date['year'] + '  ' + String(date['hour']).padStart(2, '0') + ':' + String(date['minute']).padStart(2, '0') + ':' + String(date['second']).padStart(2, '0')
+            }
         }
+    }
+
+    function MsToTimeString(ms_int){
+        const total_seconds = Math.floor(ms_int / 1000)
+        const hours = Math.floor(total_seconds / 3600)
+        const minutes = Math.floor((total_seconds % 3600) / 60)
+        const seconds = total_seconds % 60
+
+        let out_string = []
+        if (hours > 0) out_string.push(`${hours}h`)
+        if (minutes > 0) out_string.push(`${minutes}m`)
+        if (seconds > 0 || out_string.length === 0) out_string.push(`${seconds}s`)
+        
+        const formatted_ms = ms_int.toLocaleString()
+        
+        return `${out_string.join(' ')}   (${formatted_ms} ms)`
+    }
+
+    function SToTimeString(s_double){
+        const hours = Math.floor(s_double / 3600)
+        const minutes = Math.floor((s_double % 3600) / 60)
+        const seconds = s_double % 60
+
+        let out_string = []
+        if (hours > 0) out_string.push(`${hours}h`)
+        if (minutes > 0) out_string.push(`${minutes}m`)
+        
+        const sec_str = Number(seconds.toFixed(0))
+        out_string.push(`${sec_str}s`)
+
+        const formatted_ms = s_double.toLocaleString()
+        
+        return `${out_string.join(' ')}   (${formatted_ms} s)`
     }
 
     function CreateJobBlock(info){
@@ -287,7 +346,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                         <div className = 'cm_infoleft cm_infoflex'>
                             <DotIcon/> Task ID: {x.id} {'name' in x ? <div className='cm_infobg'>{x.name}</div> : <></>}
                         </div>
-                        {'operation_time' in x ? <div className='cm_infoleftmid cm_infoflex'>Operation Time: <div className='cm_infoweak cm_infoblockmid'>{x.operation_time}</div></div> : <></>}
+                        {'operation_time' in x ? <div className='cm_infoleftmid cm_infoflex'>Operation Time: <div className='cm_infoweak cm_infoblockmid'>{SToTimeString(x.operation_time)}</div></div> : <></>}
                     </div>
                     ))}
                 </div>
@@ -337,6 +396,55 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             )
         }
         return list_out
+    }
+
+    function CreateOutputDataBlock(info){
+        console.log('111111111')
+        console.log(info)
+        let out_list = []
+        for (let i=0; i<info.length; i++){
+            out_list.push(
+                <div className='cm_infoblock'>
+                    <div className = 'cm_infoflex'>
+                        <ArrowDownIcon width={16} height={16} style={{transform: 'rotate(-90deg)'}}/> Assignment No. 
+                        <div className='cm_infobg'>
+                            {i + 1}
+                        </div>
+                    </div>
+                </div>
+            )
+            for (let key in info[i]){
+                let big_text = ''
+                let small_text = ''
+                if(key === 'task'){
+                    big_text = 'Task ID: '
+                    small_text = info[i][key]
+                }
+                else if(key === 'resource'){
+                    big_text = 'Resource ID: '
+                    small_text = info[i][key]
+                }
+                else if(key === 'dispatch'){
+                    big_text = 'Dispatch Time: '
+                    small_text = BlockDateToStr(info[i][key], true, true)
+                }
+                else if(key === 'durationinmilliseconds'){
+                    big_text = 'Duration: '
+                    small_text = MsToTimeString(info[i][key])
+                }
+
+                if(big_text !== ''){
+                    out_list.push(
+                        <div className='cm_infoleft cm_infoflex'>
+                            <DotIcon/>
+                            <div className='cm_infopush'>{big_text}</div>
+                            <div className='cm_infoweak'>{small_text}</div>
+                        </div>
+                    )
+                }
+            }
+        }
+        return out_list
     }
 
     async function ResumeAnswerStream(waitTitle = null){

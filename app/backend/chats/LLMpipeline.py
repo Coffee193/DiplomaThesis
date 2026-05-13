@@ -4,7 +4,7 @@ import os
 
 from LLM_prompts.Chain1 import GibberishClassifier
 from LLM_prompts.UnexpectedException import ExceptionHandler
-from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier
+from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, HighLevelOutputJSONClassifier
 from LLM_prompts.Chain3 import ResourceAttributeRetriever, JobAttributeRetriever, TaskAttributeRetriever, TasksuitableresourceAttributeRetriever, TaskprecedencecontraintOrderDependenceClassifier, TaskprecedenceconstraintDependenceAttributeRetriever, TaskprecedenceconstraintOrderAttributeRetriever
 from LLM_prompts import StringToDateMonthForm
 from LLM_prompts.Chain4 import JobAttributeReturnClassifier, TaskAttributeReturnClassifier, ResourceAttributeReturnClassifier, TasksuitableresourceAttributeReturnResourceClassifier, TasksuitableresourceAttributeReturnTaskClassifier
@@ -119,11 +119,27 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
         think_list.append({'chain': '2', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
         words = answer['words']
         if(len(words) == 0):
-            # NOT asking about Jobs, Tasks, etc.. So a general, non-json question
-            if(json_document == None or len(json_document) == 1):
-                return {'response_msg': chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document[0]['name'] if json_document != None else None), stream = True), 'think': think_list, 'end': 'success_unfinished'}
+            # Check OUTPUT file only: Assignments, Dispatch, Duration
+            answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': HighLevelOutputJSONClassifier.getPrompt(user_question)}]).message.content)
+            answer = json.loads(answer)
+            think_list.append({'chain': '2_outputjson', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
+            words = answer['words']
+
+            if('dispatch' in words):
+                search = 'dispatch'
+            elif('duration' in words):
+                search = 'duration'
+            elif('assignment' in words):
+                search = 'assignment'
+
+            if(len(words) != 0):
+                return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': None, 'wanted_return': None, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None}
             else:
-                saopdksaoop
+                # NOT asking about Jobs, Tasks, etc.. So a general, non-json question
+                if(json_document == None or len(json_document) == 1):
+                    return {'response_msg': chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document[0]['name'] if json_document != None else None), stream = True), 'think': think_list, 'end': 'success_unfinished'}
+                else:
+                    saopdksaoop
         else:
             if('job' in words):
                 search = 'jobs'
@@ -245,14 +261,50 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
         if has_input and not has_output:
             fetched_list.append(LLMGetFinalQueryInputJSON(conv_id, search, doc, retrieve_info, llm_model, wanted_return))
         elif has_output and not has_input:
-            return assaasdsad
+            fetched_list.append(LLMGetFinalQueryOutputJSON(conv_id, search, doc))
         else:
             fetched_list.append({"query": [], "json_data": [], "doc": doc})
     
     return fetched_list
 
-def LLMGetFinalQueryOutputJSON():
-    asdjkas
+def LLMGetFinalQueryOutputJSON(conv_id, search, json_document):
+    ### Get JSON Data ###
+    ''' Retrieves the JSON data '''
+    with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(json_document['id']) + '.' + json_document['name'].split('.')[-1], encoding = 'utf-8') as file:
+        json_data = file.read()
+        json_data = json.loads(json_data)
+    ### Get JSON Data End ###
+
+    ### Query Form Based on Chain 2 ###
+    ''' Classifies if user asks about: Assignments, Dispatch, Duration'''
+    if(search == 'assignment'):
+        query = json_data['assignments']['assignment']
+    elif(search == 'tasks'):
+        query = [q['task'] for q in json_data['assignments']['assignment']]
+    elif(search == 'resources'):
+        query = [q['resource'] for q in json_data['assignments']['assignment']]
+    elif(search == 'dispatch'):
+        query = [q['timeofdispatch'] for q in json_data['assignments']['assignment']]
+    elif(search == 'duration'):
+        query = [q['durationinmilliseconds'] for q in json_data['assignments']['assignment']]
+    else:
+        query = []
+    ### End Chain 2 Query ###
+
+    ### Query Clean Form ###
+    if(search == 'assignment'):
+        query = [{'task': q['task']['id'], 'resource': q['resource']['id'], 'dispatch': {'year': q['timeofdispatch']['year'], 'month': q['timeofdispatch']['month'], 'day': q['timeofdispatch']['day'], 'hour': q['timeofdispatch']['hour'], 'minute': q['timeofdispatch']['minutes'], 'second': q['timeofdispatch']['seconds']}, 'durationinmilliseconds': q['durationinmilliseconds']} for q in query]
+    elif(search == 'tasks'):
+        query = [{'task': q['id']} for q in query]
+    elif(search == 'resources'):
+        query = [{'resource': q['id']} for q in query]
+    elif(search == 'dispatch'):
+        query = [{'dispatch': {'year': q['year'], 'month': q['month'], 'day': q['day'], 'hour': q['hour'], 'minute': q['minutes'], 'second': q['seconds']}} for q in query]
+    elif(search == 'duration'):
+        query = [{'durationinmilliseconds': q} for q in query]
+    ### End Query Clean Form###
+
+    return {"query": query, "json_data": json_data, "doc": json_document}
 
 def LLMGetFinalQueryInputJSON(conv_id, search, json_document, retrieve_info, llm_model, wanted_return):
 
@@ -275,6 +327,8 @@ def LLMGetFinalQueryInputJSON(conv_id, search, json_document, retrieve_info, llm
         query = json_data["tasksuitableresources"]["tasksuitableresource"]
     elif(search == 'tasksprecedenceconstraints'):
         query = json_data["taskprecedenceconstraints"]["taskprecedenceconstraint"]
+    else:
+        return {"query": [], "json_data": json_data, "doc": json_document}
     ### End Chain 2 Query ###
     print('==Chain 2==')
     print(query)

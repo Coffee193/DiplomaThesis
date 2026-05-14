@@ -156,7 +156,7 @@
     display: flex;
     flex-direction: column-reverse;
     gap: 50px;
-    padding: 0 calc(0.3 * var(--chatnav-width));
+    padding: 1px calc(0.3 * var(--chatnav-width));
     overflow: scroll;
 }
 
@@ -308,4 +308,11 @@
 .cm_infodocumentcount{
     position: absolute;
     right: 30px;
+}
+
+.cm_nodata{
+    font-weight: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -107,7 +107,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 if(data[i] === "(DATA)"){
                     data[i] =
                     <div className='cm_infoboxholder'>
-                        <div className = {Object.keys(info[0][0]).length > 2 && (search === 'jobs' || search === 'tasksuitableresources') ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
+                        <div className = {(Object.keys(info[0]).length === 0 || Object.keys(info[0][0]).length > 2) && (search === 'jobs' || search === 'tasksuitableresources') ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
                             {info.length === 1 ? CreateBlock(info[0], search, documents[0]['name']) : CreateMultiBlock(info, search, documents)}
                         </div>
                     </div> 
@@ -175,11 +175,15 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
     }
 
     function CreateOutputBlock(info, search){
+        if (info.length === 0) return CreateNoDataBlock()
         return CreateOutputDataBlock(info)
     }
 
     function CreateInputBlock(info, search){
-        if(search == 'jobs'){
+        if(info.length === 0){
+            return CreateNoDataBlock()
+        }
+        else if(search == 'jobs'){
             return CreateJobBlock(info)
         }
         else if(search === 'tasks'){
@@ -399,8 +403,6 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
     }
 
     function CreateOutputDataBlock(info){
-        console.log('111111111')
-        console.log(info)
         let out_list = []
         for (let i=0; i<info.length; i++){
             out_list.push(
@@ -445,6 +447,12 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             }
         }
         return out_list
+    }
+
+    function CreateNoDataBlock(){
+        return (
+            <div className='cm_nodata'> <DotIcon/> No Data Found <DotIcon/> </div>
+        )
     }
 
     async function ResumeAnswerStream(waitTitle = null){

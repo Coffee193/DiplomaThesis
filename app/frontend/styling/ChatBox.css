@@ -210,3 +210,79 @@
         transform: rotate(360deg)
     }
 }
+
+.cb_modelholder{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cb_key{
+    border: 2px solid #fff;
+    transition: 0.1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 50%;
+}
+.cb_key:hover{
+    border: 2px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+}
+
+.cb_keybox{
+    position: absolute;
+    width: 500px;
+    height: 150px;
+    background-color: #fff;
+    box-shadow: var(--default-box-shadow);
+    border-radius: 25px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+}
+
+.cb_keytop{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 13px;
+}
+
+.cb_keytitle{
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.cb_keyx{
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    transition: 0.1s ease-out;
+}
+.cb_keyx:hover{
+    color: var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+}
+
+.cb_keymain{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cb_keyinput{
+    border: 1px solid var(--chat-color-gray-medium);
+    border-radius: 25px;
+    height: 35px;
+    padding: 2px 15px;
+    width: 70%;
+    font-weight: 300;
+}
+.cb_keyinput:focus{
+    border: 2px solid var(--color-text-main-hover-blue-experimental-lighter-evenmore-hover);
+}

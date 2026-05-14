@@ -183,7 +183,9 @@ def CreateChatDocument(request):
 
     curr_time = datetime.datetime.now(datetime.timezone.utc)
 
-    if(data['m'] == 2 or data['m'] == 3):
+    if(data['m'] == 3):
+        p = multiprocessing.Process(target = AnswerQuestionCloud, args=[[], data["q"], str(chat_id), document_info, [f.decode() for f in file_write]])
+    elif(data['m'] == 2):
         ## <----------- NEED TO CHECK THESE 2 -----------
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info, [f.decode() for f in file_write]])
         #t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"], document_info["data"], document_info["name"]])
@@ -667,3 +669,6 @@ def CreateChatTitleThink(chat_id, user_question = '', file_name = None):
                      {"$set": {"name": llm_title}})
     
     redis_client.xadd("cs_" + chat_id, {"t":llm_title})
+
+def AnswerQuestionCloud():
+    

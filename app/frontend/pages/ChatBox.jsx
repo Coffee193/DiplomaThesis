@@ -1,5 +1,5 @@
 import '../styling/ChatBox.css'
-import { ArrowUpload, UploadFile, BlocksLoad, SpinnerLoad, NeuralNetwork, SparklesIcon } from '../components/svgs/UtilIcons'
+import { ArrowUpload, UploadFile, BlocksLoad, SpinnerLoad, NeuralNetwork, SparklesIcon, Key2Icon, XCloseIcon } from '../components/svgs/UtilIcons'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatBoxUpload } from './ChatBoxUpload'
@@ -19,6 +19,8 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
     const cbaskquestion = useRef(false)
     const [cbmodelState, cbmodelsetState] = useState({'name': 'Llama3.1:7B - Agent', 'type': 'local', 'agent': 'json-agent', 'id': 1})
     const [cbmodelpopupactiveState, cbmodelpopupactivesetState] = useState(false)
+    const [cbkeyboxvisibleState, cbkeyboxvisiblesetState] = useState(false)
+    const cbkeyRef = useRef()
 
     function CheckQuestion(){
         if(cbinputRef.current.value === ''){
@@ -107,6 +109,10 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         
         let body = null
         let askdoclist = []
+
+        if(cbmodelState['type'] === 'cloud'){
+            request['k'] = cbkeyRef.current.value
+        }
 
         if(cbuState['documents'].length !== 0){
             body = new FormData()
@@ -229,9 +235,24 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
                         { chattype === 'body' ? 
                         (
                         <>
-                        <div className=/*'cb_utilthink '*/'cb_model' onClick={() => {cbmodelpopupactiveState === true ? cbmodelpopupactivesetState(false) : cbmodelpopupactivesetState(true)}}>
-                            <NeuralNetwork/>
-                            <span>{cbmodelState['name']}</span>
+                        <div className='cb_modelholder'>
+                            <div className=/*'cb_utilthink '*/'cb_model' onClick={() => {cbmodelpopupactiveState === true ? cbmodelpopupactivesetState(false) : cbmodelpopupactivesetState(true)}}>
+                                <NeuralNetwork/>
+                                <span>{cbmodelState['name']}</span>
+                            </div>
+                            {cbmodelState['type'] === 'cloud' && 
+                            <>
+                                <div className='cb_key' onClick={() => cbkeyboxvisiblesetState(true ? cbkeyboxvisibleState === false : false)}><Key2Icon width={23} height={23}/></div>
+                                <div className='cb_keybox' style={cbkeyboxvisibleState === false ? {display: 'none'} : {display: 'flex'}}>
+                                    <div className='cb_keytop'>
+                                        <div className='cb_keytitle'>Add Your API Key</div>
+                                        <div className='cb_keyx' onClick={() => cbkeyboxvisiblesetState(false)}><XCloseIcon/></div>
+                                    </div>
+                                    <div className='cb_keymain'>
+                                        <input className='cb_keyinput' ref={cbkeyRef}/>
+                                    </div>
+                                </div>
+                            </>}
                         </div>
                         <ChatBoxModelPopUp current_model={cbmodelState} isactiveState={cbmodelpopupactiveState} isactivesetState={cbmodelpopupactivesetState} changemodelState={cbmodelsetState}/>
                         </>

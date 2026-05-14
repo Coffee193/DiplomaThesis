@@ -170,7 +170,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             return CreateOutputBlock(info, search)
         }
         else{
-            return 'aaaaaaaaaaaaaa'
+            return CreateInvalidNameBlock()
         }
     }
 
@@ -452,6 +452,12 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
     function CreateNoDataBlock(){
         return (
             <div className='cm_nodata'> <DotIcon/> No Data Found <DotIcon/> </div>
+        )
+    }
+
+    function CreateInvalidNameBlock(){
+        return(
+            <div className='cm_nodata'> <DotIcon/> The Uploaded File is invalid. Its name should contain the words 'input' or 'ouput'. Please upload a file with proper naming convention <DotIcon/> </div>
         )
     }
 

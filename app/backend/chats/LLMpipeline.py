@@ -8,12 +8,12 @@ from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, Hig
 from LLM_prompts.Chain3 import ResourceAttributeRetriever, JobAttributeRetriever, TaskAttributeRetriever, TasksuitableresourceAttributeRetriever, TaskprecedencecontraintOrderDependenceClassifier, TaskprecedenceconstraintDependenceAttributeRetriever, TaskprecedenceconstraintOrderAttributeRetriever
 from LLM_prompts import StringToDateMonthForm
 from LLM_prompts.Chain4 import JobAttributeReturnClassifier, TaskAttributeReturnClassifier, ResourceAttributeReturnClassifier, TasksuitableresourceAttributeReturnResourceClassifier, TasksuitableresourceAttributeReturnTaskClassifier
-from LLM_prompts.Chain5 import OutputNoResultsFound, OutputListResultsTaskJobResourceTasksuitableresource, OutputTaskprecedenceconstraintsTaskNoExist, OutputListResultsTaskprecedenceconstraints, OutputTaskprecedenceconstraintsTaskIsIndependent, OutputTaskprecedenceconstraintsClassifyQuestionBoolean, OutputTaskprecedenceconstraintsAnswerBooleanQuestion, OutputListResultsMultipleDocuments
+from LLM_prompts.Chain5 import OutputNoResultsFound, OutputListResultsTaskJobResourceTasksuitableresource, OutputTaskprecedenceconstraintsTaskNoExist, OutputListResultsTaskprecedenceconstraints, OutputTaskprecedenceconstraintsTaskIsIndependent, OutputTaskprecedenceconstraintsClassifyQuestionBoolean, OutputTaskprecedenceconstraintsAnswerBooleanQuestion, OutputListResultsMultipleDocuments, OutputInvalidName
 from LLM_prompts.FindJSONFile import InstructUploadJSON
-from LLM_prompts.UploadJSONFileNoQuestion import UserUploadJSONNoQuestion
-from LLM_prompts.UploadJSONFileIrrelevantQuestion import UserUploadJSONIrrelevantQuestion
+from LLM_prompts.UploadJSONFileNoQuestion import UserUploadJSONNoQuestion, UserUploadMultipleJSONNoQuestion
+from LLM_prompts.UploadJSONFileIrrelevantQuestion import UserUploadJSONIrrelevantQuestion, UserUploadMultipleJSONIrrelevantQuestion
 from LLM_prompts.TitleGeneration import TitleJSONUploadNoQuestion, TitleJSONUploadRelevantQuestion, TitleOnlyQuestionNoJSON, TitlteJSONUploadIrrelevantQuestion, TittleGibberishInput
-from LLM_prompts.JSONUploadNoQuestion import JSONUploadNoQuestion
+from LLM_prompts.JSONUploadNoQuestion import JSONUploadNoQuestion, MultipleJSONUploadNoQuestion
 from LLM_prompts.JSONQuestionNoPath import JSONQuestionNoPath
 
 chatdocumentpath = os.environ.get('CHAT_DOCUMENT_PATH')
@@ -39,10 +39,15 @@ def QueryToInfoNaturalLanguage(query):
             text += '\n'
     return text
 
-def CreateChatConv(db_chat, user_question, file_name = None):
-
+def CreateChatConv(db_chat, user_question, file_name = None, conv_id = None):
+    print('oly$')
+    print(file_name)
+    print(db_chat)
     llm_chat = []
-
+    ### <--- NEED TO FIX THIS. d is of the form:
+    '''
+    ... 'd': [{'id': 317270766108037120, 'name': 'OutputJSON_1.json', 'size': '8.0'}, {'id': 317270766108037121, 'name': 'InputJSON_3.json', 'size': '124.8'}, {'id': 317270766108037122, 'name': 'InputJSON_5.json', 'size': '68.9'}], 'q': 'Return all assignments'}, ...
+    '''
     for conv in db_chat:
         if 'd' in conv:
             if 'q' in conv:
@@ -50,24 +55,31 @@ def CreateChatConv(db_chat, user_question, file_name = None):
 {conv['q']}
 
 -----------------------
-The user has also uploaded a file located at:
-{conv['d']['path']}"""
+The user has also uploaded files located at:
+{', '.join(chatdocumentpath + '/' + str(conv_id) + '_' + str(d['id']) + '.' + d['name'].split('.')[-1] for d in conv['d'])}"""
             else:
-                prompt = f"""The user has uploaded a file located at:
-{conv['d']['path']}"""
+                prompt = f"""The user has uploaded files located at:
+{', '.join(chatdocumentpath + '/' + str(conv_id) + '_' + str(d['id']) + '.' + d['name'].split('.')[-1] for d in conv['d'])}"""
 
             llm_chat += [{'role': 'user', 'content': prompt}, {'role': 'assistant', 'content': conv['a']}] 
         else:
             llm_chat += [{'role': 'user', 'content': conv['q']}, {'role': 'assistant', 'content': conv['a']}]
-
+    print('HUANG*')
     if file_name == None:
         llm_chat.append({'role': 'user', 'content': user_question})
     else:
-        if(user_question == ''):
-            llm_chat.append({'role': 'user', 'content': UserUploadJSONNoQuestion.getPrompt(file_name)})
+        if(len(file_name) == 1):
+            if(user_question == ''):
+                llm_chat.append({'role': 'user', 'content': UserUploadJSONNoQuestion.getPrompt(file_name[0]['name'])})
+            else:
+                llm_chat.append({'role': 'user', 'content': UserUploadJSONIrrelevantQuestion.getPrompt(file_name[0]['name'], user_question)})
         else:
-            llm_chat.append({'role': 'user', 'content': UserUploadJSONIrrelevantQuestion.getPrompt(file_name, user_question)})
-
+            if(user_question == ''):
+                llm_chat.append({'role': 'user', 'content': UserUploadMultipleJSONNoQuestion.getPrompt([f['name'] for f in file_name])})
+            else:
+                llm_chat.append({'role': 'user', 'content': UserUploadMultipleJSONIrrelevantQuestion.getPrompt([f['name'] for f in file_name], user_question)})
+    print('JENG^')
+    print('**')
     return llm_chat
 
 # Used when could only Upload One File
@@ -83,7 +95,7 @@ def GetLastFileFromChat(db_chat):
             return [{'id': d['id'], 'name': d['name']} for d in db_chat[i]['d']]
     return None
 
-def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
+def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, conv_id = None):
     think_list = []
     print('subemela')
     print(json_document)
@@ -92,7 +104,7 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
         if(len(json_document) == 1):
             return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': JSONUploadNoQuestion.getPrompt(json_document[0]['name'])}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
         else:
-            asokdasoi
+            return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': MultipleJSONUploadNoQuestion.getPrompt([doc['name'] for doc in json_document])}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
     ### Recognise Upload End ###
 
     ### Chain 1: Gibberish Classifier ###
@@ -136,10 +148,8 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None):
                 return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': None, 'wanted_return': None, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None}
             else:
                 # NOT asking about Jobs, Tasks, etc.. So a general, non-json question
-                if(json_document == None or len(json_document) == 1):
-                    return {'response_msg': chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document[0]['name'] if json_document != None else None), stream = True), 'think': think_list, 'end': 'success_unfinished'}
-                else:
-                    saopdksaoop
+                return {'response_msg': chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document, conv_id), stream = True), 'think': think_list, 'end': 'success_unfinished'}
+
         else:
             if('job' in words):
                 search = 'jobs'
@@ -586,20 +596,23 @@ def PassLLMFinalAnswer(json_document, search, user_question, query, retrieve_inf
     print('Fin AA**')
     print(json_document)
     if(len(json_document) == 1):
-        return PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick)
+        return PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick, json_document[0]['name'])
     else:
         return PassLLMFinalAnswerMultipleDocument(search, user_question, query, llm_model, think_list)
 
 def PassLLMFinalAnswerMultipleDocument(search, user_question, query, llm_model, think_list):
     return [chat(llm_model, messages = [{'role': 'user', 'content': OutputListResultsMultipleDocuments.getPrompt(user_question)}], stream = True), think_list, query, search]
 
-def PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick):
+def PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick, doc_name):
     print('Single___')
     print(taskprecedenceconstraints_pick)
     print(retrieve_info)
     print(query)
     print('ppppppppppppp')
     ### Chain 5: Final Answer ###
+    doc_name = doc_name.lower()
+    if( ('input' in doc_name and 'output' in doc_name) or ('input' not in doc_name and 'output' not in doc_name)):
+        return [chat(llm_model, messages = [{'role': 'user', 'content': OutputInvalidName.getPrompt(user_question)}], stream = True), think_list, query, search]
     if(search != 'tasksprecedenceconstraints'):
         if(len(query[0]) == 0):
             prompt = OutputNoResultsFound.getPrompt(user_question)
@@ -652,7 +665,7 @@ def PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info
 
 def PassLLMThinkCompletePipeline(llm_model, user_question, conv_id, db_chat = [], json_document = None):
     print('sk')
-    llm_res = PassLLMThink(llm_model, user_question, db_chat, json_document)
+    llm_res = PassLLMThink(llm_model, user_question, db_chat, json_document, conv_id)
     print(llm_res)
     print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
     if(llm_res['end'] != 'success_complete'):

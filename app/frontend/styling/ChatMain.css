@@ -316,3 +316,6 @@
     justify-content: center;
     align-items: center;
 }
+.cm_nodata > svg{
+    flex-shrink: 0;
+}

@@ -8,6 +8,7 @@ from snowflake_id_gen import GenerateSnowflake
 import datetime
 from .LLMpipeline import PassLLMThink, CreateConversationTitleThink, PassLLMThinkCompletePipeline
 from LLM_prompts.NoAgent import NoAgentJSONUpload
+from openai import OpenAI
 
 ###
 # For multiplrocessing to work (i.e. to spawn a process) you must run these two lines of code before importing any models.
@@ -117,7 +118,7 @@ def CreateChatQuestion(request):
         return ReturnHttpInvalidJWT(valjwt)
     data = json.loads(request.body.decode('utf-8'))
 
-    if('q' not in data or 'm' not in data or (data['m'] != 1 and data['m'] != 2 and data['m'] != 3)):
+    if('q' not in data or 'm' not in data or (data['m'] != 1 and data['m'] != 2 and data['m'] != 3) or (data['m'] == 3 and ('k' not in data))):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
     if(len(data['q']) == 0):
         return HttpResponse(json.dumps('Question is empty'), status = 400)
@@ -126,7 +127,11 @@ def CreateChatQuestion(request):
     curr_time = datetime.datetime.now(datetime.timezone.utc)
 
     redis_client.set("cg_" + str(chat_id), json.dumps({"q": data["q"]}))
-    if(data['m'] == 2 or data['m'] == 3):
+    if(data['m'] == 3):
+        print(data['k'])
+        print('&&&==')
+        p = multiprocessing.Process(target = AnswerQuestionCloud, args=[[], data["q"], str(chat_id), None, data['k']])
+    elif(data['m'] == 2):
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id)])
         #t = multiprocessing.Process(target = CreateChatTitle, args = [str(chat_id), data["q"]])
     else:
@@ -159,7 +164,7 @@ def CreateChatDocument(request):
     request_dict['document'] = json.loads(request_dict['document'])
     print(request_dict)
     #if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'data' not in request_dict['document'] or 'name' not in request_dict['document'] or 'm' not in request_dict['data'] or (request_dict['data']['m'] != 1 and request_dict['data']['m'] != 2 and request_dict['data']['m'] != 3)):
-    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'm' not in request_dict['data'] or (request_dict['data']['m'] != 1 and request_dict['data']['m'] != 2 and request_dict['data']['m'] != 3) or (not all('data' in doc and 'name' in doc for doc in request_dict['document']))):
+    if('data' not in request_dict or 'document' not in request_dict or 'q' not in request_dict['data'] or 'm' not in request_dict['data'] or (request_dict['data']['m'] != 1 and request_dict['data']['m'] != 2 and request_dict['data']['m'] != 3) or (request_dict['data']['m'] == 3 and 'k' not in request_dict['data']) or (not all('data' in doc and 'name' in doc for doc in request_dict['document']))):
         return HttpResponse(json.dumps('Bad Request'), status = 400)
     print('popopo')
     data = request_dict['data']
@@ -184,7 +189,7 @@ def CreateChatDocument(request):
     curr_time = datetime.datetime.now(datetime.timezone.utc)
 
     if(data['m'] == 3):
-        p = multiprocessing.Process(target = AnswerQuestionCloud, args=[[], data["q"], str(chat_id), document_info, [f.decode() for f in file_write]])
+        p = multiprocessing.Process(target = AnswerQuestionCloud, args=[[], data["q"], str(chat_id), document_info, [f.decode() for f in file_write], request_dict['data']['k']])
     elif(data['m'] == 2):
         ## <----------- NEED TO CHECK THESE 2 -----------
         p = multiprocessing.Process(target = AnswerQuestionLLM, args=[[], data["q"], str(chat_id), document_info, [f.decode() for f in file_write]])
@@ -670,5 +675,125 @@ def CreateChatTitleThink(chat_id, user_question = '', file_name = None):
     
     redis_client.xadd("cs_" + chat_id, {"t":llm_title})
 
-def AnswerQuestionCloud():
+def AnswerQuestionCloud(db_chat, user_question, chat_id, document_dict = None, gpt_apikey = ''):
+    total_answer = ''
+    conversations = []
+
+    client = OpenAI(api_key = gpt_apikey)
+
+    # Collect past uploaded files
+    for conv in db_chat:
+        user_content = []
+        
+        if conv.get("q"):
+            user_content.append({
+                "type": "input_text",
+                "text": conv["q"]
+            })
+        
+        for doc in conv.get("d", []):
+            user_content.append({
+                "type": "input_file",
+                "file_id": doc["cloud_id"]
+            })
+        
+        conversations.append({
+            "role": "user",
+            "content": user_content
+        })
+
+        if conv.get("a"):
+            conversations.append({
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "output_text",
+                        "text": conv["a"]
+                    }
+                ]
+            })
+
+    # Handle current document uplaod
+    new_content = []
     
+    if user_question != '':
+        new_content.append({
+            "type": "input_text",
+            "text": user_question
+        })
+
+    # Optional uploaded files
+    if document_dict != None:
+        for doc in document_dict:
+            new_content.append({
+                "type": "input_file",
+                "file_id": doc["cloud_id"]
+            })
+
+        conversations.append({
+            "role": "user",
+            "content": new_content
+        })
+
+    ### <---------------- HEREEE !!!!!!!!!!!!!!!!!!!!!!!!! The above is from ChatGPT web. The below is still from work Teams
+
+    # Build conversation history
+    messages = []
+
+    for conv in db_chat:
+        if conv.get('q'):
+            messages.append({
+                'role': 'user',
+                'content': conv['q']
+            })
+        
+        if conv.get('a'):
+            messages.append({
+                'role': 'user',
+                'content': conv['a']
+            })
+
+    # Add current user question
+    if(user_question != ''):
+        messages.append({
+            'role': 'user',
+            'content': user_question
+        })
+    else:
+        messages.append({
+            'role': 'user',
+            'content': 'Analyze the newly uploaded documents and summarize key insights'
+        })
+
+    # Stream request
+    stream = client.responses.create(
+        model = "gpt-4.1",
+        input = user_question,
+        attachments = [{
+            "file_id": uplaoded_file.id
+        }]
+    )
+
+    # Stream response
+    with stream as s:
+        for event in s:
+            if event.type == "response.output_text.delta":
+                total_answer += event.delta
+                redis_client.xadd("cs_" + chat_id, {"v": event.delta})
+
+    # Streaming Done
+    redis_client.delete("cg_" + chat_id)
+    redis_client.xadd("cs_" + chat_id, {"d": 1}) # d -> done # cs_ -> chat stream
+    redis_client.expire("cs_" + chat_id, 3)
+    if(document_dict == None):
+        push_val = {"q": user_question, "t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer}
+        chats.update_one({"_id": int(chat_id)},
+                        {"$push": {"chat": push_val}})
+    else:
+        push_val = {"t": datetime.datetime.now(datetime.timezone.utc), "a": total_answer, "d": document_dict}
+        if(user_question != ''):
+            push_val['q'] = user_question
+        chats.update_one({"_id": int(chat_id)},
+                        {"$push": {"chat": push_val}})
+
+    return

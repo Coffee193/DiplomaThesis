@@ -38,6 +38,10 @@ export function ChatBox({ isloadingState, chatlist, chattype, convsetState, link
         let request = {"q": cbtextareaRef.current.value, "m": cbmodelState['id']}
         let body = null
 
+        if(cbmodelState['type'] === 'cloud'){
+            request['k'] = cbkeyRef.current.value
+        }
+
         //if(cbinputRef.current.value !== ''){
         console.log(cbuState['documents'].length)
         console.log(cbuState['documents'])

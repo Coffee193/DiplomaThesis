@@ -34,11 +34,11 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         }).then(data => data)
         .catch(() => {})
         
-        if(response['c'].length === 0){
-            generateTitle = chatlist.current.map((e) => e["_id"]).indexOf(linkparams.id)
-        }
-
         if(response_status === 200){
+            if(response['c'].length === 0){
+                generateTitle = chatlist.current.map((e) => e["_id"]).indexOf(linkparams.id)
+            }
+
             let conv_vals = []
 
             if('g' in response){

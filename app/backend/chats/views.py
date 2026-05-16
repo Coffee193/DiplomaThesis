@@ -713,73 +713,65 @@ def AnswerQuestionCloud(db_chat, user_question, chat_id, document_dict = None, g
                 ]
             })
 
-    # Handle current document uplaod
+    # Handle new document uploads
+    new_upload_docs = []
+
+    if(document_dict != None):
+        for doc in document_dict:
+
+            # Upload new file
+            uploaded_file = client.files.create(
+                file=open(chatdocumentpath + '/' + chat_id + '_' + str(doc['id']) + '.' + doc['name'].split('.')[-1], "rb"),
+                purpose="assistants"
+            )
+
+            doc["cloud_id"] = uploaded_file.id
+
+            new_upload_docs.append(doc)
+
+    # Add new message
     new_content = []
     
+        # New Question
     if user_question != '':
         new_content.append({
             "type": "input_text",
             "text": user_question
         })
 
-    # Optional uploaded files
+        # New file uploads
     if document_dict != None:
         for doc in document_dict:
             new_content.append({
                 "type": "input_file",
                 "file_id": doc["cloud_id"]
             })
-
-        conversations.append({
-            "role": "user",
-            "content": new_content
-        })
-
-    ### <---------------- HEREEE !!!!!!!!!!!!!!!!!!!!!!!!! The above is from ChatGPT web. The below is still from work Teams
-
-    # Build conversation history
-    messages = []
-
-    for conv in db_chat:
-        if conv.get('q'):
-            messages.append({
-                'role': 'user',
-                'content': conv['q']
-            })
-        
-        if conv.get('a'):
-            messages.append({
-                'role': 'user',
-                'content': conv['a']
+        if(user_question == ''):
+            new_content.append({
+                "type": "input_text",
+                "text": "Please analyze the uploaded file."
             })
 
-    # Add current user question
-    if(user_question != ''):
-        messages.append({
-            'role': 'user',
-            'content': user_question
-        })
-    else:
-        messages.append({
-            'role': 'user',
-            'content': 'Analyze the newly uploaded documents and summarize key insights'
-        })
+    conversations.append({
+        "role": "user",
+        "content": new_content
+    })
 
-    # Stream request
+    # Trim history
+    conversations = conversations[-20:]
+
+    # Send request
     stream = client.responses.create(
-        model = "gpt-4.1",
-        input = user_question,
-        attachments = [{
-            "file_id": uplaoded_file.id
-        }]
+        model="gpt-4.1",
+        input=conversations,
+        stream=True
     )
 
     # Stream response
-    with stream as s:
-        for event in s:
-            if event.type == "response.output_text.delta":
-                total_answer += event.delta
-                redis_client.xadd("cs_" + chat_id, {"v": event.delta})
+    for event in stream:
+        if event.type == "response.output_text.delta":
+            total_answer += event.delta
+            redis_client.xadd("cs_" + chat_id, {"v": event.delta})
 
     # Streaming Done
     redis_client.delete("cg_" + chat_id)
@@ -795,5 +787,3 @@ def AnswerQuestionCloud(db_chat, user_question, chat_id, document_dict = None, g
             push_val['q'] = user_question
         chats.update_one({"_id": int(chat_id)},
                         {"$push": {"chat": push_val}})
-
-    return

@@ -1,0 +1,29 @@
+1) Which plan do you recommend overall (finishes earliest)?
+2) Which plan has the shorter makespan?
+ 
+3) When did job 96 fully complete (start, end)?
+4) Which job has the longest duration <--- returns milliseconds
+5) By November 31 how many jobs will be completed ?
+ 
+6) Which task has the shortest duration, and which job does it belong to?
+7) When did task 199 start and end
+8) Which task has the longest duration <----- returns milliseconds
+9) By November 31 how many tasks will be completed?
+ 
+10) Which resource handled more tasks — MELTSHOP or ROLLING MILL?
+
+==================================
+
+1)
+2)
+
+3) - Can be found by Chain 2 -
+4) - Can be found by Chain 2 -
+5) - Can be found by Chain 2 -
+
+6) - Can be found by Chain 2 -
+7) - Can be found by Chain 2 -
+8) - Can be found by Chain 2 -
+9) - Can be found by Chain 2 -
+
+10) - Can be found by Chain 2 -

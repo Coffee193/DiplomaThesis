@@ -1,0 +1,34 @@
+=== *** ===
+Chain 0:
+|
+|1) Upload + No Question
+|\
+| \Yes
+|  \
+|   ** Returns ** Msg (General, Recognize files, Offer Help)
+|
+|
+Chain 1: Gibberish
+|
+|
+| 1) Is Question Gibberish?
+|\
+| \Yes
+|  \
+|   ** Returns ** Msg
+|
+Chain 2: High-Level Classifier
+|
+|
+|1) User asks: Tasks, Jobs, Resources <-- Input specific
+|\
+| \No
+|  \
+|   2) User asks: Assignment, Dispatch, Duration <--- Output Specific
+|
+|
+|
+|
+|
+| 3) User Asks: Tasks, TaskSuitableResources, TaskPrepost
+|

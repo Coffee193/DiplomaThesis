@@ -43,6 +43,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             let conv_vals = []
 
             if('g' in response){
+                cmlastdocRef.current = response.g.u?.u || response.c.findLast(item => item.d?.length)?.d
                 isgeneratingsetState(true)
                 console.log('*********************')
                 console.log(response["g"]["u"])
@@ -59,6 +60,9 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                             }
                         </div>
                 )
+            }
+            else{
+                cmlastdocRef.current = response.c.findLast(item => item.d?.length)?.d
             }
 
             for(let i=response['c'].length - 1; i>=0; i--){
@@ -85,14 +89,14 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             modelsetState(response['m'])
 
             if('g' in response){
+                console.log('ggggggggggg')
+                console.log(response['g']) /* {'q': 'return all tasks', 'u': [{'id': 123, 'name': 'InputJSON.json', 'size': '152.3'}, {'id': 456, 'name': 'InputJSON2.json', 'size': '330'}]} */
                 if(convstreamgeneratingRef.current.has(linkparams.id) === false){
                     ResumeAnswerStream(generateTitle)
                 }
-                //* Create cmlastdocRef for this part as well *//
             }
             else{
                 isgeneratingsetState(false)
-                cmlastdocRef.current = response.c.findLast(item => item.d?.length)?.d
             }
         }
         else if(response_status === 401 || response_status === 403){
@@ -105,6 +109,9 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         if(info !== undefined){
             if(data.length === 1){
                 data = data[0].split(/(\(DATA\))/)
+            }
+            if(documents === undefined){
+                documents = cmlastdocRef.current
             }
             for(let i=1; i<data.length; i++){
                 if(data[i] === "(DATA)"){
@@ -495,7 +502,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         let search_block = null
         let errorquit = false
         const decoder = new TextDecoder();
-        let document_info = null
+        let document_info = undefined
 
         while(true){
             const { done, value } = await response.read();
@@ -536,6 +543,9 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 }
             }
 
+            console.log('valval')
+            console.log(cmlastdocRef.current)
+            if (document_info === undefined) document_info = cmlastdocRef.current
             if(buffer_answer === '') continue
             if(window.location.pathname.split("/").at(-2) === linkparams.id){
                 convsetState(prevState => [

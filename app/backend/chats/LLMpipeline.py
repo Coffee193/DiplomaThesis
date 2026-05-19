@@ -4,7 +4,7 @@ import os
 
 from LLM_prompts.Chain1 import GibberishClassifier
 from LLM_prompts.UnexpectedException import ExceptionHandler
-from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, HighLevelOutputJSONClassifier
+from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, HighLevelOutputJSONClassifier, InputMultiOuputJSONClassifier
 from LLM_prompts.Chain3 import ResourceAttributeRetriever, JobAttributeRetriever, TaskAttributeRetriever, TasksuitableresourceAttributeRetriever, TaskprecedencecontraintOrderDependenceClassifier, TaskprecedenceconstraintDependenceAttributeRetriever, TaskprecedenceconstraintOrderAttributeRetriever
 from LLM_prompts import StringToDateMonthForm
 from LLM_prompts.Chain4 import JobAttributeReturnClassifier, TaskAttributeReturnClassifier, ResourceAttributeReturnClassifier, TasksuitableresourceAttributeReturnResourceClassifier, TasksuitableresourceAttributeReturnTaskClassifier
@@ -172,6 +172,17 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
                         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
             else:
                 return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
+    
+        # Ouput JSON questions (or Multi File)
+        multijson = None
+        if(search == 'jobs' or search == 'tasks' or search == 'tasksuitableresources'):
+            answer = chat(llm_model, messages = [{'role': 'user', 'content': InputMultiOuputJSONClassifier.getPrompt(user_question)}]).message.content
+            answer = json.loads(LLMOutClean(answer))
+            think_list.append({'chain': '2_multiJSON', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
+            words = answer['words']
+            if(len(words) != 0):
+                multijson = words
+
     except:
         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
     ### Chain 2 End ###
@@ -258,7 +269,7 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
     ### Chain 4 End ###
     print('Chain 4 Finished')
     print(answer)
-    return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': retrieve_info, 'wanted_return': wanted_return, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None if search != 'tasksprecedenceconstraints' else taskprecedenceconstraints_pick}
+    return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': retrieve_info, 'wanted_return': wanted_return, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None if search != 'tasksprecedenceconstraints' else taskprecedenceconstraints_pick, 'multijson': multijson}
 
 def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, wanted_return):
     fetched_list = []
@@ -668,10 +679,18 @@ def PassLLMThinkCompletePipeline(llm_model, user_question, conv_id, db_chat = []
     llm_res = PassLLMThink(llm_model, user_question, db_chat, json_document, conv_id)
     print(llm_res)
     print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
+    '''
+    Example: When did job 95 complete?
+    jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+    {'end': 'success_complete', 'think': [{'chain': '1', 'think': "The question is asking for a specific event or completion time related to job 95. It includes context and meaningful words, so it's not gibberish."}, {'chain': '2', 'think': "The words 'job' and its variations were identified through character-based pattern matching. The string 'job' was found in the input question without any corrections or assumptions made."}, {'chain': '2_multiJSON', 'think': "The word 'complete' is present in the input due to a strict character match."}, {'chain': '3', 'think': 'The user is asking about a specific job with id 95 and I assume they want to know its completion date, which would be the duedate.'}, {'chain': '4', 'think': "The user is asking about a specific job (job 95) and the completion date is related to the duedate attribute of a job. So, I'm assuming they want the entire job object returned."}], 'search': 'jobs', 'retrieve_info': {'attribute': True, 'key': 'id', 'value': 95, 'think': 'The user is asking about a specific job with id 95 and I assume they want to know its completion date, which would be the duedate.'}, 'wanted_return': {'attribute': False, 'think': "The user is asking about a specific job (job 95) and the completion date is related to the duedate attribute of a job. So, I'm assuming they want the entire job object returned."}, 'json_documents': [{'id': 319120913054060545, 'name': 'InputJSON_1.json'}, {'id': 319120913054060546, 'name': 'OutputJSON_1.json'}], 'taskprecedenceconstraints_pick': None, 'multijson': ['complete']}
+    
+    '''
     if(llm_res['end'] != 'success_complete'):
         return [llm_res['response_msg'], llm_res['think'], None, None if 'search' not in llm_res else llm_res['search']]
     else:
         fetched_results = LLMGetFinalQuery(conv_id, llm_res['search'], llm_res['json_documents'], llm_res['retrieve_info'], llm_model, llm_res['wanted_return'])
+    print('ooii')
+    print(fetched_results)
     return PassLLMFinalAnswer(llm_res['json_documents'], llm_res['search'], user_question, [fr["query"] for fr in fetched_results], llm_res['retrieve_info'], [fr["json_data"] for fr in fetched_results], llm_model, llm_res['think'], llm_res['taskprecedenceconstraints_pick'])
 
 ''' #!!!###

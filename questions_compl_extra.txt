@@ -1,7 +1,7 @@
 1) Which plan do you recommend overall (finishes earliest)?
 2) Which plan has the shorter makespan?
  
-3) When did job 96 fully complete (start, end)?
+3) When did job 96 fully complete (start, end)?    | OR |   Which job spent the most time in production?
 4) Which job has the longest duration <--- returns milliseconds
 5) By November 31 how many jobs will be completed ?
  
@@ -14,16 +14,16 @@
 
 ==================================
 
-1)
-2)
+1) * No Chain can find it * (Requires Output)
+2) * No Chain can find it * (Requires Output)
 
-3) - Can be found by Chain 2 -
-4) - Can be found by Chain 2 -
-5) - Can be found by Chain 2 -
+3) - Can be found by Chain 2 - (Requires both Input& Output)
+4) - Can be found by Chain 2 - (Requires both Input& Output)
+5) - Can be found by Chain 2 - (Requires both Input& Output)
 
-6) - Can be found by Chain 2 -
-7) - Can be found by Chain 2 -
-8) - Can be found by Chain 2 -
-9) - Can be found by Chain 2 -
+6) - Can be found by Chain 2 - (Requires Output)
+7) - Can be found by Chain 2 - (Requires Output)
+8) - Can be found by Chain 2 - (Requires Output)
+9) - Can be found by Chain 2 - (Requires Output)
 
-10) - Can be found by Chain 2 -
+10) - Can be found by Chain 2 - (Requires Output)

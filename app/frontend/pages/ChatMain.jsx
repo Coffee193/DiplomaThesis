@@ -14,6 +14,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
     const [isgeneratingState, isgeneratingsetState] = useState(false)
     const convstreamgeneratingRef = useRef(new Set([]))
     const [modelState, modelsetState] = useState('')
+    const cmlastdocRef = useRef(undefined)
 
     useEffect(() => {
         if(chatnavloadingState === false){
@@ -87,9 +88,11 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 if(convstreamgeneratingRef.current.has(linkparams.id) === false){
                     ResumeAnswerStream(generateTitle)
                 }
+                //* Create cmlastdocRef for this part as well *//
             }
             else{
                 isgeneratingsetState(false)
+                cmlastdocRef.current = response.c.findLast(item => item.d?.length)?.d
             }
         }
         else if(response_status === 401 || response_status === 403){

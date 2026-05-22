@@ -162,6 +162,8 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
                     answer = chat(llm_model, messages = [{'role': 'user', 'content': HighLevelTaskClassifier.getPrompt(user_question)}]).message.content # Meaning-search
                     answer = json.loads(LLMOutClean(answer))
                     think_list.append({'chain': '2_task', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
+                    print('2_task &&&')
+                    print(answer)
                     if(answer['pick'] == 1):
                         search = 'tasksuitableresources'
                     elif(answer['pick'] == 2):
@@ -179,6 +181,8 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
             answer = chat(llm_model, messages = [{'role': 'user', 'content': InputMultiOuputJSONClassifier.getPrompt(user_question)}]).message.content
             answer = json.loads(LLMOutClean(answer))
             think_list.append({'chain': '2_multiJSON', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
+            print(answer)
+            print('haduken--')
             words = answer['words']
             if(len(words) != 0):
                 multijson = words
@@ -271,7 +275,7 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
     print(answer)
     return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': retrieve_info, 'wanted_return': wanted_return, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None if search != 'tasksprecedenceconstraints' else taskprecedenceconstraints_pick, 'multijson': multijson}
 
-def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, wanted_return):
+def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, wanted_return, multijson = None):
     fetched_list = []
     for doc in json_documents:
         json_name = doc['name'].lower()
@@ -282,11 +286,29 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
         if has_input and not has_output:
             fetched_list.append(LLMGetFinalQueryInputJSON(conv_id, search, doc, retrieve_info, llm_model, wanted_return))
         elif has_output and not has_input:
-            fetched_list.append(LLMGetFinalQueryOutputJSON(conv_id, search, doc))
+            if(multijson != None):
+                fetched_list.append(LLMGetFinalQueryOutputMultiJSON(conv_id, search, doc, multijson))
+            else:
+                fetched_list.append(LLMGetFinalQueryOutputJSON(conv_id, search, doc))
         else:
             fetched_list.append({"query": [], "json_data": [], "doc": doc})
     
     return fetched_list
+
+def LLMGetFinalQueryOutputMultiJSON(conv_id, search, json_document, multijson):
+    ### Get JSON Data ###
+    ''' Retrieves the JSON data '''
+    with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(json_document['id']) + '.' + json_document['name'].split('.')[-1], encoding = 'utf-8') as file:
+        json_data = file.read()
+        json_data = json.loads(json_data)
+    ### Get JSON Data End ###
+
+    if(search == 'tasksuitableresources' and 'duration' in multijson):
+        query = [{'task': q['task']['id'], 'durationinmilliseconds': q['durationinmilliseconds']} for q in json_data['assignments']['assignment']]
+    else:
+        query = []
+    
+    return {"query": query, "json_data": json_data, "doc": json_document}
 
 def LLMGetFinalQueryOutputJSON(conv_id, search, json_document):
     ### Get JSON Data ###
@@ -406,6 +428,7 @@ def LLMGetFinalQueryInputJSON(conv_id, search, json_document, retrieve_info, llm
     elif(search == 'resources'):
         query = [{'name': q['name'], 'nonworkingperiods': [{'fromdate': r['fromdate'], 'todate': r['todate']} for r in q['resourceavailability']['nonworkingperiods']['period']], 'id': q['id']} for q in query]
     elif(search == 'tasksuitableresources'):
+        print('7779')
         taskres_list = []
         for i in range(0, len(query)):
             if(len(taskres_list) == 0 or (not any(fl['resource']['id'] == query[i]['resourcereference']['refid'] for fl in taskres_list)) ):
@@ -458,7 +481,7 @@ def LLMGetFinalQueryInputJSON(conv_id, search, json_document, retrieve_info, llm
                         wanted_return['value'] = IntToStrWithSlabInfornt(wanted_return['value'])
                         query = [{'resource': item['resource'], 'tasks': [t for t in item['tasks'] if t[wanted_return['key']].upper() == wanted_return['value'].upper()]}  for item in taskres_list if any(t[wanted_return['key']].upper() == wanted_return['value'].upper() for t in item['tasks'])]
     ### End Chain 4 Query ###
-
+    print(query)
     return {"query": query, "json_data": json_data, "doc": json_document}
 
 
@@ -688,7 +711,7 @@ def PassLLMThinkCompletePipeline(llm_model, user_question, conv_id, db_chat = []
     if(llm_res['end'] != 'success_complete'):
         return [llm_res['response_msg'], llm_res['think'], None, None if 'search' not in llm_res else llm_res['search']]
     else:
-        fetched_results = LLMGetFinalQuery(conv_id, llm_res['search'], llm_res['json_documents'], llm_res['retrieve_info'], llm_model, llm_res['wanted_return'])
+        fetched_results = LLMGetFinalQuery(conv_id, llm_res['search'], llm_res['json_documents'], llm_res['retrieve_info'], llm_model, llm_res['wanted_return'], llm_res['multijson'])
     print('ooii')
     print(fetched_results)
     return PassLLMFinalAnswer(llm_res['json_documents'], llm_res['search'], user_question, [fr["query"] for fr in fetched_results], llm_res['retrieve_info'], [fr["json_data"] for fr in fetched_results], llm_model, llm_res['think'], llm_res['taskprecedenceconstraints_pick'])

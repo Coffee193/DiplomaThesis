@@ -70,6 +70,9 @@ User: "Can task 55 be executed in resource with name ROLLING MILL?"
 Output:{"attribute": true, "key": "id", "value": 55, "think": "<Your thinking process>"}
 ------------------------------------------------
 User: "How long does each task take?"
+Output:{"attribute": true, "key": "time", "think": "<Your thinking process>"}
+------------------------------------------------
+User: "Return all task durations?"
 Output:{"attribute": true, "key": "time", "think": "<Your thinking process>"}"""
 
     prompt += f"""

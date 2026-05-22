@@ -66,10 +66,20 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             }
 
             for(let i=response['c'].length - 1; i>=0; i--){
+                let doc_info = response["c"][i]["d"]
+                if(doc_info === undefined){
+                    for (let j = i - 1; j >= 0; j--) {
+                        if (response['c'][j]['d']) {
+                        doc_info = response['c'][j]['d'];
+                        break;   // first hit going down = closest lower index
+                        }
+                    }
+                }
+
                 conv_vals.push(
                     <>
                         <div className='cm_chatbox'>
-                            {CreateInfoBlock(AddStreamBold(response["c"][i]["a"]), response["c"][i]["i"], response["c"][i]["s"], response["c"][i]["d"])}
+                            {CreateInfoBlock(AddStreamBold(response["c"][i]["a"]), response["c"][i]["i"], response["c"][i]["s"], doc_info)}
                         </div>
                         <div className='cm_chatuser'>
                             {/*response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"], 'id': response["c"][i]["d"]["id"], 'link': linkparams.id}}/> : null*/}
@@ -110,9 +120,11 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             if(data.length === 1){
                 data = data[0].split(/(\(DATA\))/)
             }
-            if(documents === undefined){
+            console.log('ppp')
+                console.log(documents)
+            /*if(documents === undefined){
                 documents = cmlastdocRef.current
-            }
+            }*/
             for(let i=1; i<data.length; i++){
                 if(data[i] === "(DATA)"){
                     data[i] =
@@ -540,6 +552,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                 }
                 else if(msg.u !== undefined){
                     document_info = msg.u
+                    cmlastdocRef.current = msg.u
                 }
             }
 

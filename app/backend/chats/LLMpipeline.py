@@ -193,6 +193,8 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
             answer = json.loads(LLMOutClean(answer))
             think_list.append({'chain': '2_durationExtremum', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
             duration_extremum = answer['pick']
+            if duration_extremum == 'None':
+                duration_extremum = None
 
     except:
         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
@@ -292,7 +294,10 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
         has_output = 'output' in json_name
 
         if has_input and not has_output:
-            fetched_list.append(LLMGetFinalQueryInputJSON(conv_id, search, doc, retrieve_info, llm_model, wanted_return))
+            if(multijson != None and duration_extremum != None):
+                fetched_list.append(LLMGetFinalQueryInputMultiJSON(conv_id, search, doc, multijson, duration_extremum))
+            else:
+                fetched_list.append(LLMGetFinalQueryInputJSON(conv_id, search, doc, retrieve_info, llm_model, wanted_return))
         elif has_output and not has_input:
             if(multijson != None):
                 fetched_list.append(LLMGetFinalQueryOutputMultiJSON(conv_id, search, doc, multijson, duration_extremum))
@@ -312,7 +317,7 @@ def LLMGetFinalQueryOutputMultiJSON(conv_id, search, json_document, multijson, d
     ### Get JSON Data End ###
 
     if(search == 'tasksuitableresources' and 'duration' in multijson):
-        query = [{'task': q['task']['id'], 'durationinmilliseconds': q['durationinmilliseconds']} for q in json_data['assignments']['assignment']]
+        query = [{'task': q['task']['id'], 'durationinmilliseconds': q['durationinmilliseconds'], 'idx': i + 1} for i, q in enumerate(json_data['assignments']['assignment'])]
         if(duration_extremum == 'A' and len(query) > 0):
             query = [max(query, key = lambda x: x['durationinmilliseconds'])]
         elif(duration_extremum == 'B' and len(query) > 0):
@@ -332,32 +337,66 @@ def LLMGetFinalQueryOutputJSON(conv_id, search, json_document):
 
     ### Query Form Based on Chain 2 ###
     ''' Classifies if user asks about: Assignments, Dispatch, Duration'''
+    assignments = json_data['assignments']['assignment']
     if(search == 'assignment'):
-        query = json_data['assignments']['assignment']
+        query = [(i + 1, q) for i, q in enumerate(assignments)]
     elif(search == 'tasks'):
-        query = [q['task'] for q in json_data['assignments']['assignment']]
+        query = [(i + 1, q['task']) for i, q in enumerate(assignments)]
     elif(search == 'resources'):
-        query = [q['resource'] for q in json_data['assignments']['assignment']]
+        query = [(i + 1, q['resource']) for i, q in enumerate(assignments)]
     elif(search == 'dispatch'):
-        query = [q['timeofdispatch'] for q in json_data['assignments']['assignment']]
+        query = [(i + 1, q['timeofdispatch']) for i, q in enumerate(assignments)]
     elif(search == 'duration'):
-        query = [q['durationinmilliseconds'] for q in json_data['assignments']['assignment']]
+        query = [(i + 1, q['durationinmilliseconds']) for i, q in enumerate(assignments)]
     else:
         query = []
     ### End Chain 2 Query ###
 
     ### Query Clean Form ###
     if(search == 'assignment'):
-        query = [{'task': q['task']['id'], 'resource': q['resource']['id'], 'dispatch': {'year': q['timeofdispatch']['year'], 'month': q['timeofdispatch']['month'], 'day': q['timeofdispatch']['day'], 'hour': q['timeofdispatch']['hour'], 'minute': q['timeofdispatch']['minutes'], 'second': q['timeofdispatch']['seconds']}, 'durationinmilliseconds': q['durationinmilliseconds']} for q in query]
+        query = [{'task': q['task']['id'], 'resource': q['resource']['id'], 'dispatch': {'year': q['timeofdispatch']['year'], 'month': q['timeofdispatch']['month'], 'day': q['timeofdispatch']['day'], 'hour': q['timeofdispatch']['hour'], 'minute': q['timeofdispatch']['minutes'], 'second': q['timeofdispatch']['seconds']}, 'durationinmilliseconds': q['durationinmilliseconds'], 'idx': idx} for idx, q in query]
     elif(search == 'tasks'):
-        query = [{'task': q['id']} for q in query]
+        query = [{'task': q['id'], 'idx': idx} for idx, q in query]
     elif(search == 'resources'):
-        query = [{'resource': q['id']} for q in query]
+        query = [{'resource': q['id'], 'idx': idx} for idx, q in query]
     elif(search == 'dispatch'):
-        query = [{'dispatch': {'year': q['year'], 'month': q['month'], 'day': q['day'], 'hour': q['hour'], 'minute': q['minutes'], 'second': q['seconds']}} for q in query]
+        query = [{'dispatch': {'year': q['year'], 'month': q['month'], 'day': q['day'], 'hour': q['hour'], 'minute': q['minutes'], 'second': q['seconds']}, 'idx': idx} for idx, q in query]
     elif(search == 'duration'):
-        query = [{'durationinmilliseconds': q} for q in query]
+        query = [{'durationinmilliseconds': q, 'idx': idx} for idx, q in query]
     ### End Query Clean Form###
+
+    return {"query": query, "json_data": json_data, "doc": json_document}
+
+def LLMGetFinalQueryInputMultiJSON(conv_id, search, json_document, multijson, duration_extremum = None):
+    print('??//??')
+    print(multijson)
+    print(duration_extremum)
+    print(type(duration_extremum))
+    ### Get JSON Data ###
+    with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(json_document['id']) + '.' + json_document['name'].split('.')[-1], encoding = 'utf-8') as file:
+        json_data = file.read()
+        json_data = json.loads(json_data)
+    ### Get JSON Data End ###
+
+    if(search == 'tasksuitableresources' and 'duration' in multijson):
+        raw = json_data['tasksuitableresources']['tasksuitableresource']
+        if(duration_extremum == 'A' and len(raw) > 0):
+            pick = max(raw, key = lambda x: x['operationtimeperbatchinseconds'])
+        elif(duration_extremum == 'B' and len(raw) > 0):
+            pick = min(raw, key = lambda x: x['operationtimeperbatchinseconds'])
+        else:
+            pick = None
+
+        if pick:
+            res_id = pick['resourcereference']['refid']
+            res_name = [r['name'] for r in json_data['resources']['resource'] if r['id'] == res_id][0]
+            task_id = pick['taskreference']['refid']
+            task_name = [t['name'] for t in json_data['tasks']['task'] if t['id'] == task_id][0]
+            query = [{'resource': {'id': res_id, 'name': res_name}, 'tasks': [{'id': task_id, 'operation_time': pick['operationtimeperbatchinseconds'], 'name': task_name}]}]
+        else:
+            query = []
+    else:
+        query = []
 
     return {"query": query, "json_data": json_data, "doc": json_document}
 
@@ -468,8 +507,10 @@ def LLMGetFinalQueryInputJSON(conv_id, search, json_document, retrieve_info, llm
                     query = [{'id': q['id'], 'duedate': q['duedate']} for q in query]
                 elif(wanted_return['return'] == 'period'):
                     query = [{'id': q['id'], 'nonworkingperiods': q['nonworkingperiods']} for q in query]
-
-            elif(search == 'tasksuitableresources' and retrieve_info != None):
+            
+            elif(search == 'tasksuitableresources' and retrieve_info != None and retrieve_info['attribute'] != False):
+                print(retrieve_info)
+                print('LLOOPP')
                 if(retrieve_info['search']['info'] == 'resource'):
                     if 'value' not in wanted_return:
                         if wanted_return['key'] == 'id':
@@ -725,7 +766,7 @@ def PassLLMThinkCompletePipeline(llm_model, user_question, conv_id, db_chat = []
     else:
         fetched_results = LLMGetFinalQuery(conv_id, llm_res['search'], llm_res['json_documents'], llm_res['retrieve_info'], llm_model, llm_res['wanted_return'], llm_res['multijson'], llm_res.get('duration_extremum'))
     print('ooii')
-    print(fetched_results)
+    #print(fetched_results)
     return PassLLMFinalAnswer(llm_res['json_documents'], llm_res['search'], user_question, [fr["query"] for fr in fetched_results], llm_res['retrieve_info'], [fr["json_data"] for fr in fetched_results], llm_model, llm_res['think'], llm_res['taskprecedenceconstraints_pick'])
 
 ''' #!!!###
@@ -743,6 +784,7 @@ CHANGE AnswerQuestionLLMThink of views, so that it uploads list to mongodb. Also
 '''
 
 # Query creation and LLM thinking happen simultaniously. Need to separate these two processes
+# Deprecated DO NOT USE/READ
 def PassLLMThink_Old(llm_model, user_question, conv_id, db_chat = [], json_document = None):
 
     think_list = []

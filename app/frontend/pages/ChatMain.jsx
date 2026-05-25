@@ -432,7 +432,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     <div className = 'cm_infoflex'>
                         <ArrowDownIcon width={16} height={16} style={{transform: 'rotate(-90deg)'}}/> Assignment No. 
                         <div className='cm_infobg'>
-                            {i + 1}
+                            {info[i]['idx']}
                         </div>
                     </div>
                 </div>

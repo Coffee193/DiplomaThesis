@@ -93,7 +93,11 @@ def DeleteChat(request):
     if(chat_del.deleted_count == 1):
         filepath = chatdocumentpath if development != 'true' else 'D:/Downloads/diplomat/actual_work/app/frontend/components/chatdocuments'
         for i in path_del:
+            print(i)
+            print('**DEL**')
             for x in i['paths']:
+                print(x)
+                print('--del--')
                 if(os.path.exists(filepath + '/' + x)):
                     os.remove(filepath + '/' + x)
         return CreateResponseNewAccess(valjwt[1], 'Chat successfully deleted', 200)

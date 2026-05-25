@@ -1,6 +1,7 @@
 from ollama import chat
 import json
 import os
+import datetime
 
 from LLM_prompts.Chain1 import GibberishClassifier
 from LLM_prompts.UnexpectedException import ExceptionHandler
@@ -123,6 +124,7 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
 
     ### Chain 2: High Level Classifier (Tasks, Jobs, Resources, TaskSuitableResources, TaskPrepost) ###
     ''' Classifies if user asks about: Jobs, Resources, Tasks, Tasksuitableresources, Taskprecedenceconstraints'''
+    output_specific = False
     answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': HighLevelClassifier.getPrompt(user_question)}]).message.content) # Word-based search
     print('--Chain 2--')
     print(answer)
@@ -145,7 +147,8 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
                 search = 'assignment'
 
             if(len(words) != 0):
-                return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': None, 'wanted_return': None, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None}
+                output_specific = True
+                #return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': None, 'wanted_return': None, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None, 'complex': None, 'complex_utils': {}}
             else:
                 # NOT asking about Jobs, Tasks, etc.. So a general, non-json question
                 return {'response_msg': chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document, conv_id), stream = True), 'think': think_list, 'end': 'success_unfinished'}
@@ -176,7 +179,7 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
                 return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
     
         # Ouput JSON questions (or Multi File)
-        multijson = None
+        complex = None
         if(search == 'jobs' or search == 'tasks' or search == 'tasksuitableresources'):
             answer = chat(llm_model, messages = [{'role': 'user', 'content': InputMultiOuputJSONClassifier.getPrompt(user_question)}]).message.content
             answer = json.loads(LLMOutClean(answer))
@@ -185,16 +188,17 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
             print('haduken--')
             words = answer['words']
             if(len(words) != 0):
-                multijson = words
+                complex = words
 
-        duration_extremum = None
-        if(multijson != None and 'duration' in multijson):
+        complex_utils = {}
+        if(complex != None and 'duration' in complex):
             answer = chat(llm_model, messages = [{'role': 'user', 'content': InputMultiOutputJSONDurationLongestShortestClassifier.getPrompt(user_question)}]).message.content
             answer = json.loads(LLMOutClean(answer))
             think_list.append({'chain': '2_durationExtremum', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
             duration_extremum = answer['pick']
             if duration_extremum == 'None':
                 duration_extremum = None
+            complex_utils = {'duration_extremum': duration_extremum}
 
     except:
         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
@@ -211,6 +215,10 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
     ### Get File If None Provided End ###
     print('--Get File If None--')
     print(json_document)
+
+    if output_specific == True:
+        return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': None, 'wanted_return': None, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None, 'complex': complex, 'complex_utils': complex_utils}
+
     ### Chain 3: Retrieval Classifier ###
     ''' Classifies if user filters based on some specific attribute. Example: 'Get all tasks with id _578' -> finds 'id' and _578'''
     if(search == 'resources'):
@@ -237,7 +245,8 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error', 'search': search}
 
     answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content)
-    
+    print('&&&&&[]>')
+    print(answer)
     # JSON Retrieve Information #
     try:
         retrieve_info = json.loads(answer)
@@ -254,38 +263,43 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
     print(retrieve_info)
     ### Chain 4: Wanted Returned Value Classifier ###
     ''' Classifies what value the user wants returned. Example: 'Return the ids of all tasks named ROLLING' -> finds ids'''
-    if(search == 'jobs'):
-        prompt = JobAttributeReturnClassifier.getPrompt(user_question)
-    elif(search == 'tasks'):
-        prompt = TaskAttributeReturnClassifier.getPrompt(user_question)
-    elif(search == 'resources'):
-        prompt = ResourceAttributeReturnClassifier.getPrompt(user_question)
-    elif(search == 'tasksuitableresources'):
-        if(retrieve_info['attribute'] == True):
-            if(retrieve_info['search']['info'] == 'resource'):
-                prompt = TasksuitableresourceAttributeReturnResourceClassifier.getPrompt(user_question)
-            elif(retrieve_info['search']['info'] == 'task'):
-                prompt = TasksuitableresourceAttributeReturnTaskClassifier.getPrompt(user_question)
+    skip_chain4 = (complex is not None and ('start' in complex or 'end' in complex))
 
-    wanted_return = None
-    if(search != 'tasksprecedenceconstraints'):
-        answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content)
+    if skip_chain4:
+        wanted_return = None
+    else:
+        if(search == 'jobs'):
+            prompt = JobAttributeReturnClassifier.getPrompt(user_question)
+        elif(search == 'tasks'):
+            prompt = TaskAttributeReturnClassifier.getPrompt(user_question)
+        elif(search == 'resources'):
+            prompt = ResourceAttributeReturnClassifier.getPrompt(user_question)
+        elif(search == 'tasksuitableresources'):
+            if(retrieve_info['attribute'] == True):
+                if(retrieve_info['search']['info'] == 'resource'):
+                    prompt = TasksuitableresourceAttributeReturnResourceClassifier.getPrompt(user_question)
+                elif(retrieve_info['search']['info'] == 'task'):
+                    prompt = TasksuitableresourceAttributeReturnTaskClassifier.getPrompt(user_question)
 
-    if(search != 'tasksprecedenceconstraints'):
-        try:
-            wanted_return = json.loads(answer)
-            think_list.append({'chain': '4', 'think': wanted_return['think'] if 'think' in wanted_return else 'Exception No Thinking Return from LLM'})
-        except:
-            wanted_return = None
+        wanted_return = None
+        if(search != 'tasksprecedenceconstraints'):
+            answer = LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': prompt}]).message.content)
 
-        if wanted_return == None or 'attribute' not in wanted_return:
-            return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error', 'search': search, 'retrieve_info': retrieve_info}
+        if(search != 'tasksprecedenceconstraints'):
+            try:
+                wanted_return = json.loads(answer)
+                think_list.append({'chain': '4', 'think': wanted_return['think'] if 'think' in wanted_return else 'Exception No Thinking Return from LLM'})
+            except:
+                wanted_return = None
+
+            if wanted_return == None or 'attribute' not in wanted_return:
+                return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error', 'search': search, 'retrieve_info': retrieve_info}
     ### Chain 4 End ###
     print('Chain 4 Finished')
     print(answer)
-    return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': retrieve_info, 'wanted_return': wanted_return, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None if search != 'tasksprecedenceconstraints' else taskprecedenceconstraints_pick, 'multijson': multijson, 'duration_extremum': duration_extremum}
+    return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': retrieve_info, 'wanted_return': wanted_return, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None if search != 'tasksprecedenceconstraints' else taskprecedenceconstraints_pick, 'complex': complex, 'complex_utils': complex_utils}
 
-def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, wanted_return, multijson = None, duration_extremum = None):
+def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, wanted_return, complex = None, complex_utils = {}):
     fetched_list = []
     for doc in json_documents:
         json_name = doc['name'].lower()
@@ -294,13 +308,13 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
         has_output = 'output' in json_name
 
         if has_input and not has_output:
-            if(multijson != None and duration_extremum != None):
-                fetched_list.append(LLMGetFinalQueryInputMultiJSON(conv_id, search, doc, multijson, duration_extremum))
+            if(complex != None and (complex_utils != {} or 'start' in complex or 'end' in complex)):
+                fetched_list.append(LLMGetFinalQueryInputMultiJSON(conv_id, search, doc, complex, complex_utils))
             else:
                 fetched_list.append(LLMGetFinalQueryInputJSON(conv_id, search, doc, retrieve_info, llm_model, wanted_return))
         elif has_output and not has_input:
-            if(multijson != None):
-                fetched_list.append(LLMGetFinalQueryOutputMultiJSON(conv_id, search, doc, multijson, duration_extremum))
+            if(complex != None):
+                fetched_list.append(LLMGetFinalQueryOutputMultiJSON(conv_id, search, doc, complex, complex_utils, retrieve_info))
             else:
                 fetched_list.append(LLMGetFinalQueryOutputJSON(conv_id, search, doc))
         else:
@@ -308,7 +322,7 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
 
     return fetched_list
 
-def LLMGetFinalQueryOutputMultiJSON(conv_id, search, json_document, multijson, duration_extremum = None):
+def LLMGetFinalQueryOutputMultiJSON(conv_id, search, json_document, complex, complex_utils = {}, retrieve_info = None):
     ### Get JSON Data ###
     ''' Retrieves the JSON data '''
     with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(json_document['id']) + '.' + json_document['name'].split('.')[-1], encoding = 'utf-8') as file:
@@ -316,14 +330,47 @@ def LLMGetFinalQueryOutputMultiJSON(conv_id, search, json_document, multijson, d
         json_data = json.loads(json_data)
     ### Get JSON Data End ###
 
-    if(search == 'tasksuitableresources' and 'duration' in multijson):
+    if(search == 'tasksuitableresources' and 'duration' in complex):
         query = [{'task': q['task']['id'], 'durationinmilliseconds': q['durationinmilliseconds'], 'idx': i + 1} for i, q in enumerate(json_data['assignments']['assignment'])]
-        if(duration_extremum == 'A' and len(query) > 0):
+        if(complex_utils.get('duration_extremum') == 'A' and len(query) > 0):
             query = [max(query, key = lambda x: x['durationinmilliseconds'])]
-        elif(duration_extremum == 'B' and len(query) > 0):
+        elif(complex_utils.get('duration_extremum') == 'B' and len(query) > 0):
             query = [min(query, key = lambda x: x['durationinmilliseconds'])]
+
+    elif(search == 'tasksuitableresources' and 'start' in complex and 'end' in complex):
+        query = []
+        for i, q in enumerate(json_data['assignments']['assignment']):
+            start_dt = datetime.datetime(q['timeofdispatch']['year'], q['timeofdispatch']['month'], q['timeofdispatch']['day'], q['timeofdispatch']['hour'], q['timeofdispatch']['minutes'], q['timeofdispatch']['seconds'])
+            end_dt = start_dt + datetime.timedelta(milliseconds=q['durationinmilliseconds'])
+            query.append({
+                'task': q['task']['id'],
+                'dispatch_start': {'year': start_dt.year, 'month': start_dt.month, 'day': start_dt.day, 'hour': start_dt.hour, 'minute': start_dt.minute, 'second': start_dt.second},
+                'dispatch_end': {'year': end_dt.year, 'month': end_dt.month, 'day': end_dt.day, 'hour': end_dt.hour, 'minute': end_dt.minute, 'second': end_dt.second},
+                'idx': i + 1
+            })
+
+    elif(search == 'tasksuitableresources' and 'start' in complex):
+        query = [{'task': q['task']['id'], 'dispatch_start': {'year': q['timeofdispatch']['year'], 'month': q['timeofdispatch']['month'], 'day': q['timeofdispatch']['day'], 'hour': q['timeofdispatch']['hour'], 'minute': q['timeofdispatch']['minutes'], 'second': q['timeofdispatch']['seconds']}, 'idx': i + 1} for i, q in enumerate(json_data['assignments']['assignment'])]
+
+    elif(search == 'tasksuitableresources' and 'end' in complex):
+        query = []
+        for i, q in enumerate(json_data['assignments']['assignment']):
+            start_dt = datetime.datetime(q['timeofdispatch']['year'], q['timeofdispatch']['month'], q['timeofdispatch']['day'], q['timeofdispatch']['hour'], q['timeofdispatch']['minutes'], q['timeofdispatch']['seconds'])
+            end_dt = start_dt + datetime.timedelta(milliseconds=q['durationinmilliseconds'])
+            query.append({
+                'task': q['task']['id'],
+                'dispatch_end': {'year': end_dt.year, 'month': end_dt.month, 'day': end_dt.day, 'hour': end_dt.hour, 'minute': end_dt.minute, 'second': end_dt.second},
+                'idx': i + 1
+            })
+
     else:
         query = []
+
+    if ('start' in complex or 'end' in complex) and retrieve_info is not None and retrieve_info.get('attribute') == True:
+        know = retrieve_info.get('know', {})
+        if know.get('info') == 'task' and know.get('key') == 'id':
+            target_id = IntToStrWithSlabInfornt(know['value'])
+            query = [q for q in query if q['task'] == target_id]
 
     return {"query": query, "json_data": json_data, "doc": json_document}
 
@@ -367,22 +414,22 @@ def LLMGetFinalQueryOutputJSON(conv_id, search, json_document):
 
     return {"query": query, "json_data": json_data, "doc": json_document}
 
-def LLMGetFinalQueryInputMultiJSON(conv_id, search, json_document, multijson, duration_extremum = None):
+def LLMGetFinalQueryInputMultiJSON(conv_id, search, json_document, complex, complex_utils = {}):
     print('??//??')
-    print(multijson)
-    print(duration_extremum)
-    print(type(duration_extremum))
+    print(complex)
+    print(complex_utils)
+    print(type(complex_utils))
     ### Get JSON Data ###
     with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(json_document['id']) + '.' + json_document['name'].split('.')[-1], encoding = 'utf-8') as file:
         json_data = file.read()
         json_data = json.loads(json_data)
     ### Get JSON Data End ###
 
-    if(search == 'tasksuitableresources' and 'duration' in multijson):
+    if(search == 'tasksuitableresources' and 'duration' in complex):
         raw = json_data['tasksuitableresources']['tasksuitableresource']
-        if(duration_extremum == 'A' and len(raw) > 0):
+        if(complex_utils.get('duration_extremum') == 'A' and len(raw) > 0):
             pick = max(raw, key = lambda x: x['operationtimeperbatchinseconds'])
-        elif(duration_extremum == 'B' and len(raw) > 0):
+        elif(complex_utils.get('duration_extremum') == 'B' and len(raw) > 0):
             pick = min(raw, key = lambda x: x['operationtimeperbatchinseconds'])
         else:
             pick = None
@@ -764,7 +811,7 @@ def PassLLMThinkCompletePipeline(llm_model, user_question, conv_id, db_chat = []
     if(llm_res['end'] != 'success_complete'):
         return [llm_res['response_msg'], llm_res['think'], None, None if 'search' not in llm_res else llm_res['search']]
     else:
-        fetched_results = LLMGetFinalQuery(conv_id, llm_res['search'], llm_res['json_documents'], llm_res['retrieve_info'], llm_model, llm_res['wanted_return'], llm_res['multijson'], llm_res.get('duration_extremum'))
+        fetched_results = LLMGetFinalQuery(conv_id, llm_res['search'], llm_res['json_documents'], llm_res['retrieve_info'], llm_model, llm_res['wanted_return'], llm_res['complex'], llm_res['complex_utils'])
     print('ooii')
     #print(fetched_results)
     return PassLLMFinalAnswer(llm_res['json_documents'], llm_res['search'], user_question, [fr["query"] for fr in fetched_results], llm_res['retrieve_info'], [fr["json_data"] for fr in fetched_results], llm_model, llm_res['think'], llm_res['taskprecedenceconstraints_pick'])

@@ -91,7 +91,10 @@ Input: "What tasks can i execute after completing task 13?"
 Output: { "words": ["task"], "think": "<Your thinking process>" }
 --------------
 Input: "Return all task dependencies"
-Output: { "words": ["task"], "think": "<Your thinking process>" }"""
+Output: { "words": ["task"], "think": "<Your thinking process>" }
+--------------
+Input: "Return all assignments"
+Output: { "words": [], "think": "<Your thinking process>" }"""
 
     prompt += f"""
 

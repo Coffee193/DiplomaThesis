@@ -122,14 +122,16 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             }
             console.log('ppp')
                 console.log(documents)
-            /*if(documents === undefined){
-                documents = cmlastdocRef.current
-            }*/
+            
+            let docs_contain_output = false
+            if(documents.some(item => /output/i.test(item.name))){
+                    docs_contain_output = true
+            }
             for(let i=1; i<data.length; i++){
                 if(data[i] === "(DATA)"){
                     data[i] =
                     <div className='cm_infoboxholder'>
-                        <div className = {(Object.keys(info[0]).length === 0 || Object.keys(info[0][0]).length > 2) && (search === 'jobs' || search === 'tasksuitableresources') ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
+                        <div className = {(Object.keys(info[0]).length === 0 || Object.keys(info[0][0]).length > 2) && (search === 'jobs' || (search === 'tasksuitableresources' && docs_contain_output === false)) ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
                             {info.length === 1 ? CreateBlock(info[0], search, documents[0]['name']) : CreateMultiBlock(info, search, documents)}
                         </div>
                     </div> 
@@ -448,8 +450,16 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     big_text = 'Resource ID: '
                     small_text = info[i][key]
                 }
-                else if(key === 'dispatch'){
-                    big_text = 'Dispatch Time: '
+                else if(key.includes('dispatch') === true){
+                    if(key === 'dispatch_start'){
+                        big_text = 'Start Time: '
+                    }
+                    else if(key === 'dispatch_end'){
+                        big_text = 'End Time: '
+                    }
+                    else{
+                        big_text = 'Dispatch Time: '
+                    }
                     small_text = BlockDateToStr(info[i][key], true, true)
                 }
                 else if(key === 'durationinmilliseconds'){

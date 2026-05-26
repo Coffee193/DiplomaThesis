@@ -187,7 +187,7 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
             think_list.append({'chain': '2_multiJSON', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
             print(answer)
             print('haduken--')
-            words = answer['words']
+            words = ['duration' if w == 'production' else w for w in answer['words']]
             if(len(words) != 0):
                 complex = words
 
@@ -467,6 +467,17 @@ def LLMGetFinalQueryInputMultiJSON(conv_id, search, json_document, complex, comp
             task_id = pick['taskreference']['refid']
             task_name = [t['name'] for t in json_data['tasks']['task'] if t['id'] == task_id][0]
             query = [{'resource': {'id': res_id, 'name': res_name}, 'tasks': [{'id': task_id, 'operation_time': pick['operationtimeperbatchinseconds'], 'name': task_name}]}]
+        elif len(raw) > 0:
+            groups = {}
+            for entry in raw:
+                res_id = entry['resourcereference']['refid']
+                if res_id not in groups:
+                    res_name = [r['name'] for r in json_data['resources']['resource'] if r['id'] == res_id][0]
+                    groups[res_id] = {'resource': {'id': res_id, 'name': res_name}, 'tasks': []}
+                task_id = entry['taskreference']['refid']
+                task_name = [t['name'] for t in json_data['tasks']['task'] if t['id'] == task_id][0]
+                groups[res_id]['tasks'].append({'id': task_id, 'operation_time': entry['operationtimeperbatchinseconds'], 'name': task_name})
+            query = list(groups.values())
         else:
             query = []
     else:

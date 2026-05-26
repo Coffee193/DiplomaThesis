@@ -1,0 +1,39 @@
+Now we'll focus on 'jobs'. I want to answer questions like: "Which job has the longest duration", "Return all job durations", "Return the jobs with minimum durations"
+
+This has already been done for the keyword 'tasks'. However in the case of 'jobs' things are more complicated. In Input json files, in jobs->job->jobtaskreference you can view which tasks a job consists of. You must use that info and from that basically add the duration times of all the corresponding tasks. Then you have a list oif jobs with their duration times. If the user asks for longest/shortest u can use similar code to tasks to narrow down the list.
+
+
+
+BEFORE THAT::
+WHEN ASKING ABOUT DURATION, INPUT FILE SHOULD HAVE DATA
+Currently: 'Return all task durations' -> Input file has NO DATA
+
+=======================
+
+Now we'll focus on 'jobs'. I want to answer questions like: "Which job has the longest duration", "Return all job durations", "Return the jobs with minimum durations"
+
+This has already been done for the keyword 'tasks'. However in the case of 'jobs' things are more complicated. 
+In Input json files, in jobs->job->jobtaskreference you can view which tasks a job consists of. You must use that info and from that basically add the duration times of all the corresponding tasks. Then you have a list oif jobs with their duration times. If the user asks for longest/shortest u can use similar code to tasks to narrow down the list.
+The returned query should be of the form:
+query = [{'name': <name of the job>, 'id': <id of the job>, 'task': [<id of task 1 that belongs to job>, <id of task 2..>, ...], 'duration': <the combined duration of all tasks in seconds>}, ...]
+- You can look at the return query of questions like: Return all jobs to get an idea -
+
+If the user has also Output files, you need to get some data from Inpu files necessarily. Specifically you get what task belongs to each job from the Input files uploaded.Also you'll get the name and the ids of the jobs.
+Then from the Output files find the corresponding tasks and their durationinmilliseconds, then convert it to seconds. Note: that in the output files the id values have one more '_'. Also from the output files get the assignment number. NOTE 2: there is no assignment number directly in the Output file but it is calculated index based (idx=1 for the first element, idx=2 for ther second) * look at line 349 to get an idea *.
+The return value should be:
+query = [{'name': <name of the job>, 'id': <id of the job>, 'task': [<id of task 1 that belongs to job>, <id of task 2..>, ...], 'duration': <the combined duration of all tasks in seconds>, assignments: [<id of assignment 1> , ...]}, ...]
+
+If the User has uploaded NO Input file OR multiple Input files return (put a comment in return there - we'll tackle this another time).
+
+If in some an output file, NOT ALL tasks ids of a job are found, the corresponding key 'task' should be empty -> 'task': [] AND duration should be NONE and assignments empty
+
+=== NO ABOVE ===
+
+Essentially, we'll only look at Input Files to create job durations
+If the appropriate Output File is also provided then in the dictionary of each job we'll also add: 'assignements'.
+Note the matching will happen on the following name criteria: ...InputJSON_1... -> ...OutputJSON_1...
+
+This will match with all files named: OutputJSON_1_1, OutputJSON_1_2 etc...
+
+also when returning the query dict -> i: {q: [[]]}, we'll also need to return another entiny called: do -> document_overwrite which will essentially tell the frontend:
+We will handle the document names creation in InfoBlock. and it will be a list like: [ ['Input_1_1', 'Output_1_1'], ['Input_1_1', 'Output_1_2'], ...]

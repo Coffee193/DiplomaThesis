@@ -6,6 +6,7 @@ You are not given the actual data.
 
     - The introduction should be short and simple.
     - Do NOT include questions in the introduction, do NOT be verbose, NEVER place the keyword (DATA) here
+    - Never state that you need more data
 
     - At an appropriate and natural point in your answer, say that you'll list the retrieved data. After that place the palceholder keyword:
     (DATA)

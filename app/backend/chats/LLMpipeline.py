@@ -5,7 +5,8 @@ import datetime
 
 from LLM_prompts.Chain1 import GibberishClassifier
 from LLM_prompts.UnexpectedException import ExceptionHandler
-from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, HighLevelOutputJSONClassifier, InputMultiOuputJSONClassifier, InputMultiOutputJSONDurationLongestShortestClassifier
+from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, HighLevelOutputJSONClassifier, InputMultiOuputJSONClassifier, InputMultiOutputJSONDurationLongestShortestClassifier, InputMultiOutputJSONCompleteDateExtractor
+from LLM_prompts.InvalidDate import InvalidCompleteDateResponse
 from LLM_prompts.Chain3 import ResourceAttributeRetriever, JobAttributeRetriever, TaskAttributeRetriever, TasksuitableresourceAttributeRetriever, TaskprecedencecontraintOrderDependenceClassifier, TaskprecedenceconstraintDependenceAttributeRetriever, TaskprecedenceconstraintOrderAttributeRetriever
 from LLM_prompts import StringToDateMonthForm
 from LLM_prompts.Chain4 import JobAttributeReturnClassifier, TaskAttributeReturnClassifier, ResourceAttributeReturnClassifier, TasksuitableresourceAttributeReturnResourceClassifier, TasksuitableresourceAttributeReturnTaskClassifier
@@ -200,6 +201,20 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
                 duration_extremum = None
             complex_utils = {'duration_extremum': duration_extremum}
 
+        if(complex != None and 'complete' in complex):
+            answer = chat(llm_model, messages = [{'role': 'user', 'content': InputMultiOutputJSONCompleteDateExtractor.getPrompt(user_question)}]).message.content
+            answer = json.loads(LLMOutClean(answer))
+            think_list.append({'chain': '2_completeDateExtract', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
+            date_str = answer['date']
+            if(date_str != ''):
+                complete_by = json.loads(LLMOutClean(chat(llm_model, messages = [{'role': 'user', 'content': StringToDateMonthForm.getPrompt(date_str)}]).message.content))
+                think_list.append({'chain': '2_completeDateConvert', 'think': str(complete_by)})
+                complex_utils['complete_by'] = complete_by
+                try:
+                    datetime.datetime(2001, complete_by['month'], complete_by['day'])
+                except (ValueError, KeyError):
+                    return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': InvalidCompleteDateResponse.getPrompt(user_question, date_str)}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
+
     except:
         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
     ### Chain 2 End ###
@@ -263,7 +278,7 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
     print(retrieve_info)
     ### Chain 4: Wanted Returned Value Classifier ###
     ''' Classifies what value the user wants returned. Example: 'Return the ids of all tasks named ROLLING' -> finds ids'''
-    skip_chain4 = (complex is not None and ('start' in complex or 'end' in complex))
+    skip_chain4 = (complex is not None and ('start' in complex or 'end' in complex or 'complete' in complex))
 
     if skip_chain4:
         wanted_return = None
@@ -308,7 +323,7 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
         has_output = 'output' in json_name
 
         if has_input and not has_output:
-            if(complex != None and (complex_utils != {} or 'start' in complex or 'end' in complex)):
+            if(complex != None and (complex_utils != {} or 'start' in complex or 'end' in complex or 'complete' in complex)):
                 fetched_list.append(LLMGetFinalQueryInputMultiJSON(conv_id, search, doc, complex, complex_utils))
             else:
                 fetched_list.append(LLMGetFinalQueryInputJSON(conv_id, search, doc, retrieve_info, llm_model, wanted_return))
@@ -348,10 +363,8 @@ def LLMGetFinalQueryOutputMultiJSON(conv_id, search, json_document, complex, com
                 'dispatch_end': {'year': end_dt.year, 'month': end_dt.month, 'day': end_dt.day, 'hour': end_dt.hour, 'minute': end_dt.minute, 'second': end_dt.second},
                 'idx': i + 1
             })
-
     elif(search == 'tasksuitableresources' and 'start' in complex):
         query = [{'task': q['task']['id'], 'dispatch_start': {'year': q['timeofdispatch']['year'], 'month': q['timeofdispatch']['month'], 'day': q['timeofdispatch']['day'], 'hour': q['timeofdispatch']['hour'], 'minute': q['timeofdispatch']['minutes'], 'second': q['timeofdispatch']['seconds']}, 'idx': i + 1} for i, q in enumerate(json_data['assignments']['assignment'])]
-
     elif(search == 'tasksuitableresources' and 'end' in complex):
         query = []
         for i, q in enumerate(json_data['assignments']['assignment']):
@@ -362,6 +375,20 @@ def LLMGetFinalQueryOutputMultiJSON(conv_id, search, json_document, complex, com
                 'dispatch_end': {'year': end_dt.year, 'month': end_dt.month, 'day': end_dt.day, 'hour': end_dt.hour, 'minute': end_dt.minute, 'second': end_dt.second},
                 'idx': i + 1
             })
+
+    elif(search == 'tasksuitableresources' and 'complete' in complex and 'complete_by' in complex_utils):
+        query = []
+        complete_by = complex_utils['complete_by']
+        for i, q in enumerate(json_data['assignments']['assignment']):
+            start_dt = datetime.datetime(q['timeofdispatch']['year'], q['timeofdispatch']['month'], q['timeofdispatch']['day'], q['timeofdispatch']['hour'], q['timeofdispatch']['minutes'], q['timeofdispatch']['seconds'])
+            end_dt = start_dt + datetime.timedelta(milliseconds=q['durationinmilliseconds'])
+            deadline = datetime.datetime(end_dt.year, complete_by['month'], complete_by['day'])
+            if end_dt <= deadline:
+                query.append({
+                    'task': q['task']['id'],
+                    'dispatch_end': {'year': end_dt.year, 'month': end_dt.month, 'day': end_dt.day, 'hour': end_dt.hour, 'minute': end_dt.minute, 'second': end_dt.second},
+                    'idx': i + 1
+                })
 
     else:
         query = []

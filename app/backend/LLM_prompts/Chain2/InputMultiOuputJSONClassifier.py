@@ -6,6 +6,8 @@ def getPrompt(user_question):
 - end
 - duration
 - production
+- finish
+- done
 
 Critical Instruction:
 
@@ -68,7 +70,13 @@ Input: "when did job 25 start"
 Output: { "words": ["start"], "think": "<Your thinking process>" }
 --------------
 Input: "How much time did job 59 spend in production?"
-Output: { "words": ["production"], "think": "<Your thinking process>" }"""
+Output: { "words": ["production"], "think": "<Your thinking process>" }
+---------------
+Input: "How many jobs are done before march 15?"
+Output: { "words": ["done"], "think": "<Your thinking process>" }
+---------------
+Input: "By 28-2 how many tasks will finish?"
+Output: { "words": ["finish"], "think": "<Your thinking process>" }"""
 
     prompt += f"""
 

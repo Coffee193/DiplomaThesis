@@ -1,12 +1,14 @@
 from ollama import chat
 import json
 import os
+import re
 import datetime
 
 from LLM_prompts.Chain1 import GibberishClassifier
 from LLM_prompts.UnexpectedException import ExceptionHandler
 from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, HighLevelOutputJSONClassifier, InputMultiOuputJSONClassifier, InputMultiOutputJSONDurationLongestShortestClassifier, InputMultiOutputJSONCompleteDateExtractor
 from LLM_prompts.InvalidDate import InvalidCompleteDateResponse
+from LLM_prompts.JobDuration import JobDurationNoInputFile
 from LLM_prompts.Chain3 import ResourceAttributeRetriever, JobAttributeRetriever, TaskAttributeRetriever, TasksuitableresourceAttributeRetriever, TaskprecedencecontraintOrderDependenceClassifier, TaskprecedenceconstraintDependenceAttributeRetriever, TaskprecedenceconstraintOrderAttributeRetriever
 from LLM_prompts import StringToDateMonthForm
 from LLM_prompts.Chain4 import JobAttributeReturnClassifier, TaskAttributeReturnClassifier, ResourceAttributeReturnClassifier, TasksuitableresourceAttributeReturnResourceClassifier, TasksuitableresourceAttributeReturnTaskClassifier
@@ -215,6 +217,11 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
                 except (ValueError, KeyError):
                     return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': InvalidCompleteDateResponse.getPrompt(user_question, date_str)}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
 
+        if search == 'jobs' and complex is not None and 'duration' in complex:
+            has_input = any('input' in doc['name'].lower() for doc in json_document)
+            if not has_input:
+                return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': JobDurationNoInputFile.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
+
     except:
         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
     ### Chain 2 End ###
@@ -314,7 +321,38 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
     print(answer)
     return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': retrieve_info, 'wanted_return': wanted_return, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None if search != 'tasksprecedenceconstraints' else taskprecedenceconstraints_pick, 'complex': complex, 'complex_utils': complex_utils}
 
+def BuildDocNames(json_documents):
+    input_docs = []
+    output_docs = []
+    for doc in json_documents:
+        name_lower = doc['name'].lower()
+        if 'input' in name_lower and 'output' not in name_lower:
+            input_docs.append(doc)
+        elif 'output' in name_lower and 'input' not in name_lower:
+            output_docs.append(doc)
+
+    doc_names = []
+    for inp in input_docs:
+        inp_base = inp['name'].rsplit('.', 1)[0]
+        inp_suffix = re.sub(r'(?i)input', '', inp_base, count=1)
+        matched = False
+        for out in output_docs:
+            out_base = out['name'].rsplit('.', 1)[0]
+            out_suffix = re.sub(r'(?i)output', '', out_base, count=1)
+            if out_suffix.lower().startswith(inp_suffix.lower()):
+                doc_names.append([inp['name'], out['name']])
+                matched = True
+        if not matched:
+            doc_names.append([inp['name']])
+
+    return doc_names
+
 def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, wanted_return, complex = None, complex_utils = {}):
+    if search == 'jobs' and complex is not None and 'duration' in complex:
+        doc_names = BuildDocNames(json_documents)
+        doc_by_name = {doc['name']: doc for doc in json_documents}
+        return LLMGetFinalQueryJobDuration(conv_id, doc_names, doc_by_name, complex_utils)
+
     fetched_list = []
     for doc in json_documents:
         json_name = doc['name'].lower()
@@ -484,6 +522,94 @@ def LLMGetFinalQueryInputMultiJSON(conv_id, search, json_document, complex, comp
         query = []
 
     return {"query": query, "json_data": json_data, "doc": json_document}
+
+def LLMGetFinalQueryJobDuration(conv_id, doc_names, doc_by_name, complex_utils):
+    results = []
+
+    for group in doc_names:
+        input_name = group[0]
+        input_doc = doc_by_name[input_name]
+
+        with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(input_doc['id']) + '.' + input_doc['name'].split('.')[-1], encoding='utf-8') as file:
+            input_data = json.loads(file.read())
+
+        jobs = input_data['jobs']['job']
+        tsr = input_data['tasksuitableresources']['tasksuitableresource']
+        group_query = []
+
+        if len(group) == 1:
+            for job in jobs:
+                task_refs = [t['refid'] for t in job['jobtaskreference']]
+                total_duration = 0
+                for task_ref in task_refs:
+                    for entry in tsr:
+                        if entry['taskreference']['refid'] == task_ref:
+                            total_duration += entry['operationtimeperbatchinseconds']
+                            break
+                group_query.append({
+                    'name': job['name'],
+                    'id': job['id'],
+                    'task': task_refs,
+                    'duration': total_duration
+                })
+        else:
+            output_name = group[1]
+            output_doc = doc_by_name[output_name]
+
+            with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(output_doc['id']) + '.' + output_doc['name'].split('.')[-1], encoding='utf-8') as file:
+                output_data = json.loads(file.read())
+
+            assignments = output_data['assignments']['assignment']
+
+            for job in jobs:
+                task_refs = [t['refid'] for t in job['jobtaskreference']]
+                output_task_ids = ['_' + ref for ref in task_refs]
+
+                total_duration = 0
+                assignment_indices = []
+                all_found = True
+
+                for otid in output_task_ids:
+                    found = False
+                    for i, a in enumerate(assignments):
+                        if a['task']['id'] == otid:
+                            total_duration += a['durationinmilliseconds'] / 1000
+                            assignment_indices.append(i + 1)
+                            found = True
+                            break
+                    if not found:
+                        all_found = False
+                        break
+
+                if all_found:
+                    group_query.append({
+                        'name': job['name'],
+                        'id': job['id'],
+                        'task': task_refs,
+                        'duration': total_duration,
+                        'assignments': assignment_indices
+                    })
+                else:
+                    group_query.append({
+                        'name': job['name'],
+                        'id': job['id'],
+                        'task': [],
+                        'duration': None,
+                        'assignments': []
+                    })
+
+        if complex_utils.get('duration_extremum') == 'A':
+            valid = [q for q in group_query if q['duration'] is not None]
+            if valid:
+                group_query = [max(valid, key=lambda x: x['duration'])]
+        elif complex_utils.get('duration_extremum') == 'B':
+            valid = [q for q in group_query if q['duration'] is not None]
+            if valid:
+                group_query = [min(valid, key=lambda x: x['duration'])]
+
+        results.append({"query": group_query, "doc_fuse": group, "json_data": []})
+
+    return results
 
 def LLMGetFinalQueryInputJSON(conv_id, search, json_document, retrieve_info, llm_model, wanted_return):
 
@@ -847,12 +973,15 @@ def PassLLMThinkCompletePipeline(llm_model, user_question, conv_id, db_chat = []
     
     '''
     if(llm_res['end'] != 'success_complete'):
-        return [llm_res['response_msg'], llm_res['think'], None, None if 'search' not in llm_res else llm_res['search']]
+        return [llm_res['response_msg'], llm_res['think'], None, None if 'search' not in llm_res else llm_res['search'], None]
     else:
         fetched_results = LLMGetFinalQuery(conv_id, llm_res['search'], llm_res['json_documents'], llm_res['retrieve_info'], llm_model, llm_res['wanted_return'], llm_res['complex'], llm_res['complex_utils'])
+        doc_fuse = [fr["doc_fuse"] for fr in fetched_results] if any("doc_fuse" in fr for fr in fetched_results) else None
     print('ooii')
     #print(fetched_results)
-    return PassLLMFinalAnswer(llm_res['json_documents'], llm_res['search'], user_question, [fr["query"] for fr in fetched_results], llm_res['retrieve_info'], [fr["json_data"] for fr in fetched_results], llm_model, llm_res['think'], llm_res['taskprecedenceconstraints_pick'])
+    result = PassLLMFinalAnswer(llm_res['json_documents'], llm_res['search'], user_question, [fr["query"] for fr in fetched_results], llm_res['retrieve_info'], [fr["json_data"] for fr in fetched_results], llm_model, llm_res['think'], llm_res['taskprecedenceconstraints_pick'])
+    result.append(doc_fuse)
+    return result
 
 ''' #!!!###
 YOU NEED TO TEST:

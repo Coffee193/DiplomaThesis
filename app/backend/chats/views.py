@@ -635,7 +635,7 @@ def AnswerQuestionLLMThink(db_chat, user_question, chat_id, document_dict = None
     print('vrum vrum')
     print(document_dict)
     #try:
-    llm_answer, think_stages, fetched_items, search = PassLLMThinkCompletePipeline(llm_model, user_question, chat_id, db_chat, document_dict)
+    llm_answer, think_stages, fetched_items, search, doc_fuse = PassLLMThinkCompletePipeline(llm_model, user_question, chat_id, db_chat, document_dict)
     #except:
     #    print('opopop')
     #    redis_client.delete("cg_" + chat_id)
@@ -643,6 +643,8 @@ def AnswerQuestionLLMThink(db_chat, user_question, chat_id, document_dict = None
     print('SKAAAAAAA')
     if(fetched_items != None):
         redis_client.xadd("cs_" + chat_id, {"i": json.dumps({"q": fetched_items, "s": search})}) # i -> items
+    if(doc_fuse != None):
+        redis_client.xadd("cs_" + chat_id, {"cfd": json.dumps(doc_fuse)}) # cfd -> custom fused documents
 
     for chunk in llm_answer:
         
@@ -655,6 +657,8 @@ def AnswerQuestionLLMThink(db_chat, user_question, chat_id, document_dict = None
                 if(fetched_items != None):
                     push_val["i"] = fetched_items
                     push_val["s"] = search
+                if(doc_fuse != None):
+                    push_val["cfd"] = doc_fuse
                 chats.update_one({"_id": int(chat_id)},
                                 {"$push": {"chat": push_val}})
             else:
@@ -664,6 +668,8 @@ def AnswerQuestionLLMThink(db_chat, user_question, chat_id, document_dict = None
                 if(fetched_items != None):
                     push_val['i'] = fetched_items
                     push_val['s'] = search
+                if(doc_fuse != None):
+                    push_val['cfd'] = doc_fuse
                 chats.update_one({"_id": int(chat_id)},
                                 {"$push": {"chat": push_val}})
             return

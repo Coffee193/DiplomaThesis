@@ -1,0 +1,3 @@
+Need to:
+- Compact chat
+- Expose the doc_names to PassLLMFinalAnswer. the returned value of PassLLMFinalAnswer is given back to views, which will then pass it to the MongoDB and pass it to frontend

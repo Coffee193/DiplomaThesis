@@ -37,3 +37,38 @@ This will match with all files named: OutputJSON_1_1, OutputJSON_1_2 etc...
 
 also when returning the query dict -> i: {q: [[]]}, we'll also need to return another entiny called: do -> document_overwrite which will essentially tell the frontend:
 We will handle the document names creation in InfoBlock. and it will be a list like: [ ['Input_1_1', 'Output_1_1'], ['Input_1_1', 'Output_1_2'], ...]
+
+
+
+____________________________________________
+read @summary.md so that you're informed.
+
+Now we'll focus on 'jobs'. I want to answer questions like: "Which job has the longest duration", "Return all job durations", "Return the jobs with minimum durations"
+
+1. Check wether keyword 'jobs' and 'duration' is identified by the Chain before reaching LLMGetFinalQuery, as well as longest/shortest.
+If the User has uploaded NO Input (there is no keyword input in the provided files) file return a prompt telling him that (with 'end': 'success_unfinished')
+
+2. -- at LLMGetFinalQuery --
+When that specification is met: 'jobs' has been found ALONG with 'duration'
+You'll need to iterate over the json_documents and make matches based on names. Specifically you will create a list, doc_names. To better understand what this list will contain ill give examples:
+  i. supposes the names of json_documents are: InputJSONblabla, Input2, jjopia, Outputyy
+     doc_names = [ ['InputJSONblabla'], ['Input2'] ] -> Finds keyword input (case insensitive) and adds it
+  ii. supposes the names of json_documents are: InputJSON_1, Input2, jjopia, Outputyy, OutputJSON_1, OutputJSON_1_2
+     doc_names = [ ['InputJSON_1', 'OutputJSON_1'], ['InputJSON_1', 'OutputJSON_1_2'], ['Input2'] ] -> case-insensitive match of 'inputjson_x' with 'outputjson_x'
+   iii. supposes the names of json_documents are: jjopia, Outputyy, OutputJSON_1, OutputJSON_1_2
+       doc_names = [] -> No input found
+
+3. Now to create the query
+in LLMGetFinalQuery instead of iterating over the json_documents -> iterate over the doc_names
+
+Similar things have already been done for the keyword 'tasks'. However in the case of 'jobs' things are more complicated. 
+In Input json files, in jobs->job->jobtaskreference you can view which tasks a job consists of. You must use that info and from that basically add the duration times of all the corresponding tasks. Then you have a list oif jobs with their duration times. If the user asks for longest/shortest u can use similar code to tasks to narrow down the list.
+The returned query should be of the form:
+query = [{'name': <name of the job>, 'id': <id of the job>, 'task': [<id of task 1 that belongs to job>, <id of task 2..>, ...], 'duration': <the combined duration of all tasks in seconds>}, ...]
+- You can look at the return query of questions like: Return all jobs to get an idea -
+ 
+Now if there is ALSO an Output file, search over the output file to find the 'tasks' of the 'job' and get the corresponding assignment idx, and place it in the query:
+query = [{'name': <name of the job>, 'id': <id of the job>, 'task': [<id of task 1 that belongs to job>, <id of task 2..>, ...], 'duration': <the combined duration of all tasks in seconds>, assignments: [<id of assignment 1> , ...]}, ...]
+Note: that assignments dont have an idx key, instead it is defined in the following manner: first assignment -> idx=1, second assignment -> idx =2
+
+the return value of that process should be: {"query": query, "doc": json_document (these are those uplaoded), "doc_fuse": doc_names}

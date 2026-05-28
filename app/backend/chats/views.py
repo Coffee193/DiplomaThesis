@@ -258,7 +258,7 @@ def GetLLMAnswerStream(chat_id, block_time = 110000, with_title = False):
         done_generated = False
         yield json.dumps({'v': ''}) + "\n" # Must have this so that COOKIES are instanly returned to user
 
-        # t -> title, d -> done, v -> value, u -> uploaded document, i -> info (q -> query, s -> search), e -> error
+        # t -> title, d -> done, v -> value, u -> uploaded document, i -> info (q -> query, s -> search), e -> error, cfd -> custom fused documents
         while True:
             x = redis_client.xread(streams = {stream_id: last_id }, count = None, block = block_time)
 
@@ -289,6 +289,8 @@ def GetLLMAnswerStream(chat_id, block_time = 110000, with_title = False):
                         yield json.dumps({'i': parsed_vals['i']}) + "\n"
                     elif 'u' in parsed_vals:
                         yield json.dumps({'u': parsed_vals['u']}) + "\n"
+                    elif 'cfd' in parsed_vals:
+                        yield json.dumps({'cfd': parsed_vals['cfd']}) + "\n"
 
                     if done_generated and (not with_title or title_generated):
                         return

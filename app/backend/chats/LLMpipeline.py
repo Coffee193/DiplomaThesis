@@ -9,6 +9,8 @@ from LLM_prompts.UnexpectedException import ExceptionHandler
 from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, HighLevelOutputJSONClassifier, InputMultiOuputJSONClassifier, InputMultiOutputJSONDurationLongestShortestClassifier, InputMultiOutputJSONCompleteDateExtractor
 from LLM_prompts.InvalidDate import InvalidCompleteDateResponse
 from LLM_prompts.JobDuration import JobDurationNoInputFile
+from LLM_prompts.JobStartEnd import JobStartEndNoFusedPair
+from LLM_prompts.JobComplete import JobCompleteNoFusedPair
 from LLM_prompts.Chain3 import ResourceAttributeRetriever, JobAttributeRetriever, TaskAttributeRetriever, TasksuitableresourceAttributeRetriever, TaskprecedencecontraintOrderDependenceClassifier, TaskprecedenceconstraintDependenceAttributeRetriever, TaskprecedenceconstraintOrderAttributeRetriever
 from LLM_prompts import StringToDateMonthForm
 from LLM_prompts.Chain4 import JobAttributeReturnClassifier, TaskAttributeReturnClassifier, ResourceAttributeReturnClassifier, TasksuitableresourceAttributeReturnResourceClassifier, TasksuitableresourceAttributeReturnTaskClassifier
@@ -217,11 +219,6 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
                 except (ValueError, KeyError):
                     return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': InvalidCompleteDateResponse.getPrompt(user_question, date_str)}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
 
-        if search == 'jobs' and complex is not None and 'duration' in complex:
-            has_input = any('input' in doc['name'].lower() for doc in json_document)
-            if not has_input:
-                return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': JobDurationNoInputFile.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
-
     except:
         return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'fail_error'}
     ### Chain 2 End ###
@@ -238,8 +235,32 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
     print('--Get File If None--')
     print(json_document)
 
+    ### Chain 2 JobDuration: Check JobDuration QUestion has Both Input AND/OR Output ###
+    if search == 'jobs' and complex is not None and 'duration' in complex:
+        has_input = any('input' in doc['name'].lower() for doc in json_document)
+        if not has_input:
+            return {'response_msg': chat(llm_model, messages = [{'role': 'user', 'content': JobDurationNoInputFile.getPrompt(user_question)}], stream = True), 'think': think_list, 'end': 'success_unfinished'}
+    ### Chain 2 End ###
+
+    ### Chain 2 JobStartEnd: Check JobStartEnd Question has Fused Pair (Input AND Output) ###
+    if search == 'jobs' and complex is not None and ('start' in complex or 'end' in complex):
+        doc_names = BuildDocNames(json_document)
+        has_fused_pair = any(len(group) >= 2 for group in doc_names)
+        if not has_fused_pair:
+            return {'response_msg': chat(llm_model, messages=[{'role': 'user', 'content': JobStartEndNoFusedPair.getPrompt(user_question)}], stream=True), 'think': think_list, 'end': 'success_unfinished'}
+    ### Chain 2 End ###
+
+    ### Chain 2 JobComplete: Check JobComplete Question has Fused Pair (Input AND Output) ###
+    if search == 'jobs' and complex is not None and 'complete' in complex:
+        doc_names = BuildDocNames(json_document)
+        has_fused_pair = any(len(group) >= 2 for group in doc_names)
+        if not has_fused_pair:
+            return {'response_msg': chat(llm_model, messages=[{'role': 'user', 'content': JobCompleteNoFusedPair.getPrompt(user_question)}], stream=True), 'think': think_list, 'end': 'success_unfinished'}
+    ### Chain 2 End ###
+
     if output_specific == True:
         return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': None, 'wanted_return': None, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None, 'complex': complex, 'complex_utils': complex_utils}
+    
 
     ### Chain 3: Retrieval Classifier ###
     ''' Classifies if user filters based on some specific attribute. Example: 'Get all tasks with id _578' -> finds 'id' and _578'''
@@ -352,6 +373,16 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
         doc_names = BuildDocNames(json_documents)
         doc_by_name = {doc['name']: doc for doc in json_documents}
         return LLMGetFinalQueryJobDuration(conv_id, doc_names, doc_by_name, complex_utils)
+
+    if search == 'jobs' and complex is not None and ('start' in complex or 'end' in complex):
+        doc_names = BuildDocNames(json_documents)
+        doc_by_name = {doc['name']: doc for doc in json_documents}
+        return LLMGetFinalQueryJobStartEnd(conv_id, doc_names, doc_by_name, complex, retrieve_info)
+
+    if search == 'jobs' and complex is not None and 'complete' in complex and 'complete_by' in complex_utils:
+        doc_names = BuildDocNames(json_documents)
+        doc_by_name = {doc['name']: doc for doc in json_documents}
+        return LLMGetFinalQueryJobComplete(conv_id, doc_names, doc_by_name, complex_utils, retrieve_info)
 
     fetched_list = []
     for doc in json_documents:
@@ -606,6 +637,178 @@ def LLMGetFinalQueryJobDuration(conv_id, doc_names, doc_by_name, complex_utils):
             valid = [q for q in group_query if q['duration'] is not None]
             if valid:
                 group_query = [min(valid, key=lambda x: x['duration'])]
+
+        results.append({"query": group_query, "doc_fuse": group, "json_data": []})
+
+    return results
+
+def LLMGetFinalQueryJobStartEnd(conv_id, doc_names, doc_by_name, complex, retrieve_info):
+    results = []
+
+    for group in doc_names:
+        if len(group) < 2:
+            continue
+
+        input_name = group[0]
+        output_name = group[1]
+        input_doc = doc_by_name[input_name]
+        output_doc = doc_by_name[output_name]
+
+        with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(input_doc['id']) + '.' + input_doc['name'].split('.')[-1], encoding='utf-8') as file:
+            input_data = json.loads(file.read())
+
+        with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(output_doc['id']) + '.' + output_doc['name'].split('.')[-1], encoding='utf-8') as file:
+            output_data = json.loads(file.read())
+
+        jobs = input_data['jobs']['job']
+        assignments = output_data['assignments']['assignment']
+        group_query = []
+
+        for job in jobs:
+            task_refs = [t['refid'] for t in job['jobtaskreference']]
+            output_task_ids = ['_' + ref for ref in task_refs]
+
+            matching_assignments = []
+            assignment_indices = []
+            all_found = True
+
+            for otid in output_task_ids:
+                found = False
+                for i, a in enumerate(assignments):
+                    if a['task']['id'] == otid:
+                        matching_assignments.append(a)
+                        assignment_indices.append(i + 1)
+                        found = True
+                        break
+                if not found:
+                    all_found = False
+                    break
+
+            if not all_found:
+                group_query.append({
+                    'name': job['name'],
+                    'id': job['id'],
+                    'task': [],
+                    'assignments': []
+                })
+                continue
+
+            job_entry = {
+                'name': job['name'],
+                'id': job['id'],
+                'task': task_refs,
+                'assignments': assignment_indices
+            }
+
+            if 'start' in complex:
+                earliest = None
+                for a in matching_assignments:
+                    tod = a['timeofdispatch']
+                    dt = datetime.datetime(tod['year'], tod['month'], tod['day'], tod['hour'], tod['minutes'], tod['seconds'])
+                    if earliest is None or dt < earliest:
+                        earliest = dt
+                job_entry['dispatch_start'] = {
+                    'year': earliest.year, 'month': earliest.month, 'day': earliest.day,
+                    'hour': earliest.hour, 'minute': earliest.minute, 'second': earliest.second
+                }
+
+            if 'end' in complex:
+                latest = None
+                for a in matching_assignments:
+                    tod = a['timeofdispatch']
+                    start_dt = datetime.datetime(tod['year'], tod['month'], tod['day'], tod['hour'], tod['minutes'], tod['seconds'])
+                    end_dt = start_dt + datetime.timedelta(milliseconds=a['durationinmilliseconds'])
+                    if latest is None or end_dt > latest:
+                        latest = end_dt
+                job_entry['dispatch_end'] = {
+                    'year': latest.year, 'month': latest.month, 'day': latest.day,
+                    'hour': latest.hour, 'minute': latest.minute, 'second': latest.second
+                }
+
+            group_query.append(job_entry)
+
+        if retrieve_info is not None and retrieve_info.get('attribute') == True:
+            if retrieve_info.get('key') == 'id':
+                group_query = [q for q in group_query if q['id'] == IntToStrWithSlabInfornt(retrieve_info['value'])]
+            elif retrieve_info.get('key') == 'name':
+                group_query = [q for q in group_query if q['name'].upper() == retrieve_info['value'].upper()]
+
+        results.append({"query": group_query, "doc_fuse": group, "json_data": []})
+
+    return results
+
+def LLMGetFinalQueryJobComplete(conv_id, doc_names, doc_by_name, complex_utils, retrieve_info):
+    results = []
+    complete_by = complex_utils['complete_by']
+
+    for group in doc_names:
+        if len(group) < 2:
+            continue
+
+        input_name = group[0]
+        output_name = group[1]
+        input_doc = doc_by_name[input_name]
+        output_doc = doc_by_name[output_name]
+
+        with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(input_doc['id']) + '.' + input_doc['name'].split('.')[-1], encoding='utf-8') as file:
+            input_data = json.loads(file.read())
+
+        with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(output_doc['id']) + '.' + output_doc['name'].split('.')[-1], encoding='utf-8') as file:
+            output_data = json.loads(file.read())
+
+        jobs = input_data['jobs']['job']
+        assignments = output_data['assignments']['assignment']
+        group_query = []
+
+        for job in jobs:
+            task_refs = [t['refid'] for t in job['jobtaskreference']]
+            output_task_ids = ['_' + ref for ref in task_refs]
+
+            matching_assignments = []
+            assignment_indices = []
+            all_found = True
+
+            for otid in output_task_ids:
+                found = False
+                for i, a in enumerate(assignments):
+                    if a['task']['id'] == otid:
+                        matching_assignments.append(a)
+                        assignment_indices.append(i + 1)
+                        found = True
+                        break
+                if not found:
+                    all_found = False
+                    break
+
+            if not all_found:
+                continue
+
+            latest = None
+            for a in matching_assignments:
+                tod = a['timeofdispatch']
+                start_dt = datetime.datetime(tod['year'], tod['month'], tod['day'], tod['hour'], tod['minutes'], tod['seconds'])
+                end_dt = start_dt + datetime.timedelta(milliseconds=a['durationinmilliseconds'])
+                if latest is None or end_dt > latest:
+                    latest = end_dt
+
+            deadline = datetime.datetime(latest.year, complete_by['month'], complete_by['day'])
+            if latest <= deadline:
+                group_query.append({
+                    'name': job['name'],
+                    'id': job['id'],
+                    'task': task_refs,
+                    'assignments': assignment_indices,
+                    'dispatch_end': {
+                        'year': latest.year, 'month': latest.month, 'day': latest.day,
+                        'hour': latest.hour, 'minute': latest.minute, 'second': latest.second
+                    }
+                })
+
+        if retrieve_info is not None and retrieve_info.get('attribute') == True:
+            if retrieve_info.get('key') == 'id':
+                group_query = [q for q in group_query if q['id'] == IntToStrWithSlabInfornt(retrieve_info['value'])]
+            elif retrieve_info.get('key') == 'name':
+                group_query = [q for q in group_query if q['name'].upper() == retrieve_info['value'].upper()]
 
         results.append({"query": group_query, "doc_fuse": group, "json_data": []})
 

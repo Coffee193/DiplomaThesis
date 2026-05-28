@@ -76,10 +76,11 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     }
                 }
 
+                let effective_docs = response["c"][i]["cfd"] !== undefined ? TransformCfd(response["c"][i]["cfd"]) : doc_info
                 conv_vals.push(
                     <>
                         <div className='cm_chatbox'>
-                            {CreateInfoBlock(AddStreamBold(response["c"][i]["a"]), response["c"][i]["i"], response["c"][i]["s"], doc_info)}
+                            {CreateInfoBlock(AddStreamBold(response["c"][i]["a"]), response["c"][i]["i"], response["c"][i]["s"], effective_docs)}
                         </div>
                         <div className='cm_chatuser'>
                             {/*response["c"][i]["d"] !== undefined ? <ChatBoxUpload cbuState={{'visible': true, 'inchat': true, 'name': response["c"][i]["d"]["name"], 'type': response["c"][i]["d"]["name"].split('.')[1].toUpperCase(), 'size': response["c"][i]["d"]["size"], 'id': response["c"][i]["d"]["id"], 'link': linkparams.id}}/> : null*/}
@@ -115,6 +116,13 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
 
     }
 
+    function TransformCfd(cfd){
+        return cfd.map(group => ({
+            name: group[0],
+            fused: group.join(' , ')
+        }))
+    }
+
     function CreateInfoBlock(data, info, search, documents){
         if(info !== undefined){
             if(data.length === 1){
@@ -132,7 +140,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     data[i] =
                     <div className='cm_infoboxholder'>
                         <div className = {(Object.keys(info[0]).length === 0 || Object.keys(info[0][0]).length > 2) && (search === 'jobs' || (search === 'tasksuitableresources' && docs_contain_output === false)) ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
-                            {info.length === 1 ? CreateBlock(info[0], search, documents[0]['name']) : CreateMultiBlock(info, search, documents)}
+                            {info.length === 1 && !documents[0]?.fused ? CreateBlock(info[0], search, documents[0]['name']) : CreateMultiBlock(info, search, documents)}
                         </div>
                     </div> 
                 }
@@ -141,7 +149,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         return data
     }
 
-    function CreateDocumentNameBlock(name, found_count, margin_remove, search){
+    function CreateDocumentNameBlock(name, found_count, margin_remove, search, is_fused){
         let style = {}
         if (search === 'jobs'){
             style.margin = 0
@@ -149,18 +157,19 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
         else if (margin_remove === true){
             style.marginTop = 0
         }
+        if(is_fused) style.fontSize = '13px'
 
         return (
             <div className='cm_infodocumentname' style={style}>
-                <div>{DocumentNameBlockTruncate(name)}</div>
+                <div>{DocumentNameBlockTruncate(name, is_fused ? 45 : undefined)}</div>
                 <div className='cm_infodocumentcount'>({found_count})</div>
             </div>
         )
     }
 
-    function DocumentNameBlockTruncate(name){
-        if(name.length > 25){
-            return name.slice(0, 22) + '...'
+    function DocumentNameBlockTruncate(name, max_len = 25){
+        if(name.length > max_len){
+            return name.slice(0, max_len - 3) + '...'
         }
         else{
             return name
@@ -175,7 +184,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             console.log(info)
             console.log(search)
             console.log(documents)
-            out_block.push(CreateDocumentNameBlock(documents[i]['name'], info[i].length, i === 0 ? true : false, search))
+            out_block.push(CreateDocumentNameBlock(documents[i]['fused'] || documents[i]['name'], info[i].length, i === 0 ? true : false, search, !!documents[i]['fused']))
             out_block.push(CreateBlock(info[i], search, documents[i]['name']))
         }
         return out_block
@@ -343,6 +352,45 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     </div>
                 )
             }
+            if("assignments" in info[i]){
+                extra_info.push(
+                    <div className='cm_infoleft cm_infoflex'>
+                        <DotIcon/> <div>Assignments:</div>
+                        {info[i]['assignments'].flatMap((val, index) => [
+                            <div key={index} className='cm_infobg' style={index > 0 ? {marginLeft: '5px'} : undefined}>{val}</div>,
+                            index < info[i]['assignments'].length - 1 ? <span key={'c' + index}> , </span> : null
+                        ])}
+                    </div>
+                )
+            }
+            if("duration" in info[i]){
+                extra_info.push(
+                    <div className='cm_infoleft cm_infoflex'>
+                        <DotIcon/>
+                        <div className='cm_infopush'>Duration: </div>
+                        <div className='cm_infoweak'>{SToTimeString(info[i]['duration'])}</div>
+                    </div>
+                )
+            }
+            if("dispatch_start" in info[i]){
+                extra_info.push(
+                    <div className='cm_infoleft cm_infoflex'>
+                        <DotIcon/>
+                        <div className='cm_infopush'>Start Time: </div>
+                        <div className='cm_infoweak'>{BlockDateToStr(info[i]['dispatch_start'], true, true)}</div>
+                    </div>
+                )
+            }
+            if("dispatch_end" in info[i]){
+                extra_info.push(
+                    <div className='cm_infoleft cm_infoflex'>
+                        <DotIcon/>
+                        <div className='cm_infopush'>End Time: </div>
+                        <div className='cm_infoweak'>{BlockDateToStr(info[i]['dispatch_end'], true, true)}</div>
+                    </div>
+                )
+            }
+
             list_out.push(
                 <div className='cm_infoblock'>
                     <div className = 'cm_infoflex'>
@@ -520,11 +568,12 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
     async function ReadAnswerStream(response, linkparams, convsetState, isgeneratingsetState, convstreamgeneratingRef, waitTitle){
         let ai_answer = ''
         let buffer_answer = ''
-        let info_block = null
+        let info_block = undefined
         let search_block = null
         let errorquit = false
         const decoder = new TextDecoder();
         let document_info = undefined
+        let cfd_block = null
 
         while(true){
             const { done, value } = await response.read();
@@ -564,6 +613,9 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     document_info = msg.u
                     cmlastdocRef.current = msg.u
                 }
+                else if(msg.cfd !== undefined){
+                    cfd_block = msg.cfd
+                }
             }
 
             console.log('valval')
@@ -573,7 +625,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             if(window.location.pathname.split("/").at(-2) === linkparams.id){
                 convsetState(prevState => [
                 <div className='cm_chatbox'>
-                    {CreateInfoBlock([buffer_answer], info_block, search_block, document_info)}
+                    {CreateInfoBlock([buffer_answer], info_block, search_block, cfd_block !== null ? TransformCfd(cfd_block) : document_info)}
                 </div>,
                 prevState.slice(1)
                 ])

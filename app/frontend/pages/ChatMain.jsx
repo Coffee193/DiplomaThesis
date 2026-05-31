@@ -140,7 +140,7 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
                     data[i] =
                     <div className='cm_infoboxholder'>
                         <div className = {(Object.keys(info[0]).length === 0 || Object.keys(info[0][0]).length > 2) && (search === 'jobs' || (search === 'tasksuitableresources' && docs_contain_output === false)) ? 'cm_infobox cm_infoboxgap': 'cm_infobox'}>
-                            {info.length === 1 && !documents[0]?.fused ? CreateBlock(info[0], search, documents[0]['name']) : CreateMultiBlock(info, search, documents)}
+                            {search === 'plan' ? CreatePlanBlock(info, search, documents) : (info.length === 1 && !documents[0]?.fused ? CreateBlock(info[0], search, documents[0]['name']) : CreateMultiBlock(info, search, documents))}
                         </div>
                     </div> 
                 }
@@ -188,6 +188,70 @@ export function ChatMain({ chatlist, chatnavloadingState, linkparams, chatnavset
             out_block.push(CreateBlock(info[i], search, documents[i]['name']))
         }
         return out_block
+    }
+
+    function CreatePlanDocumentNameBlock(name, margin_remove){
+        let style = {}
+        if (margin_remove === true){
+            style.marginTop = 0
+        }
+        return (
+            <div className='cm_infodocumentname' style={style}>
+                <div>{DocumentNameBlockTruncate(name)}</div>
+            </div>
+        )
+    }
+
+    function CreatePlanBlock(info, search, documents){
+        let out_block = []
+        for (let i=0; i<info.length; i++){
+            out_block.push(CreatePlanDocumentNameBlock(documents[i]['name'], i === 0 ? true : false))
+            out_block.push(CreatePlanDataBlock(info[i], documents[i]['name']))
+        }
+        return out_block
+    }
+
+    function CreatePlanDataBlock(info, document_name){
+        const name = document_name.toLowerCase()
+        const hasInput = name.includes('input') && !name.includes('output')
+        const hasOutput = name.includes('output') && !name.includes('input')
+
+        if(hasInput){
+            return CreateNoDataBlock()
+        }
+        if(hasOutput){
+            if(info.length === 0) return CreateNoDataBlock()
+            let out_list = []
+            for (let i=0; i<info.length; i++){
+                for (let key in info[i]){
+                    let big_text = ''
+                    let small_text = ''
+                    if(key === 'dispatch_start'){
+                        big_text = 'Start Time: '
+                        small_text = BlockDateToStr(info[i][key], true, true)
+                    }
+                    else if(key === 'dispatch_end'){
+                        big_text = 'End Time: '
+                        small_text = BlockDateToStr(info[i][key], true, true)
+                    }
+                    else if(key === 'durationinmilliseconds'){
+                        big_text = 'Duration: '
+                        small_text = MsToTimeString(info[i][key])
+                    }
+                    if(big_text !== ''){
+                        out_list.push(
+                            <div className='cm_infoleft cm_infoflex'>
+                                <DotIcon/>
+                                <div className='cm_infopush'>{big_text}</div>
+                                <div className='cm_infoweak'>{small_text}</div>
+                            </div>
+                        )
+                    }
+                }
+            }
+            return out_list
+        }
+        return CreateInvalidNameBlock()
     }
 
     function CreateBlock(info, search, document_name){

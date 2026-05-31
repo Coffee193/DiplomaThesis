@@ -12,3 +12,11 @@ Password: POSTGrEpoulKaio21vS33
 NOTE: You must create the Sapling Database first in the new PC
 
 mongorestore C:\Users\Chris\Downloads\diplomat\database_dumprestore\mongodump
+
+
+----------NEW PATHS------------
+DUMP:
+
+pg_dump -U postgres -d Sapling -f C:\Users\Chris\Downloads\diplomat\database_dumprestore\postgresdump.sql
+
+mongodump -d Sapling --out C:\Users\Chris\Downloads\diplomat\database_dumprestore\mongodump

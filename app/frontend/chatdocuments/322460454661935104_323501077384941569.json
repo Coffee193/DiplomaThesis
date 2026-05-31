@@ -1,0 +1,348 @@
+{
+    "assignments": {
+      "assignment": [
+        {
+          "task": {
+            "id": "__201"
+          },
+          "resource": {
+            "id": "__1"
+          },
+          "timeofdispatch": {
+            "day": 18,
+            "month": 6,
+            "year": 2027,
+            "hour": 6,
+            "minutes": 46,
+            "seconds": 8
+          },
+          "durationinmilliseconds": 15334710,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__187"
+          },
+          "resource": {
+            "id": "__1"
+          },
+          "timeofdispatch": {
+            "day": 18,
+            "month": 6,
+            "year": 2027,
+            "hour": 11,
+            "minutes": 1,
+            "seconds": 42
+          },
+          "durationinmilliseconds": 19366290,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__200"
+          },
+          "resource": {
+            "id": "__2"
+          },
+          "timeofdispatch": {
+            "day": 18,
+            "month": 6,
+            "year": 2027,
+            "hour": 11,
+            "minutes": 1,
+            "seconds": 42
+          },
+          "durationinmilliseconds": 14535320,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__191"
+          },
+          "resource": {
+            "id": "__1"
+          },
+          "timeofdispatch": {
+            "day": 18,
+            "month": 6,
+            "year": 2027,
+            "hour": 16,
+            "minutes": 24,
+            "seconds": 29
+          },
+          "durationinmilliseconds": 20131570,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__186"
+          },
+          "resource": {
+            "id": "__2"
+          },
+          "timeofdispatch": {
+            "day": 18,
+            "month": 6,
+            "year": 2027,
+            "hour": 16,
+            "minutes": 24,
+            "seconds": 29
+          },
+          "durationinmilliseconds": 16868980,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__193"
+          },
+          "resource": {
+            "id": "__1"
+          },
+          "timeofdispatch": {
+            "day": 18,
+            "month": 6,
+            "year": 2027,
+            "hour": 22,
+            "minutes": 0,
+            "seconds": 0
+          },
+          "durationinmilliseconds": 68858350,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__190"
+          },
+          "resource": {
+            "id": "__2"
+          },
+          "timeofdispatch": {
+            "day": 18,
+            "month": 6,
+            "year": 2027,
+            "hour": 22,
+            "minutes": 0,
+            "seconds": 0
+          },
+          "durationinmilliseconds": 43714270,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__189"
+          },
+          "resource": {
+            "id": "__1"
+          },
+          "timeofdispatch": {
+            "day": 19,
+            "month": 6,
+            "year": 2027,
+            "hour": 17,
+            "minutes": 7,
+            "seconds": 38
+          },
+          "durationinmilliseconds": 57987850,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__192"
+          },
+          "resource": {
+            "id": "__2"
+          },
+          "timeofdispatch": {
+            "day": 19,
+            "month": 6,
+            "year": 2027,
+            "hour": 17,
+            "minutes": 7,
+            "seconds": 38
+          },
+          "durationinmilliseconds": 57857930,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__199"
+          },
+          "resource": {
+            "id": "__1"
+          },
+          "timeofdispatch": {
+            "day": 20,
+            "month": 6,
+            "year": 2027,
+            "hour": 9,
+            "minutes": 14,
+            "seconds": 6
+          },
+          "durationinmilliseconds": 42316990,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__188"
+          },
+          "resource": {
+            "id": "__2"
+          },
+          "timeofdispatch": {
+            "day": 20,
+            "month": 6,
+            "year": 2027,
+            "hour": 9,
+            "minutes": 14,
+            "seconds": 6
+          },
+          "durationinmilliseconds": 34282900,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__203"
+          },
+          "resource": {
+            "id": "__1"
+          },
+          "timeofdispatch": {
+            "day": 20,
+            "month": 6,
+            "year": 2027,
+            "hour": 20,
+            "minutes": 59,
+            "seconds": 23
+          },
+          "durationinmilliseconds": 4930300,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__198"
+          },
+          "resource": {
+            "id": "__2"
+          },
+          "timeofdispatch": {
+            "day": 20,
+            "month": 6,
+            "year": 2027,
+            "hour": 20,
+            "minutes": 59,
+            "seconds": 23
+          },
+          "durationinmilliseconds": 82929900,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__194"
+          },
+          "resource": {
+            "id": "__1"
+          },
+          "timeofdispatch": {
+            "day": 20,
+            "month": 6,
+            "year": 2027,
+            "hour": 22,
+            "minutes": 21,
+            "seconds": 34
+          },
+          "durationinmilliseconds": 86883240,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__202"
+          },
+          "resource": {
+            "id": "__2"
+          },
+          "timeofdispatch": {
+            "day": 21,
+            "month": 6,
+            "year": 2027,
+            "hour": 20,
+            "minutes": 1,
+            "seconds": 33
+          },
+          "durationinmilliseconds": 3937450,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__197"
+          },
+          "resource": {
+            "id": "__1"
+          },
+          "timeofdispatch": {
+            "day": 21,
+            "month": 6,
+            "year": 2027,
+            "hour": 22,
+            "minutes": 29,
+            "seconds": 37
+          },
+          "durationinmilliseconds": 77647660,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__195"
+          },
+          "resource": {
+            "id": "__2"
+          },
+          "timeofdispatch": {
+            "day": 21,
+            "month": 6,
+            "year": 2027,
+            "hour": 22,
+            "minutes": 29,
+            "seconds": 37
+          },
+          "durationinmilliseconds": 56253440,
+          "properties": null,
+          "locked": null
+        },
+        {
+          "task": {
+            "id": "__196"
+          },
+          "resource": {
+            "id": "__2"
+          },
+          "timeofdispatch": {
+            "day": 22,
+            "month": 6,
+            "year": 2027,
+            "hour": 20,
+            "minutes": 3,
+            "seconds": 44
+          },
+          "durationinmilliseconds": 72748390,
+          "properties": null,
+          "locked": null
+        }
+      ]
+    }
+}

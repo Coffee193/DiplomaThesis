@@ -6,15 +6,16 @@ import datetime
 
 from LLM_prompts.Chain1 import GibberishClassifier
 from LLM_prompts.UnexpectedException import ExceptionHandler
-from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, HighLevelOutputJSONClassifier, InputMultiOuputJSONClassifier, InputMultiOutputJSONDurationLongestShortestClassifier, InputMultiOutputJSONCompleteDateExtractor
+from LLM_prompts.Chain2 import HighLevelClassifier, HighLevelTaskClassifier, HighLevelOutputJSONClassifier, InputMultiOuputJSONClassifier, InputMultiOutputJSONDurationLongestShortestClassifier, InputMultiOutputJSONCompleteDateExtractor, HighLevelPlanClassifier
 from LLM_prompts.InvalidDate import InvalidCompleteDateResponse
 from LLM_prompts.JobDuration import JobDurationNoInputFile
 from LLM_prompts.JobStartEnd import JobStartEndNoFusedPair
 from LLM_prompts.JobComplete import JobCompleteNoFusedPair
+from LLM_prompts.PlanComparison import PlanComparisonNoOutputFiles
 from LLM_prompts.Chain3 import ResourceAttributeRetriever, JobAttributeRetriever, TaskAttributeRetriever, TasksuitableresourceAttributeRetriever, TaskprecedencecontraintOrderDependenceClassifier, TaskprecedenceconstraintDependenceAttributeRetriever, TaskprecedenceconstraintOrderAttributeRetriever
 from LLM_prompts import StringToDateMonthForm
 from LLM_prompts.Chain4 import JobAttributeReturnClassifier, TaskAttributeReturnClassifier, ResourceAttributeReturnClassifier, TasksuitableresourceAttributeReturnResourceClassifier, TasksuitableresourceAttributeReturnTaskClassifier
-from LLM_prompts.Chain5 import OutputNoResultsFound, OutputListResultsTaskJobResourceTasksuitableresource, OutputTaskprecedenceconstraintsTaskNoExist, OutputListResultsTaskprecedenceconstraints, OutputTaskprecedenceconstraintsTaskIsIndependent, OutputTaskprecedenceconstraintsClassifyQuestionBoolean, OutputTaskprecedenceconstraintsAnswerBooleanQuestion, OutputListResultsMultipleDocuments, OutputInvalidName
+from LLM_prompts.Chain5 import OutputNoResultsFound, OutputListResultsTaskJobResourceTasksuitableresource, OutputTaskprecedenceconstraintsTaskNoExist, OutputListResultsTaskprecedenceconstraints, OutputTaskprecedenceconstraintsTaskIsIndependent, OutputTaskprecedenceconstraintsClassifyQuestionBoolean, OutputTaskprecedenceconstraintsAnswerBooleanQuestion, OutputListResultsMultipleDocuments, OutputInvalidName, OutputListResultsPlanComparisonSingle, OutputListResultsPlanComparisonMultiple
 from LLM_prompts.FindJSONFile import InstructUploadJSON
 from LLM_prompts.UploadJSONFileNoQuestion import UserUploadJSONNoQuestion, UserUploadMultipleJSONNoQuestion
 from LLM_prompts.UploadJSONFileIrrelevantQuestion import UserUploadJSONIrrelevantQuestion, UserUploadMultipleJSONIrrelevantQuestion
@@ -155,8 +156,16 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
                 output_specific = True
                 #return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': None, 'wanted_return': None, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None, 'complex': None, 'complex_utils': {}}
             else:
-                # NOT asking about Jobs, Tasks, etc.. So a general, non-json question
-                return {'response_msg': chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document, conv_id), stream = True), 'think': think_list, 'end': 'success_unfinished'}
+                # Check for "plan"
+                answer = LLMOutClean(chat(llm_model, messages=[{'role': 'user', 'content': HighLevelPlanClassifier.getPrompt(user_question)}]).message.content)
+                answer = json.loads(answer)
+                think_list.append({'chain': '2_plan', 'think': answer['think'] if 'think' in answer else 'Exception No Thinking Return from LLM'})
+                words = answer['words']
+                if 'plan' in words:
+                    search = 'plan'
+                else:
+                    # NOT asking about Jobs, Tasks, etc.. So a general, non-json question
+                    return {'response_msg': chat(llm_model, messages = CreateChatConv(db_chat, user_question, json_document, conv_id), stream = True), 'think': think_list, 'end': 'success_unfinished'}
 
         else:
             if('job' in words):
@@ -258,9 +267,17 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
             return {'response_msg': chat(llm_model, messages=[{'role': 'user', 'content': JobCompleteNoFusedPair.getPrompt(user_question)}], stream=True), 'think': think_list, 'end': 'success_unfinished'}
     ### Chain 2 End ###
 
+    ### Chain 2 Plan: Check Plan Question has at least 2 Output files ###
+    if search == 'plan':
+        output_count = sum(1 for doc in json_document if 'output' in doc['name'].lower() and 'input' not in doc['name'].lower())
+        if output_count < 2:
+            return {'response_msg': chat(llm_model, messages=[{'role': 'user', 'content': PlanComparisonNoOutputFiles.getPrompt(user_question)}], stream=True), 'think': think_list, 'end': 'success_unfinished'}
+        return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': None, 'wanted_return': None, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None, 'complex': None, 'complex_utils': {}}
+    ### Chain 2 Plan End ###
+
     if output_specific == True:
         return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': None, 'wanted_return': None, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None, 'complex': complex, 'complex_utils': complex_utils}
-    
+
 
     ### Chain 3: Retrieval Classifier ###
     ''' Classifies if user filters based on some specific attribute. Example: 'Get all tasks with id _578' -> finds 'id' and _578'''
@@ -369,6 +386,9 @@ def BuildDocNames(json_documents):
     return doc_names
 
 def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, wanted_return, complex = None, complex_utils = {}):
+    if search == 'plan':
+        return LLMGetFinalQueryPlan(conv_id, json_documents)
+
     if search == 'jobs' and complex is not None and 'duration' in complex:
         doc_names = BuildDocNames(json_documents)
         doc_by_name = {doc['name']: doc for doc in json_documents}
@@ -469,6 +489,50 @@ def LLMGetFinalQueryOutputMultiJSON(conv_id, search, json_document, complex, com
             query = [q for q in query if q['task'] == target_id]
 
     return {"query": query, "json_data": json_data, "doc": json_document}
+
+def LLMGetFinalQueryPlan(conv_id, json_documents):
+    fetched_list = []
+    for doc in json_documents:
+        json_name = doc['name'].lower()
+        has_input = 'input' in json_name and 'output' not in json_name
+        has_output = 'output' in json_name and 'input' not in json_name
+
+        if has_input:
+            fetched_list.append({"query": [], "json_data": [], "doc": doc})
+        elif has_output:
+            with open(chatdocumentpath + '/' + str(conv_id) + '_' + str(doc['id']) + '.' + doc['name'].split('.')[-1], encoding='utf-8') as file:
+                json_data = json.loads(file.read())
+
+            assignments = json_data['assignments']['assignment']
+
+            if len(assignments) == 0:
+                fetched_list.append({"query": [], "json_data": json_data, "doc": doc})
+                continue
+
+            earliest_start = None
+            latest_end = None
+
+            for q in assignments:
+                start_dt = datetime.datetime(q['timeofdispatch']['year'], q['timeofdispatch']['month'], q['timeofdispatch']['day'], q['timeofdispatch']['hour'], q['timeofdispatch']['minutes'], q['timeofdispatch']['seconds'])
+                end_dt = start_dt + datetime.timedelta(milliseconds=q['durationinmilliseconds'])
+
+                if earliest_start is None or start_dt < earliest_start:
+                    earliest_start = start_dt
+                if latest_end is None or end_dt > latest_end:
+                    latest_end = end_dt
+
+            duration_ms = int((latest_end - earliest_start).total_seconds() * 1000)
+
+            query = [{
+                'dispatch_start': {'year': earliest_start.year, 'month': earliest_start.month, 'day': earliest_start.day, 'hour': earliest_start.hour, 'minute': earliest_start.minute, 'second': earliest_start.second},
+                'dispatch_end': {'year': latest_end.year, 'month': latest_end.month, 'day': latest_end.day, 'hour': latest_end.hour, 'minute': latest_end.minute, 'second': latest_end.second},
+                'durationinmilliseconds': duration_ms,
+            }]
+            fetched_list.append({"query": query, "json_data": json_data, "doc": doc})
+        else:
+            fetched_list.append({"query": [], "json_data": [], "doc": doc})
+
+    return fetched_list
 
 def LLMGetFinalQueryOutputJSON(conv_id, search, json_document):
     ### Get JSON Data ###
@@ -1096,6 +1160,8 @@ def LLMGetFinalQuery_Old(conv_id, search, json_documents, retrieve_info, llm_mod
 def PassLLMFinalAnswer(json_document, search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick):
     print('Fin AA**')
     print(json_document)
+    if search == 'plan':
+        return PassLLMFinalAnswerPlan(search, user_question, query, json_document, llm_model, think_list)
     if(len(json_document) == 1):
         return PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick, json_document[0]['name'])
     else:
@@ -1103,6 +1169,29 @@ def PassLLMFinalAnswer(json_document, search, user_question, query, retrieve_inf
 
 def PassLLMFinalAnswerMultipleDocument(search, user_question, query, llm_model, think_list):
     return [chat(llm_model, messages = [{'role': 'user', 'content': OutputListResultsMultipleDocuments.getPrompt(user_question)}], stream = True), think_list, query, search]
+
+def PassLLMFinalAnswerPlan(search, user_question, query, json_documents, llm_model, think_list):
+    best_duration = None
+    best_doc_names = []
+
+    for i, doc in enumerate(json_documents):
+        doc_name = doc['name'].lower()
+        if 'output' in doc_name and 'input' not in doc_name:
+            if len(query[i]) > 0 and 'durationinmilliseconds' in query[i][0]:
+                dur = query[i][0]['durationinmilliseconds']
+                if best_duration is None or dur < best_duration:
+                    best_duration = dur
+                    best_doc_names = [doc['name']]
+                elif dur == best_duration:
+                    best_doc_names.append(doc['name'])
+
+    if len(best_doc_names) == 0:
+        return [chat(llm_model, messages=[{'role': 'user', 'content': ExceptionHandler.getPrompt(user_question)}], stream=True), think_list, query, search]
+
+    if len(best_doc_names) == 1:
+        return [chat(llm_model, messages=[{'role': 'user', 'content': OutputListResultsPlanComparisonSingle.getPrompt(user_question, best_doc_names[0])}], stream=True), think_list, query, search]
+    else:
+        return [chat(llm_model, messages=[{'role': 'user', 'content': OutputListResultsPlanComparisonMultiple.getPrompt(user_question, best_doc_names)}], stream=True), think_list, query, search]
 
 def PassLLMFinalAnswerSingleDocument(search, user_question, query, retrieve_info, json_data, llm_model, think_list, taskprecedenceconstraints_pick, doc_name):
     print('Single___')

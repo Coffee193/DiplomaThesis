@@ -1,0 +1,4123 @@
+{
+  "workcenters" : {
+    "workcenter" : [ {
+      "name" : "Generic Workcenter",
+      "description" : "Generic Workcenter",
+      "algorithm" : "MULTICRITERIA",
+      "workcenterresourcereference" : [ {
+        "refid" : "_1"
+      }, {
+        "refid" : "_2"
+      } ],
+      "toolrepository" : null,
+      "dockingstations" : null,
+      "id" : "WC"
+    } ]
+  },
+  "resources" : {
+    "resource" : [ {
+      "name" : "MELTSHOP",
+      "description" : null,
+      "setupmatrixreference" : {
+        "refid" : "1"
+      },
+      "resourceavailability" : {
+        "nonworkingperiods" : {
+          "period" : [ {
+            "fromdate" : {
+              "day" : 1,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 0,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 2,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 2,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 14,
+              "minute" : 50,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 2,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 15,
+              "minute" : 50,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 2,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 3,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 3,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 4,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 4,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 5,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 5,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 6,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 6,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 10,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 10,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 11,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 11,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 12,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 12,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 13,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 13,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 16,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 16,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 17,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 17,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 18,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 18,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 19,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 19,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 20,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 20,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 23,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 23,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 24,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 24,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 25,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 25,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 26,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 26,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 27,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 27,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 28,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 23,
+              "minute" : 59,
+              "second" : 59
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          } ]
+        },
+        "forcedworkingperiods" : null
+      },
+      "properties" : null,
+      "endeffectors" : null,
+      "id" : "_1"
+    }, {
+      "name" : "ROLLING MILL",
+      "description" : null,
+      "setupmatrixreference" : {
+        "refid" : "1"
+      },
+      "resourceavailability" : {
+        "nonworkingperiods" : {
+          "period" : [ {
+            "fromdate" : {
+              "day" : 1,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 0,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 2,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 2,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 3,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 3,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 4,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 4,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 5,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 5,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 6,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 6,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 9,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 10,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 10,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 11,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 11,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 12,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 12,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 13,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 13,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 16,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 16,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 17,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 17,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 18,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 18,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 19,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 19,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 20,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 20,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 23,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 23,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 24,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 24,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 25,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 25,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 26,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 26,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 27,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 6,
+              "minute" : 0,
+              "second" : 0
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          }, {
+            "fromdate" : {
+              "day" : 27,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 22,
+              "minute" : 0,
+              "second" : 0
+            },
+            "todate" : {
+              "day" : 28,
+              "month" : 2,
+              "year" : 2026,
+              "hour" : 23,
+              "minute" : 59,
+              "second" : 59
+            },
+            "reoccurance" : {
+              "years" : null,
+              "months" : null,
+              "weeks" : null,
+              "days" : 0,
+              "hours" : null,
+              "minutes" : null,
+              "seconds" : null
+            }
+          } ]
+        },
+        "forcedworkingperiods" : null
+      },
+      "properties" : null,
+      "endeffectors" : null,
+      "id" : "_2"
+    } ]
+  },
+  "jobs" : {
+    "job" : [ {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_586"
+      }, {
+        "refid" : "_587"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_298"
+    }, {
+      "name" : "FROM SCRAP",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_583"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_296"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_585"
+      }, {
+        "refid" : "_584"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_297"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_571"
+      }, {
+        "refid" : "_570"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_289"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_569"
+      }, {
+        "refid" : "_568"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_288"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_582"
+      }, {
+        "refid" : "_581"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_295"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_580"
+      }, {
+        "refid" : "_579"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_294"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_578"
+      }, {
+        "refid" : "_577"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_293"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_573"
+      }, {
+        "refid" : "_572"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_290"
+    }, {
+      "name" : "FROM SCRAP",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_574"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_291"
+    }, {
+      "name" : "FROM BILLET",
+      "description" : null,
+      "arrivaldate" : {
+        "day" : 1,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "duedate" : {
+        "day" : 28,
+        "month" : 2,
+        "year" : 2026,
+        "hour" : 0,
+        "minute" : 0,
+        "second" : 0
+      },
+      "jobtaskreference" : [ {
+        "refid" : "_575"
+      }, {
+        "refid" : "_576"
+      } ],
+      "jobworkcenterreference" : {
+        "refid" : "WC"
+      },
+      "id" : "_292"
+    } ]
+  },
+  "tasks" : {
+    "task" : [ {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_586"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_587"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_583"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_585"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_584"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_571"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_570"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_569"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_568"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_582"
+    }, {
+      "name" : "Melting ",
+      "description" : null,
+      "properties" : null,
+      "id" : "_581"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_580"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_579"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_578"
+    }, {
+      "name" : "Rolling ",
+      "description" : null,
+      "properties" : null,
+      "id" : "_577"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_573"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_572"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_574"
+    }, {
+      "name" : "Melting",
+      "description" : null,
+      "properties" : null,
+      "id" : "_575"
+    }, {
+      "name" : "Rolling",
+      "description" : null,
+      "properties" : null,
+      "id" : "_576"
+    } ]
+  },
+  "tasksuitableresources" : {
+    "tasksuitableresource" : [ {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_586"
+      },
+      "operationtimeperbatchinseconds" : 24499.0,
+      "setupcode" : "Φ7.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_587"
+      },
+      "operationtimeperbatchinseconds" : 24499.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_583"
+      },
+      "operationtimeperbatchinseconds" : 20202.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_585"
+      },
+      "operationtimeperbatchinseconds" : 16333.0,
+      "setupcode" : "Φ6.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_584"
+      },
+      "operationtimeperbatchinseconds" : 16333.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_571"
+      },
+      "operationtimeperbatchinseconds" : 40832.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_570"
+      },
+      "operationtimeperbatchinseconds" : 40832.0,
+      "setupcode" : "Φ11.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_569"
+      },
+      "operationtimeperbatchinseconds" : 28582.0,
+      "setupcode" : "Φ9.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_568"
+      },
+      "operationtimeperbatchinseconds" : 28582.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_582"
+      },
+      "operationtimeperbatchinseconds" : 16333.0,
+      "setupcode" : "Φ9.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_581"
+      },
+      "operationtimeperbatchinseconds" : 16333.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_580"
+      },
+      "operationtimeperbatchinseconds" : 40832.0,
+      "setupcode" : "Φ6.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_579"
+      },
+      "operationtimeperbatchinseconds" : 40832.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_578"
+      },
+      "operationtimeperbatchinseconds" : 44915.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_577"
+      },
+      "operationtimeperbatchinseconds" : 44915.0,
+      "setupcode" : "Φ6.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_573"
+      },
+      "operationtimeperbatchinseconds" : 4083.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_572"
+      },
+      "operationtimeperbatchinseconds" : 4083.0,
+      "setupcode" : "Φ11.0",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_574"
+      },
+      "operationtimeperbatchinseconds" : 20202.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_1"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_575"
+      },
+      "operationtimeperbatchinseconds" : 20416.0,
+      "setupcode" : "140X140-9.70m",
+      "properties" : null
+    }, {
+      "resourcereference" : {
+        "refid" : "_2"
+      },
+      "toolreference" : null,
+      "mobileresourcereference" : null,
+      "taskreference" : {
+        "refid" : "_576"
+      },
+      "operationtimeperbatchinseconds" : 20416.0,
+      "setupcode" : "Φ7.0",
+      "properties" : null
+    } ]
+  },
+  "taskprecedenceconstraints" : {
+    "taskprecedenceconstraint" : [ {
+      "preconditiontaskreference" : {
+        "refid" : "_587"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_586"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_584"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_585"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_571"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_570"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_568"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_569"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_581"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_582"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_579"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_580"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_578"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_577"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_573"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_572"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    }, {
+      "preconditiontaskreference" : {
+        "refid" : "_575"
+      },
+      "postconditiontaskreference" : {
+        "refid" : "_576"
+      },
+      "nexttaskinchain" : null,
+      "resourceunavailableuntilnexttask" : null
+    } ]
+  },
+  "setupmatrices" : {
+    "setupmatrix" : [ {
+      "setup" : [ {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 2400
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ10",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ7",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ10",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ11",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 2220
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ11",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ6",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ7",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ9",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ9",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 2400
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ12",
+        "timeinseconds" : 1800
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ6",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ7",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ12",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ9",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ10",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,2",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ11",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ10",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,4",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ11",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7,5",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ11",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ11,5",
+        "tocode" : "140X140-9.70m",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,8",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ6,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ9,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9,6",
+        "tocode" : "Φ11,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ14",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ5,5",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ9",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ12",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ8,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ12,8",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ10,4",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,5",
+        "tocode" : "Φ6,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ10,8",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ8,3",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ9,5",
+        "tocode" : "Φ10",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ8",
+        "tocode" : "Φ7",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ10,8",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ11",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ12,5",
+        "tocode" : "Φ5,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ7",
+        "timeinseconds" : 5100
+      }, {
+        "fromcode" : "Φ8,3",
+        "tocode" : "Φ8",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "140X140-9.70m",
+        "tocode" : "Φ12",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6,3",
+        "tocode" : "Φ9",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ7,5",
+        "timeinseconds" : 1500
+      }, {
+        "fromcode" : "Φ12",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ10,5",
+        "tocode" : "Φ12,5",
+        "timeinseconds" : 3000
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ14",
+        "timeinseconds" : 0
+      }, {
+        "fromcode" : "Φ7",
+        "tocode" : "Φ9,6",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ9",
+        "tocode" : "Φ10,5",
+        "timeinseconds" : 6600
+      }, {
+        "fromcode" : "Φ6",
+        "tocode" : "Φ8,2",
+        "timeinseconds" : 3000
+      } ],
+      "id" : "SM1"
+    } ]
+  },
+  "tooltypes" : null,
+  "tools" : null,
+  "mobileresourcetypes" : null,
+  "mobileresources" : null,
+  "continueAssignmentsAfterPlanEndDate" : "false",
+  "id" : "51 - Monday, Feb 2, 2026 02:50:40 PM",
+  "planEndDateDay" : "28",
+  "planEndDateMonth" : "2",
+  "planEndDateYear" : "2026",
+  "planStartDateDay" : "1",
+  "planStartDateMonth" : "2",
+  "planStartDateYear" : "2026"
+}

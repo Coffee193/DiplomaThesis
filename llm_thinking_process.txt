@@ -32,3 +32,35 @@ Chain 2: High-Level Classifier
 |
 | 3) User Asks: Tasks, TaskSuitableResources, TaskPrepost
 |
+
+
+
+
+
+=========================================
+1) Finishing parts of diploma thesis
+
+How to test things that one performs better/worse than the other:
+Key Performance Indicator (KPI) <---
+
+
+-> Να πω στο Cloud Model πρακτικα αν αλυσει όλα αυτά π ζηταω με layer based λογικη:
+* Πεταω τα JSON μεσα κ του λεω την ερωτηση απευθειας
+* Πεταω τα JSON μεσα - κ τ λεω πχ. υπαρχουν τα Jobs, Tasks, TasksUitableresource tc. etc. -  κ του λεω την ερωτηση απευθειας
+* Πεταω τα JSON μεσα - κ τ λεω πχ. υπαρχουν τα Jobs, Tasks, TasksUitableresource και του λεω και τα keys π εχει μεσα το κάθε ένα tc. etc. -  κ του λεω την ερωτηση απευθειας
+* ...
+Και τεσταρω τις απαντησεις ανα περίπτωση
+
+
+ΚΑΙ
+
+θα μ σταλθουν JSON inputs/outputs
+
+2) Σπουδαστική??? (Ποιο κομματι είναι η σπουδαστικη και ποιο η διπλοματικη??)
+
+3) Προθεσμίες για Διπλοματικη / Σπουδαστική (Να παρω γραμματεία μαλλον )
+* 1 μηνα γραψημο
+* κανα 2βδομαδο για refinements sto word
+* powerpoint
+
+4) Πότε να αρχίσω να γράφω?? <--- Πρώτα να δείξω στον καθηγητή. Παρουσίαση με καθηγητή

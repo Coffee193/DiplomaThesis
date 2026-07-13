@@ -360,28 +360,35 @@ def PassLLMThink(llm_model, user_question, db_chat = [], json_document = None, c
     return {'end': 'success_complete', 'think': think_list, 'search': search, 'retrieve_info': retrieve_info, 'wanted_return': wanted_return, 'json_documents': json_document, 'taskprecedenceconstraints_pick': None if search != 'tasksprecedenceconstraints' else taskprecedenceconstraints_pick, 'complex': complex, 'complex_utils': complex_utils}
 
 def BuildDocNames(json_documents):
-    input_docs = []
-    output_docs = []
+    seen = set()
+    unique_docs = []
     for doc in json_documents:
+        if doc['name'] not in seen:
+            seen.add(doc['name'])
+            unique_docs.append(doc)
+
+    input_groups = {}
+    output_groups = {}
+    for doc in unique_docs:
         name_lower = doc['name'].lower()
-        if 'input' in name_lower and 'output' not in name_lower:
-            input_docs.append(doc)
-        elif 'output' in name_lower and 'input' not in name_lower:
-            output_docs.append(doc)
+        match = re.search(r'(input|output)[a-z]*_(\d+)', name_lower)
+        if match:
+            io_type = match.group(1)
+            x = match.group(2)
+            if io_type == 'input':
+                input_groups.setdefault(x, []).append(doc)
+            else:
+                output_groups.setdefault(x, []).append(doc)
 
     doc_names = []
-    for inp in input_docs:
-        inp_base = inp['name'].rsplit('.', 1)[0]
-        inp_suffix = re.sub(r'(?i)input', '', inp_base, count=1)
-        matched = False
-        for out in output_docs:
-            out_base = out['name'].rsplit('.', 1)[0]
-            out_suffix = re.sub(r'(?i)output', '', out_base, count=1)
-            if out_suffix.lower().startswith(inp_suffix.lower()):
-                doc_names.append([inp['name'], out['name']])
-                matched = True
-        if not matched:
-            doc_names.append([inp['name']])
+    for x, inp_docs in input_groups.items():
+        out_docs = output_groups.get(x, [])
+        for inp in inp_docs:
+            if out_docs:
+                for out in out_docs:
+                    doc_names.append([inp['name'], out['name']])
+            else:
+                doc_names.append([inp['name']])
 
     return doc_names
 
@@ -658,16 +665,15 @@ def LLMGetFinalQueryJobDuration(conv_id, doc_names, doc_by_name, complex_utils):
 
             for job in jobs:
                 task_refs = [t['refid'] for t in job['jobtaskreference']]
-                output_task_ids = ['_' + ref for ref in task_refs]
-
                 total_duration = 0
                 assignment_indices = []
                 all_found = True
 
-                for otid in output_task_ids:
+                for ref in task_refs:
+                    ref_stripped = ref.lstrip('_')
                     found = False
                     for i, a in enumerate(assignments):
-                        if a['task']['id'] == otid:
+                        if a['task']['id'].lstrip('_') == ref_stripped:
                             total_duration += a['durationinmilliseconds'] / 1000
                             assignment_indices.append(i + 1)
                             found = True
@@ -730,16 +736,15 @@ def LLMGetFinalQueryJobStartEnd(conv_id, doc_names, doc_by_name, complex, retrie
 
         for job in jobs:
             task_refs = [t['refid'] for t in job['jobtaskreference']]
-            output_task_ids = ['_' + ref for ref in task_refs]
-
             matching_assignments = []
             assignment_indices = []
             all_found = True
 
-            for otid in output_task_ids:
+            for ref in task_refs:
+                ref_stripped = ref.lstrip('_')
                 found = False
                 for i, a in enumerate(assignments):
-                    if a['task']['id'] == otid:
+                    if a['task']['id'].lstrip('_') == ref_stripped:
                         matching_assignments.append(a)
                         assignment_indices.append(i + 1)
                         found = True
@@ -826,16 +831,15 @@ def LLMGetFinalQueryJobComplete(conv_id, doc_names, doc_by_name, complex_utils, 
 
         for job in jobs:
             task_refs = [t['refid'] for t in job['jobtaskreference']]
-            output_task_ids = ['_' + ref for ref in task_refs]
-
             matching_assignments = []
             assignment_indices = []
             all_found = True
 
-            for otid in output_task_ids:
+            for ref in task_refs:
+                ref_stripped = ref.lstrip('_')
                 found = False
                 for i, a in enumerate(assignments):
-                    if a['task']['id'] == otid:
+                    if a['task']['id'].lstrip('_') == ref_stripped:
                         matching_assignments.append(a)
                         assignment_indices.append(i + 1)
                         found = True

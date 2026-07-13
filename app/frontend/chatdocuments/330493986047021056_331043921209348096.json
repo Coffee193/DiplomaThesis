@@ -1,0 +1,4882 @@
+{
+    "workcenters": {
+        "workcenter": [
+            {
+                "id": "WC_1",
+                "name": "LMS_Civilian_Baseline_Assembly",
+                "description": "Mercedes G-Class Line - Hybrid Mix",
+                "algorithm": "MULTICRITERIA",
+                "workcenterresourcereference": [
+                    {
+                        "refid": "_1"
+                    },
+                    {
+                        "refid": "_2"
+                    },
+                    {
+                        "refid": "_3"
+                    },
+                    {
+                        "refid": "_4"
+                    },
+                    {
+                        "refid": "_5"
+                    },
+                    {
+                        "refid": "_6"
+                    },
+                    {
+                        "refid": "_7"
+                    },
+                    {
+                        "refid": "_8"
+                    },
+                    {
+                        "refid": "_9"
+                    },
+                    {
+                        "refid": "_10"
+                    },
+                    {
+                        "refid": "_11"
+                    },
+                    {
+                        "refid": "_12"
+                    },
+                    {
+                        "refid": "_13"
+                    },
+                    {
+                        "refid": "_14"
+                    },
+                    {
+                        "refid": "_15"
+                    }
+                ]
+            }
+        ]
+    },
+    "resources": {
+        "resource": [
+            {
+                "id": "_1",
+                "name": "R1",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_2",
+                "name": "R2",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_3",
+                "name": "R3",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_4",
+                "name": "R4",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_5",
+                "name": "R5",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_6",
+                "name": "R6",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_7",
+                "name": "R7",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_8",
+                "name": "R8",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_9",
+                "name": "R9",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_10",
+                "name": "R10",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_11",
+                "name": "R11",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_12",
+                "name": "R12",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_13",
+                "name": "R13",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_14",
+                "name": "R14",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            },
+            {
+                "id": "_15",
+                "name": "R15",
+                "description": null,
+                "setupmatrixreference": {
+                    "refid": "1"
+                },
+                "resourceavailability": {
+                    "nonworkingperiods": null,
+                    "forcedworkingperiods": null
+                },
+                "properties": null,
+                "endeffectors": null
+            }
+        ]
+    },
+    "jobs": {
+        "job": [
+            {
+                "id": "JOB_INITIALIZATION",
+                "name": "Resource Initialization",
+                "jobtaskreference": [
+                    {
+                        "refid": "INIT_T_1"
+                    },
+                    {
+                        "refid": "INIT_T_2"
+                    },
+                    {
+                        "refid": "INIT_T_3"
+                    },
+                    {
+                        "refid": "INIT_T_4"
+                    },
+                    {
+                        "refid": "INIT_T_5"
+                    },
+                    {
+                        "refid": "INIT_T_6"
+                    },
+                    {
+                        "refid": "INIT_T_7"
+                    },
+                    {
+                        "refid": "INIT_T_8"
+                    },
+                    {
+                        "refid": "INIT_T_9"
+                    },
+                    {
+                        "refid": "INIT_T_10"
+                    },
+                    {
+                        "refid": "INIT_T_11"
+                    },
+                    {
+                        "refid": "INIT_T_12"
+                    },
+                    {
+                        "refid": "INIT_T_13"
+                    },
+                    {
+                        "refid": "INIT_T_14"
+                    },
+                    {
+                        "refid": "INIT_T_15"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 1,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_001",
+                "name": "Civilian Unit 1",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_001"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_001"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_001"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_001"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_001"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_001"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_001"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_001"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_001"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_001"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_002",
+                "name": "Civilian Unit 2",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_002"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_002"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_002"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_002"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_002"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_002"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_002"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_002"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_002"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_002"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_003",
+                "name": "Civilian Unit 3",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_003"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_003"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_003"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_003"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_003"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_003"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_003"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_003"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_003"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_003"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_004",
+                "name": "Civilian Unit 4",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_004"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_004"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_004"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_004"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_004"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_004"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_004"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_004"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_004"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_004"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_005",
+                "name": "Civilian Unit 5",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_005"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_005"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_005"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_005"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_005"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_005"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_005"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_005"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_005"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_005"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_006",
+                "name": "Civilian Unit 6",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_006"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_006"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_006"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_006"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_006"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_006"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_006"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_006"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_006"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_006"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_007",
+                "name": "Civilian Unit 7",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_007"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_007"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_007"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_007"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_007"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_007"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_007"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_007"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_007"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_007"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_008",
+                "name": "Civilian Unit 8",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_008"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_008"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_008"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_008"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_008"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_008"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_008"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_008"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_008"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_008"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_009",
+                "name": "Civilian Unit 9",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_009"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_009"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_009"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_009"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_009"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_009"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_009"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_009"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_009"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_009"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            },
+            {
+                "id": "JOB_CIV_010",
+                "name": "Civilian Unit 10",
+                "jobtaskreference": [
+                    {
+                        "refid": "C_KIT_CIV_010"
+                    },
+                    {
+                        "refid": "C_CHS_CIV_010"
+                    },
+                    {
+                        "refid": "C_RUN_CIV_010"
+                    },
+                    {
+                        "refid": "C_MAR_CIV_010"
+                    },
+                    {
+                        "refid": "C_MECH_CIV_010"
+                    },
+                    {
+                        "refid": "C_EEB_CIV_010"
+                    },
+                    {
+                        "refid": "C_BDY_CIV_010"
+                    },
+                    {
+                        "refid": "C_CFN_CIV_010"
+                    },
+                    {
+                        "refid": "C_FQI_CIV_010"
+                    },
+                    {
+                        "refid": "C_EOL_CIV_010"
+                    }
+                ],
+                "jobworkcenterreference": {
+                    "refid": "WC_1"
+                },
+                "arrivaldate": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "duedate": {
+                    "day": 28,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minute": 0,
+                    "second": 0
+                },
+                "description": null
+            }
+        ]
+    },
+    "tasks": {
+        "task": [
+            {
+                "id": "INIT_T_1",
+                "name": "Initialization Task 1",
+                "description": "Initial state setup for Resource R1 (KIT_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_2",
+                "name": "Initialization Task 2",
+                "description": "Initial state setup for Resource R2 (CHS_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_3",
+                "name": "Initialization Task 3",
+                "description": "Initial state setup for Resource R3 (RUN_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_4",
+                "name": "Initialization Task 4",
+                "description": "Initial state setup for Resource R4 (RUN_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_5",
+                "name": "Initialization Task 5",
+                "description": "Initial state setup for Resource R5 (MAR_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_6",
+                "name": "Initialization Task 6",
+                "description": "Initial state setup for Resource R6 (MECH_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_7",
+                "name": "Initialization Task 7",
+                "description": "Initial state setup for Resource R7 (EEB_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_8",
+                "name": "Initialization Task 8",
+                "description": "Initial state setup for Resource R8 (BDY_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_9",
+                "name": "Initialization Task 9",
+                "description": "Initial state setup for Resource R9 (CFN_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_10",
+                "name": "Initialization Task 10",
+                "description": "Initial state setup for Resource R10 (MPB_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_11",
+                "name": "Initialization Task 11",
+                "description": "Initial state setup for Resource R11 (MGL_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_12",
+                "name": "Initialization Task 12",
+                "description": "Initial state setup for Resource R12 (MEE_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_13",
+                "name": "Initialization Task 13",
+                "description": "Initial state setup for Resource R13 (FQI_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_14",
+                "name": "Initialization Task 14",
+                "description": "Initial state setup for Resource R14 (EOL_CIV)",
+                "properties": null
+            },
+            {
+                "id": "INIT_T_15",
+                "name": "Initialization Task 15",
+                "description": "Initial state setup for Resource R15 (EOL_CIV)",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_001",
+                "name": "KIT_CIV (CIV_001)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_001",
+                "name": "CHS_CIV (CIV_001)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_001",
+                "name": "RUN_CIV (CIV_001)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_001",
+                "name": "MAR_CIV (CIV_001)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_001",
+                "name": "MECH_CIV (CIV_001)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_001",
+                "name": "EEB_CIV (CIV_001)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_001",
+                "name": "BDY_CIV (CIV_001)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_001",
+                "name": "CFN_CIV (CIV_001)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_001",
+                "name": "FQI_CIV (CIV_001)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_001",
+                "name": "EOL_CIV (CIV_001)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_001",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_002",
+                "name": "KIT_CIV (CIV_002)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_002",
+                "name": "CHS_CIV (CIV_002)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_002",
+                "name": "RUN_CIV (CIV_002)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_002",
+                "name": "MAR_CIV (CIV_002)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_002",
+                "name": "MECH_CIV (CIV_002)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_002",
+                "name": "EEB_CIV (CIV_002)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_002",
+                "name": "BDY_CIV (CIV_002)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_002",
+                "name": "CFN_CIV (CIV_002)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_002",
+                "name": "FQI_CIV (CIV_002)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_002",
+                "name": "EOL_CIV (CIV_002)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_002",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_003",
+                "name": "KIT_CIV (CIV_003)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_003",
+                "name": "CHS_CIV (CIV_003)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_003",
+                "name": "RUN_CIV (CIV_003)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_003",
+                "name": "MAR_CIV (CIV_003)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_003",
+                "name": "MECH_CIV (CIV_003)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_003",
+                "name": "EEB_CIV (CIV_003)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_003",
+                "name": "BDY_CIV (CIV_003)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_003",
+                "name": "CFN_CIV (CIV_003)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_003",
+                "name": "FQI_CIV (CIV_003)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_003",
+                "name": "EOL_CIV (CIV_003)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_003",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_004",
+                "name": "KIT_CIV (CIV_004)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_004",
+                "name": "CHS_CIV (CIV_004)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_004",
+                "name": "RUN_CIV (CIV_004)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_004",
+                "name": "MAR_CIV (CIV_004)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_004",
+                "name": "MECH_CIV (CIV_004)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_004",
+                "name": "EEB_CIV (CIV_004)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_004",
+                "name": "BDY_CIV (CIV_004)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_004",
+                "name": "CFN_CIV (CIV_004)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_004",
+                "name": "FQI_CIV (CIV_004)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_004",
+                "name": "EOL_CIV (CIV_004)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_004",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_005",
+                "name": "KIT_CIV (CIV_005)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_005",
+                "name": "CHS_CIV (CIV_005)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_005",
+                "name": "RUN_CIV (CIV_005)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_005",
+                "name": "MAR_CIV (CIV_005)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_005",
+                "name": "MECH_CIV (CIV_005)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_005",
+                "name": "EEB_CIV (CIV_005)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_005",
+                "name": "BDY_CIV (CIV_005)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_005",
+                "name": "CFN_CIV (CIV_005)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_005",
+                "name": "FQI_CIV (CIV_005)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_005",
+                "name": "EOL_CIV (CIV_005)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_005",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_006",
+                "name": "KIT_CIV (CIV_006)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_006",
+                "name": "CHS_CIV (CIV_006)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_006",
+                "name": "RUN_CIV (CIV_006)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_006",
+                "name": "MAR_CIV (CIV_006)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_006",
+                "name": "MECH_CIV (CIV_006)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_006",
+                "name": "EEB_CIV (CIV_006)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_006",
+                "name": "BDY_CIV (CIV_006)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_006",
+                "name": "CFN_CIV (CIV_006)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_006",
+                "name": "FQI_CIV (CIV_006)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_006",
+                "name": "EOL_CIV (CIV_006)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_006",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_007",
+                "name": "KIT_CIV (CIV_007)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_007",
+                "name": "CHS_CIV (CIV_007)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_007",
+                "name": "RUN_CIV (CIV_007)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_007",
+                "name": "MAR_CIV (CIV_007)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_007",
+                "name": "MECH_CIV (CIV_007)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_007",
+                "name": "EEB_CIV (CIV_007)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_007",
+                "name": "BDY_CIV (CIV_007)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_007",
+                "name": "CFN_CIV (CIV_007)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_007",
+                "name": "FQI_CIV (CIV_007)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_007",
+                "name": "EOL_CIV (CIV_007)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_007",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_008",
+                "name": "KIT_CIV (CIV_008)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_008",
+                "name": "CHS_CIV (CIV_008)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_008",
+                "name": "RUN_CIV (CIV_008)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_008",
+                "name": "MAR_CIV (CIV_008)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_008",
+                "name": "MECH_CIV (CIV_008)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_008",
+                "name": "EEB_CIV (CIV_008)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_008",
+                "name": "BDY_CIV (CIV_008)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_008",
+                "name": "CFN_CIV (CIV_008)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_008",
+                "name": "FQI_CIV (CIV_008)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_008",
+                "name": "EOL_CIV (CIV_008)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_008",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_009",
+                "name": "KIT_CIV (CIV_009)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_009",
+                "name": "CHS_CIV (CIV_009)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_009",
+                "name": "RUN_CIV (CIV_009)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_009",
+                "name": "MAR_CIV (CIV_009)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_009",
+                "name": "MECH_CIV (CIV_009)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_009",
+                "name": "EEB_CIV (CIV_009)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_009",
+                "name": "BDY_CIV (CIV_009)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_009",
+                "name": "CFN_CIV (CIV_009)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_009",
+                "name": "FQI_CIV (CIV_009)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_009",
+                "name": "EOL_CIV (CIV_009)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_009",
+                "properties": null
+            },
+            {
+                "id": "C_KIT_CIV_010",
+                "name": "KIT_CIV (CIV_010)",
+                "description": "Material Receiving and Kitting (Civilian) for Job JOB_CIV_010",
+                "properties": null
+            },
+            {
+                "id": "C_CHS_CIV_010",
+                "name": "CHS_CIV (CIV_010)",
+                "description": "Chassis / Frame Preparation (Civilian) for Job JOB_CIV_010",
+                "properties": null
+            },
+            {
+                "id": "C_RUN_CIV_010",
+                "name": "RUN_CIV (CIV_010)",
+                "description": "Running Gear Assembly (Civilian) for Job JOB_CIV_010",
+                "properties": null
+            },
+            {
+                "id": "C_MAR_CIV_010",
+                "name": "MAR_CIV (CIV_010)",
+                "description": "Powertrain Marriage (Civilian) for Job JOB_CIV_010",
+                "properties": null
+            },
+            {
+                "id": "C_MECH_CIV_010",
+                "name": "MECH_CIV (CIV_010)",
+                "description": "Mechanical Systems Integration (Civilian) for Job JOB_CIV_010",
+                "properties": null
+            },
+            {
+                "id": "C_EEB_CIV_010",
+                "name": "EEB_CIV (CIV_010)",
+                "description": "Base Electrical and Electronic Build (Civilian) for Job JOB_CIV_010",
+                "properties": null
+            },
+            {
+                "id": "C_BDY_CIV_010",
+                "name": "BDY_CIV (CIV_010)",
+                "description": "Body / Cabin Mounting (Civilian) for Job JOB_CIV_010",
+                "properties": null
+            },
+            {
+                "id": "C_CFN_CIV_010",
+                "name": "CFN_CIV (CIV_010)",
+                "description": "Civilian Final Assembly and Finish for Job JOB_CIV_010",
+                "properties": null
+            },
+            {
+                "id": "C_FQI_CIV_010",
+                "name": "FQI_CIV (CIV_010)",
+                "description": "Final Quality Inspection (Civilian) for Job JOB_CIV_010",
+                "properties": null
+            },
+            {
+                "id": "C_EOL_CIV_010",
+                "name": "EOL_CIV (CIV_010)",
+                "description": "End-of-Line Functional Test (Civilian) for Job JOB_CIV_010",
+                "properties": null
+            }
+        ]
+    },
+    "tasksuitableresources": {
+        "tasksuitableresource": [
+            {
+                "id": "TS_INIT_1",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_1"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_2",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_2"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_3",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_3"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_4",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_4"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_5",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_5"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_6",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_6"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_7",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_7"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_8",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_8"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_9",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_9"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_10",
+                "resourcereference": {
+                    "refid": "_10"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_10"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "MPB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_11",
+                "resourcereference": {
+                    "refid": "_11"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_11"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "MGL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_12",
+                "resourcereference": {
+                    "refid": "_12"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_12"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "MEE_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_13",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_13"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_14",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_14"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_INIT_15",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "operationtimeperbatchinseconds": 1,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_001",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_001",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_001",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_001",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_001",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_001",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_001",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_001",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_001",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_001",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_001",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_001",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_001"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_002",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_002",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_002",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_002",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_002",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_002",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_002",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_002",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_002",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_002",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_002",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_002",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_002"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_003",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_003",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_003",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_003",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_003",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_003",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_003",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_003",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_003",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_003",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_003",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_003",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_003"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_004",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_004",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_004",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_004",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_004",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_004",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_004",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_004",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_004",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_004",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_004",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_004",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_004"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_005",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_005",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_005",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_005",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_005",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_005",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_005",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_005",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_005",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_005",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_005",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_005",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_005"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_006",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_006",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_006",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_006",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_006",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_006",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_006",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_006",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_006",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_006",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_006",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_006",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_006"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_007",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_007",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_007",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_007",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_007",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_007",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_007",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_007",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_007",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_007",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_007",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_007",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_007"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_008",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_008",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_008",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_008",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_008",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_008",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_008",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_008",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_008",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_008",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_008",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_008",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_008"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_009",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_009",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_009",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_009",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_009",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_009",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_009",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_009",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_009",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_009",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_009",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_009",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_009"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_KIT_CIV_010",
+                "resourcereference": {
+                    "refid": "_1"
+                },
+                "taskreference": {
+                    "refid": "C_KIT_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 7200,
+                "setupcode": "KIT_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CHS_CIV_010",
+                "resourcereference": {
+                    "refid": "_2"
+                },
+                "taskreference": {
+                    "refid": "C_CHS_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "CHS_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R3_CIV_010",
+                "resourcereference": {
+                    "refid": "_3"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 21600,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_RUN_R4_CIV_010",
+                "resourcereference": {
+                    "refid": "_4"
+                },
+                "taskreference": {
+                    "refid": "C_RUN_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "RUN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MAR_CIV_010",
+                "resourcereference": {
+                    "refid": "_5"
+                },
+                "taskreference": {
+                    "refid": "C_MAR_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MAR_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_MECH_CIV_010",
+                "resourcereference": {
+                    "refid": "_6"
+                },
+                "taskreference": {
+                    "refid": "C_MECH_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "MECH_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EEB_CIV_010",
+                "resourcereference": {
+                    "refid": "_7"
+                },
+                "taskreference": {
+                    "refid": "C_EEB_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EEB_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_BDY_CIV_010",
+                "resourcereference": {
+                    "refid": "_8"
+                },
+                "taskreference": {
+                    "refid": "C_BDY_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "BDY_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_CFN_CIV_010",
+                "resourcereference": {
+                    "refid": "_9"
+                },
+                "taskreference": {
+                    "refid": "C_CFN_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 28800,
+                "setupcode": "CFN_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_FQI_CIV_010",
+                "resourcereference": {
+                    "refid": "_13"
+                },
+                "taskreference": {
+                    "refid": "C_FQI_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 10800,
+                "setupcode": "FQI_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R14_CIV_010",
+                "resourcereference": {
+                    "refid": "_14"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 14400,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            },
+            {
+                "id": "TS_C_EOL_R15_CIV_010",
+                "resourcereference": {
+                    "refid": "_15"
+                },
+                "taskreference": {
+                    "refid": "C_EOL_CIV_010"
+                },
+                "operationtimeperbatchinseconds": 18000,
+                "setupcode": "EOL_CIV",
+                "toolreference": null,
+                "mobileresourcereference": null,
+                "properties": null
+            }
+        ]
+    },
+    "taskprecedenceconstraints": {
+        "taskprecedenceconstraint": [
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_1"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_2"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_2"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_3"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_3"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_4"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_4"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_5"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_5"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_6"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_6"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_7"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_7"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_8"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_8"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_9"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_9"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_10"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_10"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_11"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_11"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_12"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_12"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_13"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_13"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_14"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_14"
+                },
+                "postconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_001"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_001"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_001"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_001"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_001"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_001"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_001"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_001"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_001"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_001"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_002"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_002"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_002"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_002"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_002"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_002"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_002"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_002"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_002"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_002"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_003"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_003"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_003"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_003"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_003"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_003"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_003"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_003"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_003"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_003"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_004"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_004"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_004"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_004"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_004"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_004"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_004"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_004"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_004"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_004"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_005"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_005"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_005"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_005"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_005"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_005"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_005"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_005"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_005"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_005"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_006"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_006"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_006"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_006"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_006"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_006"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_006"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_006"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_006"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_006"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_007"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_007"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_007"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_007"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_007"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_007"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_007"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_007"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_007"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_007"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_008"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_008"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_008"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_008"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_008"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_008"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_008"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_008"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_008"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_008"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_009"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_009"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_009"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_009"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_009"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_009"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_009"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_009"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_009"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_009"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "INIT_T_15"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_KIT_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_KIT_CIV_010"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CHS_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CHS_CIV_010"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_RUN_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_RUN_CIV_010"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MAR_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MAR_CIV_010"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_MECH_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_MECH_CIV_010"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EEB_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_EEB_CIV_010"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_BDY_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_BDY_CIV_010"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_CFN_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_CFN_CIV_010"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_FQI_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            },
+            {
+                "preconditiontaskreference": {
+                    "refid": "C_FQI_CIV_010"
+                },
+                "postconditiontaskreference": {
+                    "refid": "C_EOL_CIV_010"
+                },
+                "nexttaskinchain": null,
+                "resourceunavailableuntilnexttask": null
+            }
+        ]
+    },
+    "setupmatrices": {
+        "setupmatrix": [
+            {
+                "id": "1",
+                "setup": [
+                    {
+                        "fromcode": "KIT_CIV",
+                        "tocode": "KIT_MIL",
+                        "timeinseconds": 7200
+                    },
+                    {
+                        "fromcode": "CHS_CIV",
+                        "tocode": "CHS_MIL",
+                        "timeinseconds": 10800
+                    },
+                    {
+                        "fromcode": "RUN_CIV",
+                        "tocode": "RUN_MIL",
+                        "timeinseconds": 9000
+                    },
+                    {
+                        "fromcode": "MAR_CIV",
+                        "tocode": "MAR_MIL",
+                        "timeinseconds": 7200
+                    },
+                    {
+                        "fromcode": "MECH_CIV",
+                        "tocode": "MECH_MIL",
+                        "timeinseconds": 9000
+                    },
+                    {
+                        "fromcode": "EEB_CIV",
+                        "tocode": "EEB_MIL",
+                        "timeinseconds": 14400
+                    },
+                    {
+                        "fromcode": "BDY_CIV",
+                        "tocode": "BDY_MIL",
+                        "timeinseconds": 21600
+                    },
+                    {
+                        "fromcode": "EOL_CIV",
+                        "tocode": "EOL_MIL",
+                        "timeinseconds": 7200
+                    },
+                    {
+                        "fromcode": "KIT_MIL",
+                        "tocode": "KIT_CIV",
+                        "timeinseconds": 5400
+                    },
+                    {
+                        "fromcode": "CHS_MIL",
+                        "tocode": "CHS_CIV",
+                        "timeinseconds": 7200
+                    },
+                    {
+                        "fromcode": "RUN_MIL",
+                        "tocode": "RUN_CIV",
+                        "timeinseconds": 7200
+                    },
+                    {
+                        "fromcode": "MAR_MIL",
+                        "tocode": "MAR_CIV",
+                        "timeinseconds": 5400
+                    },
+                    {
+                        "fromcode": "MECH_MIL",
+                        "tocode": "MECH_CIV",
+                        "timeinseconds": 7200
+                    },
+                    {
+                        "fromcode": "EEB_MIL",
+                        "tocode": "EEB_CIV",
+                        "timeinseconds": 10800
+                    },
+                    {
+                        "fromcode": "BDY_MIL",
+                        "tocode": "BDY_CIV",
+                        "timeinseconds": 14400
+                    },
+                    {
+                        "fromcode": "EOL_MIL",
+                        "tocode": "EOL_CIV",
+                        "timeinseconds": 5400
+                    },
+                    {
+                        "fromcode": "KIT_CIV",
+                        "tocode": "KIT_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "KIT_MIL",
+                        "tocode": "KIT_MIL",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "CHS_CIV",
+                        "tocode": "CHS_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "CHS_MIL",
+                        "tocode": "CHS_MIL",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "RUN_CIV",
+                        "tocode": "RUN_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "RUN_MIL",
+                        "tocode": "RUN_MIL",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "MAR_CIV",
+                        "tocode": "MAR_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "MAR_MIL",
+                        "tocode": "MAR_MIL",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "MECH_CIV",
+                        "tocode": "MECH_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "MECH_MIL",
+                        "tocode": "MECH_MIL",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "EEB_CIV",
+                        "tocode": "EEB_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "EEB_MIL",
+                        "tocode": "EEB_MIL",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "BDY_CIV",
+                        "tocode": "BDY_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "BDY_MIL",
+                        "tocode": "BDY_MIL",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "EOL_CIV",
+                        "tocode": "EOL_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "EOL_MIL",
+                        "tocode": "EOL_MIL",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "MPB_CIV",
+                        "tocode": "MPB_MIL",
+                        "timeinseconds": 18000
+                    },
+                    {
+                        "fromcode": "MPB_MIL",
+                        "tocode": "MPB_CIV",
+                        "timeinseconds": 14400
+                    },
+                    {
+                        "fromcode": "MGL_CIV",
+                        "tocode": "MGL_MIL",
+                        "timeinseconds": 18000
+                    },
+                    {
+                        "fromcode": "MGL_MIL",
+                        "tocode": "MGL_CIV",
+                        "timeinseconds": 14400
+                    },
+                    {
+                        "fromcode": "MEE_CIV",
+                        "tocode": "MEE_MIL",
+                        "timeinseconds": 18000
+                    },
+                    {
+                        "fromcode": "MEE_MIL",
+                        "tocode": "MEE_CIV",
+                        "timeinseconds": 14400
+                    },
+                    {
+                        "fromcode": "FQI_CIV",
+                        "tocode": "FQM_MIL",
+                        "timeinseconds": 7200
+                    },
+                    {
+                        "fromcode": "FQM_MIL",
+                        "tocode": "FQI_CIV",
+                        "timeinseconds": 5400
+                    },
+                    {
+                        "fromcode": "CFN_CIV",
+                        "tocode": "CFN_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "MPB_CIV",
+                        "tocode": "MPB_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "MGL_CIV",
+                        "tocode": "MGL_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "MEE_CIV",
+                        "tocode": "MEE_CIV",
+                        "timeinseconds": 0
+                    },
+                    {
+                        "fromcode": "FQI_CIV",
+                        "tocode": "FQI_CIV",
+                        "timeinseconds": 0
+                    }
+                ]
+            }
+        ]
+    },
+    "continueAssignmentsAfterPlanEndDate": false,
+    "id": "VEHICLE_T10_MIL_000PERCENT",
+    "planStartDateDay": 1,
+    "planStartDateMonth": 2,
+    "planStartDateYear": 2026,
+    "planEndDateDay": 28,
+    "planEndDateMonth": 2,
+    "planEndDateYear": 2026
+}

@@ -1,0 +1,2580 @@
+{
+  "scheduleId" : "VEHICLE_T50_MIL_000PERCENT_DH4_MNA400_SR10",
+  "generatedAt" : "2026-06-10T14:50:32.572969700",
+  "assignments" : [ {
+    "task" : "INIT_T_1",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T00:00",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_2",
+    "resource" : "_2",
+    "startTime" : "2026-02-01T00:00:01",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_3",
+    "resource" : "_3",
+    "startTime" : "2026-02-01T00:00:02",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_4",
+    "resource" : "_4",
+    "startTime" : "2026-02-01T00:00:03",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_5",
+    "resource" : "_5",
+    "startTime" : "2026-02-01T00:00:04",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_6",
+    "resource" : "_6",
+    "startTime" : "2026-02-01T00:00:05",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_7",
+    "resource" : "_7",
+    "startTime" : "2026-02-01T00:00:06",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_8",
+    "resource" : "_8",
+    "startTime" : "2026-02-01T00:00:07",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_9",
+    "resource" : "_9",
+    "startTime" : "2026-02-01T00:00:08",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_10",
+    "resource" : "_10",
+    "startTime" : "2026-02-01T00:00:09",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_11",
+    "resource" : "_11",
+    "startTime" : "2026-02-01T00:00:10",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_12",
+    "resource" : "_12",
+    "startTime" : "2026-02-01T00:00:11",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_13",
+    "resource" : "_13",
+    "startTime" : "2026-02-01T00:00:12",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_14",
+    "resource" : "_14",
+    "startTime" : "2026-02-01T00:00:13",
+    "durationSeconds" : 1
+  }, {
+    "task" : "INIT_T_15",
+    "resource" : "_15",
+    "startTime" : "2026-02-01T00:00:14",
+    "durationSeconds" : 1
+  }, {
+    "task" : "T_KIT_CIV_009",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T00:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_KIT_CIV_027",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T02:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_009",
+    "resource" : "_2",
+    "startTime" : "2026-02-01T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_039",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T04:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_KIT_CIV_041",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T06:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_027",
+    "resource" : "_2",
+    "startTime" : "2026-02-01T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_009",
+    "resource" : "_4",
+    "startTime" : "2026-02-01T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_038",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T08:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_KIT_CIV_034",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T10:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_039",
+    "resource" : "_2",
+    "startTime" : "2026-02-01T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_027",
+    "resource" : "_3",
+    "startTime" : "2026-02-01T10:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_MAR_CIV_009",
+    "resource" : "_5",
+    "startTime" : "2026-02-01T11:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_001",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T12:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_KIT_CIV_050",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T14:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_001",
+    "resource" : "_2",
+    "startTime" : "2026-02-01T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_039",
+    "resource" : "_4",
+    "startTime" : "2026-02-01T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_007",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T16:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_MAR_CIV_027",
+    "resource" : "_5",
+    "startTime" : "2026-02-01T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_009",
+    "resource" : "_6",
+    "startTime" : "2026-02-01T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_042",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T18:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_038",
+    "resource" : "_2",
+    "startTime" : "2026-02-01T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_001",
+    "resource" : "_3",
+    "startTime" : "2026-02-01T18:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_KIT_CIV_024",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T20:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_MAR_CIV_039",
+    "resource" : "_5",
+    "startTime" : "2026-02-01T21:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_027",
+    "resource" : "_6",
+    "startTime" : "2026-02-01T21:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_009",
+    "resource" : "_7",
+    "startTime" : "2026-02-01T21:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_045",
+    "resource" : "_1",
+    "startTime" : "2026-02-01T22:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_034",
+    "resource" : "_2",
+    "startTime" : "2026-02-01T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_038",
+    "resource" : "_4",
+    "startTime" : "2026-02-01T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_015",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T00:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_BDY_CIV_009",
+    "resource" : "_8",
+    "startTime" : "2026-02-02T01:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_047",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T02:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_045",
+    "resource" : "_2",
+    "startTime" : "2026-02-02T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_034",
+    "resource" : "_3",
+    "startTime" : "2026-02-02T02:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_MAR_CIV_001",
+    "resource" : "_5",
+    "startTime" : "2026-02-02T02:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_039",
+    "resource" : "_6",
+    "startTime" : "2026-02-02T02:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_027",
+    "resource" : "_7",
+    "startTime" : "2026-02-02T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_043",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T04:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CFN_CIV_009",
+    "resource" : "_9",
+    "startTime" : "2026-02-02T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_KIT_CIV_017",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T06:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_042",
+    "resource" : "_2",
+    "startTime" : "2026-02-02T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_045",
+    "resource" : "_4",
+    "startTime" : "2026-02-02T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_027",
+    "resource" : "_8",
+    "startTime" : "2026-02-02T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_038",
+    "resource" : "_5",
+    "startTime" : "2026-02-02T07:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_001",
+    "resource" : "_6",
+    "startTime" : "2026-02-02T07:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_039",
+    "resource" : "_7",
+    "startTime" : "2026-02-02T07:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_044",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T08:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_KIT_CIV_020",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T10:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_044",
+    "resource" : "_2",
+    "startTime" : "2026-02-02T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_042",
+    "resource" : "_3",
+    "startTime" : "2026-02-02T10:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_039",
+    "resource" : "_8",
+    "startTime" : "2026-02-02T11:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_019",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T12:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_MAR_CIV_034",
+    "resource" : "_5",
+    "startTime" : "2026-02-02T12:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_038",
+    "resource" : "_6",
+    "startTime" : "2026-02-02T12:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_001",
+    "resource" : "_7",
+    "startTime" : "2026-02-02T12:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_027",
+    "resource" : "_9",
+    "startTime" : "2026-02-02T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_009",
+    "resource" : "_13",
+    "startTime" : "2026-02-02T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_KIT_CIV_008",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T14:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_020",
+    "resource" : "_2",
+    "startTime" : "2026-02-02T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_044",
+    "resource" : "_4",
+    "startTime" : "2026-02-02T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_035",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T16:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_BDY_CIV_001",
+    "resource" : "_8",
+    "startTime" : "2026-02-02T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_009",
+    "resource" : "_14",
+    "startTime" : "2026-02-02T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_042",
+    "resource" : "_5",
+    "startTime" : "2026-02-02T17:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_034",
+    "resource" : "_6",
+    "startTime" : "2026-02-02T17:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_038",
+    "resource" : "_7",
+    "startTime" : "2026-02-02T17:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_036",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T18:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_050",
+    "resource" : "_2",
+    "startTime" : "2026-02-02T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_020",
+    "resource" : "_3",
+    "startTime" : "2026-02-02T18:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_KIT_CIV_022",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T20:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_BDY_CIV_038",
+    "resource" : "_8",
+    "startTime" : "2026-02-02T21:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_001",
+    "resource" : "_9",
+    "startTime" : "2026-02-02T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_027",
+    "resource" : "_13",
+    "startTime" : "2026-02-02T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_KIT_CIV_011",
+    "resource" : "_1",
+    "startTime" : "2026-02-02T22:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_024",
+    "resource" : "_2",
+    "startTime" : "2026-02-02T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_050",
+    "resource" : "_4",
+    "startTime" : "2026-02-02T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MAR_CIV_044",
+    "resource" : "_5",
+    "startTime" : "2026-02-02T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_042",
+    "resource" : "_6",
+    "startTime" : "2026-02-02T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_034",
+    "resource" : "_7",
+    "startTime" : "2026-02-02T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_010",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T00:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_EOL_CIV_027",
+    "resource" : "_15",
+    "startTime" : "2026-02-03T00:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_040",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T02:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_008",
+    "resource" : "_2",
+    "startTime" : "2026-02-03T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_024",
+    "resource" : "_3",
+    "startTime" : "2026-02-03T02:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_034",
+    "resource" : "_8",
+    "startTime" : "2026-02-03T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_050",
+    "resource" : "_5",
+    "startTime" : "2026-02-03T03:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_044",
+    "resource" : "_6",
+    "startTime" : "2026-02-03T03:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_042",
+    "resource" : "_7",
+    "startTime" : "2026-02-03T03:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_005",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T04:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CFN_CIV_039",
+    "resource" : "_9",
+    "startTime" : "2026-02-03T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_001",
+    "resource" : "_13",
+    "startTime" : "2026-02-03T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_KIT_CIV_029",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T06:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_019",
+    "resource" : "_2",
+    "startTime" : "2026-02-03T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_008",
+    "resource" : "_4",
+    "startTime" : "2026-02-03T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_042",
+    "resource" : "_8",
+    "startTime" : "2026-02-03T07:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_014",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T08:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_MAR_CIV_024",
+    "resource" : "_5",
+    "startTime" : "2026-02-03T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_050",
+    "resource" : "_6",
+    "startTime" : "2026-02-03T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_044",
+    "resource" : "_7",
+    "startTime" : "2026-02-03T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_001",
+    "resource" : "_14",
+    "startTime" : "2026-02-03T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_006",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T10:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_010",
+    "resource" : "_2",
+    "startTime" : "2026-02-03T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_019",
+    "resource" : "_3",
+    "startTime" : "2026-02-03T10:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_KIT_CIV_049",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T12:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_BDY_CIV_044",
+    "resource" : "_8",
+    "startTime" : "2026-02-03T12:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_008",
+    "resource" : "_5",
+    "startTime" : "2026-02-03T13:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_024",
+    "resource" : "_6",
+    "startTime" : "2026-02-03T13:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_050",
+    "resource" : "_7",
+    "startTime" : "2026-02-03T13:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_038",
+    "resource" : "_9",
+    "startTime" : "2026-02-03T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_039",
+    "resource" : "_13",
+    "startTime" : "2026-02-03T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_KIT_CIV_030",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T14:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_005",
+    "resource" : "_2",
+    "startTime" : "2026-02-03T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_010",
+    "resource" : "_4",
+    "startTime" : "2026-02-03T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_046",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T16:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_EOL_CIV_039",
+    "resource" : "_15",
+    "startTime" : "2026-02-03T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_050",
+    "resource" : "_8",
+    "startTime" : "2026-02-03T17:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_025",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T18:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_015",
+    "resource" : "_2",
+    "startTime" : "2026-02-03T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_005",
+    "resource" : "_3",
+    "startTime" : "2026-02-03T18:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_MAR_CIV_020",
+    "resource" : "_5",
+    "startTime" : "2026-02-03T18:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_008",
+    "resource" : "_6",
+    "startTime" : "2026-02-03T18:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_024",
+    "resource" : "_7",
+    "startTime" : "2026-02-03T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_018",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T20:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CFN_CIV_044",
+    "resource" : "_9",
+    "startTime" : "2026-02-03T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_038",
+    "resource" : "_13",
+    "startTime" : "2026-02-03T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_KIT_CIV_023",
+    "resource" : "_1",
+    "startTime" : "2026-02-03T22:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_025",
+    "resource" : "_2",
+    "startTime" : "2026-02-03T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_015",
+    "resource" : "_4",
+    "startTime" : "2026-02-03T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_024",
+    "resource" : "_8",
+    "startTime" : "2026-02-03T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_045",
+    "resource" : "_5",
+    "startTime" : "2026-02-03T23:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_020",
+    "resource" : "_6",
+    "startTime" : "2026-02-03T23:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_008",
+    "resource" : "_7",
+    "startTime" : "2026-02-03T23:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_012",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T00:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_EOL_CIV_038",
+    "resource" : "_14",
+    "startTime" : "2026-02-04T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_037",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T02:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_036",
+    "resource" : "_2",
+    "startTime" : "2026-02-04T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_025",
+    "resource" : "_3",
+    "startTime" : "2026-02-04T02:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_008",
+    "resource" : "_8",
+    "startTime" : "2026-02-04T03:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_016",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T04:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_MAR_CIV_005",
+    "resource" : "_5",
+    "startTime" : "2026-02-04T04:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_045",
+    "resource" : "_6",
+    "startTime" : "2026-02-04T04:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_020",
+    "resource" : "_7",
+    "startTime" : "2026-02-04T04:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_024",
+    "resource" : "_9",
+    "startTime" : "2026-02-04T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_044",
+    "resource" : "_13",
+    "startTime" : "2026-02-04T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_KIT_CIV_028",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T06:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_030",
+    "resource" : "_2",
+    "startTime" : "2026-02-04T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_036",
+    "resource" : "_4",
+    "startTime" : "2026-02-04T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_002",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T08:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_BDY_CIV_020",
+    "resource" : "_8",
+    "startTime" : "2026-02-04T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_044",
+    "resource" : "_15",
+    "startTime" : "2026-02-04T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MAR_CIV_015",
+    "resource" : "_5",
+    "startTime" : "2026-02-04T09:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_005",
+    "resource" : "_6",
+    "startTime" : "2026-02-04T09:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_045",
+    "resource" : "_7",
+    "startTime" : "2026-02-04T09:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_031",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T10:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_023",
+    "resource" : "_2",
+    "startTime" : "2026-02-04T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_030",
+    "resource" : "_3",
+    "startTime" : "2026-02-04T10:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_KIT_CIV_026",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T12:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_BDY_CIV_045",
+    "resource" : "_8",
+    "startTime" : "2026-02-04T13:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_034",
+    "resource" : "_9",
+    "startTime" : "2026-02-04T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_024",
+    "resource" : "_13",
+    "startTime" : "2026-02-04T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_KIT_CIV_003",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T14:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_037",
+    "resource" : "_2",
+    "startTime" : "2026-02-04T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_023",
+    "resource" : "_4",
+    "startTime" : "2026-02-04T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MAR_CIV_025",
+    "resource" : "_5",
+    "startTime" : "2026-02-04T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_015",
+    "resource" : "_6",
+    "startTime" : "2026-02-04T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_005",
+    "resource" : "_7",
+    "startTime" : "2026-02-04T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_013",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T16:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_EOL_CIV_024",
+    "resource" : "_15",
+    "startTime" : "2026-02-04T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_KIT_CIV_032",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T18:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_031",
+    "resource" : "_2",
+    "startTime" : "2026-02-04T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_037",
+    "resource" : "_3",
+    "startTime" : "2026-02-04T18:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_005",
+    "resource" : "_8",
+    "startTime" : "2026-02-04T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_023",
+    "resource" : "_5",
+    "startTime" : "2026-02-04T19:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_025",
+    "resource" : "_6",
+    "startTime" : "2026-02-04T19:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_015",
+    "resource" : "_7",
+    "startTime" : "2026-02-04T19:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_021",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T20:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CFN_CIV_042",
+    "resource" : "_9",
+    "startTime" : "2026-02-04T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_034",
+    "resource" : "_13",
+    "startTime" : "2026-02-04T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_KIT_CIV_004",
+    "resource" : "_1",
+    "startTime" : "2026-02-04T22:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_003",
+    "resource" : "_2",
+    "startTime" : "2026-02-04T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_031",
+    "resource" : "_4",
+    "startTime" : "2026-02-04T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_015",
+    "resource" : "_8",
+    "startTime" : "2026-02-04T23:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_033",
+    "resource" : "_1",
+    "startTime" : "2026-02-05T00:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_MAR_CIV_010",
+    "resource" : "_5",
+    "startTime" : "2026-02-05T00:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_023",
+    "resource" : "_6",
+    "startTime" : "2026-02-05T00:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_025",
+    "resource" : "_7",
+    "startTime" : "2026-02-05T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_034",
+    "resource" : "_14",
+    "startTime" : "2026-02-05T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_KIT_CIV_048",
+    "resource" : "_1",
+    "startTime" : "2026-02-05T02:00:15",
+    "durationSeconds" : 7200
+  }, {
+    "task" : "T_CHS_CIV_026",
+    "resource" : "_2",
+    "startTime" : "2026-02-05T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_003",
+    "resource" : "_3",
+    "startTime" : "2026-02-05T02:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_025",
+    "resource" : "_8",
+    "startTime" : "2026-02-05T04:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_036",
+    "resource" : "_5",
+    "startTime" : "2026-02-05T05:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_010",
+    "resource" : "_6",
+    "startTime" : "2026-02-05T05:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_023",
+    "resource" : "_7",
+    "startTime" : "2026-02-05T05:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_005",
+    "resource" : "_9",
+    "startTime" : "2026-02-05T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_042",
+    "resource" : "_13",
+    "startTime" : "2026-02-05T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_017",
+    "resource" : "_2",
+    "startTime" : "2026-02-05T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_026",
+    "resource" : "_4",
+    "startTime" : "2026-02-05T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EOL_CIV_042",
+    "resource" : "_15",
+    "startTime" : "2026-02-05T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_023",
+    "resource" : "_8",
+    "startTime" : "2026-02-05T09:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_004",
+    "resource" : "_2",
+    "startTime" : "2026-02-05T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_017",
+    "resource" : "_3",
+    "startTime" : "2026-02-05T10:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_MAR_CIV_037",
+    "resource" : "_5",
+    "startTime" : "2026-02-05T10:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_036",
+    "resource" : "_6",
+    "startTime" : "2026-02-05T10:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_010",
+    "resource" : "_7",
+    "startTime" : "2026-02-05T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_023",
+    "resource" : "_9",
+    "startTime" : "2026-02-05T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_005",
+    "resource" : "_13",
+    "startTime" : "2026-02-05T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_012",
+    "resource" : "_2",
+    "startTime" : "2026-02-05T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_004",
+    "resource" : "_4",
+    "startTime" : "2026-02-05T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_010",
+    "resource" : "_8",
+    "startTime" : "2026-02-05T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_019",
+    "resource" : "_5",
+    "startTime" : "2026-02-05T15:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_037",
+    "resource" : "_6",
+    "startTime" : "2026-02-05T15:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_036",
+    "resource" : "_7",
+    "startTime" : "2026-02-05T15:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_005",
+    "resource" : "_14",
+    "startTime" : "2026-02-05T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_013",
+    "resource" : "_2",
+    "startTime" : "2026-02-05T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_012",
+    "resource" : "_3",
+    "startTime" : "2026-02-05T18:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_036",
+    "resource" : "_8",
+    "startTime" : "2026-02-05T19:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_030",
+    "resource" : "_5",
+    "startTime" : "2026-02-05T20:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_019",
+    "resource" : "_6",
+    "startTime" : "2026-02-05T20:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_037",
+    "resource" : "_7",
+    "startTime" : "2026-02-05T20:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_050",
+    "resource" : "_9",
+    "startTime" : "2026-02-05T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_023",
+    "resource" : "_13",
+    "startTime" : "2026-02-05T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_018",
+    "resource" : "_2",
+    "startTime" : "2026-02-05T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_013",
+    "resource" : "_4",
+    "startTime" : "2026-02-05T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_037",
+    "resource" : "_8",
+    "startTime" : "2026-02-06T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_023",
+    "resource" : "_14",
+    "startTime" : "2026-02-06T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_031",
+    "resource" : "_5",
+    "startTime" : "2026-02-06T01:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_030",
+    "resource" : "_6",
+    "startTime" : "2026-02-06T01:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_019",
+    "resource" : "_7",
+    "startTime" : "2026-02-06T01:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_046",
+    "resource" : "_2",
+    "startTime" : "2026-02-06T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_018",
+    "resource" : "_3",
+    "startTime" : "2026-02-06T02:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_019",
+    "resource" : "_8",
+    "startTime" : "2026-02-06T05:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_025",
+    "resource" : "_9",
+    "startTime" : "2026-02-06T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_050",
+    "resource" : "_13",
+    "startTime" : "2026-02-06T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_041",
+    "resource" : "_2",
+    "startTime" : "2026-02-06T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_046",
+    "resource" : "_4",
+    "startTime" : "2026-02-06T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MAR_CIV_017",
+    "resource" : "_5",
+    "startTime" : "2026-02-06T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_031",
+    "resource" : "_6",
+    "startTime" : "2026-02-06T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_030",
+    "resource" : "_7",
+    "startTime" : "2026-02-06T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_050",
+    "resource" : "_14",
+    "startTime" : "2026-02-06T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_048",
+    "resource" : "_2",
+    "startTime" : "2026-02-06T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_041",
+    "resource" : "_3",
+    "startTime" : "2026-02-06T10:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_030",
+    "resource" : "_8",
+    "startTime" : "2026-02-06T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_013",
+    "resource" : "_5",
+    "startTime" : "2026-02-06T11:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_017",
+    "resource" : "_6",
+    "startTime" : "2026-02-06T11:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_031",
+    "resource" : "_7",
+    "startTime" : "2026-02-06T11:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_020",
+    "resource" : "_9",
+    "startTime" : "2026-02-06T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_025",
+    "resource" : "_13",
+    "startTime" : "2026-02-06T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_047",
+    "resource" : "_2",
+    "startTime" : "2026-02-06T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_048",
+    "resource" : "_4",
+    "startTime" : "2026-02-06T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_031",
+    "resource" : "_8",
+    "startTime" : "2026-02-06T15:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_046",
+    "resource" : "_5",
+    "startTime" : "2026-02-06T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_013",
+    "resource" : "_6",
+    "startTime" : "2026-02-06T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_017",
+    "resource" : "_7",
+    "startTime" : "2026-02-06T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_025",
+    "resource" : "_15",
+    "startTime" : "2026-02-06T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_CHS_CIV_014",
+    "resource" : "_2",
+    "startTime" : "2026-02-06T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_047",
+    "resource" : "_3",
+    "startTime" : "2026-02-06T18:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_017",
+    "resource" : "_8",
+    "startTime" : "2026-02-06T20:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_026",
+    "resource" : "_5",
+    "startTime" : "2026-02-06T21:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_046",
+    "resource" : "_6",
+    "startTime" : "2026-02-06T21:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_013",
+    "resource" : "_7",
+    "startTime" : "2026-02-06T21:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_010",
+    "resource" : "_9",
+    "startTime" : "2026-02-06T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_020",
+    "resource" : "_13",
+    "startTime" : "2026-02-06T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_002",
+    "resource" : "_2",
+    "startTime" : "2026-02-06T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_014",
+    "resource" : "_4",
+    "startTime" : "2026-02-06T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EOL_CIV_020",
+    "resource" : "_14",
+    "startTime" : "2026-02-07T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_BDY_CIV_013",
+    "resource" : "_8",
+    "startTime" : "2026-02-07T01:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_007",
+    "resource" : "_2",
+    "startTime" : "2026-02-07T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_002",
+    "resource" : "_3",
+    "startTime" : "2026-02-07T02:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_MAR_CIV_047",
+    "resource" : "_5",
+    "startTime" : "2026-02-07T02:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_026",
+    "resource" : "_6",
+    "startTime" : "2026-02-07T02:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_046",
+    "resource" : "_7",
+    "startTime" : "2026-02-07T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_036",
+    "resource" : "_9",
+    "startTime" : "2026-02-07T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_010",
+    "resource" : "_13",
+    "startTime" : "2026-02-07T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_022",
+    "resource" : "_2",
+    "startTime" : "2026-02-07T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_007",
+    "resource" : "_4",
+    "startTime" : "2026-02-07T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_046",
+    "resource" : "_8",
+    "startTime" : "2026-02-07T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_012",
+    "resource" : "_5",
+    "startTime" : "2026-02-07T07:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_047",
+    "resource" : "_6",
+    "startTime" : "2026-02-07T07:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_026",
+    "resource" : "_7",
+    "startTime" : "2026-02-07T07:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_010",
+    "resource" : "_14",
+    "startTime" : "2026-02-07T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_028",
+    "resource" : "_2",
+    "startTime" : "2026-02-07T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_022",
+    "resource" : "_3",
+    "startTime" : "2026-02-07T10:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_026",
+    "resource" : "_8",
+    "startTime" : "2026-02-07T11:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_003",
+    "resource" : "_5",
+    "startTime" : "2026-02-07T12:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_012",
+    "resource" : "_6",
+    "startTime" : "2026-02-07T12:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_047",
+    "resource" : "_7",
+    "startTime" : "2026-02-07T12:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_031",
+    "resource" : "_9",
+    "startTime" : "2026-02-07T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_036",
+    "resource" : "_13",
+    "startTime" : "2026-02-07T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_029",
+    "resource" : "_2",
+    "startTime" : "2026-02-07T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_028",
+    "resource" : "_4",
+    "startTime" : "2026-02-07T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_047",
+    "resource" : "_8",
+    "startTime" : "2026-02-07T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_036",
+    "resource" : "_14",
+    "startTime" : "2026-02-07T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_022",
+    "resource" : "_5",
+    "startTime" : "2026-02-07T17:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_003",
+    "resource" : "_6",
+    "startTime" : "2026-02-07T17:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_012",
+    "resource" : "_7",
+    "startTime" : "2026-02-07T17:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_032",
+    "resource" : "_2",
+    "startTime" : "2026-02-07T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_029",
+    "resource" : "_3",
+    "startTime" : "2026-02-07T18:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_012",
+    "resource" : "_8",
+    "startTime" : "2026-02-07T21:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_030",
+    "resource" : "_9",
+    "startTime" : "2026-02-07T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_031",
+    "resource" : "_13",
+    "startTime" : "2026-02-07T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_033",
+    "resource" : "_2",
+    "startTime" : "2026-02-07T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_032",
+    "resource" : "_4",
+    "startTime" : "2026-02-07T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MAR_CIV_041",
+    "resource" : "_5",
+    "startTime" : "2026-02-07T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_022",
+    "resource" : "_6",
+    "startTime" : "2026-02-07T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_003",
+    "resource" : "_7",
+    "startTime" : "2026-02-07T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_031",
+    "resource" : "_14",
+    "startTime" : "2026-02-08T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_043",
+    "resource" : "_2",
+    "startTime" : "2026-02-08T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_033",
+    "resource" : "_3",
+    "startTime" : "2026-02-08T02:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_003",
+    "resource" : "_8",
+    "startTime" : "2026-02-08T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_002",
+    "resource" : "_5",
+    "startTime" : "2026-02-08T03:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_041",
+    "resource" : "_6",
+    "startTime" : "2026-02-08T03:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_022",
+    "resource" : "_7",
+    "startTime" : "2026-02-08T03:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_037",
+    "resource" : "_9",
+    "startTime" : "2026-02-08T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_030",
+    "resource" : "_13",
+    "startTime" : "2026-02-08T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_006",
+    "resource" : "_2",
+    "startTime" : "2026-02-08T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_043",
+    "resource" : "_4",
+    "startTime" : "2026-02-08T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_022",
+    "resource" : "_8",
+    "startTime" : "2026-02-08T07:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_033",
+    "resource" : "_5",
+    "startTime" : "2026-02-08T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_002",
+    "resource" : "_6",
+    "startTime" : "2026-02-08T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_041",
+    "resource" : "_7",
+    "startTime" : "2026-02-08T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_030",
+    "resource" : "_14",
+    "startTime" : "2026-02-08T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_021",
+    "resource" : "_2",
+    "startTime" : "2026-02-08T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_006",
+    "resource" : "_3",
+    "startTime" : "2026-02-08T10:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_041",
+    "resource" : "_8",
+    "startTime" : "2026-02-08T12:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_004",
+    "resource" : "_5",
+    "startTime" : "2026-02-08T13:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_033",
+    "resource" : "_6",
+    "startTime" : "2026-02-08T13:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_002",
+    "resource" : "_7",
+    "startTime" : "2026-02-08T13:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_008",
+    "resource" : "_9",
+    "startTime" : "2026-02-08T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_037",
+    "resource" : "_13",
+    "startTime" : "2026-02-08T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_049",
+    "resource" : "_2",
+    "startTime" : "2026-02-08T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_021",
+    "resource" : "_4",
+    "startTime" : "2026-02-08T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EOL_CIV_037",
+    "resource" : "_14",
+    "startTime" : "2026-02-08T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_BDY_CIV_002",
+    "resource" : "_8",
+    "startTime" : "2026-02-08T17:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CHS_CIV_040",
+    "resource" : "_2",
+    "startTime" : "2026-02-08T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_049",
+    "resource" : "_3",
+    "startTime" : "2026-02-08T18:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_MAR_CIV_018",
+    "resource" : "_5",
+    "startTime" : "2026-02-08T18:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_004",
+    "resource" : "_6",
+    "startTime" : "2026-02-08T18:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_033",
+    "resource" : "_7",
+    "startTime" : "2026-02-08T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_003",
+    "resource" : "_9",
+    "startTime" : "2026-02-08T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_008",
+    "resource" : "_13",
+    "startTime" : "2026-02-08T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_035",
+    "resource" : "_2",
+    "startTime" : "2026-02-08T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_040",
+    "resource" : "_4",
+    "startTime" : "2026-02-08T22:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_033",
+    "resource" : "_8",
+    "startTime" : "2026-02-08T22:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_029",
+    "resource" : "_5",
+    "startTime" : "2026-02-08T23:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_018",
+    "resource" : "_6",
+    "startTime" : "2026-02-08T23:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_004",
+    "resource" : "_7",
+    "startTime" : "2026-02-08T23:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_008",
+    "resource" : "_15",
+    "startTime" : "2026-02-09T00:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_CHS_CIV_011",
+    "resource" : "_2",
+    "startTime" : "2026-02-09T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_035",
+    "resource" : "_3",
+    "startTime" : "2026-02-09T02:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_004",
+    "resource" : "_8",
+    "startTime" : "2026-02-09T03:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_007",
+    "resource" : "_5",
+    "startTime" : "2026-02-09T04:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_029",
+    "resource" : "_6",
+    "startTime" : "2026-02-09T04:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_018",
+    "resource" : "_7",
+    "startTime" : "2026-02-09T04:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_012",
+    "resource" : "_9",
+    "startTime" : "2026-02-09T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_003",
+    "resource" : "_13",
+    "startTime" : "2026-02-09T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_CHS_CIV_016",
+    "resource" : "_2",
+    "startTime" : "2026-02-09T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_011",
+    "resource" : "_4",
+    "startTime" : "2026-02-09T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_018",
+    "resource" : "_8",
+    "startTime" : "2026-02-09T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_003",
+    "resource" : "_15",
+    "startTime" : "2026-02-09T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MAR_CIV_032",
+    "resource" : "_5",
+    "startTime" : "2026-02-09T09:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_007",
+    "resource" : "_6",
+    "startTime" : "2026-02-09T09:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_029",
+    "resource" : "_7",
+    "startTime" : "2026-02-09T09:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_RUN_CIV_016",
+    "resource" : "_3",
+    "startTime" : "2026-02-09T10:00:15",
+    "durationSeconds" : 21600
+  }, {
+    "task" : "T_BDY_CIV_029",
+    "resource" : "_8",
+    "startTime" : "2026-02-09T13:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_004",
+    "resource" : "_9",
+    "startTime" : "2026-02-09T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_012",
+    "resource" : "_13",
+    "startTime" : "2026-02-09T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_MAR_CIV_040",
+    "resource" : "_5",
+    "startTime" : "2026-02-09T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_032",
+    "resource" : "_6",
+    "startTime" : "2026-02-09T14:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_007",
+    "resource" : "_7",
+    "startTime" : "2026-02-09T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_012",
+    "resource" : "_14",
+    "startTime" : "2026-02-09T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_BDY_CIV_007",
+    "resource" : "_8",
+    "startTime" : "2026-02-09T18:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_021",
+    "resource" : "_5",
+    "startTime" : "2026-02-09T19:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_040",
+    "resource" : "_6",
+    "startTime" : "2026-02-09T19:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_032",
+    "resource" : "_7",
+    "startTime" : "2026-02-09T19:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_022",
+    "resource" : "_9",
+    "startTime" : "2026-02-09T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_004",
+    "resource" : "_13",
+    "startTime" : "2026-02-09T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_BDY_CIV_032",
+    "resource" : "_8",
+    "startTime" : "2026-02-09T23:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_014",
+    "resource" : "_5",
+    "startTime" : "2026-02-10T00:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_021",
+    "resource" : "_6",
+    "startTime" : "2026-02-10T00:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_040",
+    "resource" : "_7",
+    "startTime" : "2026-02-10T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_004",
+    "resource" : "_14",
+    "startTime" : "2026-02-10T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_BDY_CIV_040",
+    "resource" : "_8",
+    "startTime" : "2026-02-10T04:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_006",
+    "resource" : "_5",
+    "startTime" : "2026-02-10T05:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_014",
+    "resource" : "_6",
+    "startTime" : "2026-02-10T05:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_021",
+    "resource" : "_7",
+    "startTime" : "2026-02-10T05:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_018",
+    "resource" : "_9",
+    "startTime" : "2026-02-10T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_022",
+    "resource" : "_13",
+    "startTime" : "2026-02-10T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_022",
+    "resource" : "_14",
+    "startTime" : "2026-02-10T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_BDY_CIV_021",
+    "resource" : "_8",
+    "startTime" : "2026-02-10T09:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_049",
+    "resource" : "_5",
+    "startTime" : "2026-02-10T10:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_006",
+    "resource" : "_6",
+    "startTime" : "2026-02-10T10:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_014",
+    "resource" : "_7",
+    "startTime" : "2026-02-10T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_026",
+    "resource" : "_9",
+    "startTime" : "2026-02-10T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_018",
+    "resource" : "_13",
+    "startTime" : "2026-02-10T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_BDY_CIV_014",
+    "resource" : "_8",
+    "startTime" : "2026-02-10T14:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_016",
+    "resource" : "_5",
+    "startTime" : "2026-02-10T15:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_049",
+    "resource" : "_6",
+    "startTime" : "2026-02-10T15:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_006",
+    "resource" : "_7",
+    "startTime" : "2026-02-10T15:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_018",
+    "resource" : "_14",
+    "startTime" : "2026-02-10T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_BDY_CIV_006",
+    "resource" : "_8",
+    "startTime" : "2026-02-10T19:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_048",
+    "resource" : "_5",
+    "startTime" : "2026-02-10T20:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_016",
+    "resource" : "_6",
+    "startTime" : "2026-02-10T20:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_049",
+    "resource" : "_7",
+    "startTime" : "2026-02-10T20:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_032",
+    "resource" : "_9",
+    "startTime" : "2026-02-10T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_026",
+    "resource" : "_13",
+    "startTime" : "2026-02-10T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_BDY_CIV_049",
+    "resource" : "_8",
+    "startTime" : "2026-02-11T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_026",
+    "resource" : "_14",
+    "startTime" : "2026-02-11T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_043",
+    "resource" : "_5",
+    "startTime" : "2026-02-11T01:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_048",
+    "resource" : "_6",
+    "startTime" : "2026-02-11T01:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_016",
+    "resource" : "_7",
+    "startTime" : "2026-02-11T01:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_BDY_CIV_016",
+    "resource" : "_8",
+    "startTime" : "2026-02-11T05:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_046",
+    "resource" : "_9",
+    "startTime" : "2026-02-11T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_032",
+    "resource" : "_13",
+    "startTime" : "2026-02-11T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_MAR_CIV_011",
+    "resource" : "_5",
+    "startTime" : "2026-02-11T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_043",
+    "resource" : "_6",
+    "startTime" : "2026-02-11T06:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_048",
+    "resource" : "_7",
+    "startTime" : "2026-02-11T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_032",
+    "resource" : "_15",
+    "startTime" : "2026-02-11T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_048",
+    "resource" : "_8",
+    "startTime" : "2026-02-11T10:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_028",
+    "resource" : "_5",
+    "startTime" : "2026-02-11T11:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_011",
+    "resource" : "_6",
+    "startTime" : "2026-02-11T11:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_043",
+    "resource" : "_7",
+    "startTime" : "2026-02-11T11:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_016",
+    "resource" : "_9",
+    "startTime" : "2026-02-11T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_046",
+    "resource" : "_13",
+    "startTime" : "2026-02-11T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_BDY_CIV_043",
+    "resource" : "_8",
+    "startTime" : "2026-02-11T15:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MAR_CIV_035",
+    "resource" : "_5",
+    "startTime" : "2026-02-11T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_MECH_CIV_028",
+    "resource" : "_6",
+    "startTime" : "2026-02-11T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_011",
+    "resource" : "_7",
+    "startTime" : "2026-02-11T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_046",
+    "resource" : "_15",
+    "startTime" : "2026-02-11T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_BDY_CIV_011",
+    "resource" : "_8",
+    "startTime" : "2026-02-11T20:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_MECH_CIV_035",
+    "resource" : "_6",
+    "startTime" : "2026-02-11T21:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_EEB_CIV_028",
+    "resource" : "_7",
+    "startTime" : "2026-02-11T21:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_013",
+    "resource" : "_9",
+    "startTime" : "2026-02-11T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_016",
+    "resource" : "_13",
+    "startTime" : "2026-02-11T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_016",
+    "resource" : "_14",
+    "startTime" : "2026-02-12T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_BDY_CIV_028",
+    "resource" : "_8",
+    "startTime" : "2026-02-12T01:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EEB_CIV_035",
+    "resource" : "_7",
+    "startTime" : "2026-02-12T02:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_006",
+    "resource" : "_9",
+    "startTime" : "2026-02-12T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_013",
+    "resource" : "_13",
+    "startTime" : "2026-02-12T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_BDY_CIV_035",
+    "resource" : "_8",
+    "startTime" : "2026-02-12T06:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_EOL_CIV_013",
+    "resource" : "_14",
+    "startTime" : "2026-02-12T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_047",
+    "resource" : "_9",
+    "startTime" : "2026-02-12T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_006",
+    "resource" : "_13",
+    "startTime" : "2026-02-12T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_006",
+    "resource" : "_14",
+    "startTime" : "2026-02-12T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_014",
+    "resource" : "_9",
+    "startTime" : "2026-02-12T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_047",
+    "resource" : "_13",
+    "startTime" : "2026-02-12T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_047",
+    "resource" : "_14",
+    "startTime" : "2026-02-13T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_002",
+    "resource" : "_9",
+    "startTime" : "2026-02-13T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_014",
+    "resource" : "_13",
+    "startTime" : "2026-02-13T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_014",
+    "resource" : "_14",
+    "startTime" : "2026-02-13T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_021",
+    "resource" : "_9",
+    "startTime" : "2026-02-13T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_002",
+    "resource" : "_13",
+    "startTime" : "2026-02-13T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_002",
+    "resource" : "_14",
+    "startTime" : "2026-02-13T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_007",
+    "resource" : "_9",
+    "startTime" : "2026-02-13T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_021",
+    "resource" : "_13",
+    "startTime" : "2026-02-13T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_021",
+    "resource" : "_14",
+    "startTime" : "2026-02-14T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_043",
+    "resource" : "_9",
+    "startTime" : "2026-02-14T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_007",
+    "resource" : "_13",
+    "startTime" : "2026-02-14T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_007",
+    "resource" : "_15",
+    "startTime" : "2026-02-14T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_CFN_CIV_049",
+    "resource" : "_9",
+    "startTime" : "2026-02-14T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_043",
+    "resource" : "_13",
+    "startTime" : "2026-02-14T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_043",
+    "resource" : "_15",
+    "startTime" : "2026-02-14T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_CFN_CIV_045",
+    "resource" : "_9",
+    "startTime" : "2026-02-14T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_049",
+    "resource" : "_13",
+    "startTime" : "2026-02-14T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_049",
+    "resource" : "_15",
+    "startTime" : "2026-02-15T00:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_CFN_CIV_019",
+    "resource" : "_9",
+    "startTime" : "2026-02-15T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_045",
+    "resource" : "_13",
+    "startTime" : "2026-02-15T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_045",
+    "resource" : "_14",
+    "startTime" : "2026-02-15T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_011",
+    "resource" : "_9",
+    "startTime" : "2026-02-15T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_019",
+    "resource" : "_13",
+    "startTime" : "2026-02-15T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_019",
+    "resource" : "_14",
+    "startTime" : "2026-02-15T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_040",
+    "resource" : "_9",
+    "startTime" : "2026-02-15T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_011",
+    "resource" : "_13",
+    "startTime" : "2026-02-15T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_011",
+    "resource" : "_15",
+    "startTime" : "2026-02-16T00:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_CFN_CIV_041",
+    "resource" : "_9",
+    "startTime" : "2026-02-16T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_040",
+    "resource" : "_13",
+    "startTime" : "2026-02-16T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_040",
+    "resource" : "_15",
+    "startTime" : "2026-02-16T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_CFN_CIV_015",
+    "resource" : "_9",
+    "startTime" : "2026-02-16T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_041",
+    "resource" : "_13",
+    "startTime" : "2026-02-16T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_041",
+    "resource" : "_14",
+    "startTime" : "2026-02-16T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_033",
+    "resource" : "_9",
+    "startTime" : "2026-02-16T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_015",
+    "resource" : "_13",
+    "startTime" : "2026-02-16T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_015",
+    "resource" : "_14",
+    "startTime" : "2026-02-17T00:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_029",
+    "resource" : "_9",
+    "startTime" : "2026-02-17T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_033",
+    "resource" : "_13",
+    "startTime" : "2026-02-17T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_033",
+    "resource" : "_14",
+    "startTime" : "2026-02-17T08:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_048",
+    "resource" : "_9",
+    "startTime" : "2026-02-17T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_029",
+    "resource" : "_13",
+    "startTime" : "2026-02-17T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_029",
+    "resource" : "_14",
+    "startTime" : "2026-02-17T16:00:15",
+    "durationSeconds" : 14400
+  }, {
+    "task" : "T_CFN_CIV_017",
+    "resource" : "_9",
+    "startTime" : "2026-02-17T21:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_048",
+    "resource" : "_13",
+    "startTime" : "2026-02-17T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_048",
+    "resource" : "_15",
+    "startTime" : "2026-02-18T00:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_CFN_CIV_028",
+    "resource" : "_9",
+    "startTime" : "2026-02-18T05:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_017",
+    "resource" : "_13",
+    "startTime" : "2026-02-18T05:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_017",
+    "resource" : "_15",
+    "startTime" : "2026-02-18T08:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_CFN_CIV_035",
+    "resource" : "_9",
+    "startTime" : "2026-02-18T13:00:15",
+    "durationSeconds" : 28800
+  }, {
+    "task" : "T_FQI_CIV_028",
+    "resource" : "_13",
+    "startTime" : "2026-02-18T13:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_028",
+    "resource" : "_15",
+    "startTime" : "2026-02-18T16:00:15",
+    "durationSeconds" : 18000
+  }, {
+    "task" : "T_FQI_CIV_035",
+    "resource" : "_13",
+    "startTime" : "2026-02-18T21:00:15",
+    "durationSeconds" : 10800
+  }, {
+    "task" : "T_EOL_CIV_035",
+    "resource" : "_15",
+    "startTime" : "2026-02-19T00:00:15",
+    "durationSeconds" : 18000
+  } ]
+}

@@ -1,0 +1,2191 @@
+{
+    "assignments": {
+        "assignment": [
+            {
+                "task": {
+                    "id": "INIT_T_1"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 0
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_2"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 1
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_3"
+                },
+                "resource": {
+                    "id": "_3"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 2
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_4"
+                },
+                "resource": {
+                    "id": "_4"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 3
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_5"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 4
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_6"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 5
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_7"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 6
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_8"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 7
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_9"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 8
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_10"
+                },
+                "resource": {
+                    "id": "_10"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 9
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_11"
+                },
+                "resource": {
+                    "id": "_11"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 10
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_12"
+                },
+                "resource": {
+                    "id": "_12"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 11
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_13"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 12
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_14"
+                },
+                "resource": {
+                    "id": "_14"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 13
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "INIT_T_15"
+                },
+                "resource": {
+                    "id": "_15"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 14
+                },
+                "durationinmilliseconds": 1000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_007"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_001"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 2,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_007"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 2,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_003"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 4,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_004"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 6,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_001"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 6,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_007"
+                },
+                "resource": {
+                    "id": "_4"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 6,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_002"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 8,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_006"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 10,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_003"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 10,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_001"
+                },
+                "resource": {
+                    "id": "_3"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 10,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 21600000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_007"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 11,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_009"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 12,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_005"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 14,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_002"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 14,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_003"
+                },
+                "resource": {
+                    "id": "_4"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 14,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_010"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 16,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_001"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 16,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_007"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 16,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_KIT_CIV_008"
+                },
+                "resource": {
+                    "id": "_1"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 18,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 7200000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_005"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 18,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_002"
+                },
+                "resource": {
+                    "id": "_3"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 18,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 21600000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_003"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_001"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_007"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_008"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 22,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_005"
+                },
+                "resource": {
+                    "id": "_4"
+                },
+                "timeofdispatch": {
+                    "day": 1,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 22,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_007"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 1,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_006"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 2,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_008"
+                },
+                "resource": {
+                    "id": "_3"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 2,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 21600000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_002"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 2,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_003"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 2,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_001"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 2,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_007"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 5,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_004"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 6,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_006"
+                },
+                "resource": {
+                    "id": "_4"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 6,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_001"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 6,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_005"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 7,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_002"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 7,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_003"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 7,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_010"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 10,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_004"
+                },
+                "resource": {
+                    "id": "_3"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 10,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 21600000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_003"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 11,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_008"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 12,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_005"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 12,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_002"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 12,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_001"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 13,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_007"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 13,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CHS_CIV_009"
+                },
+                "resource": {
+                    "id": "_2"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 14,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_010"
+                },
+                "resource": {
+                    "id": "_4"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 14,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_002"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 16,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_007"
+                },
+                "resource": {
+                    "id": "_14"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 16,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_004"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 17,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_008"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 17,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_005"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 17,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_RUN_CIV_009"
+                },
+                "resource": {
+                    "id": "_3"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 18,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 21600000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_005"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_003"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_001"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_010"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 22,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_004"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 22,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_008"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 2,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 22,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_001"
+                },
+                "resource": {
+                    "id": "_15"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_008"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 2,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_009"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 3,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_010"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 3,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_004"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 3,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_005"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 5,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_003"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 5,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_004"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 7,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MAR_CIV_006"
+                },
+                "resource": {
+                    "id": "_5"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 8,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_009"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 8,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_010"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 8,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_003"
+                },
+                "resource": {
+                    "id": "_15"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 8,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_010"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 12,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_MECH_CIV_006"
+                },
+                "resource": {
+                    "id": "_6"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 13,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_009"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 13,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_008"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 13,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_005"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 13,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_005"
+                },
+                "resource": {
+                    "id": "_15"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 16,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_009"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 17,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EEB_CIV_006"
+                },
+                "resource": {
+                    "id": "_7"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 18,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_004"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_008"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_BDY_CIV_006"
+                },
+                "resource": {
+                    "id": "_8"
+                },
+                "timeofdispatch": {
+                    "day": 3,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 22,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_008"
+                },
+                "resource": {
+                    "id": "_14"
+                },
+                "timeofdispatch": {
+                    "day": 4,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_006"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 4,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 5,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_004"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 4,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 5,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_004"
+                },
+                "resource": {
+                    "id": "_14"
+                },
+                "timeofdispatch": {
+                    "day": 4,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 8,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_010"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 4,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 13,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_006"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 4,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 13,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_006"
+                },
+                "resource": {
+                    "id": "_14"
+                },
+                "timeofdispatch": {
+                    "day": 4,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 16,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 14400000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_002"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 4,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_010"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 4,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 21,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_010"
+                },
+                "resource": {
+                    "id": "_15"
+                },
+                "timeofdispatch": {
+                    "day": 5,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 0,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_CFN_CIV_009"
+                },
+                "resource": {
+                    "id": "_9"
+                },
+                "timeofdispatch": {
+                    "day": 5,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 5,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 28800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_002"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 5,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 5,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_002"
+                },
+                "resource": {
+                    "id": "_15"
+                },
+                "timeofdispatch": {
+                    "day": 5,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 8,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_FQI_CIV_009"
+                },
+                "resource": {
+                    "id": "_13"
+                },
+                "timeofdispatch": {
+                    "day": 5,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 13,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 10800000,
+                "properties": null,
+                "locked": null
+            },
+            {
+                "task": {
+                    "id": "C_EOL_CIV_009"
+                },
+                "resource": {
+                    "id": "_15"
+                },
+                "timeofdispatch": {
+                    "day": 5,
+                    "month": 2,
+                    "year": 2026,
+                    "hour": 16,
+                    "minutes": 0,
+                    "seconds": 15
+                },
+                "durationinmilliseconds": 18000000,
+                "properties": null,
+                "locked": null
+            }
+        ]
+    }
+}

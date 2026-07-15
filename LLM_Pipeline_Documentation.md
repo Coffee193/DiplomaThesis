@@ -246,7 +246,7 @@ When all chains succeed, `PassLLMThink()` returns:
     'retrieve_info': {...} or None,  # Chain 3 output
     'wanted_return': {...} or None,  # Chain 4 output
     'json_documents': [...],         # List of document references
-    'taskprecedenceconstraints_pick': 'order' | 'dependence' | None,
+    'taskprecedenceconstraints_pick': 'order' | 'dependence' | None,  # None whenever search != 'tasksprecedenceconstraints'
     'complex': ['duration'] | ['start', 'end'] | ['complete'] | None,
     'complex_utils': {'duration_extremum': 'A'|'B'|None, 'complete_by': {...}} or {}
 }
@@ -303,12 +303,14 @@ Detects character-pattern matches for: "job", "task", "resource" (pure string ma
 {"words": ["job"] | ["task"] | ["resource"] | ["task", "resource"] | [], "think": "..."}
 ```
 
-**Routing Logic**:
-- `["job"]` -> `search = "jobs"`
-- `["resource", "task"]` or `["task", "resource"]` -> `search = "tasksuitableresources"`
-- `["resource"]` alone -> `search = "resources"`
-- `["task"]` alone -> triggers sub-classifier (Step 1b)
-- `[]` (empty) -> proceed to Step 2
+**Routing Logic** (evaluated as an if/elif/else chain, so priority matters):
+1. `"job" in words` (any combo containing "job") -> `search = "jobs"`. This means `["job"]`, `["job","task"]`, `["job","resource"]`, and `["job","task","resource"]` all route to `search = "jobs"` — the "job" keyword always wins and other words are ignored.
+2. `"resource" in words and "task" in words` -> `search = "tasksuitableresources"` (covers `["resource","task"]` and `["task","resource"]`)
+3. Single-word arrays (`len(words) == 1`):
+   - `["resource"]` -> `search = "resources"`
+   - `["task"]` -> triggers sub-classifier (Step 1b)
+4. `[]` (empty) -> proceed to Step 2
+5. Any other multi-word combo not matching the above (e.g. hypothetically `["resource","resource"]`) -> returns `fail_error` (error fallback)
 
 ### Step 1b: Task Sub-Classifier (when only "task" detected)
 **Prompt**: `HighLevelTaskClassifier.getPrompt(user_question)`
@@ -333,7 +335,16 @@ Detects: "assignment", "dispatch", "duration"
 {"words": ["assignment"] | ["dispatch"] | ["duration"] | [...] | [], "think": "..."}
 ```
 
-If found: sets `search` to "assignment"/"dispatch"/"duration" and marks `output_specific = True`.
+**Multi-word priority**: If the classifier returns multiple words (e.g. `["assignment","duration"]`), only one becomes `search`. The code uses an if/elif chain with this priority order:
+1. `"dispatch"` (highest priority)
+2. `"duration"`
+3. `"assignment"` (lowest priority)
+
+So `["assignment","duration"]` → `search = "duration"`.
+
+If found: sets `search` to the winning keyword and marks `output_specific = True`.
+
+**What `output_specific = True` does**: It triggers an early return that **skips Chains 3 and 4 entirely** (attribute retrieval and wanted-return classification). The pipeline jumps straight to `LLMGetFinalQuery` with `retrieve_info = None` and `wanted_return = None`. This is correct because output-specific queries (assignments/dispatch/duration from Output JSON) extract data directly from the Output JSON structure without needing attribute filtering or return-value classification.
 
 ### Step 3: Plan Detection (if Step 2 found nothing)
 **Prompt**: `HighLevelPlanClassifier.getPrompt(user_question)`
@@ -341,10 +352,14 @@ If found: sets `search` to "assignment"/"dispatch"/"duration" and marks `output_
 Detects: "plan"
 
 If found: `search = "plan"`.
-If not found: falls through to general conversation (no pipeline, just chat with LLM using conversation history).
+If not found: **General conversation fallback**. The pipeline does NOT proceed to Chains 3-5 or `LLMGetFinalQuery`. Instead, it returns immediately with `end = 'success_unfinished'` and a streaming LLM response generated from the full conversation history (via `CreateChatConv`). There is no `search` value — the return dict has no `search` key, so the caller receives `None` for the search field. The response is purely conversational, with the LLM answering the user's question using chat history context but no JSON data extraction.
 
-### Complex Query Detection (for jobs/tasks/tasksuitableresources)
+### Complex Query Detection (runs only for jobs/tasks/tasksuitableresources)
 **Prompt**: `InputMultiOuputJSONClassifier.getPrompt(user_question)`
+
+**When it runs**: This classifier runs **only** when `search` is `"jobs"`, `"tasks"`, or `"tasksuitableresources"` (i.e., input-entity searches). It does NOT run for `"resources"`, `"tasksprecedenceconstraints"`, `"dispatch"`, `"duration"`, `"assignment"`, or `"plan"`.
+
+**How "duration" from this classifier differs from Step 2's "duration"**: These two paths are **mutually exclusive**. Step 2's `HighLevelOutputJSONClassifier` sets `search = "duration"` and `output_specific = True`, which triggers an early return before `InputMultiOuputJSONClassifier` ever runs. In contrast, `InputMultiOuputJSONClassifier`'s "duration" populates the `complex` array (a separate variable), which routes to cross-file job duration queries (pairing Input+Output files). In short: Step 2 "duration" = output-only duration data; this classifier's "duration" = computed job duration from input+output pairs.
 
 Detects: "complete", "start", "end", "duration", "production", "finish", "done"
 
@@ -432,6 +447,15 @@ Then:
   {"attribute": true, "reference": 59, "target": 37|"*", "think": "..."}
   ```
 
+**`"*"` semantics (wildcard = "user didn't specify")**: The `"*"` value means "any" — the corresponding filter is skipped entirely for that field:
+- `before = "*"`: No filter on the precondition task. Only `after` is filtered.
+- `after = "*"`: No filter on the postcondition task. Only `before` is filtered.
+- Both `"*"`: No filtering — all precedence constraints are returned.
+- `target = "*"` (dependence mode): Finds all constraints where the `reference` task appears in **either** the precondition or postcondition position (all constraints involving that task, regardless of direction).
+- `target = specific ID` (dependence mode): Finds constraints where the `{reference, target}` pair matches the `{precondition, postcondition}` set (order-independent, using Python set comparison).
+
+**`taskprecedenceconstraints_pick` = None conditions**: This field is `None` in the pipeline return whenever `search` is anything other than `"tasksprecedenceconstraints"`. It is only set to `"order"` or `"dependence"` when `search == "tasksprecedenceconstraints"` and the sub-classifier succeeds. It cannot be `None` inside the `tasksprecedenceconstraints` branch itself — if the sub-classifier's JSON parsing fails, the pipeline returns a `fail_error` before reaching the final return.
+
 ---
 
 ## 9. Chain 4: Wanted Return Value Classification
@@ -440,7 +464,9 @@ Then:
 
 This chain is SKIPPED for:
 - `tasksprecedenceconstraints` (always returns full constraint info)
-- Complex queries with start/end/complete (return format is predetermined)
+- Complex queries containing `"start"`, `"end"`, or `"complete"` (return format is predetermined)
+
+**Note**: Complex queries with only `"duration"` do **NOT** skip Chain 4. The skip condition explicitly checks for `'start' in complex or 'end' in complex or 'complete' in complex` — "duration" is intentionally excluded because duration queries still benefit from return-value classification.
 
 ### For `search = "jobs"`:
 **Prompt**: `JobAttributeReturnClassifier.getPrompt(user_question)`
@@ -464,13 +490,13 @@ Possible returns: "name", "id"
 Possible returns: "name", "id", "period"
 
 ### For `search = "tasksuitableresources"`:
-Uses different prompts depending on whether the user is searching for resource or task info:
+Uses different prompts depending on `retrieve_info['search']['info']` — the "search" field from Chain 3's `TasksuitableresourceAttributeRetriever` output. This field captures what the user is SEARCHING FOR (as opposed to what they already KNOW):
 
-- Searching resource info: `TasksuitableresourceAttributeReturnResourceClassifier`
+- `retrieve_info['search']['info'] == "resource"` → `TasksuitableresourceAttributeReturnResourceClassifier`
   ```json
   {"attribute": true|false, "key": "name"|"id"|"period", "value": ...(optional), "think": "..."}
   ```
-- Searching task info: `TasksuitableresourceAttributeReturnTaskClassifier`
+- `retrieve_info['search']['info'] == "task"` → `TasksuitableresourceAttributeReturnTaskClassifier`
   ```json
   {"attribute": true|false, "key": "name"|"id"|"time", "value": ...(optional), "think": "..."}
   ```
@@ -510,7 +536,7 @@ More complex logic depending on `taskprecedenceconstraints_pick`:
 - `OutputListResultsMultipleDocuments.getPrompt(user_question)` - generic multi-doc response
 
 ### Invalid File Name
-- `OutputInvalidName.getPrompt(user_question)` - file must contain "input" or "output" but not both
+- `OutputInvalidName.getPrompt(user_question)` - triggered when a filename contains **both** "input" and "output", OR when it contains **neither**. The code checks: `('input' in doc_name and 'output' in doc_name) or ('input' not in doc_name and 'output' not in doc_name)`. So a file like `"data_1.json"` (neither keyword) gets the same invalid-name response as `"InputOutput_1.json"` (both keywords). This check only runs in the single-document answer path (`PassLLMFinalAnswerSingleDocument`).
 
 ### The (DATA) Placeholder Pattern
 All final answer prompts that include query results use a `(DATA)` placeholder. The LLM generates text like:
@@ -709,9 +735,9 @@ After streaming completes, the full conversation turn is saved to MongoDB:
 
 ---
 
-## 17. All Prompt Templates (Complete Text)
+## 17. All Prompt Templates (Summaries & Key Rules)
 
-Every prompt is a Python module with a `getPrompt(...)` function. Below are the complete prompt texts for all 51 modules.
+Every prompt is a Python module with a `getPrompt(...)` function. Below are **summaries and key behavioral rules** for all prompt modules — not the verbatim prompt strings. The actual prompt text lives in the Python source files under `app/backend/LLM_prompts/`. For evaluation purposes where exact prompt wording matters, refer to the source files directly.
 
 ---
 
@@ -1016,3 +1042,9 @@ The user uploaded a file:
 
 User Question: ...
 ```
+
+---
+
+## 18. Dataset Compatibility Note
+
+The earlier 89-question evaluation dataset tests a top-level `{"pick": 2..7}` classifier — a single-step classification that mapped user questions directly to a numbered category. This current pipeline has a fundamentally different structure: Chain 2 uses a multi-step approach (word pattern detection → sub-classifiers → output JSON detection → plan detection) rather than a single "pick" step. The old dataset is testing a classification architecture that **structurally no longer exists** in this pipeline. Any evaluation using the old dataset would need to be adapted to map its categories to the new pipeline's stepped classification flow, or a new dataset should be created that tests each step of the current pipeline independently.

@@ -253,12 +253,32 @@ When all chains succeed, `PassLLMThink()` returns:
 ```
 
 ### Early Exit Points
-The pipeline can exit early at many points:
-- Chain 0: File uploaded without question -> acknowledge upload
-- Chain 1: Gibberish detected -> polite error
-- Chain 2: No entity words found and no output/plan keywords -> treat as general conversation (send question + chat history to LLM directly)
-- Various validation gates (missing files, no fused pair, etc.)
-- Any JSON parsing failure -> ExceptionHandler fallback
+The pipeline can exit early at many points. All early exits return `end = 'success_unfinished'` or `end = 'fail_error'`, which causes `PassLLMThinkCompletePipeline` to skip `LLMGetFinalQuery` and Chain 5 entirely. The response is returned directly (no structured data, no `(DATA)` replacement).
+
+| Exit Point | `end` value | Scenario |
+|---|---|---|
+| Chain 0 | `success_unfinished` | File uploaded without question → acknowledge upload |
+| Chain 1 | `success_unfinished` | Gibberish detected → polite error |
+| Chain 1 | `fail_error` | JSON parsing failure |
+| Chain 2 | `success_unfinished` | No entity/output/plan keywords → general conversation |
+| Chain 2 | `success_unfinished` | Invalid complete date extracted |
+| Chain 2 | `success_unfinished` | No file provided and none in chat history |
+| Chain 2 | `success_unfinished` | Job duration but no input file |
+| Chain 2 | `success_unfinished` | Job start/end but no fused pair |
+| Chain 2 | `success_unfinished` | Job complete but no fused pair |
+| Chain 2 | `success_unfinished` | Plan comparison but < 2 output files |
+| Chain 2 | `fail_error` | Various JSON parsing failures |
+| Chain 3 | `fail_error` | JSON parsing failures |
+| Chain 4 | `fail_error` | JSON parsing failures |
+
+**What `success_unfinished` means for the frontend**: The caller returns `[response_msg, think_list, None, search_or_None, None]`. The `None` for `fetched_items` means no structured data is sent via the Redis stream's `i` key — the frontend receives only the text response, with no data sidebar or table. The MongoDB chat record also omits the `i` and `s` fields.
+
+### Evaluation Note: General Conversation Fallback
+When a question falls through all of Chain 2 (no entity words, no output keywords, no "plan") and hits the general conversation path, the pipeline returns `end = 'success_unfinished'` with no `search` value. For thesis evaluation purposes, this creates a classification gap: there is no search label to compare against a ground truth. Whether this is "correct" depends on the question itself:
+- If the question is genuinely non-JSON-related (e.g., "What is machine learning?"), the fallback is the correct route — the pipeline correctly identified it as outside its domain.
+- If the question IS about the JSON data but the classifier failed to detect any entity keywords (e.g., "How long does the first operation take?" — no "job"/"task"/"resource" substring), then it is a misclassification.
+
+For evaluation, these questions should be handled as a separate category (e.g., `search = "general"` or `search = null`) and evaluated on a case-by-case basis against the intended query type.
 
 ---
 
@@ -500,6 +520,8 @@ Uses different prompts depending on `retrieve_info['search']['info']` — the "s
   ```json
   {"attribute": true|false, "key": "name"|"id"|"time", "value": ...(optional), "think": "..."}
   ```
+- `retrieve_info['search']['info'] == "time"` → **Not handled (known bug)**. The if/elif chain only checks for `"resource"` and `"task"` with no `else` fallback. If Chain 3 returns `search.info = "time"`, the `prompt` variable is never assigned in this block. The code then silently reuses the `prompt` variable left over from Chain 3 (the attribute retrieval prompt), sending the wrong prompt to the LLM. The result would be an incorrect or unpredictable Chain 4 classification. In practice this scenario is rare — "time" as a search target typically appears alongside a known resource/task filter — but it is a latent bug.
+- `retrieve_info['attribute'] == False` → **Also not handled**. Same issue: no prompt is set, and the stale Chain 3 prompt is reused.
 
 ---
 
@@ -563,10 +585,13 @@ def LLMGetFinalQuery(conv_id, search, json_documents, retrieve_info, llm_model, 
         return LLMGetFinalQueryJobStartEnd(...)
     if search == 'jobs' and complex has 'complete':
         return LLMGetFinalQueryJobComplete(...)
-    # For each document:
-    #   if "input" in filename -> LLMGetFinalQueryInputJSON()
+    # For each document, routes by FILENAME (not by search type):
+    #   if "input" in filename  -> LLMGetFinalQueryInputJSON()
     #   if "output" in filename -> LLMGetFinalQueryOutputJSON()
+    #   if neither              -> returns empty results {query:[], json_data:[]}
 ```
+
+**How `search = "tasks"` or `"resources"` reaches `LLMGetFinalQueryOutputJSON`**: The routing to Input vs Output query functions is based on the **filename** (whether it contains "input" or "output"), NOT on the `search` type or the `output_specific` flag. If a user uploads an Output JSON file (e.g., `OutputJSON_1.json`) and asks a question classified as `search = "tasks"` or `search = "resources"`, the filename check routes it to `LLMGetFinalQueryOutputJSON`. Inside that function, `search = "tasks"` extracts task IDs from the `assignments` array, and `search = "resources"` extracts resource IDs from it. This is not dead code — it handles the scenario where the user asks about tasks/resources but only has Output files uploaded.
 
 ### LLMGetFinalQueryInputJSON
 Handles queries on Input JSON files. Applies chains 2-4 results sequentially:
